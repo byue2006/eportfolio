@@ -433,7 +433,8 @@ P_['playseat'] = dict(
   </tbody>
 </table></div></div>
 <div class="figs">''' + row(fig('images/playseat-cane.webp', 'A black cane clamped into a grey 3D-printed mount on the back of the chair.', 'Fig. 4', 'The cane attachment lets a caregiver push the seat…', 1600, 1200, mode='cover', group='playseat'),
-                       fig('images/playseat-cane-out.webp', 'The same mount with the cane lifted out, showing its two metal clamps.', 'Fig. 5', '…and lifts out of its printed mount.', 1600, 1200, mode='cover', group='playseat')) + '</div>'),
+                       fig('images/playseat-cane-out.webp', 'The same mount with the cane lifted out, showing its two metal clamps.', 'Fig. 5', '…and lifts out of its printed mount.', 1600, 1200, mode='cover', group='playseat'),
+                       fig('images/playseat-poster.webp', 'Team poster titled Creating an Accessible Seating Solution, with sections for motivation, project goals, design blocks, the final design with labeled features, the design criteria and testing table, conclusions, and acknowledgements.', 'Fig. 6', 'Our final poster. Click to read it full size.', 2400, 2400, group='playseat')) + '</div>'),
     ('reflection', 'Reflection', '''<div class="prose"><p>It's the smallest project here and the one that taught me the most about verification. A requirement you haven't tested against the real user is a guess written in a confident font.</p>
 <p>The next change would be foam inserts that come out more easily, so the seat can be resized as he grows.</p></div>'''),
     ('skills', 'Skills', tags(['Requirements definition', 'User testing', 'Verification testing', 'Ergonomics', 'Laser cutting', 'Acrylic bending', 'Manual machining', 'Teamwork'])),
