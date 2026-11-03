@@ -514,16 +514,42 @@ figcaption b { font-weight: 500; color: var(--ink); margin-right: 6px; }
 @media (max-width: 420px) { .skills dl > div { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
 
 /* ---------- personal page ---------- */
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
-.filters button { font: 500 13px/1 var(--sans); color: var(--ink-2); background: var(--surface); border: 1px solid var(--rule); border-radius: 999px; padding: 10px 15px; cursor: pointer; }
-.filters button[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+.ptiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: clamp(48px, 7vw, 96px); }
+@media (max-width: 860px) { .ptiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } }
+.ptile { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; text-decoration: none; isolation: isolate; border: 1px solid var(--rule); background: var(--ink); color: #fff; }
+.ptile-media { position: absolute; inset: 0; z-index: -1; }
+.ptile-media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(calc(var(--img-dim) * .92)); transition: transform 1s var(--ease); }
+.ptile-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.18) 45%, rgba(0,0,0,0) 70%); }
+a.ptile:hover .ptile-media img { transform: scale(1.05); }
+.ptile-meta { position: absolute; inset: auto 0 0 0; padding: clamp(14px, 2vw, 22px); display: flex; flex-direction: column; gap: 8px; }
+.ptile-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.ptile .num { font: 500 11px/1 var(--mono); letter-spacing: .08em; opacity: .75; }
+.ptile .t { font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+.ptile .n { font: 500 10.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; opacity: .8; white-space: nowrap; }
+.ptile-icon { position: absolute; left: 50%; top: 40%; width: 46%; transform: translate(-50%, -50%); fill: none; stroke: var(--ink-3); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .8s var(--ease), stroke .3s ease; }
+a.ptile:hover .ptile-icon { transform: translate(-50%, -50%) rotate(-12deg) scale(1.04); stroke: var(--accent); }
+.ptile.type { background: var(--surface); color: var(--ink); }
+.ptile.type .ptile-media { background-image: radial-gradient(var(--dot) 1px, transparent 1.2px); background-size: 18px 18px; }
+.ptile.type .ptile-media::after { display: none; }
+.ptile.type .n { color: var(--ink-3); opacity: 1; }
+div.ptile.type { border-style: dashed; }
+a.ptile.type:hover .t { color: var(--accent); }
+.pcat { padding-block: clamp(48px, 7vw, 88px); border-top: 1px solid var(--rule); }
+.pcat-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px clamp(24px, 5vw, 72px); align-items: end; margin-bottom: clamp(24px, 3.5vw, 40px); }
+@media (max-width: 760px) { .pcat-head { grid-template-columns: minmax(0, 1fr); } }
+.pcat-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: .95; letter-spacing: -0.02em; margin: 8px 0 0; }
+.pcat-blurb p { margin: 0 0 16px; color: var(--ink-2); max-width: 56ch; }
+.pcat-blurb p:last-child { margin-bottom: 0; }
+.pcat-soon { font: 400 13px/1.6 var(--mono); color: var(--ink-3); margin: 0; }
 .masonry { display: flex; gap: 16px; align-items: flex-start; }
 .masonry .col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
 .masonry figure { margin: 0; }
 .masonry .frame img { height: auto; }
 .masonry figcaption { display: flex; justify-content: space-between; gap: 12px; }
 .masonry figcaption .when { color: var(--ink-3); white-space: nowrap; }
-.filters .count { font: 500 11px/1 var(--mono); opacity: .6; margin-left: 2px; }
+.pchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.pchips .soon { color: var(--ink-3); border-style: dashed; cursor: default; }
+.pchips .soon:hover { border-color: var(--rule); }
 .empty { border: 1px dashed var(--rule); border-radius: var(--radius); padding: 40px; text-align: center; color: var(--ink-2); }
 
 /* ---------- reveal on scroll ---------- */

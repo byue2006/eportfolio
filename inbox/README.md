@@ -68,12 +68,13 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 
 Logos for NC State, Duke and Tsinghua International School; résumé; drawings; project figures.
 
-## Photography, sports, drawings
+## Volleyball, basketball, music, photography
 
-Gallery photos can skip the inbox. Upload them straight into their folder and they appear on the Personal page by themselves, sorted by date, about 2 minutes later:
+Personal photos can skip the inbox. Upload them straight into their folder and they appear in that section of brianyue.me/personal by themselves, about 2 minutes later:
 
+- Volleyball: https://github.com/byue2006/eportfolio/upload/main/personal/volleyball
+- Basketball: https://github.com/byue2006/eportfolio/upload/main/personal/basketball
+- Music: https://github.com/byue2006/eportfolio/upload/main/personal/music
 - Photography: https://github.com/byue2006/eportfolio/upload/main/personal/photography
-- Sports: https://github.com/byue2006/eportfolio/upload/main/personal/sports
-- Drawings: https://github.com/byue2006/eportfolio/upload/main/personal/drawings
 
 If you're not sure where something goes, put it in the inbox.

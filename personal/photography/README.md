@@ -1,23 +1,18 @@
-# Photography: how to add images
+# Photography: how to add photos
 
-Images in this folder appear on the **Personal** page of brianyue.me, under the **Photography** filter.
+Photos in this folder appear in the **Photography** section of brianyue.me/personal.
 
 ## Upload (about 2 minutes, start to finish)
 
-1. Above the list of files on this page, click **Add file**, then **Upload files**.
-2. Drag your images into the box, or click **choose your files**.
-3. Scroll down and click the green **Commit changes** button.
+1. Go to https://github.com/byue2006/eportfolio/upload/main/personal/photography
+2. Drag your photos into the box.
+3. Click the green **Commit changes** button at the bottom.
 4. Wait about 2 minutes, then refresh brianyue.me/personal.
 
-## What you can upload
+## Good to know
 
-- **JPG, PNG, WebP or iPhone HEIC.** No need to convert anything first.
-- **Any size up to 25 MB per file** (GitHub's limit). Smaller web copies are made for you.
-- **Up to 100 files at a time.**
-
-## Making it look right
-
-- **Captions** come from the file name. `duke-chapel-at-dusk.jpg` shows as "Duke chapel at dusk". Phone names like `IMG_4821.jpg` show no caption. Rename the file before uploading if you want one.
-- **Order** is newest first, by the date the photo was taken.
-- **Groups:** a folder inside this one, such as `photography/volleyball/`, adds its name to the caption ("Volleyball · ..."). To make one, put the photos in a folder on your computer and drag the whole folder into the upload box. GitHub keeps the folder.
-- **Removing a photo:** click it in the file list, then the **⋯** menu, then **Delete file**, then **Commit changes**.
+- **JPG, PNG, WebP or iPhone HEIC**, up to 25 MB each. If GitHub says a file is too large, see the export steps in the `inbox` folder.
+- **Captions** come from the file name: `sunset-over-the-court.jpg` shows as "Sunset over the court". Phone names like `IMG_4821` get no caption. Ask Claude to write or change captions.
+- **Order:** newest first, by the date the photo was taken.
+- **Section text** (the sentence under the heading) lives in `personal/categories.js`.
+- **Removing a photo:** click it, then the **⋯** menu, then **Delete file**, then **Commit changes**.

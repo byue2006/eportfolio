@@ -62,18 +62,15 @@ Optional. These appear only if present, and nothing shows otherwise:
 
 Drop files into `inbox/` (upload page: https://github.com/byue2006/eportfolio/upload/main/inbox) and tell Claude. `inbox/README.md` lists what the site is still missing. The inbox is never published.
 
-## Photography, sports & drawings (self-organizing)
+## Personal page: volleyball, basketball, music, photography (self-organizing)
 
-Upload images into a folder, and they appear on the Personal page, sorted automatically.
+brianyue.me/personal has a tile for each category, then a section per category with its own photo grid.
 
-- **Folders:** `personal/photography/`, `personal/sports/`, `personal/drawings/`. Any new folder becomes its own filter. A subfolder such as `personal/sports/volleyball/` becomes part of the caption.
-- **On GitHub:** open the folder → **Add file → Upload files** → drag photos in → **Commit changes**. About 2 minutes later they're on brianyue.me. JPG, PNG, WebP and iPhone HEIC all work. Each folder has a README with the steps.
-- **Order:** newest first within each category, by the date the photo was taken. Categories appear as Photography, Sports, Drawings, then any others.
-- **Captions:** taken from the file name (`duke-gardens-in-fog.jpg` becomes "Duke gardens in fog"). Camera names like `IMG_4821` get no caption. To change one, edit `personal/gallery.js` on GitHub; your edits are kept.
-- **Size:** big photos are fine, up to 25 MB each. The page shows 900 px and 2000 px copies (in `personal/_web/`, made automatically), not the originals.
-- **Locally:** `pip install Pillow pillow-heif`, then `python3 tools/build_gallery.py`.
-
-The Personal link in the nav and the strip on the home page appear once there's at least one image.
+- **Folders:** `personal/volleyball/`, `personal/basketball/`, `personal/music/`, `personal/photography/`. Upload photos into the right one on GitHub (**Add file → Upload files → Commit changes**) and they appear about 2 minutes later. JPG, PNG, WebP and iPhone HEIC all work, up to 25 MB each.
+- **Section text, order, links and cover photos:** `personal/categories.js`. A category with no photos and no text shows as "Coming soon" on its tile and has no section yet.
+- **Captions:** taken from the file name, or edited in `personal/gallery.js` (edits are kept). Newest photos come first, by the date taken.
+- **New category:** make a new folder (it appears automatically), then add an entry for it in `categories.js` to give it a description and position.
+- **Behind the scenes:** `tools/build_gallery.py` (run by the GitHub Action) makes 900 px and 2000 px copies in `personal/_web/` and rewrites `gallery.js`.
 
 ## Notes
 

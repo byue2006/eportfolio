@@ -165,6 +165,7 @@ def page(title, desc, P, active, main, progress=False, path=None):
   <button class="lb-btn lb-nav lb-prev" type="button" data-step="-1" aria-label="Previous image">‹</button>
   <button class="lb-btn lb-nav lb-next" type="button" data-step="1" aria-label="Next image">›</button>
 </dialog>
+<script src="{P}personal/categories.js"></script>
 <script src="{P}personal/gallery.js"></script>
 <script src="{P}assets/site.js"></script>
 </body>
@@ -574,7 +575,7 @@ def home():
 <section class="section" id="personalTeaser" hidden>
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <div><p class="label">Personal</p><h2>Outside the shop</h2></div>
+      <div><p class="label">Personal</p><h2>Outside the shop</h2><div class="pchips"></div></div>
       <a class="pill" href="personal.html">See everything <span class="arrow">→</span></a>
     </div>
     <div class="strip" data-reveal></div>
@@ -654,15 +655,15 @@ def personal():
   <div class="wrap">
     <p class="label accent fade-in" style="--d:.05s">Personal</p>
     <h1 class="split">Outside the shop.</h1>
-    <p class="p-lede fade-in" style="--d:.5s">Photography, sports, and drawings: what I make and do away from engineering.</p>
+    <p class="p-lede fade-in" style="--d:.5s">Volleyball, basketball, music, and photography: what I do away from engineering.</p>
   </div>
 </section>
 <section class="wrap" style="padding-bottom: clamp(72px, 10vw, 128px)">
-  <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
-  <div class="masonry" id="masonry"></div>
-  <p class="empty" id="emptyGallery" hidden>Nothing here yet.</p>
+  <nav class="ptiles fade-in" style="--d:.7s" id="ptiles" aria-label="Categories"></nav>
+  <div id="psections"></div>
+  <noscript><p class="empty">Photos need JavaScript to display.</p></noscript>
 </section>'''
-    return page('Personal · Brian Yue', 'Drawings, photographs, and other things Brian Yue makes for fun.', P, 'personal', main, path='personal')
+    return page('Personal · Brian Yue', 'Volleyball, basketball, music, and photography: what Brian Yue does away from engineering.', P, 'personal', main, path='personal')
 
 # ---------------------------------------------------------------- write
 def write(rel, text):
