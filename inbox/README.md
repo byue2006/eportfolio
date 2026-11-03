@@ -12,13 +12,6 @@ Drop files in, then tell Claude "I uploaded files to the inbox". Claude renames,
 
 File names don't matter, but a hint helps, e.g. `portrait.jpg`, `playseat-car.jpg`, `aiaa-talk.jpg`.
 
-## Waiting for your answer
-
-These `hold-` files are private and not on the site:
-
-- `hold-IMG_9521`, `hold-IMG_9622`, `hold-IMG_9639`: portraits from the Forbidden City shoot. OK to publish? Only if you know them, or they agreed to be photographed for sharing.
-- `hold-IMG_4998`: you with a man in a pink shirt at AIAA. Who is he? If it's someone relevant (e.g. your NC State advisor), it could go on a project page.
-
 ## "File too large" when uploading?
 
 GitHub's upload page takes files up to **25 MB each**. Full-resolution edits from Lightroom are often bigger. The site never shows a photo larger than 2000 px, so export smaller copies.

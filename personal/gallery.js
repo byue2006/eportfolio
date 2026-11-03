@@ -7,7 +7,7 @@ window.PERSONAL_GALLERY = [
   {
     "src": "personal/_web/music/pregame-duke-football-900.webp",
     "caption": "Pregame with the Duke University Marching Band",
-    "alt": "The Duke University Marching Band in white and blue uniforms lined up on the field before a football game, holding brass instruments, with a flame cannon and stands behind them.",
+    "alt": "Brian Yue, in sunglasses, with the Duke University Marching Band in white and blue uniforms on the field before a football game.",
     "category": "Music",
     "orig": "personal/music/pregame-duke-football.jpg",
     "full": "personal/_web/music/pregame-duke-football-2000.webp",
@@ -17,8 +17,8 @@ window.PERSONAL_GALLERY = [
   },
   {
     "src": "personal/_web/music/in-the-stands-900.webp",
-    "caption": "In the stands at a Duke football game",
-    "alt": "The Duke University Marching Band in blue shirts and white caps playing brass instruments in the stadium stands, with a drum major in front.",
+    "caption": "Playing trombone in the stands at a Duke football game",
+    "alt": "Brian Yue, in sunglasses, playing trombone with the Duke University Marching Band in the stadium stands.",
     "category": "Music",
     "orig": "personal/music/in-the-stands.jpg",
     "full": "personal/_web/music/in-the-stands-2000.webp",
@@ -28,7 +28,7 @@ window.PERSONAL_GALLERY = [
   },
   {
     "src": "personal/_web/photography/01-roof-guardians-at-dusk-900.webp",
-    "caption": "Roof guardians at dusk · Forbidden City, Beijing",
+    "caption": "Roof guardians at dusk",
     "alt": "Silhouette of a curved palace roof edge lined with small guardian figures against an orange evening sky.",
     "category": "Photography",
     "orig": "personal/photography/01-roof-guardians-at-dusk.jpg",
@@ -38,7 +38,7 @@ window.PERSONAL_GALLERY = [
   },
   {
     "src": "personal/_web/photography/02-painted-eaves-900.webp",
-    "caption": "Painted eaves · Forbidden City, Beijing",
+    "caption": "Painted eaves",
     "alt": "Golden-tiled palace hall with a blue name plaque and painted eaves under a clear blue sky.",
     "category": "Photography",
     "orig": "personal/photography/02-painted-eaves.jpg",
@@ -48,7 +48,7 @@ window.PERSONAL_GALLERY = [
   },
   {
     "src": "personal/_web/photography/03-corner-tower-at-sunset-900.webp",
-    "caption": "Corner tower at sunset · Forbidden City, Beijing",
+    "caption": "Corner tower at sunset",
     "alt": "The tiered corner tower of the Forbidden City in silhouette against a golden sunset.",
     "category": "Photography",
     "orig": "personal/photography/03-corner-tower-at-sunset.jpg",
@@ -58,7 +58,7 @@ window.PERSONAL_GALLERY = [
   },
   {
     "src": "personal/_web/photography/04-ridge-ornament-900.webp",
-    "caption": "Ridge ornament · Forbidden City, Beijing",
+    "caption": "Glazed ridge ornament",
     "alt": "Close-up of a carved glazed ornament at the end of a roof ridge against blue sky.",
     "category": "Photography",
     "orig": "personal/photography/04-ridge-ornament.jpg",
@@ -68,7 +68,7 @@ window.PERSONAL_GALLERY = [
   },
   {
     "src": "personal/_web/photography/05-carved-marble-way-900.webp",
-    "caption": "Carved marble way · Forbidden City, Beijing",
+    "caption": "Carved marble way",
     "alt": "A carved white marble ramp in raking light leading up to a palace hall under blue sky.",
     "category": "Photography",
     "orig": "personal/photography/05-carved-marble-way.jpg",
@@ -78,7 +78,7 @@ window.PERSONAL_GALLERY = [
   },
   {
     "src": "personal/_web/photography/06-gilded-finial-900.webp",
-    "caption": "Gilded finial · Forbidden City, Beijing",
+    "caption": "Golden roof, blue sky",
     "alt": "A pyramidal golden-tiled roof topped with a gilded ball finial against deep blue sky.",
     "category": "Photography",
     "orig": "personal/photography/06-gilded-finial.jpg",
