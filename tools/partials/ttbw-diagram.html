@@ -1,0 +1,63 @@
+<div class="diagram">
+        <svg viewBox="0 0 1600 900" role="img" aria-labelledby="ttbwSvgTitle ttbwSvgDesc">
+          <title id="ttbwSvgTitle">Truss-braced wing schematic and bending moment comparison</title>
+          <desc id="ttbwSvgDesc">Front view of a high-wing aircraft with a main strut and jury strut on each side, above a plot of bending moment along the semispan. The cantilever wing's moment peaks at the root; the strut-braced wing's peak is about six times smaller and sits at the strut attachment.</desc>
+
+          <text class="t-title" x="120" y="86">FRONT VIEW · SCHEMATIC</text>
+
+          <!-- T-tail -->
+          <rect class="fill-ink" x="796" y="122" width="8" height="134" rx="2"/>
+          <rect class="fill-ink" x="640" y="116" width="320" height="7" rx="3"/>
+
+          <!-- fuselage -->
+          <circle class="fill-paper ink" cx="800" cy="300" r="46" stroke-width="3.5"/>
+
+          <!-- right half -->
+          <g>
+            <path class="fill-ink" d="M800 252 L1480 262 L1480 266 L800 264 Z"/>
+            <line class="acc" x1="835" y1="330" x2="1208" y2="266" stroke-width="5" stroke-linecap="round"/>
+            <line class="acc" x1="1060" y1="291" x2="1060" y2="266" stroke-width="3.5" stroke-linecap="round"/>
+            <line class="ink" x1="930" y1="266" x2="930" y2="272" stroke-width="5"/>
+            <circle class="fill-paper ink" cx="930" cy="288" r="18" stroke-width="3"/>
+            <circle class="fill-ink" cx="930" cy="288" r="7"/>
+          </g>
+          <g>
+            <path class="fill-ink" d="M800 252 L120 262 L120 266 L800 264 Z"/>
+            <line class="acc" x1="765" y1="330" x2="392" y2="266" stroke-width="5" stroke-linecap="round"/>
+            <line class="acc" x1="540" y1="291" x2="540" y2="266" stroke-width="3.5" stroke-linecap="round"/>
+            <line class="ink" x1="670" y1="266" x2="670" y2="272" stroke-width="5"/>
+            <circle class="fill-paper ink" cx="670" cy="288" r="18" stroke-width="3"/>
+            <circle class="fill-ink" cx="670" cy="288" r="7"/>
+          </g>
+
+          <!-- labels -->
+          <line class="soft" x1="1330" y1="226" x2="1330" y2="256" stroke-width="1.5"/>
+          <text x="1330" y="214" text-anchor="middle">thin, long, high-mounted wing</text>
+          <line class="soft" x1="440" y1="356" x2="440" y2="281" stroke-width="1.5"/>
+          <text x="440" y="384" text-anchor="middle" class="t-acc">main strut</text>
+          <line class="soft" x1="600" y1="356" x2="542" y2="296" stroke-width="1.5"/>
+          <text x="600" y="384" text-anchor="middle" class="t-acc">jury strut</text>
+
+          <!-- strut attach reference -->
+          <line class="soft" x1="1208" y1="276" x2="1208" y2="836" stroke-width="1.5" stroke-dasharray="6 7"/>
+
+          <!-- explanatory text block -->
+          <text class="t-title" x="120" y="560">BENDING MOMENT ALONG THE SEMISPAN</text>
+          <text class="t-body" x="120" y="606">Idealized beam: uniform lift, pinned root,</text>
+          <text class="t-body" x="120" y="638">strut at 60% of the semispan.</text>
+          <text class="t-big" x="120" y="710">Peak moment drops</text>
+          <text class="t-big" x="120" y="752">by about 6×.</text>
+
+          <!-- plot -->
+          <line class="soft" x1="800" y1="540" x2="1480" y2="540" stroke-width="1.5"/>
+          <polyline class="soft" fill="none" stroke-width="2.5" points="800.0,800.0 817.0,787.2 834.0,774.6 851.0,762.5 868.0,750.6 885.0,739.1 902.0,727.8 919.0,717.0 936.0,706.4 953.0,696.2 970.0,686.2 987.0,676.7 1004.0,667.4 1021.0,658.5 1038.0,649.9 1055.0,641.6 1072.0,633.6 1089.0,626.0 1106.0,618.6 1123.0,611.7 1140.0,605.0 1157.0,598.7 1174.0,592.6 1191.0,587.0 1208.0,581.6 1225.0,576.6 1242.0,571.9 1259.0,567.5 1276.0,563.4 1293.0,559.7 1310.0,556.2 1327.0,553.2 1344.0,550.4 1361.0,548.0 1378.0,545.9 1395.0,544.1 1412.0,542.6 1429.0,541.5 1446.0,540.6 1463.0,540.2 1480.0,540.0"/>
+          <polygon class="fill-acc-soft" points="800.0,540.0 817.0,538.0 834.0,536.3 851.0,535.0 868.0,533.9 885.0,533.2 902.0,532.9 919.0,532.8 936.0,533.1 953.0,533.7 970.0,534.6 987.0,535.8 1004.0,537.4 1021.0,539.3 1038.0,541.5 1055.0,544.1 1072.0,546.9 1089.0,550.1 1106.0,553.6 1123.0,557.5 1140.0,561.7 1157.0,566.2 1174.0,571.0 1191.0,576.1 1208.0,581.6 1225.0,576.6 1242.0,571.9 1259.0,567.5 1276.0,563.4 1293.0,559.7 1310.0,556.2 1327.0,553.2 1344.0,550.4 1361.0,548.0 1378.0,545.9 1395.0,544.1 1412.0,542.6 1429.0,541.5 1446.0,540.6 1463.0,540.2 1480.0,540.0"/>
+          <polyline class="acc" fill="none" stroke-width="4" stroke-linejoin="round" points="800.0,540.0 817.0,538.0 834.0,536.3 851.0,535.0 868.0,533.9 885.0,533.2 902.0,532.9 919.0,532.8 936.0,533.1 953.0,533.7 970.0,534.6 987.0,535.8 1004.0,537.4 1021.0,539.3 1038.0,541.5 1055.0,544.1 1072.0,546.9 1089.0,550.1 1106.0,553.6 1123.0,557.5 1140.0,561.7 1157.0,566.2 1174.0,571.0 1191.0,576.1 1208.0,581.6 1225.0,576.6 1242.0,571.9 1259.0,567.5 1276.0,563.4 1293.0,559.7 1310.0,556.2 1327.0,553.2 1344.0,550.4 1361.0,548.0 1378.0,545.9 1395.0,544.1 1412.0,542.6 1429.0,541.5 1446.0,540.6 1463.0,540.2 1480.0,540.0"/>
+          <text x="950" y="772">cantilever</text>
+          <text x="842" y="514" class="t-acc">strut-braced</text>
+          <line class="soft" x1="800" y1="528" x2="800" y2="836" stroke-width="1.5"/>
+          <text x="800" y="868" text-anchor="middle">root</text>
+          <text x="1208" y="868" text-anchor="middle">strut attach</text>
+          <text x="1480" y="868" text-anchor="middle">tip</text>
+        </svg>
+      </div>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unified forward closure · Brian Yue</title>
+<meta name="description" content="Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f5f5f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1011" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Unified forward closure · Brian Yue">
+<meta property="og:description" content="Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141414'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='monospace' font-weight='700' font-size='13' fill='%23fff'%3EBY%3C/text%3E%3Ccircle cx='26' cy='26' r='3.5' fill='%23c2410c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<script>document.documentElement.classList.add('js');window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&t.hasAttribute('data-logo')){t.remove();return;}if(!t||t.tagName!=='IMG'||!t.hasAttribute('data-dropin'))return;if(t.hasAttribute('data-optional')){var f=t.closest('figure');if(f){f.hidden=true;var r=f.closest('.figs');if(r&&!r.querySelector('figure:not([hidden])'))r.hidden=true;}return;}var b=t.closest('.frame,.media,.portrait');if(b){b.classList.add('is-missing');b.setAttribute('data-file',t.getAttribute('data-dropin'));}var a=t.closest('a[data-lightbox]');if(a){a.removeAttribute('href');a.removeAttribute('data-lightbox');}},true);</script>
+</head>
+<body data-base="../">
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">BY</span>Brian Yue</a>
+    <nav class="navpill" aria-label="Primary"><a href="../index.html#work" aria-current="page">Work</a><a href="../index.html#leadership">Leadership</a><a href="../about.html">About</a><a href="../personal.html" data-nav="personal">Personal</a></nav>
+    <div class="bar-right">
+      <a class="pill solid" href="../resume.pdf" target="_blank" rel="noopener">Résumé <span class="arrow">↗</span></a>
+      <button class="pill menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span>Menu</span></button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" inert>
+  <nav aria-label="Menu"><a href="../index.html">Home <span>00</span></a><a href="../index.html#work" aria-current="page">Work <span>01</span></a><a href="../index.html#leadership">Leadership <span>02</span></a><a href="../about.html">About <span>03</span></a><a href="../personal.html" data-nav="personal">Personal <span>04</span></a><a href="../resume.pdf" target="_blank" rel="noopener">Résumé <span>PDF</span></a></nav>
+  <p class="label">brian.yue@duke.edu</p>
+</div>
+
+<main id="main">
+
+<section class="p-hero">
+  <div class="wrap">
+    <div class="crumbs fade-in" style="--d:.05s">
+      <a class="pill" href="../index.html#work"><span class="arrow">←</span> All work</a>
+      <span class="label">Project 01 / 03</span>
+    </div>
+    <p class="label accent fade-in" style="--d:.1s">Flight hardware</p>
+    <h1 class="split">Unified forward closure</h1>
+    <p class="p-lede fade-in" style="--d:.55s">Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.</p>
+    <dl class="meta-grid fade-in" style="--d:.7s"><div><dt>Role</dt><dd>Drove the redesign</dd></div><div><dt>When</dt><dd>August 2025 – present</dd></div><div><dt>Team</dt><dd>Duke Aero, Solid Propulsion</dd></div><div><dt>Status</dt><dd>Flown</dd></div></dl>
+  </div>
+</section>
+
+<div class="wrap">
+  <figure class="p-lead" data-reveal><div class="frame"><a href="../images/closure-machined.webp" data-lightbox="closure"><img src="../images/closure-machined.webp" width="1600" height="1200" fetchpriority="high" style="object-position: 50% 58%" alt="A partially machined aluminum forward closure on a shop bench, with two eye bolts threaded into its face and radial ports around its side."></a></div><figcaption><b>Fig. 1</b>Forward closure, partially machined.</figcaption></figure>
+  <div class="p-body">
+    <aside class="toc" aria-label="On this page"><p class="label">On this page</p><ol><li><a href="#challenge"><span>01</span>The challenge</a></li><li><a href="#contribution"><span>02</span>My contribution</a></li><li><a href="#process"><span>03</span>Process &amp; iteration</a></li><li><a href="#outcome"><span>04</span>Outcome &amp; evidence</a></li><li><a href="#reflection"><span>05</span>Reflection</a></li><li><a href="#skills"><span>06</span>Skills</a></li></ol></aside>
+    <div>
+      <div class="glance" data-reveal><dl><div><dt>Consolidation</dt><dd>3 closures → 1</dd></div><div><dt>Part count</dt><dd>−67%</dd></div><div><dt>Machining setups</dt><dd>−2</dd></div><div><dt>Ports</dt><dd>Hydrostatic + hot fire merged, sealed for flight</dd></div><div><dt>Min. factor of safety</dt><dd>≈11, preliminary design</dd></div><div><dt>Processes</dt><dd>Lathe, drill press, mill</dd></div></dl></div>
+      <section class="p-sec" id="challenge" data-reveal>
+        <h2><span class="n">01</span>The challenge</h2>
+        <div class="prose"><p>We were machining three separate forward closures for one solid rocket motor: one for the hydrostatic proof test, one for static hot fire, and one for flight. Three parts, three setups, three chances to get something wrong, and two of them thrown away after a single use.</p></div>
+      </section>
+      <section class="p-sec" id="contribution" data-reveal>
+        <h2><span class="n">02</span>My contribution</h2>
+        <p class="contrib">I drove the redesign and did the modeling, the analysis, and the fastener and sealing evaluation. Machining was shared with teammates. The thermal and mechanical loads came from our team lead by way of OpenRocket, and teammates produced the final drawings.</p>
+      </section>
+      <section class="p-sec" id="process" data-reveal>
+        <h2><span class="n">03</span>Process &amp; iteration</h2>
+        <div class="prose"><p>Consolidating all three into one part cut part count by 67% and eliminated two machining setups. The hard part was the ports. A flight closure wants to be solid; a test closure needs instrumentation and fill ports. I merged the hydrostatic and hot fire ports into a single port that is sealed for flight, so one part can serve all three roles without compromising the one that matters.</p>
+<p>I modeled it in Onshape, ran SolidWorks Simulation on a preliminary design to check factor of safety under flight loads, and evaluated commercial fasteners and seals from several suppliers against the chamber's specified thermal and mechanical loads.</p></div>
+<div class="figs"><div class="row" data-reveal><figure style="--ar: 1.107"><div class="frame contain"><a href="../images/closure-section.webp" data-lightbox="closure"><img src="../images/closure-section.webp" width="685" height="619" loading="lazy" alt="Half-section CAD view of the closure showing the bore, seal grooves, and threaded holes."></a></div><figcaption><b>Fig. 2</b>Section view of the final design.</figcaption></figure><figure style="--ar: 1.547"><div class="frame contain"><a href="../images/closure-port.webp" data-lightbox="closure"><img src="../images/closure-port.webp" width="696" height="450" loading="lazy" alt="Section through the closure showing an L-shaped internal passage from the face to the side port."></a></div><figcaption><b>Fig. 3</b>Section through the merged hydrostatic / hot fire port.</figcaption></figure></div></div>
+      </section>
+      <section class="p-sec" id="outcome" data-reveal>
+        <h2><span class="n">04</span>Outcome &amp; evidence</h2>
+        <div class="prose"><p>My teammates and I machined the final parts on a lathe, drill press, and mill. The motor flew.</p></div>
+      </section>
+      <section class="p-sec" id="reflection" data-reveal>
+        <h2><span class="n">05</span>Reflection</h2>
+        <div class="prose"><p>The minimum factor of safety came out around 11, which is not a good number. It means the geometry was set by available stock, machinability, and handling rather than by load, and on a weight-critical vehicle that is mass we'd want back. I'd also verify the chamber pressure independently instead of taking it downstream of someone else's model, since every number after it depends on it.</p>
+<p class="next-note">Next: researching head-end ignition ahead of a two-stage vehicle next year.</p></div>
+<div class="figs"><div class="row" data-reveal><figure style="--ar: 1.763"><div class="frame contain"><a href="../images/closure-fos.webp" data-lightbox="closure"><img src="../images/closure-fos.webp" width="1400" height="794" loading="lazy" alt="SolidWorks factor-of-safety plot of the closure, mostly red, with a minimum factor of safety of 11."></a></div><figcaption><b>Fig. 4</b>FEA on a preliminary design. Minimum FOS = 11.</figcaption></figure></div></div>
+      </section>
+      <section class="p-sec" id="skills" data-reveal>
+        <h2><span class="n">06</span>Skills</h2>
+        <ul class="tags"><li>Onshape</li><li>SolidWorks Simulation (FEA)</li><li>Fastener &amp; seal selection</li><li>Pressure vessel design</li><li>Lathe</li><li>Mill</li><li>Drill press</li><li>DFM</li></ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<section class="next">
+  <div class="wrap">
+    <a href="../work/happy-meal.html" data-cursor="Next">
+      <div><p class="label">Next · Project</p><p class="t">Modular Happy Meal train <span class="arrow">→</span></p></div>
+      <div class="media"><img src="../images/toy-heads.webp" loading="lazy" style="object-position: 50% 65%" alt="Three 3D-printed train heads on a workbench"></div>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <p class="label" data-reveal>Contact</p>
+    <a class="contact-big" href="mailto:brian.yue@duke.edu" data-reveal>brian.yue@duke.edu</a>
+    <div class="actions" data-reveal>
+      <button class="pill" type="button" data-copy="brian.yue@duke.edu">Copy email <span class="hint"></span></button>
+      <a class="pill" href="https://www.linkedin.com/in/brianyihanyue/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+      <a class="pill" href="../resume.pdf" target="_blank" rel="noopener">Résumé <span class="arrow">↗</span></a>
+    </div>
+    <div class="foot-bar">
+      <span>© 2026 Brian Yue</span>
+      <span data-clock>Durham, NC</span>
+      <a href="#main">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<dialog class="lb" id="lightbox" aria-label="Image viewer">
+  <div class="lb-inner"><img alt=""><p class="lb-cap"></p></div>
+  <button class="lb-btn" type="button" data-close>Close</button>
+  <button class="lb-btn lb-nav lb-prev" type="button" data-step="-1" aria-label="Previous image">‹</button>
+  <button class="lb-btn lb-nav lb-next" type="button" data-step="1" aria-label="Next image">›</button>
+</dialog>
+<script src="../personal/gallery.js"></script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
