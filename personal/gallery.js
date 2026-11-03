@@ -85,5 +85,45 @@ window.PERSONAL_GALLERY = [
     "full": "personal/_web/photography/06-gilded-finial-2000.webp",
     "width": 900,
     "height": 611
+  },
+  {
+    "src": "personal/_web/photography/07-by-the-corner-tower-900.webp",
+    "caption": "By the corner tower",
+    "alt": "A woman in Qing-style dress and a floral headdress stands in front of the Forbidden City corner tower in late-afternoon light.",
+    "category": "Photography",
+    "orig": "personal/photography/07-by-the-corner-tower.jpg",
+    "full": "personal/_web/photography/07-by-the-corner-tower-2000.webp",
+    "width": 853,
+    "height": 1280
+  },
+  {
+    "src": "personal/_web/photography/08-against-the-red-pillars-900.webp",
+    "caption": "Against the red pillars",
+    "alt": "A woman in Qing-style dress holding a round fan leans against a red lacquered pillar in low sun.",
+    "category": "Photography",
+    "orig": "personal/photography/08-against-the-red-pillars.jpg",
+    "full": "personal/_web/photography/08-against-the-red-pillars-2000.webp",
+    "width": 853,
+    "height": 1280
+  },
+  {
+    "src": "personal/_web/photography/09-white-cloak-red-wall-900.webp",
+    "caption": "White cloak, red wall",
+    "alt": "A woman in a white fur-trimmed cloak and blue headdress flowers stands beside a red palace wall, eyes lowered.",
+    "category": "Photography",
+    "orig": "personal/photography/09-white-cloak-red-wall.jpg",
+    "full": "personal/_web/photography/09-white-cloak-red-wall-2000.webp",
+    "width": 853,
+    "height": 1280
+  },
+  {
+    "src": "personal/_web/photography/10-candied-fruit-after-dark-900.webp",
+    "caption": "Candied fruit after dark",
+    "alt": "A street vendor smiling behind a bundle of glazed candied-fruit skewers lit warm against a blue night.",
+    "category": "Photography",
+    "orig": "personal/photography/10-candied-fruit-after-dark.jpg",
+    "full": "personal/_web/photography/10-candied-fruit-after-dark-2000.webp",
+    "width": 853,
+    "height": 1280
   }
 ];

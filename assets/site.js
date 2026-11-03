@@ -315,7 +315,8 @@
       var io2 = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io2.unobserve(en.target); } }); }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
       sections.querySelectorAll('[data-reveal]').forEach(function (s) { io2.observe(s); });
     } else { sections.querySelectorAll('[data-reveal]').forEach(function (s) { s.classList.add('in'); }); }
-    if (location.hash) { var target = document.getElementById(location.hash.slice(1)); if (target) setTimeout(function () { target.scrollIntoView(); }, 60); }
+    var hashEl = location.hash && document.getElementById(location.hash.slice(1));
+    if (hashEl) setTimeout(function () { hashEl.scrollIntoView(); }, 60);
   }
 
   /* ---------- lightbox ---------- */

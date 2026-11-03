@@ -34,6 +34,6 @@ window.PERSONAL_CATEGORIES = [
   {
     "key": "photography",
     "title": "Photography",
-    "blurb": "Architecture and light, mostly shot on a Canon DSLR. This first set is from the Forbidden City in Beijing."
+    "blurb": "Architecture, light, and people, mostly shot on a Canon DSLR. This first set is from Beijing, most of it at the Forbidden City. Everyone pictured agreed to be photographed."
   }
 ];
