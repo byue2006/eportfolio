@@ -63,7 +63,7 @@ jobs:
       - name: Leave out originals and tools from the GitHub Pages mirror
         run: |
           find personal -type f -not -path 'personal/_web/*' \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.gif' -o -iname '*.avif' -o -iname '*.heic' -o -iname '*.heif' \) -delete
-          rm -rf tools .git
+          rm -rf tools inbox .git
 
       - uses: actions/configure-pages@v5
 

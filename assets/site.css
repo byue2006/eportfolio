@@ -312,7 +312,7 @@ body.menu-open { overflow: hidden; }
 .media.contain img { object-fit: contain; padding: 9%; }
 .media.fit img { object-fit: contain; padding: 3%; }
 .media.tint { background: var(--tint, var(--plate)); }
-.media.tint img { mix-blend-mode: multiply; }
+.media.tint > img { mix-blend-mode: multiply; }
 /* organization tile shown at rest; the work fades in on hover */
 .org {
   position: absolute; inset: 0; z-index: 1;

@@ -394,7 +394,7 @@ P_['coaching'] = dict(
 CARD = {
   'shear-balance': dict(card_title='Research Intern @ NC State', status=['Internship', 'Finished'], dates='Jun 2026 → Aug 2026',
       lede='Designed a floating-element shear-force balance; rerouted the load path before a 40% friction error got built in.',
-      org=dict(word='NC STATE', sub='Turbulent Shear Flow Laboratory', name='NC State University', bg='#cc0000', logo='images/logo-ncstate.png', logo_w='82%'),
+      org=dict(word='NC STATE', sub='Turbulent Shear Flow Laboratory', name='NC State University', bg='#cc0000', logo='images/logo-ncstate.svg', logo_w='78%'),
       thumb_tint='#e9edf3'),
   'ttbw': dict(card_title='Student Researcher @ Duke', status=['Research', 'Published'], dates='Apr 2025 → Jun 2026',
       lede='First-author AIAA paper synthesizing 53 sources on transonic truss-braced wings.',
@@ -407,13 +407,13 @@ CARD = {
       lede='Adaptive seating for a young client, where one fit test moved the wheels.', thumb_tint='#e7efe9'),
   'issdc': dict(card_title='Captain &amp; Advisor @ ISSDC', status=['Leadership', 'Global Champion'], dates='Sep 2021 → Aug 2024',
       lede='Operations and atmosphere design for settlement proposals; Global Champion at Kennedy Space Center.',
-      org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='ISSDC', bg='#0b0d12')),
+      org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='Space Settlement Design Competitions', bg='#eef3f8', fg='#12294a', logo='images/logo-issdc.webp', logo_w='74%')),
   'teaching': dict(card_title='Teaching Assistant @ Duke', status=['Leadership', 'Ongoing'], dates='Aug 2025 → present',
       lede='EGR 105 and ME 221: office hours, lab sections, and one-on-one sessions.',
       org=dict(word='EGR 105<br>ME 221', sub='EGR 105 · ME 221 · Teaching Assistant', name='Duke University', bg='#012169', small=True, logo='images/logo-duke.svg')),
   'coaching': dict(card_title='Student Coach @ Tsinghua Intl. School', status=['Leadership', 'Finished'], dates='Sep 2020 → May 2024',
       lede='Assistant, then head coach of girls\' volleyball and basketball while a student-athlete.',
-      org=dict(word='TIS', sub='Tsinghua International School Athletics', name='Tsinghua International School', bg='#2a2622')),
+      org=dict(word='TIS', sub='Athletics · Beijing', name='Tsinghua International School', bg='#82318e', logo='images/logo-tis.webp', logo_w='84%')),
 }
 for _slug, _extra in CARD.items():
     _tint = _extra.pop('thumb_tint', None)

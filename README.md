@@ -42,8 +42,12 @@ Optional. These appear only if present, and nothing shows otherwise:
 
 | File | Effect |
 |---|---|
-| `images/logo-ncstate.png` | Replaces the typeset "NC STATE" on the internship card. Use a white or transparent version so it reads on red. The Duke cards already use Duke's official wordmark (`images/logo-duke.svg`). |
+| Logos | Done: `images/logo-ncstate.svg`, `logo-duke.svg`, `logo-issdc.webp`, `logo-tis.webp` (official sources). |
 | `images/teaching.jpg`, `images/coaching.jpg` | Adds a photo to the Teaching / Coaching pages |
+
+## Inbox (anything else: logos, portrait, project photos)
+
+Drop files into `inbox/` (upload page: https://github.com/byue2006/eportfolio/upload/main/inbox) and tell Claude. `inbox/README.md` lists what the site is still missing. The inbox is never published.
 
 ## Photography, sports & drawings (self-organizing)
 
