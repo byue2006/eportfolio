@@ -12,11 +12,30 @@ Drop files in, then tell Claude "I uploaded files to the inbox". Claude renames,
 
 File names don't matter, but a hint helps, e.g. `portrait.jpg`, `playseat-car.jpg`, `aiaa-talk.jpg`.
 
+## "File too large" when uploading?
+
+GitHub's upload page takes files up to **25 MB each**. Full-resolution edits from Lightroom are often bigger. The site never shows a photo larger than 2000 px, so export smaller copies.
+
+**Lightroom Classic:**
+
+1. In the Library grid, select the photos (Ctrl+click, or Ctrl+A for all).
+2. Press **Ctrl+Shift+E** (File → Export).
+3. **Export Location:** pick a folder, e.g. Desktop → "Portfolio export".
+4. **File Settings:** Image Format **JPEG**, Quality **80**, Color Space **sRGB**.
+5. **Image Sizing:** tick **Resize to Fit**, choose **Long Edge**, type **3000** pixels.
+6. **Metadata:** choose **Copyright Only**. This also removes GPS location.
+7. Click **Add** (bottom-left) and name the preset "Portfolio web", so next time it's one click.
+8. Click **Export**.
+
+Each photo comes out around 1–3 MB, well under the limit. Upload those exported copies, not the originals.
+
+**Phone or other apps:** export or share as JPG at "Large" or about 3000 px instead of "Actual size".
+
 ## What's missing on the site
 
 **Empty boxes on the site right now. These matter most:**
 
-- [ ] **Portrait.** Shown at the top of the home page and on the About page. The suit photo at Duke is perfect.
+- [x] **Portrait.** Done: the suit photo at Duke, on the home and About pages.
 - [ ] **PlaySeat prototype in the shop.** The side view with a teammate holding the headrest support.
 - [ ] **PlaySeat chair next to car 63.** The finished chair parked beside the blue race car.
 
