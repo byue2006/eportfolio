@@ -75,8 +75,10 @@ def words(stem):
 
 def caption_from_name(filename, album=""):
     w = words(os.path.splitext(filename)[0])
-    if re.fullmatch(r"(img|dsc|dscn|pxl|photo|image|screenshot)\s?\d[\d\s]*", w, re.I):
-        w = ""                                   # camera file names make poor captions
+    if re.fullmatch(r"(img|dsc|dscn|dji|gopr|mvimg|pxl|photo|image|screenshot)\s?\d[\d\s]*", w, re.I) \
+            or re.fullmatch(r"[0-9a-f\s]{16,}(\s\d+)?", w, re.I) \
+            or re.fullmatch(r"[0-9a-f]{8}(\s?[0-9a-f]{4}){3}\s?[0-9a-f]{12}(\s\d+)?", w, re.I):
+        w = ""                                   # camera, hash or UUID file names make poor captions
     w = (w[:1].upper() + w[1:]) if w else ""
     if album:
         a = words(album)

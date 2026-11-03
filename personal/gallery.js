@@ -5,34 +5,23 @@
 */
 window.PERSONAL_GALLERY = [
   {
-    "src": "personal/_web/music/9975a4662154e75556219c7f5242968b-900.webp",
-    "caption": "9975a4662154e75556219c7f5242968b",
-    "alt": "",
+    "src": "personal/_web/music/pregame-duke-football-900.webp",
+    "caption": "Pregame with the Duke University Marching Band",
+    "alt": "The Duke University Marching Band in white and blue uniforms lined up on the field before a football game, holding brass instruments, with a flame cannon and stands behind them.",
     "category": "Music",
-    "orig": "personal/music/9975a4662154e75556219c7f5242968b.JPG",
-    "full": "personal/_web/music/9975a4662154e75556219c7f5242968b-2000.webp",
+    "orig": "personal/music/pregame-duke-football.jpg",
+    "full": "personal/_web/music/pregame-duke-football-2000.webp",
     "width": 900,
     "height": 600,
     "taken": "2025-09-21"
   },
   {
-    "src": "personal/_web/music/a44cb00bb992e041f3e6dc98be4dc541-2-900.webp",
-    "caption": "A44cb00bb992e041f3e6dc98be4dc541 2",
-    "alt": "",
+    "src": "personal/_web/music/in-the-stands-900.webp",
+    "caption": "In the stands at a Duke football game",
+    "alt": "The Duke University Marching Band in blue shirts and white caps playing brass instruments in the stadium stands, with a drum major in front.",
     "category": "Music",
-    "orig": "personal/music/a44cb00bb992e041f3e6dc98be4dc541 2.JPG",
-    "full": "personal/_web/music/a44cb00bb992e041f3e6dc98be4dc541-2-2000.webp",
-    "width": 900,
-    "height": 600,
-    "taken": "2025-09-06"
-  },
-  {
-    "src": "personal/_web/music/a44cb00bb992e041f3e6dc98be4dc541-900.webp",
-    "caption": "A44cb00bb992e041f3e6dc98be4dc541",
-    "alt": "",
-    "category": "Music",
-    "orig": "personal/music/a44cb00bb992e041f3e6dc98be4dc541.jpg",
-    "full": "personal/_web/music/a44cb00bb992e041f3e6dc98be4dc541-2000.webp",
+    "orig": "personal/music/in-the-stands.jpg",
+    "full": "personal/_web/music/in-the-stands-2000.webp",
     "width": 900,
     "height": 600,
     "taken": "2025-09-06"
