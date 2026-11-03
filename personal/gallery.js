@@ -5,6 +5,39 @@
 */
 window.PERSONAL_GALLERY = [
   {
+    "src": "personal/_web/music/9975a4662154e75556219c7f5242968b-900.webp",
+    "caption": "9975a4662154e75556219c7f5242968b",
+    "alt": "",
+    "category": "Music",
+    "orig": "personal/music/9975a4662154e75556219c7f5242968b.JPG",
+    "full": "personal/_web/music/9975a4662154e75556219c7f5242968b-2000.webp",
+    "width": 900,
+    "height": 600,
+    "taken": "2025-09-21"
+  },
+  {
+    "src": "personal/_web/music/a44cb00bb992e041f3e6dc98be4dc541-2-900.webp",
+    "caption": "A44cb00bb992e041f3e6dc98be4dc541 2",
+    "alt": "",
+    "category": "Music",
+    "orig": "personal/music/a44cb00bb992e041f3e6dc98be4dc541 2.JPG",
+    "full": "personal/_web/music/a44cb00bb992e041f3e6dc98be4dc541-2-2000.webp",
+    "width": 900,
+    "height": 600,
+    "taken": "2025-09-06"
+  },
+  {
+    "src": "personal/_web/music/a44cb00bb992e041f3e6dc98be4dc541-900.webp",
+    "caption": "A44cb00bb992e041f3e6dc98be4dc541",
+    "alt": "",
+    "category": "Music",
+    "orig": "personal/music/a44cb00bb992e041f3e6dc98be4dc541.jpg",
+    "full": "personal/_web/music/a44cb00bb992e041f3e6dc98be4dc541-2000.webp",
+    "width": 900,
+    "height": 600,
+    "taken": "2025-09-06"
+  },
+  {
     "src": "personal/_web/photography/01-roof-guardians-at-dusk-900.webp",
     "caption": "Roof guardians at dusk · Forbidden City, Beijing",
     "alt": "Silhouette of a curved palace roof edge lined with small guardian figures against an orange evening sky.",
