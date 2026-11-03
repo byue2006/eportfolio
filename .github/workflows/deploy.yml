@@ -1,8 +1,13 @@
-# Publishes the site to GitHub Pages on every push to main, including photos
-# uploaded through the GitHub website. Before publishing, it sorts the personal
-# gallery (tools/build_gallery.py), converts iPhone HEIC photos, and makes
-# web-sized copies.
-name: Build and publish site
+# Runs after every push to main, including photos uploaded on github.com.
+#
+#   1. Sorts the personal gallery (tools/build_gallery.py): converts iPhone HEIC,
+#      makes web-sized copies in personal/_web/, and rewrites personal/gallery.js.
+#   2. Commits those results back to main. Cloudflare Pages (brianyue.me) serves the
+#      repository as-is, so it picks the new photos up from that commit.
+#   3. Publishes a mirror to GitHub Pages (byue2006.github.io/eportfolio). Every page
+#      names brianyue.me as its canonical address, so search engines treat the mirror
+#      as a copy, not a competing site.
+name: Organize gallery and publish
 
 on:
   push:
@@ -10,12 +15,13 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # save the updated gallery list back to the repo
+  contents: write
   pages: write
   id-token: write
 
+# one run at a time; a second upload waits for the first to finish
 concurrency:
-  group: pages
+  group: site
   cancel-in-progress: false
 
 jobs:
@@ -23,6 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main          # always the newest commit, not the one that triggered the run
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -34,20 +43,27 @@ jobs:
       - name: Organize the personal gallery
         run: python3 tools/build_gallery.py
 
-      - name: Save the updated gallery list (keeps your caption edits in one place)
+      - name: Save the organized gallery to the repository
         run: |
-          if ! git diff --quiet -- personal/gallery.js; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add personal/gallery.js
-            git commit -m "Update personal gallery [skip ci]"
-            git pull --rebase --quiet origin main && git push || echo "::warning::Couldn't save gallery.js back; the site still publishes."
+          git add -A personal/gallery.js personal/_web
+          if git diff --cached --quiet; then
+            echo "Gallery already up to date."
+            exit 0
           fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Organize personal gallery"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 5
+          done
+          echo "::error::Couldn't push the gallery update."
+          exit 1
 
-      - name: Publish web-sized copies only (originals stay in the repo)
+      - name: Leave out originals and tools from the GitHub Pages mirror
         run: |
           find personal -type f -not -path 'personal/_web/*' \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.gif' -o -iname '*.avif' -o -iname '*.heic' -o -iname '*.heif' \) -delete
-          rm -rf tools
+          rm -rf tools .git
 
       - uses: actions/configure-pages@v5
 

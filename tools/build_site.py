@@ -9,6 +9,7 @@ import os, re, html
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # the site folder
 SCR = os.path.dirname(os.path.abspath(__file__))
 
+SITE = 'https://brianyue.me'          # the live domain (Cloudflare)
 EMAIL = 'brian.yue@duke.edu'
 LINKEDIN = 'https://www.linkedin.com/in/brianyihanyue/'
 DOI = 'https://doi.org/10.2514/6.2026-4344'
@@ -80,7 +81,7 @@ def media(card, hover=True):
 def tags(lst): return '<ul class="tags">' + ''.join(f'<li>{esc(x)}</li>' for x in lst) + '</ul>'
 
 # ---------------------------------------------------------------- shell
-def page(title, desc, P, active, main, progress=False):
+def page(title, desc, P, active, main, progress=False, path=None):
     def cur(k): return ' aria-current="page"' if active == k else ''
     home = '' if active == 'home' else P + 'index.html'
     nav = (f'<a href="{home}#work"{cur("work")}>Work</a>'
@@ -93,6 +94,7 @@ def page(title, desc, P, active, main, progress=False):
                   f'<a href="{P}about.html"{cur("about")}>About <span>03</span></a>'
                   f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}>Personal <span>04</span></a>'
                   f'<a href="{P}resume.pdf" target="_blank" rel="noopener">Résumé <span>PDF</span></a>')
+    canon = '' if path is None else f'\n<link rel="canonical" href="{SITE}/{path}">\n<meta property="og:url" content="{SITE}/{path}">'
     out = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -106,6 +108,10 @@ def page(title, desc, P, active, main, progress=False):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:type" content="website">
+<meta property="og:image" content="{SITE}/images/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">{canon}
 <link rel="icon" href="{FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -477,7 +483,7 @@ def project_page(i, kind, slug):
   </div>
 </section>'''
     title = f'{d["card_title"]} · Brian Yue'
-    return page(title, d['lede'], P, kind, main, progress=True)
+    return page(title, d['lede'], P, kind, main, progress=True, path=f'{kind}/{slug}')
 
 # ---------------------------------------------------------------- home
 def home():
@@ -570,7 +576,7 @@ def home():
     <div class="strip" data-reveal></div>
   </div>
 </section>'''
-    return page('Brian Yue · Mechanical Engineering', 'Brian Yue, mechanical engineering student at Duke. Instrument design, flight hardware, aerospace research, assistive devices, and leadership.', P, 'home', main)
+    return page('Brian Yue · Mechanical Engineering', 'Brian Yue, mechanical engineering student at Duke. Instrument design, flight hardware, aerospace research, assistive devices, and leadership.', P, 'home', main, path='')
 
 # ---------------------------------------------------------------- about
 def about():
@@ -634,7 +640,7 @@ def about():
     </div>
   </div>
 </section>'''
-    return page('About · Brian Yue', 'About Brian Yue: background, experience, education, honors, and skills.', P, 'about', main)
+    return page('About · Brian Yue', 'About Brian Yue: background, experience, education, honors, and skills.', P, 'about', main, path='about')
 
 # ---------------------------------------------------------------- personal
 def personal():
@@ -652,17 +658,45 @@ def personal():
   <div class="masonry" id="masonry"></div>
   <p class="empty" id="emptyGallery" hidden>Nothing here yet.</p>
 </section>'''
-    return page('Personal · Brian Yue', 'Drawings, photographs, and other things Brian Yue makes for fun.', P, 'personal', main)
+    return page('Personal · Brian Yue', 'Drawings, photographs, and other things Brian Yue makes for fun.', P, 'personal', main, path='personal')
 
 # ---------------------------------------------------------------- write
 def write(rel, text):
     path = os.path.join(OUT, rel)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    os.makedirs(os.path.dirname(path) or OUT, exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:
         f.write(text)
     print('wrote', rel, len(text))
 
+def not_found():
+    P = '/'   # root-absolute: this page is served at whatever broken URL was typed
+    main = '''
+<section class="p-hero" style="min-height: 62vh">
+  <div class="wrap">
+    <p class="label accent fade-in" style="--d:.05s">Error 404 · page not found</p>
+    <h1 class="split">This part isn't in the assembly.</h1>
+    <p class="p-lede fade-in" style="--d:.5s">The page you're looking for doesn't exist, or it moved. Try one of these instead.</p>
+    <div class="actions fade-in" style="--d:.7s; margin-top: 32px">
+      <a class="pill solid" href="/">Home <span class="arrow">→</span></a>
+      <a class="pill" href="/#work">Work</a>
+      <a class="pill" href="/#leadership">Leadership</a>
+      <a class="pill" href="/about.html">About</a>
+    </div>
+  </div>
+</section>'''
+    out = page('Page not found · Brian Yue', 'This page does not exist.', P, 'none', main)
+    return out.replace('<meta name="description"', '<meta name="robots" content="noindex">\n<meta name="description"', 1)
+
+def sitemap():
+    import datetime
+    today = datetime.date.today().isoformat()
+    paths = [''] + ['about', 'personal'] + [f'{k}/{s_}' for k, s_ in ORDER]
+    urls = ''.join(f'  <url><loc>{SITE}/{x}</loc><lastmod>{today}</lastmod></url>\n' for x in paths)
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
+
 write('index.html', home())
+write('404.html', not_found())
+write('sitemap.xml', sitemap())
 write('about.html', about())
 write('personal.html', personal())
 for i, (kind, slug) in enumerate(ORDER):

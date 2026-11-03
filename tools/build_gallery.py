@@ -208,6 +208,18 @@ def main():
         return (ci, c, 0 if t else 1, "".join(chr(0x10FFFF - ord(ch)) for ch in t), e["orig"].lower())
     out.sort(key=order)
 
+    # remove web copies whose original was deleted or renamed
+    keep = {os.path.join(ROOT, e[k]) for e in out for k in ("src", "full") if e.get(k)}
+    pruned = 0
+    if os.path.isdir(WEB):
+        for dirpath, _, filenames in os.walk(WEB, topdown=False):
+            for name in filenames:
+                fp = os.path.join(dirpath, name)
+                if fp not in keep:
+                    os.remove(fp); pruned += 1
+            if dirpath != WEB and not os.listdir(dirpath):
+                os.rmdir(dirpath)
+
     keys = {e["orig"] for e in out}
     removed = sum(1 for k in by_orig if k not in keys and str(k).startswith("personal/"))
     # entries pointing outside personal/ (e.g. a URL you added by hand) are kept
@@ -224,7 +236,8 @@ def main():
     for e in out:
         counts[e.get("category", "?")] = counts.get(e.get("category", "?"), 0) + 1
     print(f"personal/gallery.js: {len(out)} item(s) (+{new} new, -{removed} removed) "
-          + ", ".join(f"{k}: {v}" for k, v in counts.items()))
+          + ", ".join(f"{k}: {v}" for k, v in counts.items())
+          + (f"; pruned {pruned} stale web cop{'y' if pruned == 1 else 'ies'}" if pruned else ""))
     if skipped:
         print("  Skipped (needs conversion" + ("" if HAVE_HEIF else "; pip install pillow-heif for HEIC") + "):")
         for s in skipped:

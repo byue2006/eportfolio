@@ -1,15 +1,12 @@
 # eportfolio
 
-Brian Yue's ePortfolio. Live at **https://byue2006.github.io/eportfolio/** once GitHub Pages is on (see below).
+Brian Yue's ePortfolio, live at **https://brianyue.me**.
 
-Static multi-page site. No build step: upload this folder as-is.
+## How it's hosted
 
-## Put it online (GitHub Pages, auto-updating)
-
-This folder is a Git repository with a GitHub Actions workflow (`.github/workflows/deploy.yml`).
-Once it's on GitHub, every push to `main` republishes the site in about a minute.
-
-One-time setup: in this repository, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**. After that, every push to `main` (including photo uploads made on github.com) republishes the site in about a minute. Progress is on the **Actions** tab.
+- **brianyue.me** is served by **Cloudflare Pages**, straight from this repository's `main` branch. Any change pushed to `main` is live in about a minute.
+- **GitHub Actions** (`.github/workflows/deploy.yml`) runs after every push. It organizes the photo gallery, saves the result back to `main` (which Cloudflare then publishes), and updates a mirror at byue2006.github.io/eportfolio. Every page names brianyue.me as its main address, so search engines treat the mirror as a copy.
+- See each run's progress on the **Actions** tab. A green check means it worked.
 
 ## Pages
 
@@ -52,10 +49,10 @@ Optional. These appear only if present, and nothing shows otherwise:
 Upload images into a folder, and they appear on the Personal page, sorted automatically.
 
 - **Folders:** `personal/photography/`, `personal/sports/`, `personal/drawings/`. Any new folder becomes its own filter. A subfolder such as `personal/sports/volleyball/` becomes part of the caption.
-- **On GitHub:** open the folder → **Add file → Upload files** → drag photos in → **Commit changes**. The site rebuilds itself. JPG, PNG, WebP and iPhone HEIC all work.
+- **On GitHub:** open the folder → **Add file → Upload files** → drag photos in → **Commit changes**. About 2 minutes later they're on brianyue.me. JPG, PNG, WebP and iPhone HEIC all work. Each folder has a README with the steps.
 - **Order:** newest first within each category, by the date the photo was taken. Categories appear as Photography, Sports, Drawings, then any others.
 - **Captions:** taken from the file name (`duke-gardens-in-fog.jpg` becomes "Duke gardens in fog"). Camera names like `IMG_4821` get no caption. To change one, edit `personal/gallery.js` on GitHub; your edits are kept.
-- **Size:** big photos are fine. The build publishes 900 px and 2000 px copies, not the originals.
+- **Size:** big photos are fine, up to 25 MB each. The page shows 900 px and 2000 px copies (in `personal/_web/`, made automatically), not the originals.
 - **Locally:** `pip install Pillow pillow-heif`, then `python3 tools/build_gallery.py`.
 
 The Personal link in the nav and the strip on the home page appear once there's at least one image.
