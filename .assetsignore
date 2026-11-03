@@ -17,3 +17,21 @@ personal/*
 !personal/_web
 .wrangler
 node_modules
+
+# Stray uploads in the top folder are never published (only the site's own files are)
+/*.jpg
+/*.JPG
+/*.jpeg
+/*.JPEG
+/*.png
+/*.PNG
+/*.heic
+/*.HEIC
+/*.heif
+/*.webp
+/*.gif
+/*.tif
+/*.tiff
+/*.docx
+/*.pptx
+!/apple-touch-icon.png
