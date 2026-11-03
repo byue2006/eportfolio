@@ -45,7 +45,7 @@ jobs:
 
       - name: Save the organized gallery to the repository
         run: |
-          git add -A personal/gallery.js personal/_web
+          git add -A -- personal/   # gallery.js and _web/ (which doesn't exist until the first photo)
           if git diff --cached --quiet; then
             echo "Gallery already up to date."
             exit 0
