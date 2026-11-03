@@ -596,6 +596,7 @@ def about():
       <div class="prose fade-in" style="--d:.5s">
         <p>I'm a mechanical engineering junior at Duke's Pratt School of Engineering, working toward a certificate in aerospace engineering. Before Duke I was at Tsinghua International School in Beijing, where I captained our ISSDC teams and, as a full-time student-athlete, coached middle school volleyball and basketball, ending as head coach of both girls' teams.</p>
         <p>At Duke I split my time between Duke Aero's solid propulsion subteam, research, and teaching. I like projects where the envelope is fixed and everything inside it is mine to decide.</p>
+        <p>Outside engineering, I play trombone in the Duke University Marching Band, and I play volleyball and basketball.</p>
         <p>I'm a native speaker of English and Mandarin, and a US citizen.</p>
       </div>
       <div class="actions fade-in" style="--d:.7s; margin-top:28px">

@@ -185,7 +185,7 @@
   var ICONS = {
     volleyball: '<circle cx="50" cy="50" r="38"/><path d="M50 12c-6 14-6 30 0 38M50 50c-9 6-25 10-38 6M50 50c9 6 17 18 18 32"/><path d="M27 20c10 4 18 14 23 30M88 46c-12 6-26 6-38 4M24 80c4-12 14-24 26-30"/>',
     basketball: '<circle cx="50" cy="50" r="38"/><path d="M12 50h76M50 12v76"/><path d="M23 23c10 9 15 18 15 27s-5 18-15 27M77 23c-10 9-15 18-15 27s5 18 15 27"/>',
-    music: '<path d="M36 72V26l40-9v46"/><path d="M36 37l40-9"/><ellipse cx="28" cy="72" rx="9" ry="7" transform="rotate(-20 28 72)"/><ellipse cx="68" cy="63" rx="9" ry="7" transform="rotate(-20 68 63)"/>',
+    music: '<path d="M36 60 H86 a5 5 0 0 1 0 10 H30"/><path d="M30 70 l-6 -3 v6 z"/><path d="M46 60 V70 M80 60 V70"/><path d="M36 60 H24 a11 11 0 0 1 0 -22 H52"/><path d="M52 36.5 C63 36 71 31 78 21 V55 C71 45 63 40 52 39.5"/><path d="M60 39.5 V60"/>',
     photography: '<rect x="14" y="30" width="72" height="48" rx="6"/><path d="M36 30l5-9h18l5 9"/><circle cx="50" cy="54" r="14"/><circle cx="50" cy="54" r="6"/>'
   };
   var countText = function (c) { return c.items.length ? c.items.length + (c.items.length === 1 ? ' photo' : ' photos') : 'Coming soon'; };

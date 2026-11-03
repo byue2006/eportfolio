@@ -28,7 +28,7 @@ window.PERSONAL_CATEGORIES = [
   {
     key: "music",
     title: "Music",
-    blurb: ""
+    blurb: "I play trombone in the Duke University Marching Band. In high school I played in concert, pop, and jazz ensembles."
   },
   {
     key: "photography",
