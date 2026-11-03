@@ -153,12 +153,13 @@ button { font: inherit; color: inherit; }
 .site-header.hide { transform: translateY(-100%); }
 .bar { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; white-space: nowrap; }
-.brand .mark {
-  width: 26px; height: 26px; border-radius: 7px; background: var(--ink); color: var(--paper);
-  display: grid; place-items: center; font: 600 11px/1 var(--mono); letter-spacing: 0;
-  position: relative;
-}
-.brand .mark::after { content: ""; position: absolute; right: -3px; bottom: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); border: 2px solid var(--paper); }
+.brand .mark { width: 30px; height: 30px; flex: none; display: block; transition: transform .4s var(--ease); }
+.brand:hover .mark { transform: rotate(-6deg); }
+.brand .m-bg { fill: var(--ink); }
+.brand .m-fg { fill: var(--paper); }
+.brand .m-dot { fill: var(--accent); }
+.brand .wm { font-family: var(--serif); font-weight: 400; font-size: 23px; letter-spacing: -0.01em; line-height: 1; }
+.brand .stop { color: var(--accent); }
 .navpill {
   display: flex; gap: 2px; padding: 4px;
   border: 1px solid var(--rule); border-radius: 999px;

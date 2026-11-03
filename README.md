@@ -9,6 +9,19 @@ Brian Yue's ePortfolio, live at **https://brianyue.me**.
 - **GitHub Actions** (`.github/workflows/deploy.yml`) runs after every push. It organizes the photo gallery, saves the result back to `main` (which Cloudflare then publishes), and updates a mirror at byue2006.github.io/eportfolio. Every page names brianyue.me as its main address, so search engines treat the mirror as a copy.
 - See each run's progress on the **Actions** tab. A green check means it worked.
 
+## Logo
+
+`assets/brand/` holds the logo: an italic serif **by.** with an orange full stop, echoing the "make it." headline.
+
+| File | Use |
+|---|---|
+| `logo-mark.svg`, `logo-mark-1024.png` | Square mark, dark tile (profile pictures, LinkedIn, résumé) |
+| `logo-mark-light.svg`, `logo-mark-light-1024.png` | Square mark, light tile (for dark backgrounds) |
+| `logo-lockup.svg`, `logo-lockup-2400.png` | Mark + "Brian Yue." for light backgrounds |
+| `logo-lockup-on-dark.svg`, `logo-lockup-on-dark-2400.png` | Same, for dark backgrounds |
+
+`favicon.svg`, `favicon.ico` and `apple-touch-icon.png` (browser tab and phone home screen) are made from the same mark. The site header draws it inline, so it follows light/dark mode.
+
 ## Pages
 
 | Page | File |
