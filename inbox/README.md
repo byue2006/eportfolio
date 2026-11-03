@@ -25,7 +25,7 @@ File names don't matter, but a hint helps, e.g. `portrait.jpg`, `playseat-car.jp
 - [ ] **Forward closure:** the motor on the pad, the hot fire or launch, or the finished machined part.
 - [ ] **TTBW paper:** you presenting at the AIAA AVIATION Forum in San Diego.
 - [ ] **Happy Meal train:** the Duke 2025 Toy Fair: your booth, poster, costume, or the toy video.
-- [ ] **ISSDC:** the team at Kennedy Space Center, or the award.
+- [ ] **ISSDC:** the team at Kennedy Space Center, or the award. Also the **ISSDC logo**, if you have one (the ISSDC one, not the American SSDC one).
 - [ ] **Teaching:** you leading a lab or office hours.
 - [ ] **Coaching:** one of your teams.
 - [ ] **Shear-force balance:** any photo of the real parts or hardware, if it was built.
@@ -40,7 +40,7 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 
 ## Already done (no need to send)
 
-Logos for NC State, Duke, Space Settlement Design Competitions and Tsinghua International School; résumé; drawings; project figures.
+Logos for NC State, Duke and Tsinghua International School; résumé; drawings; project figures.
 
 ## Photography, sports, drawings
 

@@ -407,7 +407,7 @@ CARD = {
       lede='Adaptive seating for a young client, where one fit test moved the wheels.', thumb_tint='#e7efe9'),
   'issdc': dict(card_title='Captain &amp; Advisor @ ISSDC', status=['Leadership', 'Global Champion'], dates='Sep 2021 → Aug 2024',
       lede='Operations and atmosphere design for settlement proposals; Global Champion at Kennedy Space Center.',
-      org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='Space Settlement Design Competitions', bg='#eef3f8', fg='#12294a', logo='images/logo-issdc.webp', logo_w='74%')),
+      org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='ISSDC', bg='#0b0d12')),
   'teaching': dict(card_title='Teaching Assistant @ Duke', status=['Leadership', 'Ongoing'], dates='Aug 2025 → present',
       lede='EGR 105 and ME 221: office hours, lab sections, and one-on-one sessions.',
       org=dict(word='EGR 105<br>ME 221', sub='EGR 105 · ME 221 · Teaching Assistant', name='Duke University', bg='#012169', small=True, logo='images/logo-duke.svg')),
@@ -482,7 +482,7 @@ def project_page(i, kind, slug):
     </a>
   </div>
 </section>'''
-    title = f'{d["card_title"]} · Brian Yue'
+    title = f'{html.unescape(d["card_title"])} · Brian Yue'
     return page(title, d['lede'], P, kind, main, progress=True, path=f'{kind}/{slug}')
 
 # ---------------------------------------------------------------- home

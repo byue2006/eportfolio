@@ -42,7 +42,7 @@ Optional. These appear only if present, and nothing shows otherwise:
 
 | File | Effect |
 |---|---|
-| Logos | Done: `images/logo-ncstate.svg`, `logo-duke.svg`, `logo-issdc.webp`, `logo-tis.webp` (official sources). |
+| Logos | Done: `images/logo-ncstate.svg`, `logo-duke.svg`, `logo-tis.webp` (official sources). The ISSDC card is typeset until an ISSDC logo is provided. Note that ISSDC (the international competition) is not SSDC (the US one). |
 | `images/teaching.jpg`, `images/coaching.jpg` | Adds a photo to the Teaching / Coaching pages |
 
 ## Inbox (anything else: logos, portrait, project photos)
