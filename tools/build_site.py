@@ -403,26 +403,40 @@ P_['happy-meal'] = dict(
 P_['playseat'] = dict(
   kind='work', num='04', cat='Assistive device', year='2024',
   title='Accessible PlaySeat', card_title='Accessible PlaySeat',
-  lede='Adaptive seating for a young client, where one fit test moved the wheels.',
+  lede='A mobile play seat for a three-year-old, where one fit test moved the wheels and six tests proved the rest.',
   tags=['User testing', 'Fabrication', 'Requirements'],
-  thumb=dict(kind='img', src='images/playseat-front.webp', mode='cover', alt='The finished PlaySeat'),
-  meta=[('Role', 'Seating structure, fabrication'), ('When', 'September – December 2024'), ('Team', '4 people'), ('Advisor', 'Dr. George Delagrammatikas')],
-  lead=lead('images/playseat-front.webp', 'The finished PlaySeat: a padded child\'s seat with a harness on a white base, large wheels, and a black footrest platform in front.',
-            'Fig. 1', 'The finished chair.', 1600, 900, mode='cover', group='playseat'),
-  glance=[('Timeline', '11 weeks, concept to delivery'), ('Verification', 'Predesign evaluation; prototype fit test with client and caregivers'),
-          ('Change from testing', 'Drive wheels moved forward, rear wheels added'), ('Processes', 'Laser cutting, acrylic bending, manual machining')],
+  thumb=dict(kind='img', src='images/playseat-iso.webp', mode='cover', pos='45% 55%', alt='The finished PlaySeat with its tray'),
+  meta=[('Role', 'Seating structure, fabrication'), ('When', 'September – December 2024'), ('Team', 'Team P-Play, 4 people · EGR 101'), ('Advisor', 'Dr. George Delagrammatikas')],
+  lead=lead('images/playseat-iso.webp', 'The finished PlaySeat outdoors: a padded seat with a five-point harness on a white base, a clamp-on tray, a large three-spoke side wheel, and a black faux carbon-fiber front wing over the leg padding.',
+            'Fig. 1', 'The finished chair, with its clamp-on tray.', 2000, 1500, mode='cover', group='playseat', pos='50% 58%'),
+  glance=[('Timeline', '11 weeks, concept to delivery'), ('Verification', 'Fit test with client and caregivers; six pass/fail tests against target values'),
+          ('Change from testing', 'Drive wheels moved forward, rear wheels added'), ('Weight', '15.72 lb (target 20 lb or less)'),
+          ('Materials', 'Plastic, polycarbonate, vinyl wrap'), ('Processes', 'Laser cutting, acrylic bending, manual machining')],
   sections=[
-    ('challenge', 'The challenge', '''<div class="prose"><p>A young client needed seating that fit his postural and reach limitations. Our job over eleven weeks was to turn what he and his caregivers needed into something quantified enough to design against: spinal support geometry, ergonomic reach limits, and the requirement that it not look clinical.</p></div>'''),
-    ('contribution', 'My contribution', '''<p class="contrib">I worked on the seating structure design and the fabrication, and shared the requirements work and the fit test with my three teammates.</p>'''),
-    ('process', 'Process &amp; iteration', '''<div class="prose"><p>A prototype fit test showed he couldn't reach the push rims. That was a requirement we had written down and gotten wrong. Moving the drive wheels forward fixed the reach and shifted the center of gravity, so we added rear wheels to offset it. One test invalidated an assumption, the fix created a second problem, and we fixed that too, all inside an eleven-week build.</p></div>
-<div class="figs">''' + row(fig('images/playseat-prototype.jpg', 'Side view of the PlaySeat prototype in the shop, with a teammate holding the headrest support.', 'Fig. 2', 'Earlier prototype, in the shop.', ar=0.75, mode='cover', group='playseat', dropin=True),
-                       fig('images/playseat-wheel.webp', 'Close-up side view of the final chair\'s large spoked wheel, footrest, and small caster.', 'Fig. 3', 'Drive wheel and footrest, final chair.', 1400, 965, group='playseat'),
-                       fig('images/playseat-back.webp', 'Rear view of the final chair showing black straps, a bolted headrest support, and a handle.', 'Fig. 4', 'Rear view, final chair.', 975, 1125, group='playseat')) + '</div>'),
-    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>The finished chair was delivered to the client at the end of the build.</p></div>
-<div class="figs">''' + row(fig('images/playseat-tray.webp', 'Final chair with its white meal tray attached.', 'Fig. 5', 'With the tray attached.', 1400, 1025, group='playseat'),
-                       fig('images/playseat-car63.jpg', 'The finished chair parked beside a blue Duke race car, number 63.', 'Fig. 6', 'The finished chair beside car 63.', ar=1.333, mode='cover', group='playseat', dropin=True)) + '</div>'),
-    ('reflection', 'Reflection', '''<div class="prose"><p>It's the smallest project here and the one that taught me the most about verification. A requirement you haven't tested against the real user is a guess written in a confident font.</p></div>'''),
-    ('skills', 'Skills', tags(['Requirements definition', 'User testing', 'Ergonomics', 'Laser cutting', 'Acrylic bending', 'Manual machining', 'Teamwork'])),
+    ('challenge', 'The challenge', '''<div class="prose"><p>A three-year-old with spinal conditions needed more upper-body support than any wheelchair on the market gave him, and without it he couldn't play with the other kids in his classroom. Our job over eleven weeks was to turn what he and his caregivers needed into requirements we could design and test against.</p>
+<p>The chair had to let him reach the ground to play with toys on the floor, right himself after leaning, move on his own and get over obstacles, keep up with his peers, and be something he actually enjoyed sitting in.</p></div>'''),
+    ('contribution', 'My contribution', '''<p class="contrib">I worked on the seating structure design and the fabrication, and shared the requirements work and the testing with my teammates Anna Karius, Ethan Liao, and Julia Morgan.</p>'''),
+    ('process', 'Process &amp; iteration', '''<div class="prose"><p>We started from a booster highchair with a removable base and built around it: a five-point harness and foam padding for support, side wheels he can push himself, front casters so it turns in place, a cane attachment so caregivers can push him, and a clamp-on tray. He loves Formula 1, so it also got a faux carbon-fiber rear spoiler and front wing, which is how "not clinical" turned into a design requirement.</p>
+<p>A prototype fit test showed he couldn't reach the push rims. That was a requirement we had written down and gotten wrong. Moving the drive wheels forward fixed the reach and shifted the center of gravity, so we added rear wheels to offset it. One test invalidated an assumption, the fix created a second problem, and we fixed that too, all inside an eleven-week build.</p></div>
+<div class="figs">''' + row(fig('images/playseat-wheel.webp', "Close-up side view of the final chair's large three-spoke wheel, footrest, and small front caster.", 'Fig. 2', 'Three-spoke side wheel he propels himself, and a front caster for turning in place.', 1400, 965, group='playseat'),
+                       fig('images/playseat-rear.webp', 'Rear view of the chair: a black faux carbon-fiber spoiler bolted across the seat back, and a grey mount holding a black cane.', 'Fig. 3', 'Rear view: the faux carbon-fiber spoiler and the cane mount.', 1200, 1600, mode='cover', group='playseat')) + '</div>'),
+    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>We tested the finished chair against every requirement with a target value. All six passed, and the chair was delivered to the client at the end of the build.</p></div>
+<div class="figs" data-reveal><div class="vtable-wrap"><table class="vtable">
+  <thead><tr><th scope="col">Criterion</th><th scope="col">Target</th><th scope="col">Test</th><th scope="col">Result</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Safety</th><td data-label="Target">No reachable gaps of 15 mm or more</td><td data-label="Test">Measured every gap he could reach</td><td data-label="Result"><span class="pass">Pass</span> None 15 mm or larger</td></tr>
+    <tr><th scope="row">Support</th><td data-label="Target">Holds his head 80–100° from the ground</td><td data-label="Test">He leaned away from vertical and tried to return upright</td><td data-label="Result"><span class="pass">Pass</span> Stayed upright</td></tr>
+    <tr><th scope="row">Mobility</th><td data-label="Target">10 ft or more in 20 s</td><td data-label="Test">Pushed across carpet, tile, concrete, and over toys</td><td data-label="Result"><span class="pass">Pass</span> All surfaces</td></tr>
+    <tr><th scope="row">Aesthetics</th><td data-label="Target">His rating of 4 or more</td><td data-label="Test">He rated it on a scale he defined</td><td data-label="Result"><span class="pass">Pass</span> 4, and visibly enjoyed it</td></tr>
+    <tr><th scope="row">Durability</th><td data-label="Target">Lasts 2 years or more</td><td data-label="Test">Accelerated drop test</td><td data-label="Result"><span class="pass">Pass</span> Survived drops up to 4 ft</td></tr>
+    <tr><th scope="row">Weight</th><td data-label="Target">20 lb or less</td><td data-label="Test">Crane scale</td><td data-label="Result"><span class="pass">Pass</span> 15.72 lb</td></tr>
+  </tbody>
+</table></div></div>
+<div class="figs">''' + row(fig('images/playseat-cane.webp', 'A black cane clamped into a grey 3D-printed mount on the back of the chair.', 'Fig. 4', 'The cane attachment lets a caregiver push the seat…', 1600, 1200, mode='cover', group='playseat'),
+                       fig('images/playseat-cane-out.webp', 'The same mount with the cane lifted out, showing its two metal clamps.', 'Fig. 5', '…and lifts out of its printed mount.', 1600, 1200, mode='cover', group='playseat')) + '</div>'),
+    ('reflection', 'Reflection', '''<div class="prose"><p>It's the smallest project here and the one that taught me the most about verification. A requirement you haven't tested against the real user is a guess written in a confident font.</p>
+<p>The next change would be foam inserts that come out more easily, so the seat can be resized as he grows.</p></div>'''),
+    ('skills', 'Skills', tags(['Requirements definition', 'User testing', 'Verification testing', 'Ergonomics', 'Laser cutting', 'Acrylic bending', 'Manual machining', 'Teamwork'])),
   ])
 
 P_['issdc'] = dict(
@@ -502,8 +516,8 @@ CARD = {
       lede='Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.'),
   'happy-meal': dict(card_title='Modular Happy Meal train', status=['Project', 'Toy Fair 2025'], dates='Duke · Spring 2025',
       lede='An injection-moldable toy train with swappable snap-fit heads, at $0.31 a unit.'),
-  'playseat': dict(card_title='Accessible PlaySeat', status=['Project', 'Delivered'], dates='Duke · Sep 2024 → Dec 2024',
-      lede='Adaptive seating for a young client, where one fit test moved the wheels.', thumb_tint='#e7efe9'),
+  'playseat': dict(card_title='Accessible PlaySeat', status=['Project', 'Delivered'], dates='Duke EGR 101 · Sep 2024 → Dec 2024',
+      lede='A mobile play seat for a three-year-old: one fit test moved the wheels, then six pass/fail tests proved the rest.'),
   'issdc': dict(card_title='Captain &amp; Advisor @ ISSDC', status=['Leadership', 'Global Champion'], dates='Sep 2021 → Aug 2024',
       lede='Operations and atmosphere design for settlement proposals; Global Champion at Kennedy Space Center.',
       org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='ISSDC', bg='#0b0d12')),

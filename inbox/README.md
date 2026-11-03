@@ -1,6 +1,8 @@
 # Inbox: drop files here for Claude
 
 Anything in this folder is private to the repository. It is **not** shown on brianyue.me until Claude sorts it.
+**Upload here, not to the top folder of the repository.** Files in the top folder used to be published as-is; they are now blocked, but the inbox is the right place.
+
 Drop files in, then tell Claude "I uploaded files to the inbox". Claude renames, crops and converts them, puts each one where it belongs, and clears the inbox.
 
 ## How to upload
@@ -36,8 +38,8 @@ Each photo comes out around 1–3 MB, well under the limit. Upload those exporte
 **Empty boxes on the site right now. These matter most:**
 
 - [x] **Portrait.** Done: the suit photo at Duke, on the home and About pages.
-- [ ] **PlaySeat prototype in the shop.** The side view with a teammate holding the headrest support.
-- [ ] **PlaySeat chair next to car 63.** The finished chair parked beside the blue race car.
+- [x] **PlaySeat.** Done: final chair, rear view, cane attachment, and the test results from the poster.
+- [ ] **PlaySeat, optional:** the prototype in the shop, or the chair beside car 63.
 
 **Nice to have.** Each one adds a photo to a page that doesn't have one there yet:
 

@@ -439,6 +439,24 @@ body.menu-open { overflow: hidden; }
 .prose strong { font-weight: 600; }
 .contrib { border-left: 2px solid var(--accent); padding: 4px 0 4px 20px; font-size: 18.5px; line-height: 1.6; }
 .next-note { color: var(--ink-2); }
+.vtable-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); }
+.vtable { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 14.5px; line-height: 1.45; }
+.vtable th, .vtable td { text-align: left; vertical-align: top; padding: 12px 16px; border-top: 1px solid var(--rule); }
+.vtable thead th { border-top: 0; font: 500 10.5px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.vtable tbody th { font-weight: 600; }
+.vtable .pass { display: inline-block; margin-right: 6px; font: 500 10.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 4px 7px; border-radius: 5px; background: rgba(22, 128, 61, .12); color: #15803d; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .vtable .pass { background: rgba(74, 222, 128, .12); color: #4ade80; } }
+:root[data-theme="dark"] .vtable .pass { background: rgba(74, 222, 128, .12); color: #4ade80; }
+@media (max-width: 640px) {
+  .vtable-wrap { overflow: visible; border: 0; background: none; }
+  .vtable { min-width: 0; }
+  .vtable thead { display: none; }
+  .vtable, .vtable tbody, .vtable tr, .vtable th, .vtable td { display: block; }
+  .vtable tr { border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); padding: 6px 0; margin-bottom: 10px; }
+  .vtable th, .vtable td { border-top: 0; padding: 6px 16px; }
+  .vtable tbody th { font-size: 16px; }
+  .vtable td::before { content: attr(data-label); display: block; font: 500 10px/1.6 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+}
 .todo { display: none; }
 
 /* figures */
