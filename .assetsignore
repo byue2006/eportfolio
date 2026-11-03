@@ -1,0 +1,17 @@
+# Files in the repository that should NOT be published on brianyue.me.
+# (gitignore syntax; read by Cloudflare's wrangler at deploy time)
+.git
+.github
+.assetsignore
+.gitignore
+.nojekyll
+wrangler.jsonc
+tools
+README.md
+**/README.md
+# full-size photo originals: only the web copies in personal/_web are published
+personal/*
+!personal/gallery.js
+!personal/_web
+.wrangler
+node_modules

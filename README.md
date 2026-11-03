@@ -4,7 +4,8 @@ Brian Yue's ePortfolio, live at **https://brianyue.me**.
 
 ## How it's hosted
 
-- **brianyue.me** is served by **Cloudflare Pages**, straight from this repository's `main` branch. Any change pushed to `main` is live in about a minute.
+- **brianyue.me** is served by **Cloudflare Workers** (Workers Builds), straight from this repository's `main` branch. Any change pushed to `main` is live in about a minute. `wrangler.jsonc` configures it, and `.assetsignore` keeps the scripts, READMEs and full-size photo originals off the public site.
+- **Never put `[skip ci]` (or `[ci skip]`) in a commit message.** Both GitHub and Cloudflare skip that commit entirely.
 - **GitHub Actions** (`.github/workflows/deploy.yml`) runs after every push. It organizes the photo gallery, saves the result back to `main` (which Cloudflare then publishes), and updates a mirror at byue2006.github.io/eportfolio. Every page names brianyue.me as its main address, so search engines treat the mirror as a copy.
 - See each run's progress on the **Actions** tab. A green check means it worked.
 

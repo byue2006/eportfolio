@@ -1,0 +1,13 @@
+// Cloudflare Workers config for brianyue.me (static site, no server code).
+// "name" must match the Worker that Workers Builds deploys ("eportfolio").
+{
+  "name": "eportfolio",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": ".",
+    // unknown URLs get the styled 404.html instead of a blank page
+    "not_found_handling": "404-page",
+    // /work/playseat.html redirects to /work/playseat (the canonical URLs)
+    "html_handling": "auto-trailing-slash"
+  }
+}
