@@ -3,4 +3,65 @@
   Upload photos into personal/photography/, personal/sports/ or personal/drawings/ and
   this list rebuilds itself. You can edit "caption" and "alt" here; edits are kept.
 */
-window.PERSONAL_GALLERY = [];
+window.PERSONAL_GALLERY = [
+  {
+    "src": "personal/_web/photography/01-roof-guardians-at-dusk-900.webp",
+    "caption": "Roof guardians at dusk · Forbidden City, Beijing",
+    "alt": "Silhouette of a curved palace roof edge lined with small guardian figures against an orange evening sky.",
+    "category": "Photography",
+    "orig": "personal/photography/01-roof-guardians-at-dusk.jpg",
+    "full": "personal/_web/photography/01-roof-guardians-at-dusk-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/photography/02-painted-eaves-900.webp",
+    "caption": "Painted eaves · Forbidden City, Beijing",
+    "alt": "Golden-tiled palace hall with a blue name plaque and painted eaves under a clear blue sky.",
+    "category": "Photography",
+    "orig": "personal/photography/02-painted-eaves.jpg",
+    "full": "personal/_web/photography/02-painted-eaves-2000.webp",
+    "width": 805,
+    "height": 1280
+  },
+  {
+    "src": "personal/_web/photography/03-corner-tower-at-sunset-900.webp",
+    "caption": "Corner tower at sunset · Forbidden City, Beijing",
+    "alt": "The tiered corner tower of the Forbidden City in silhouette against a golden sunset.",
+    "category": "Photography",
+    "orig": "personal/photography/03-corner-tower-at-sunset.jpg",
+    "full": "personal/_web/photography/03-corner-tower-at-sunset-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/photography/04-ridge-ornament-900.webp",
+    "caption": "Ridge ornament · Forbidden City, Beijing",
+    "alt": "Close-up of a carved glazed ornament at the end of a roof ridge against blue sky.",
+    "category": "Photography",
+    "orig": "personal/photography/04-ridge-ornament.jpg",
+    "full": "personal/_web/photography/04-ridge-ornament-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/photography/05-carved-marble-way-900.webp",
+    "caption": "Carved marble way · Forbidden City, Beijing",
+    "alt": "A carved white marble ramp in raking light leading up to a palace hall under blue sky.",
+    "category": "Photography",
+    "orig": "personal/photography/05-carved-marble-way.jpg",
+    "full": "personal/_web/photography/05-carved-marble-way-2000.webp",
+    "width": 900,
+    "height": 1200
+  },
+  {
+    "src": "personal/_web/photography/06-gilded-finial-900.webp",
+    "caption": "Gilded finial · Forbidden City, Beijing",
+    "alt": "A pyramidal golden-tiled roof topped with a gilded ball finial against deep blue sky.",
+    "category": "Photography",
+    "orig": "personal/photography/06-gilded-finial.jpg",
+    "full": "personal/_web/photography/06-gilded-finial-2000.webp",
+    "width": 900,
+    "height": 611
+  }
+];
