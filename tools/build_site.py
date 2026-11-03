@@ -4,7 +4,7 @@
 All page text lives in this file. Edit it, then run:  python3 tools/build_site.py
 This overwrites the generated .html files, so make content changes here, not in the HTML.
 """
-import os, re, html
+import os, re, html, json
 
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # the site folder
 SCR = os.path.dirname(os.path.abspath(__file__))
@@ -62,7 +62,7 @@ def media(card, hover=True):
     t = card['thumb']
     go = '<span class="go">View <span class="arrow">→</span></span>' if hover else ''
     if t['kind'] == 'type':
-        inner = f'<div class="media type"><span class="cap">{t["cap"]}</span><span class="big">{t["big"]}</span>'
+        inner = f'<div class="media type" aria-hidden="true"><span class="cap">{t["cap"]}</span> <span class="big">{t["big"]}</span>'
     else:
         cls = 'media' + {'cover': '', 'contain': ' contain', 'fit': ' fit'}[t['mode']] + (' tint' if t.get('tint') else '')
         mstyle = f' style="--tint: {t["tint"]}"' if t.get('tint') else ''
@@ -73,11 +73,109 @@ def media(card, hover=True):
         lw = f' style="--logo-w: {org["logo_w"]}"' if org.get('logo_w') else ''
         logo = f'<img class="logo" data-logo src="{{{{P}}}}{org["logo"]}"{lw} alt="{esc(org["name"])}">' if org.get('logo') else ''
         word_cls = 'word sm' if org.get('small') else 'word'
-        inner += (f'<div class="org reveal" style="--org-bg: {org["bg"]}; --org-fg: {org.get("fg", "#fff")}">'
-                  f'{logo}<span class="{word_cls}">{org["word"]}</span><span class="sub">{org["sub"]}</span></div>')
+        inner += (f'<div class="org reveal" aria-hidden="true" style="--org-bg: {org["bg"]}; --org-fg: {org.get("fg", "#fff")}">'
+                  f'{logo} <span class="{word_cls}">{org["word"]}</span> <span class="sub">{org["sub"]}</span></div>')
     return inner + go + '</div>'
 
 def tags(lst): return '<ul class="tags">' + ''.join(f'<li>{esc(x)}</li>' for x in lst) + '</ul>'
+
+# ---------------------------------------------------------------- personal data (personal/categories.js + gallery.js)
+def _js_array(path, name):
+    txt = open(os.path.join(OUT, path), encoding='utf-8').read()
+    m = re.search(r'window\.' + name + r'\s*=\s*(\[.*\])\s*;', txt, re.S)
+    return json.loads(m.group(1)) if m else []
+
+def _slug(t):
+    return re.sub(r'^-|-$', '', re.sub(r'[^a-z0-9]+', '-', str(t or 'personal').lower()))
+
+def _icons():
+    js = open(os.path.join(OUT, 'assets', 'site.js'), encoding='utf-8').read()
+    block = re.search(r'var ICONS = \{(.*?)\n  \};', js, re.S).group(1)
+    return dict(re.findall(r"(\w+): '([^']*)'", block))
+
+def personal_data():
+    items = [i for i in _js_array('personal/gallery.js', 'PERSONAL_GALLERY') if i.get('src')]
+    cats = [dict(c, key=_slug(c.get('key') or c.get('title'))) for c in _js_array('personal/categories.js', 'PERSONAL_CATEGORIES')]
+    for it in items:
+        k = _slug(it.get('category'))
+        if not any(c['key'] == k for c in cats):
+            cats.append({'key': k, 'title': it.get('category') or 'Personal', 'blurb': ''})
+    for c in cats:
+        c['items'] = [it for it in items if _slug(it.get('category')) == c['key']]
+        c['live'] = bool(c['items']) or bool(c.get('blurb'))
+    return items, cats
+
+ITEMS, CATS = personal_data()
+HAS_PERSONAL = any(c['live'] for c in CATS)
+
+def _count(c):
+    n = len(c['items'])
+    return (f'{n} photo' + ('' if n == 1 else 's')) if n else 'Coming soon'
+
+def _cover(c):
+    if not c['items']:
+        return None
+    if c.get('cover'):
+        for it in c['items']:
+            if c['cover'] in (it.get('orig') or ''):
+                return it
+    return c['items'][0]
+
+def _when(it):
+    import datetime
+    try:
+        return datetime.date.fromisoformat(it['taken']).strftime('%b %Y') if it.get('taken') else ''
+    except ValueError:
+        return ''
+
+def render_personal(P):
+    icons = _icons(); tiles = []; secs = []
+    for i, c in enumerate(CATS):
+        num = f'{i + 1:02d}'
+        cov = _cover(c)
+        if cov:
+            media = f'<img src="{P}{esc(cov["src"])}" alt="" loading="lazy">'
+        elif c['key'] in icons:
+            media = f'<svg class="ptile-icon" viewBox="0 0 100 100" aria-hidden="true">{icons[c["key"]]}</svg>'
+        else:
+            media = ''
+        cls = 'ptile' + ('' if c['items'] else ' type')
+        meta = (f'<div class="ptile-meta"><div class="ptile-top"><span class="num">{num}</span> <span class="n">{_count(c)}</span></div> '
+                f'<span class="t">{esc(c["title"])}</span></div>')
+        if c['live']:
+            tiles.append(f'<a class="{cls}" href="#{c["key"]}" data-cursor="Open"><div class="ptile-media">{media}</div>{meta}</a>')
+        else:
+            tiles.append(f'<div class="{cls}"><div class="ptile-media">{media}</div>{meta}</div>')
+            continue
+        label = f'{num} · {_count(c)}' if c['items'] else num
+        blurb = f'<p>{esc(c["blurb"])}</p>' if c.get('blurb') else ''
+        link = c.get('link') or {}
+        if link.get('href'):
+            blurb += f'<a class="pill" href="{P}{esc(link["href"])}">{esc(link.get("text") or "More")} <span class="arrow">→</span></a>'
+        if c['items']:
+            figs = []
+            for it in c['items']:
+                size = f' width="{it["width"]}" height="{it["height"]}"' if it.get('width') and it.get('height') else ''
+                cap = esc(it.get('caption') or '')
+                when = _when(it)
+                capt = ''
+                if cap or when:
+                    capt = f'<figcaption>{cap}' + (f'<span class="when">{when}</span>' if when else '') + '</figcaption>'
+                figs.append(f'<figure><div class="frame"><a href="{P}{esc(it.get("full") or it["src"])}" data-lightbox="p-{c["key"]}">'
+                            f'<img src="{P}{esc(it["src"])}" loading="lazy" alt="{esc(it.get("alt") or it.get("caption") or "")}"{size}></a></div>{capt}</figure>')
+            body = '<div class="masonry">' + ''.join(figs) + '</div>'
+        else:
+            body = '<p class="pcat-soon">Photos coming soon.</p>'
+        secs.append(f'<section class="pcat" id="{c["key"]}" data-reveal><div class="pcat-head"><div><p class="label">{label}</p><h2>{esc(c["title"])}</h2></div>'
+                    f'<div class="pcat-blurb">{blurb}</div></div>{body}</section>')
+    return ''.join(tiles), ''.join(secs)
+
+def render_teaser(P):
+    chips = ''.join((f'<a class="pill" href="{P}personal.html#{c["key"]}">{esc(c["title"])}</a>' if c['live'] else
+                     f'<a class="pill soon">{esc(c["title"])}</a>') for c in CATS)
+    strip = ''.join(f'<a href="{P}{esc(it.get("full") or it["src"])}" data-lightbox="teaser"><img src="{P}{esc(it["src"])}" '
+                    f'alt="{esc(it.get("alt") or it.get("caption") or "")}" loading="lazy"></a>' for it in ITEMS[:4])
+    return chips, strip
 
 # ---------------------------------------------------------------- shell
 def page(title, desc, P, active, main, progress=False, path=None):
@@ -86,12 +184,12 @@ def page(title, desc, P, active, main, progress=False, path=None):
     nav = (f'<a href="{home}#work"{cur("work")}>Work</a>'
            f'<a href="{home}#leadership"{cur("leadership")}>Leadership</a>'
            f'<a href="{P}about.html"{cur("about")}>About</a>'
-           f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}>Personal</a>')
+           f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}{"" if HAS_PERSONAL else " hidden"}>Personal</a>')
     menu_links = (f'<a href="{P}index.html"{cur("home")}>Home <span>00</span></a>'
                   f'<a href="{home}#work"{cur("work")}>Work <span>01</span></a>'
                   f'<a href="{home}#leadership"{cur("leadership")}>Leadership <span>02</span></a>'
                   f'<a href="{P}about.html"{cur("about")}>About <span>03</span></a>'
-                  f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}>Personal <span>04</span></a>'
+                  f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}{"" if HAS_PERSONAL else " hidden"}>Personal <span>04</span></a>'
                   f'<a href="{P}resume.pdf" target="_blank" rel="noopener">Résumé <span>PDF</span></a>')
     canon = '' if path is None else f'\n<link rel="canonical" href="{SITE}/{path}">\n<meta property="og:url" content="{SITE}/{path}">'
     out = f'''<!doctype html>
@@ -183,14 +281,14 @@ P_['shear-balance'] = dict(
   kind='work', num='01', cat='Instrument design', year='2026',
   title='Floating-element shear-force balance',
   card_title='Floating-element shear-force balance',
-  lede='Rerouted the load path before a 40% friction error got built in.',
+  lede='Rerouted the load path onto about $159 of catalog parts after test data from a comparable instrument showed friction eroding ~40% of measured shear.',
   tags=['Onshape', 'GD&T', 'FEA', 'Instrumentation'],
   thumb=dict(kind='img', src='images/balance-rear.webp', mode='contain', alt='CAD render of the shear-force balance'),
   meta=[('Role', 'Designer, end to end'), ('When', 'June – August 2026'), ('Where', 'Turbulent Shear Flow Lab, NC State'), ('Advisor', 'Dr. Venkat Narayanaswamy')],
   lead=lead('images/balance-rear.webp', 'CAD render of the sidewall-insert plate: a blue aluminum frame with a light-blue floating plate, a small rail and carriage at the center, and the load-cell mount at the right.',
             'Fig. 1', 'Rear face of the sidewall-insert assembly. Carriage, rail, and load-cell mount visible; mounting plate hidden.', 1120, 541, mode='pad', group='balance'),
   glance=[('Constraint', '5 DOF fixed, 1 free'), ('Sensing', 'Uniaxial load cell, single load path'), ('Fits', 'RC4 / LC2, ASME B4.1'),
-          ('Position', '⌀.010 true position, ASME Y14.5'), ('Material', '6061 aluminum, 16 Ra flow surfaces'), ('Error avoided', '~40% friction loss'),
+          ('Position', '⌀.010 true position, ASME Y14.5'), ('Material', '6061 aluminum, 16 Ra flow surfaces'), ('Comparable instrument', 'Friction eroded ~40% of measured shear'),
           ('Carriage + rail', '~$159, catalog parts'), ('Deliverables', '5-sheet drawing set, BOM')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>Skin friction is a wall shear stress, and measuring it directly means letting a small element of the wall float free in one direction while holding it still in the other five. Every parallel path that load can take is measurement error. The instrument also had to fit inside a cavity that already existed in the lab's subsonic tunnel wall, so the envelope, the mounting, and the flow-facing surface were fixed before I drew anything.</p></div>'''),
@@ -211,7 +309,7 @@ P_['shear-balance'] = dict(
     <a href="{{P}}drawings/5-carriage-rail.pdf" target="_blank" rel="noopener"><div class="frame"><img src="{{P}}images/dwg-5-carriage-rail.webp" width="1000" height="773" loading="lazy" alt="Drawing sheet 5: carriage rail"></div><span class="s-t">5 · Carriage rail</span><span class="s-d">Modified catalog part</span></a>
   </div>
 </div>'''),
-    ('reflection', 'Reflection', '''<div class="prose"><p>The most useful input to this design was someone else's test data. It arrived before anything was cut, so changing the interface cost a redesign instead of a rebuild. The lesson I'd carry forward: look for data on comparable hardware before committing to a load path.</p></div>'''),
+    ('reflection', 'Reflection', '''<div class="prose"><p><strong>The interface was the part.</strong> What I was designing was the load path; the frame, the plate and the mounting existed to serve it.</p><p>The most useful input to this design was someone else's test data. It arrived before anything was cut, so changing the interface cost a redesign instead of a rebuild. The lesson I'd carry forward: look for data on comparable hardware before committing to a load path.</p></div>'''),
     ('skills', 'Skills', tags(['Onshape', 'SolidWorks Simulation', 'GD&T (ASME Y14.5)', 'Fits (ASME B4.1)', 'Tolerance analysis', 'Load path design', 'DFM', 'BOM'])),
   ])
 
@@ -243,7 +341,7 @@ P_['forward-closure'] = dict(
 P_['ttbw'] = dict(
   kind='work', num='03', cat='Research · publication', year='2025–26',
   title='An Overview of Transonic Truss-Braced Wing Technology', card_title='Transonic truss-braced wing review',
-  lede='First-author AIAA paper synthesizing 53 sources on what stands between the configuration and service.',
+  lede='Sole-author AIAA paper synthesizing 53 sources on what stands between the configuration and service.',
   tags=['AIAA 2026-4344', 'Aerostructures', 'Certification'],
   thumb=dict(kind='img', src='images/ttbw-diagram.webp', mode='fit', alt='Truss-braced wing schematic and bending moment plot'),
   meta=[('Role', 'Sole author, presenter'), ('When', 'April 2025 – June 2026'), ('Advisor', 'Dr. Earl H. Dowell'), ('Venue', 'AIAA AVIATION Forum 2026')],
@@ -355,20 +453,16 @@ P_['issdc'] = dict(
 P_['teaching'] = dict(
   kind='leadership', num='02', cat='Teaching', year='2025–',
   title='Undergraduate Teaching Assistant', card_title='Teaching assistant, EGR 105 & ME 221',
-  lede='Two engineering courses, two sections of 39 students each, and a rule: teach the process, not the answer.',
+  lede='Teaching EGR 105, Computing for Engineers, and grading for ME 221, Structure and Properties of Solids.',
   tags=['EGR 105', 'ME 221', 'Mentoring'],
-  thumb=dict(kind='type', big='2 × 39', cap='Students per section · EGR 105 & ME 221'),
-  meta=[('Role', 'Undergraduate TA'), ('When', 'August 2025 – present'), ('Courses', 'EGR 105, ME 221'), ('Where', 'Duke University')],
-  lead='''<div class="p-lead stats" data-reveal>
-  <div><div class="big">2</div><div class="cap">Courses: Computing for Engineers (EGR 105) and Structure &amp; Properties of Solids (ME 221)</div></div>
-  <div><div class="big">2 × 39</div><div class="cap">Students per section</div></div>
-  <div><div class="big">Weekly</div><div class="cap">Office hours, plus lab sections and one-on-one sessions</div></div>
-</div>''',
-  glance=[('EGR 105', 'Computing for Engineers, two years'), ('ME 221', 'Structure & Properties of Solids, one year'), ('Format', 'Office hours, lab sections, one-on-one sessions')],
+  thumb=dict(kind='type', big='EGR 105', cap='Computing for Engineers · two years'),
+  meta=[('Role', 'Undergraduate TA'), ('When', 'August 2025 – present'), ('Courses', 'EGR 105 (teaching), ME 221 (grading)'), ('Where', 'Duke University')],
+  lead='',
+  glance=[('EGR 105', 'Computing for Engineers, two years: office hours, lab sections, one-on-one sessions'), ('ME 221', 'Structure & Properties of Solids, one year: grading')],
   sections=[
-    ('challenge', 'The role', '''<div class="prose"><p>I'm a teaching assistant for two courses: EGR 105, Computing for Engineers, for two years, and ME 221, Structure and Properties of Solids, for one, with two sections of 39 students each. Students come in with very different backgrounds, and the work spans coding projects, lab work, mini-activities, and problem sets.</p></div>'''),
-    ('contribution', 'My contribution', '''<p class="contrib">I hold weekly office hours, lead lab sections, and run individual instructional sessions. I also advise on student projects, quizzes, and lab work.</p>'''),
-    ('process', 'Approach', '''<div class="prose"><p>I break hard concepts down into their fundamentals and teach the process instead of supplying answers. When I review submitted work, I give feedback, suggest more efficient approaches where they exist, and recommend specific changes for resubmission.</p></div>
+    ('challenge', 'The role', '''<div class="prose"><p>I'm a teaching assistant for EGR 105, Computing for Engineers, for two years, and ME 221, Structure and Properties of Solids, for one. In EGR 105, students come in with very different backgrounds, and the work spans coding projects, lab work, mini-activities, and problem sets. In ME 221, my job is grading.</p></div>'''),
+    ('contribution', 'My contribution', '''<p class="contrib">In EGR 105, I hold weekly office hours, lead lab sections, and run one-on-one sessions, and I review student projects, quizzes, and lab work. In ME 221, I grade.</p>'''),
+    ('process', 'Approach', '''<div class="prose"><p>I break hard concepts down into their fundamentals and teach the process instead of supplying answers. When I review EGR 105 work, I give feedback, suggest more efficient approaches where they exist, and recommend specific changes for resubmission.</p></div>
 <div class="figs">''' + row(fig('images/teaching.jpg', 'Teaching a lab section.', 'Fig. 1', 'Teaching.', ar=1.5, mode='cover', group='teaching', dropin=True, optional=True)) + '</div>'),
     ('skills', 'Skills', tags(['Technical communication', 'Python', 'Materials science', 'Mentoring', 'Feedback'])),
   ],
@@ -397,12 +491,12 @@ P_['coaching'] = dict(
   todo='Add a Reflection section: what did coaching teach you that engineering uses?')
 
 CARD = {
-  'shear-balance': dict(card_title='Research Intern @ NC State', status=['Internship', 'Finished'], dates='Jun 2026 → Aug 2026',
-      lede='Designed a floating-element shear-force balance; rerouted the load path before a 40% friction error got built in.',
+  'shear-balance': dict(card_title='Floating-element shear-force balance', status=['Internship · NC State', 'Finished'], dates='Jun 2026 → Aug 2026',
+      lede='Owned the design, analysis, drawing package and BOM. Rerouted the load path onto about $159 of catalog parts after test data showed friction eroding ~40% of measured shear.',
       org=dict(word='NC STATE', sub='Turbulent Shear Flow Laboratory', name='NC State University', bg='#cc0000', logo='images/logo-ncstate.svg', logo_w='78%'),
       thumb_tint='#e9edf3'),
-  'ttbw': dict(card_title='Student Researcher @ Duke', status=['Research', 'Published'], dates='Apr 2025 → Jun 2026',
-      lede='First-author AIAA paper synthesizing 53 sources on transonic truss-braced wings.',
+  'ttbw': dict(card_title='Transonic truss-braced wing review', status=['Research · Duke', 'Published'], dates='Apr 2025 → Jun 2026',
+      lede='Sole-author AIAA paper synthesizing 53 sources on transonic truss-braced wings; presented at AVIATION 2026.',
       org=dict(word='DUKE', sub='Mechanical Engineering &amp; Materials Science', name='Duke University', bg='#00539b', logo='images/logo-duke.svg')),
   'forward-closure': dict(card_title='Unified forward closure', status=['Project', 'Flown'], dates='Duke Aero · Aug 2025 → present',
       lede='Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.'),
@@ -414,7 +508,7 @@ CARD = {
       lede='Operations and atmosphere design for settlement proposals; Global Champion at Kennedy Space Center.',
       org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='ISSDC', bg='#0b0d12')),
   'teaching': dict(card_title='Teaching Assistant @ Duke', status=['Leadership', 'Ongoing'], dates='Aug 2025 → present',
-      lede='EGR 105 and ME 221: office hours, lab sections, and one-on-one sessions.',
+      lede='EGR 105: office hours, lab sections, and one-on-one sessions. ME 221: grading.',
       org=dict(word='EGR 105<br>ME 221', sub='EGR 105 · ME 221 · Teaching Assistant', name='Duke University', bg='#012169', small=True, logo='images/logo-duke.svg')),
   'coaching': dict(card_title='Student Coach @ Tsinghua Intl. School', status=['Leadership', 'Finished'], dates='Sep 2020 → May 2024',
       lede='Assistant, then head coach of girls\' volleyball and basketball while a student-athlete.',
@@ -431,11 +525,11 @@ def next_of(i): return ORDER[(i + 1) % len(ORDER)]
 def card(slug, P, delay=0.0):
     d = P_[slug]
     href = f'{P}{d["kind"]}/{slug}.html'
-    status = ''.join(f'<span class="{"k" if n == 0 else ""}">{x}</span>' for n, x in enumerate(d['status']))
+    status = ' '.join(f'<span class="{"k" if n == 0 else ""}">{x}</span>' for n, x in enumerate(d['status']))
     return f'''<article class="card" data-reveal style="--d:{delay:.2f}s">
   <a href="{href}" data-cursor="View">
     {media(d)}
-    <div class="card-info"><h3>{d["card_title"]}</h3><div class="status">{status}</div><span class="dates">{d["dates"]}</span><p>{d["lede"]}</p></div>
+    <div class="card-info"><h3>{d["card_title"]}</h3> <div class="status">{status}</div> <span class="dates">{d["dates"]}</span> <p>{d["lede"]}</p></div>
   </a>
 </article>'''
 
@@ -528,7 +622,7 @@ def home():
   </div>
 </section>
 
-<div class="marquee" aria-label="Tools and processes"><div class="marquee-track">{mq}{mq.replace("<ul>", '<ul aria-hidden="true">', 1)}</div></div>
+<div class="marquee" aria-label="Tools and processes"><div class="marquee-track">{mq}</div></div>
 
 <section class="section" id="work">
   <div class="wrap">
@@ -559,7 +653,7 @@ def home():
 
 <section class="section" id="about-teaser">
   <div class="wrap split-2">
-    <div class="portrait" data-reveal><img src="images/portrait.jpg" data-dropin="images/portrait.jpg" loading="lazy" alt="Portrait of Brian Yue in a navy suit, standing in a stone archway at Duke."></div>
+    <div class="portrait" data-reveal><img src="images/aiaa-sign.webp" loading="lazy" style="object-position: 50% 40%" alt="Brian Yue at the AIAA AVIATION 2026 forum in San Diego."></div>
     <div data-reveal style="--d:.1s">
       <p class="label">About</p>
       <p class="big-text" style="font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.05">Beijing, then Durham.</p>
@@ -572,15 +666,18 @@ def home():
   </div>
 </section>
 
-<section class="section" id="personalTeaser" hidden>
+<section class="section" id="personalTeaser"{{TEASER_HIDDEN}} data-prerendered>
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <div><p class="label">Personal</p><h2>Outside the shop</h2><div class="pchips"></div></div>
+      <div><p class="label">Personal</p><h2>Outside the shop</h2><div class="pchips">{{TEASER_CHIPS}}</div></div>
       <a class="pill" href="personal.html">See everything <span class="arrow">→</span></a>
     </div>
-    <div class="strip" data-reveal></div>
+    <div class="strip" data-reveal>{{TEASER_STRIP}}</div>
   </div>
 </section>'''
+    chips, strip = render_teaser(P)
+    main = (main.replace('{TEASER_HIDDEN}', '' if HAS_PERSONAL else ' hidden')
+                .replace('{TEASER_CHIPS}', chips).replace('{TEASER_STRIP}', strip))
     return page('Brian Yue · Mechanical Engineering', 'Brian Yue, mechanical engineering student at Duke. Instrument design, flight hardware, aerospace research, assistive devices, and leadership.', P, 'home', main, path='')
 
 # ---------------------------------------------------------------- about
@@ -660,10 +757,11 @@ def personal():
   </div>
 </section>
 <section class="wrap" style="padding-bottom: clamp(72px, 10vw, 128px)">
-  <nav class="ptiles fade-in" style="--d:.7s" id="ptiles" aria-label="Categories"></nav>
-  <div id="psections"></div>
-  <noscript><p class="empty">Photos need JavaScript to display.</p></noscript>
+  <nav class="ptiles fade-in" style="--d:.7s" id="ptiles" aria-label="Categories">{TILES}</nav>
+  <div id="psections" data-prerendered>{SECS}</div>
 </section>'''
+    TILES, SECS = render_personal(P)
+    main = main.replace('{TILES}', TILES).replace('{SECS}', SECS)
     return page('Personal · Brian Yue', 'Volleyball, basketball, music, and photography: what Brian Yue does away from engineering.', P, 'personal', main, path='personal')
 
 # ---------------------------------------------------------------- write
@@ -697,7 +795,7 @@ def sitemap():
     import datetime
     today = datetime.date.today().isoformat()
     paths = [''] + ['about', 'personal'] + [f'{k}/{s_}' for k, s_ in ORDER]
-    urls = ''.join(f'  <url><loc>{SITE}/{x}</loc><lastmod>{today}</lastmod></url>\n' for x in paths)
+    urls = ''.join(f'  <url><loc>{SITE}/{x}</loc></url>\n' for x in paths)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
 
 write('index.html', home())

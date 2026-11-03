@@ -87,6 +87,12 @@
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
+  /* ---------- marquee: second copy for a seamless loop (kept out of the page text) ---------- */
+  document.querySelectorAll('.marquee-track').forEach(function (track) {
+    var ul = track.querySelector('ul');
+    if (ul && track.children.length === 1) { var copy = ul.cloneNode(true); copy.setAttribute('aria-hidden', 'true'); track.appendChild(copy); }
+  });
+
   /* ---------- hero crosshair with coordinate readout ---------- */
   var hero = document.querySelector('.hero');
   var xh = hero && hero.querySelector('.xhair');
@@ -197,7 +203,7 @@
 
   /* home page teaser */
   var teaser = document.getElementById('personalTeaser');
-  if (teaser && hasPersonal) {
+  if (teaser && hasPersonal && !teaser.hasAttribute('data-prerendered')) {
     teaser.hidden = false;
     var chips = teaser.querySelector('.pchips');
     if (chips) cats.forEach(function (c) {
@@ -218,7 +224,15 @@
   var tiles = document.getElementById('ptiles');
   var sections = document.getElementById('psections');
   var layouts = [];
-  if (tiles && sections) {
+  if (tiles && sections && sections.hasAttribute('data-prerendered')) {
+    sections.querySelectorAll('.masonry').forEach(function (grid) {
+      var figs = Array.prototype.slice.call(grid.querySelectorAll('figure')).map(function (f) {
+        var im = f.querySelector('img'); var w = im && +im.getAttribute('width'), h = im && +im.getAttribute('height');
+        f._ratio = (w && h) ? h / w : 1; return f;
+      });
+      layouts.push({ grid: grid, figs: figs, n: 0 });
+    });
+  } else if (tiles && sections) {
     cats.forEach(function (c, i) {
       var num = String(i + 1).padStart(2, '0');
       /* tile */
@@ -280,6 +294,8 @@
       }
       sections.appendChild(sec);
     });
+  }
+  if (layouts.length || (sections && tiles)) {
     /* row-major masonry: each photo goes to the shortest column, so reading order
        left to right follows the sorted order */
     var layoutAll = function (force) {

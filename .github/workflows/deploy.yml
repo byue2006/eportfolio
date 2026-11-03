@@ -2,6 +2,8 @@
 #
 #   1. Sorts the personal gallery (tools/build_gallery.py): converts iPhone HEIC,
 #      makes web-sized copies in personal/_web/, and rewrites personal/gallery.js.
+#      Then rebuilds the pages (tools/build_site.py) so the photos and captions are
+#      in the HTML itself, readable without JavaScript and by search engines.
 #   2. Commits those results back to main. Cloudflare Pages (brianyue.me) serves the
 #      repository as-is, so it picks the new photos up from that commit.
 #   3. Publishes a mirror to GitHub Pages (byue2006.github.io/eportfolio). Every page
@@ -43,9 +45,12 @@ jobs:
       - name: Organize the personal gallery
         run: python3 tools/build_gallery.py
 
-      - name: Save the organized gallery to the repository
+      - name: Rebuild the pages (Personal page and home preview include the photos as HTML)
+        run: python3 tools/build_site.py
+
+      - name: Save the organized gallery and rebuilt pages to the repository
         run: |
-          git add -A -- personal/   # gallery.js and _web/ (which doesn't exist until the first photo)
+          git add -A -- personal/ '*.html' sitemap.xml
           if git diff --cached --quiet; then
             echo "Gallery already up to date."
             exit 0
