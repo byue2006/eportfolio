@@ -236,15 +236,15 @@ body.menu-open { overflow: hidden; }
 @media (hover: none), (pointer: coarse) { .xhair { display: none; } }
 
 .hero-in { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
-@media (max-width: 860px) { .hero-in { grid-template-columns: minmax(0, 1fr); } .hero-in .view { max-width: 300px; } }
+@media (max-width: 860px) { .hero-in { grid-template-columns: minmax(0, 1fr); } .hero-in .view { max-width: 328px; } }
 
 /* portrait as a drawing view, with registration marks */
-.view { position: relative; padding: 14px; }
+.view { position: relative; padding: 14px; margin: -14px; }  /* corner marks sit just outside the photo, so the photo lines up with the page edge */
 .view::before, .view::after, .view .reg::before, .view .reg::after { content: ""; position: absolute; width: 16px; height: 16px; border-color: var(--ink-3); border-style: solid; border-width: 0; }
 .view::before { left: 0; top: 0; border-left-width: 1px; border-top-width: 1px; }
 .view::after { right: 0; top: 0; border-right-width: 1px; border-top-width: 1px; }
-.view .reg::before { left: 0; bottom: 30px; border-left-width: 1px; border-bottom-width: 1px; }
-.view .reg::after { right: 0; bottom: 30px; border-right-width: 1px; border-bottom-width: 1px; }
+.view .reg::before { left: 0; bottom: 0; border-left-width: 1px; border-bottom-width: 1px; }
+.view .reg::after { right: 0; bottom: 0; border-right-width: 1px; border-bottom-width: 1px; }
 .view .portrait { aspect-ratio: 4 / 5; }
 .view figcaption { display: flex; justify-content: space-between; margin-top: 12px; }
 
