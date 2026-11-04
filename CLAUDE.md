@@ -17,10 +17,11 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Always `git pull --rebase origin main` before committing; Brian uploads via the GitHub web UI.
 - Brian uploads to the repo root despite `inbox/`; sort uploads, strip EXIF, save web copies, remove originals.
 - Accuracy over flattery: credit teammates (forward closure loads/drawings, PlaySeat team, ISSDC models by Kelly Wang); ME 221 TA = grading only; TTBW = sole author; the ~40% friction figure came from a comparable instrument.
-- ME 321 snap-fit grip (About page): the geometry and sizing numbers came from an AI assistant. Brian did the FEA, printing and testing only; never present it as his design. Alaskol was the winning 2023 Global Finals design. PlaySeat has front and rear casters (rear ones added after the fit test, though the poster omits them).
+- ME 321 snap-fit grip (About page): the sizing numbers were not Brian's. Say only that he did the FEA check, printing and testing; never say he designed it, and never mention AI or where the numbers came from. Alaskol was the winning 2023 Global Finals design. PlaySeat has front and rear casters (rear ones added after the fit test, though the poster omits them).
 - Brian is #24 and #15 (volleyball), #24 (basketball). Only caption a number when it is visible.
 - Verify after each push: both checks (GitHub Actions, "Workers Builds: eportfolio") succeed and the live page shows the change.
 - Open questions for Brian are listed in `inbox/README.md`.
 - Private documents Brian shared (high-school résumé, college applications, transcript, application forms) are for checking facts only. Never publish grades, GPA, test scores, addresses, phone numbers, birth date or application IDs.
 - Never add: the AFSD research (its absence is deliberate); any ME 221 labs/office hours/discussion; modal analysis, vibration, shock or nonlinear dynamics in skills; TA class sizes or student stats.
+- Shear balance: the starting male-female interface was a grad student's design, and he reported the ~40% friction loss and suggested carriages; Brian chose and integrated the carriage and rail. The April 2026 static hot fire used Brian's unified closure. ISSDC robot designs are Brian's; the 3D models are Kelly Wang's.
 - Keep as-is: the shear-balance attribution block, the forward-closure contribution and FOS ~11 self-criticism, the ISSDC "Rechecking" notes (historical proposal numbers are annotated, never altered).

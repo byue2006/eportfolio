@@ -86,9 +86,9 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 - [x] Happy Meal train: done. Engineer alongside the team, most of the CAD.
 - [x] Teaching and coaching reflections: done (leadership; breaking concepts down to fundamentals).
 - [x] TTBW sources: 53. The chart is redrawn from the paper's reference list as Fig. 7 on the TTBW page.
-- [ ] ISSDC robots: Kelly Wang is credited with the 3D models. Correct?
-- [ ] Forward closure: was the April 2026 static hot fire the motor with your unified closure?
-- [ ] Shear-force balance: any specific approaches you tried before the male-female interface?
+- [x] ISSDC robots: your design, 3D models by Kelly Wang. Done.
+- [x] Forward closure: the April 2026 static hot fire used your closure. Done.
+- [x] Shear-force balance: male-female interface from a grad student, who flagged the friction and suggested carriages. Done.
 - [x] PlaySeat: rear casters offset the CG shift (front and rear casters); material is polycarbonate (per the poster). Done.
 - [x] Coaching: both placements were girls' basketball (from your high-school résumé). Done.
 
