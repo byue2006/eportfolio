@@ -458,42 +458,37 @@ P_['playseat'] = dict(
 P_['issdc'] = dict(
   kind='leadership', num='01', cat='Team systems design · 2021–24', year='2021–24',
   title='Space settlement design', card_title='ISSDC: captain and advisor',
-  lede='Operations and atmosphere design for ISSDC proposals; named a Global Champion at Kennedy Space Center in 2023.',
-  tags=['Captain', 'Global Champion', 'Life support'],
-  thumb=dict(kind='img', src='images/issdc-alaskol-cover.webp', mode='cover', pos='0% 50%', alt='Alaskol title slide'),
-  meta=[('Role', 'Captain, then student advisor'), ('When', 'September 2021 – August 2024'), ('Result', 'Global Champion, 2023'), ('My sections', 'Operations; atmosphere; cost')],
-  lead=lead('images/issdc-alaskol-atmosphere.webp', 'Proposal slide titled Atmosphere: a table of nitrogen, oxygen, carbon dioxide, and humidity for residential, industrial, and agricultural sectors, and a table of residential seasons.',
-            'Fig. 1', 'Alaskol atmosphere design: gas mix by sector and the residential season calendar. My section.', 1600, 900, group='issdc'),
+  lede='Operations design, including the construction and repair robots, and atmosphere design for ISSDC proposals; named a Global Champion at Kennedy Space Center in 2023.',
+  tags=['Captain', 'Global Champion', 'Robotics'],
+  thumb=dict(kind='img', src='images/issdc-robot-welder.webp', mode='contain', alt='Dual-mode welding robot concept'),
+  meta=[('Role', 'Captain, then student advisor'), ('When', 'September 2021 – August 2024'), ('Result', 'Global Champion, 2023'), ('My sections', 'Operations and robots; atmosphere')],
+  lead=lead('images/issdc-robot-welder.webp', 'Rendering of a boxy robot on magnetic tank treads with RCS thrusters and two articulated arms ending in a laser welder with an oxygen sprayer and a nanobot dispenser; dimension arrows show 2 m, 3 m and 5 m.',
+            'Fig. 1', 'The dual-mode welding robot I designed for Bellevistat. 3D model by Kelly Wang.', 980, 351, mode='pad', group='issdc'),
   glance=[('Result', 'Global Champion, 2023, Kennedy Space Center'), ('Also', 'Asia Regional Finals twice; Best Representor, China Finals 2021–22'),
           ('Format', 'Assigned team, RFP, 24–48 hours'), ('Judges', 'Former NASA engineers')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>The International Space Settlement Design Competition runs like an industry proposal shop. A team is assigned, not chosen, an RFP lands, and a complete settlement design and presentation are due in 24 to 48 hours, then defended in front of judges who are former NASA engineers.</p></div>'''),
-    ('contribution', 'My contribution', '''<p class="contrib">On <strong>Bellevistat</strong>, Team Bread's proposal for the 30th ISSDC (2022–23), I designed nearly all of the operations and infrastructure section, and I built the proposal's total-cost summary and compliance matrix. On <strong>Alaskol</strong>, DAFC's lunar settlement (2023), I designed the atmosphere. I also built the team's design database and documented team strategy, which later teams worked from.</p>
-<div class="prose" style="margin-top:20px"><p>Every table and figure in the Bellevistat proposal names its designer. Mine:</p>
-<ul>
-  <li><strong>Designed alone:</strong> the hull material list, the construction equipment list, the air composition, initial food stores, power distribution, water distribution, and day/night schedule tables, the total-cost summary, and the compliance matrix.</li>
-  <li><strong>Designed with teammates:</strong> the hull materials table, the 0g cylinder layout, the water infrastructure expansion plan, the crew organization chart, the operational networking diagram, the design and construction schedule, the operations and automation cost tables, and the contractor list.</li>
-</ul></div>'''),
-    ('process', 'Process &amp; iteration', '''<div class="prose"><p>Bellevistat is an orbital settlement for 7,850 people. I sized its utilities from per-person and per-area assumptions:</p>
+    ('contribution', 'My contribution', '''<p class="contrib">On <strong>Bellevistat</strong>, Team Bread's proposal for the 30th ISSDC (2022–23), I designed nearly all of the operations and infrastructure section, including its construction and repair robots. On <strong>Alaskol</strong>, DAFC's lunar settlement (2023), I designed the atmosphere. I also built the team's design database and documented team strategy, which later teams worked from.</p>'''),
+    ('process', 'Process &amp; iteration', '''<div class="prose"><p>Bellevistat is an orbital settlement for 7,850 people, built mostly by assembling prefabricated modules in orbit. The robots that do that assembly were my design.</p>
+<p>The main one is a dual-mode welding robot adapted from the F1M8 industrial robot in the competition's program book. It flies in zero gravity on RCS thrusters and crawls along the hull on magnetic tank treads, so it only spends propellant when it has to. It carries two laser welders, each with an oxygen sprayer so the weld works in vacuum, and a magnetic clamp holds the two sections together while it welds. The robots ship as modules with magnets on their mating faces and assemble themselves on arrival.</p>
+<p>Once construction ends, the same fleet becomes the settlement's ship-repair service. Swapping parts turns each robot into one of three types, eleven of each per fleet: cutting bots that remove damaged modules from a docked ship, grabber bots that fetch spares from cargo and hold them in place, and welding bots that attach them. Repurposing the construction fleet instead of building a second one kept the cost down.</p></div>
+<div class="figs">''' + row(fig('images/issdc-robot-cutter.webp', 'The same robot fitted with a laser cutter on its arms.', 'Fig. 2', 'Repurposed as a cutting bot for ship repair.', 1273, 429, group='issdc'),
+                       fig('images/issdc-robot-grabber.webp', 'The same robot fitted with magnetic plates on its arms.', 'Fig. 3', 'Repurposed as a grabber bot. Models by Kelly Wang.', 1097, 425, group='issdc')) + '''
+<div class="row" data-reveal style="max-width: 620px">''' + fig('images/issdc-robot-clamp.webp', 'Rendering of a magnetic clamp: two electromagnets joined by a retractable screw that extends from 3 to 15 m.', 'Fig. 4', 'Magnetic clamp that holds sections together during welding.', 885, 441, group='issdc') + '''</div></div>
+<div class="prose" style="margin-top:32px"><p>I also sized the settlement's life support and power from per-person and per-area assumptions:</p>
 <ul>
   <li><strong>Air:</strong> an Earth-normal mix at 0.75 atm across 4.29 × 10⁸ m³ of pressurized volume, which works out to roughly 11,400 cargo containers of gas.</li>
   <li><strong>Power:</strong> 1.12 × 10⁸ kWh per day, met by 3.37 × 10⁶ m² of solar panels with a reactor as backup.</li>
-  <li><strong>Water:</strong> 170 million gallons, stored in the central shaft.</li>
-  <li><strong>Day and night:</strong> a cycle copied from Houston in mid-spring.</li>
 </ul>
-<p>I also wrote the hull material and construction equipment lists, the maintenance and repair plan, and the plan for expanding infrastructure.</p></div>
-<div class="figs">''' + row(fig('images/issdc-bread-atmosphere.webp', 'Proposal page on community infrastructure with an air composition table and food production text.', 'Fig. 2', 'Air composition and food sizing.', 1100, 1424, group='issdc'),
-                       fig('images/issdc-bread-power.webp', 'Proposal page with initial food quantity and power distribution tables.', 'Fig. 3', 'Food stores and power budget.', 1100, 1424, group='issdc'),
-                       fig('images/issdc-bread-water.webp', 'Proposal page on water management with a water distribution table and two labeled maps of fresh water and sewer routing.', 'Fig. 4', 'Water budget, with the distribution and sewer maps I labeled.', 1100, 1424, group='issdc')) + '''</div>
-<div class="prose" style="margin-top:32px"><p>Beyond operations, I worked on schedule and cost. With four teammates I built the design and construction schedule, seven phases from contract award in 2043 to the first residents in 2052, and I rolled every section's costs into the total: about $66.2 billion, 95% of it structures.</p></div>
-<div class="figs">''' + row(fig('images/issdc-bread-schedule.webp', 'Gantt chart of the Bellevistat design and construction schedule, seven color-coded phases from 2043 to 2052.', 'Fig. 5', 'Design and construction schedule (with Nick Xu, Owen Dai, Julia Zhang, and Tianxiao Wang).', 1310, 730, group='issdc'),
-                       fig('images/issdc-bread-total-costs.webp', 'Table of total costs of construction and operation: structures, operations, human factors, automations, miscellaneous, and a total of about 66.2 billion US dollars.', 'Fig. 6', 'Total costs: my roll-up of every section.', 1210, 414, group='issdc')) + '''</div>
-<div class="prose" style="margin-top:32px"><p>Alaskol sits on the Moon next to mining operations. I gave each sector its own atmosphere: residential air at 28% oxygen, industrial and agricultural air close to Earth-normal, carbon dioxide raised to 0.15% in the agricultural unit, and humidity set per sector at 50, 40, and 70%. Residential areas also run a three-season climate calendar. Like every choice in a proposal, the composition had to be defended against the alternatives.</p></div>'''),
+<p>Alaskol sits on the Moon next to mining operations. I gave each sector its own atmosphere: residential air at 28% oxygen, industrial and agricultural air close to Earth-normal, carbon dioxide raised to 0.15% in the agricultural unit, and humidity set per sector at 50, 40, and 70%. Residential areas also run a three-season climate calendar. Like every choice in a proposal, the composition had to be defended against the alternatives.</p></div>
+<div class="figs">''' + row(fig('images/issdc-bread-atmosphere.webp', 'Proposal page on community infrastructure with an air composition table and food production text.', 'Fig. 5', 'Bellevistat air composition and amounts.', 1100, 1424, group='issdc'),
+                       fig('images/issdc-bread-power.webp', 'Proposal page with initial food quantity and power distribution tables.', 'Fig. 6', 'Bellevistat power budget.', 1100, 1424, group='issdc'),
+                       fig('images/issdc-alaskol-atmosphere.webp', 'Proposal slide titled Atmosphere: a table of nitrogen, oxygen, carbon dioxide, and humidity for residential, industrial, and agricultural sectors, and a table of residential seasons.', 'Fig. 7', 'Alaskol atmosphere: gas mix by sector and the season calendar.', 1600, 900, group='issdc')) + '</div>'),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>I led a team to the Asia Regional Finals twice, was invited onto the Chinese national team for the 2022–23 Global Championship, and was named a Global Champion at Kennedy Space Center. After aging out as a competitor, I came back as a student advisor.</p></div>
-<div class="figs">''' + row(fig('images/issdc-presenting.webp', 'A video-call screenshot of a slide titled 5.3 Automation Devices showing a cleaning bot, delivery bot, and butler bot, with Brian Yue speaking in a video tile at the top right.', 'Fig. 7', 'Presenting for our company, Grumbo (that\'s me, top right). The robot models on this slide are by teammates.', 1728, 1080, group='issdc'),
-                       fig('images/issdc-alaskol-cover.webp', 'Title slide: ALASKOL, with a domed lunar habitat and the DAFC logo.', 'Fig. 8', 'Alaskol title slide. Art by teammates.', 1600, 900, mode='cover', group='issdc')) + '</div>'),
+<div class="figs">''' + row(fig('images/issdc-presenting.webp', 'A video-call screenshot of a slide titled 5.3 Automation Devices showing a cleaning bot, delivery bot, and butler bot, with Brian Yue speaking in a video tile at the top right.', 'Fig. 8', 'Presenting for our company, Grumbo (that\'s me, top right). The robots on this slide are teammates\' designs.', 1728, 1080, group='issdc'),
+                       fig('images/issdc-alaskol-cover.webp', 'Title slide: ALASKOL, with a domed lunar habitat and the DAFC logo.', 'Fig. 9', 'Alaskol title slide. Art by teammates.', 1600, 900, mode='cover', group='issdc')) + '</div>'),
     ('reflection', 'Reflection', '''<div class="prose"><p>You hand off work and trust it comes back, and you decide fast which parts of the problem are worth the time you have left. That carries straight over to engineering.</p></div>'''),
-    ('skills', 'Skills', tags(['Life-support sizing', 'Scheduling', 'Cost estimation', 'Requirements compliance', 'Trade studies', 'Technical writing', 'Team leadership', 'Presenting to judges'])),
+    ('skills', 'Skills', tags(['Robotics concept design', 'Operations planning', 'Life-support sizing', 'Trade studies', 'Technical writing', 'Team leadership', 'Presenting to judges'])),
   ])
 
 P_['teaching'] = dict(
@@ -553,7 +548,7 @@ CARD = {
   'playseat': dict(card_title='Accessible PlaySeat', status=['Project', 'Delivered'], dates='Duke EGR 101 · Sep 2024 → Dec 2024',
       lede='A mobile play seat for a three-year-old: one fit test moved the wheels, then six pass/fail tests proved the rest.'),
   'issdc': dict(card_title='Captain &amp; Advisor @ ISSDC', status=['Leadership', 'Global Champion'], dates='Sep 2021 → Aug 2024',
-      lede='Operations and atmosphere design for settlement proposals; Global Champion at Kennedy Space Center.',
+      lede='Designed the operations and construction robots for a settlement proposal; Global Champion at Kennedy Space Center.',
       org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='ISSDC', bg='#0b0d12')),
   'teaching': dict(card_title='Teaching Assistant @ Duke', status=['Leadership', 'Ongoing'], dates='Aug 2025 → present',
       lede='EGR 105: office hours, lab sections, and one-on-one sessions. ME 221: grading.',
