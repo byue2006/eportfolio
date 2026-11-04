@@ -312,7 +312,7 @@ def page(title, desc, P, active, main, progress=False, path=None):
 </header>
 <div class="menu" id="menu" inert>
   <nav aria-label="Menu">{menu_links}</nav>
-  <p class="label">{EMAIL}</p>
+  <a class="label menu-mail" href="mailto:{EMAIL}">{EMAIL}</a>
 </div>
 
 <main id="main">
@@ -784,7 +784,7 @@ def home():
       <div class="actions fade-in" style="--d:.85s">
         <a class="pill solid" href="#work">See the work <span class="arrow">↓</span></a>
         <a class="pill" href="about.html">About me <span class="arrow">→</span></a>
-        <button class="pill" type="button" data-copy="{EMAIL}">{EMAIL} <span class="hint">Copy</span></button>
+        <a class="pill" href="mailto:{EMAIL}">{EMAIL} <span class="arrow">↗</span></a>
       </div>
     </div>
   </div>

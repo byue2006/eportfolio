@@ -205,6 +205,8 @@ button { font: inherit; color: inherit; }
 }
 .menu nav a span { font: 500 12px/1 var(--mono); color: var(--ink-3); letter-spacing: .06em; }
 .menu.open nav a { transform: none; opacity: 1; }
+.menu .menu-mail { text-decoration: none; }
+.menu .menu-mail:hover { color: var(--accent); }
 .menu.open nav a:nth-child(2) { transition-delay: .04s; }
 .menu.open nav a:nth-child(3) { transition-delay: .08s; }
 .menu.open nav a:nth-child(4) { transition-delay: .12s; }
