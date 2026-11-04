@@ -10,6 +10,9 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - `.assetsignore` keeps tools, READMEs, inbox, originals and stray root uploads off the live site. New top-level files that should NOT be public must be added there.
 - Never put `[skip ci]` in a commit message (Cloudflare skips the deploy too).
 
+## Design
+- Sleek, hardware-company feel (Brian likes Anduril and Swarm Aero; inspired by, never copied): Geist display headings with tight tracking; Instrument Serif italic only for the hero accent and the "by." logo; one orange accent; 8px radius; cards lead with the work photo and a small glass org tag; renders, diagrams and the 3D viewer sit in a light studio grey (graphite in dark mode); video stages are always dark.
+
 ## Working rules
 - Always `git pull --rebase origin main` before committing; Brian uploads via the GitHub web UI.
 - Brian uploads to the repo root despite `inbox/`; sort uploads, strip EXIF, save web copies, remove originals.

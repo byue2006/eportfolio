@@ -132,7 +132,7 @@ def video(slug, alt, num, cap, loop=False, yt=None, lead=False, label=None, ar=N
             f'<figcaption><b>{num}</b>{cap}</figcaption></figure>')
 
 def media(card, hover=True):
-    """Card / next-project thumbnail. Roles show the organization at rest and the work on hover."""
+    """Card / next-project thumbnail: the work, with the organization as a small tag in the corner."""
     t = card['thumb']
     go = '<span class="go">View <span class="arrow">→</span></span>' if hover else ''
     if t['kind'] == 'type':
@@ -144,11 +144,9 @@ def media(card, hover=True):
         inner = f'<div class="{cls}"{mstyle}><img src="{{{{P}}}}{t["src"]}" loading="lazy"{style} alt="{esc(t["alt"])}">'
     org = card.get('org')
     if org and hover:
-        lw = f' style="--logo-w: {org["logo_w"]}"' if org.get('logo_w') else ''
-        logo = f'<img class="logo" data-logo src="{{{{P}}}}{org["logo"]}"{lw} alt="{esc(org["name"])}">' if org.get('logo') else ''
-        word_cls = 'word sm' if org.get('small') else 'word'
-        inner += (f'<div class="org reveal" aria-hidden="true" style="--org-bg: {org["bg"]}; --org-fg: {org.get("fg", "#fff")}">'
-                  f'{logo} <span class="{word_cls}">{org["word"]}</span> <span class="sub">{org["sub"]}</span></div>')
+        lh = f' style="--logo-h: {org["logo_h"]}px"' if org.get('logo_h') else ''
+        logo = f'<img class="logo" data-logo src="{{{{P}}}}{org["logo"]}"{lh} alt="">' if org.get('logo') else ''
+        inner += f'<div class="org" aria-hidden="true">{logo}<span class="word">{org["word"].replace("<br>", " · ")}</span></div>'
     return inner + go + '</div>'
 
 def tags(lst): return '<ul class="tags">' + ''.join(f'<li>{esc(x)}</li>' for x in lst) + '</ul>'
@@ -532,7 +530,7 @@ P_['issdc'] = dict(
   title='Space settlement design', card_title='ISSDC: captain and advisor',
   lede='Operations design, including the construction and repair robots, and atmosphere design for ISSDC proposals; named a Global Champion at Kennedy Space Center in 2023.',
   tags=['Captain', 'Global Champion', 'Robotics'],
-  thumb=dict(kind='img', src='images/issdc-robot-welder.webp', mode='contain', alt='Dual-mode welding robot concept'),
+  thumb=dict(kind='img', src='images/issdc-robot-welder.webp', mode='cover', pos='62% 50%', alt='Dual-mode welding robot concept'),
   meta=[('Role', 'Captain, then student advisor'), ('When', 'September 2021 – August 2024'), ('Result', 'Global Champion, 2023'), ('My sections', 'Operations and robots; atmosphere')],
   lead=lead('images/issdc-robot-welder.webp', 'Rendering of a boxy robot on magnetic tank treads with RCS thrusters and two articulated arms ending in a laser welder with an oxygen sprayer and a nanobot dispenser; dimension arrows show 2 m, 3 m and 5 m.',
             'Fig. 1', 'My dual-mode welding configuration of the F1M8, a vendor robot. 3D model by Kelly Wang.', 980, 351, mode='pad', group='issdc'),
@@ -615,7 +613,7 @@ CARD = {
       thumb_tint='#e9edf3'),
   'ttbw': dict(card_title='Transonic truss-braced wing review', status=['Research · Duke', 'Published'], dates='AIAA AVIATION · Jun 2026',
       lede='Sole-author AIAA paper synthesizing 53 sources on transonic truss-braced wings; presented at AVIATION 2026.',
-      org=dict(word='DUKE', sub='Mechanical Engineering &amp; Materials Science', name='Duke University', bg='#00539b', logo='images/logo-duke.svg')),
+      org=dict(word='DUKE', sub='Mechanical Engineering &amp; Materials Science', name='Duke University', bg='#00539b', logo='images/logo-duke.svg', logo_h=17)),
   'forward-closure': dict(card_title='Unified forward closure', status=['Project', 'Flown'], dates='Duke Aero · Aug 2025 → present',
       lede='Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.'),
   'happy-meal': dict(card_title='Modular Happy Meal train', status=['Project', 'Toy Fair 2025'], dates='Duke · Spring 2025',
@@ -627,7 +625,7 @@ CARD = {
       org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='ISSDC', bg='#0b0d12')),
   'teaching': dict(card_title='Teaching Assistant @ Duke', status=['Leadership', 'Ongoing'], dates='Aug 2025 → present',
       lede='EGR 105: office hours, lab sections, and one-on-one sessions. ME 221: grading.',
-      org=dict(word='EGR 105<br>ME 221', sub='EGR 105 · ME 221 · Teaching Assistant', name='Duke University', bg='#012169', small=True, logo='images/logo-duke.svg')),
+      org=dict(word='EGR 105<br>ME 221', sub='EGR 105 · ME 221 · Teaching Assistant', name='Duke University', bg='#012169', small=True, logo='images/logo-duke.svg', logo_h=17)),
   'coaching': dict(card_title='Student Coach @ Tsinghua Intl. School', status=['Leadership', 'Finished'], dates='Sep 2020 → May 2024',
       lede='Assistant, then head coach of girls\' volleyball and basketball while a student-athlete.',
       org=dict(word='TIS', sub='Athletics · Beijing', name='Tsinghua International School', bg='#82318e', logo='images/logo-tis.webp', logo_w='84%')),
