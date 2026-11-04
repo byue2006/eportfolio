@@ -66,14 +66,14 @@ Each photo comes out around 1–3 MB, well under the limit. Upload those exporte
 
 - [x] **Portrait.** Done: the suit photo at Duke, on the home and About pages.
 - [x] **PlaySeat.** Done: final chair, rear view, cane attachment, and the test results from the poster.
-- [ ] **PlaySeat, optional:** the prototype in the shop, or the chair beside car 63.
+- [x] **PlaySeat:** done. The chair beside car 63, plus sketches, the Pugh matrix and both prototypes from the oral presentation.
 
 **Nice to have.** Each one adds a photo to a page that doesn't have one there yet:
 
 - [x] **Forward closure:** done, the April 2026 static hot fire.
 - [x] **TTBW paper:** done, three photos from AIAA AVIATION 2026. (A photo of you *at the podium* would still be great.)
-- [ ] **Happy Meal train:** the Duke 2025 Toy Fair: your booth, poster, costume, or the toy video.
-- [ ] **ISSDC:** the team at Kennedy Space Center, or the award. (Logo done: the ISSDC seal from your application form.)
+- [x] **Happy Meal train:** the Toy Fair poster is up (credited to Saina and Mariangle). Still welcome: the booth, a costume photo, or the toy video.
+- [x] **ISSDC:** done. The national team with the trophy, the rocket garden, and you with your dad.
 - [x] **Happy Meal train:** EGR Corp logo, done.
 - [ ] **Teaching:** you leading a lab or office hours.
 - [x] **Coaching:** done, three photos of you coaching on the coaching page.

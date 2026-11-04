@@ -115,6 +115,16 @@ window.PERSONAL_GALLERY = [
     "height": 599
   },
   {
+    "src": "personal/_web/basketball/04-bench-burning-after-unc-900.webp",
+    "caption": "Bench burning on the quad after a Duke–UNC win",
+    "alt": "Brian Yue smiling in a blue and white striped shirt in front of a bonfire on Duke's campus at night, sparks rising and Duke Chapel lit up behind him.",
+    "category": "Basketball",
+    "orig": "personal/basketball/04-bench-burning-after-unc.jpg",
+    "full": "personal/_web/basketball/04-bench-burning-after-unc-2000.webp",
+    "width": 900,
+    "height": 1200
+  },
+  {
     "src": "personal/_web/music/01-playing-up-close-900.webp",
     "caption": "Playing trombone with the Duke University Marching Band",
     "alt": "Close-up of Brian Yue, in sunglasses and a white Duke band cap and uniform, playing trombone against a background of green trees.",
@@ -191,6 +201,16 @@ window.PERSONAL_GALLERY = [
     "category": "Music",
     "orig": "personal/music/08-laughing-on-the-field.jpg",
     "full": "personal/_web/music/08-laughing-on-the-field-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/music/09-marching-at-a-day-game-900.webp",
+    "caption": "Marching in with the trombone at a day game",
+    "alt": "Brian Yue in the Duke marching band uniform, white cap and sunglasses, carrying his trombone past the stands with bandmates.",
+    "category": "Music",
+    "orig": "personal/music/09-marching-at-a-day-game.jpg",
+    "full": "personal/_web/music/09-marching-at-a-day-game-2000.webp",
     "width": 900,
     "height": 600
   },
