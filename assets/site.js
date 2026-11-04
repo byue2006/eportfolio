@@ -529,3 +529,14 @@
   });
   window.byThemeLabel();
 })();
+
+/* Animated card posters: on touch screens (no hover), play each one while it is on screen */
+(function () {
+  var cards = document.querySelectorAll('.card.mini');
+  if (!cards.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && matchMedia('(hover: hover)').matches) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { e.target.classList.toggle('play', e.isIntersecting); });
+  }, { threshold: 0.6 });
+  cards.forEach(function (c) { io.observe(c); });
+})();
