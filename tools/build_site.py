@@ -506,7 +506,7 @@ P_['coaching'] = dict(
   title='Student coach', card_title='Student coach, volleyball & basketball',
   lede='Assistant coach, then head coach of two middle school teams, while a full-time student-athlete.',
   tags=['Head coach', 'Volleyball', 'Basketball'],
-  thumb=dict(kind='type', big='2nd', cap='ISAC U14 Division III, 2020–21'),
+  thumb=dict(kind='img', src='images/coaching-timeout.webp', mode='cover', alt='Coaching during a timeout'),
   meta=[('Role', 'Assistant, then head coach'), ('When', 'September 2020 – May 2024'), ('Where', 'Tsinghua International School, Beijing'), ('Teams', 'Volleyball, basketball')],
   lead='''<div class="p-lead stats" data-reveal>
   <div><div class="big">3</div><div class="cap">Teams coached: boys' volleyball, girls' volleyball, girls' basketball</div></div>
@@ -518,7 +518,9 @@ P_['coaching'] = dict(
     ('challenge', 'The role', '''<div class="prose"><p>I started as an assistant coach for the middle school boys' volleyball, girls' volleyball, and girls' basketball teams at Tsinghua International School, and in my senior year became head coach of girls' volleyball and girls' basketball, all while playing as a full-time student-athlete.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">I ran practices, set lineups, gave individual feedback and advice, tracked and analyzed statistics, and managed rosters across multiple teams.</p>'''),
     ('outcome', 'Outcome', '''<div class="prose"><p>Teams I coached placed second in ISAC U14 Division III in 2020–21 and third in Division IV in 2022–23.</p></div>
-<div class="figs">''' + row(fig('images/coaching.jpg', 'Coaching a middle school team.', 'Fig. 1', 'Coaching.', ar=1.5, mode='cover', group='coaching', dropin=True, optional=True)) + '</div>'),
+<div class="figs">''' + row(fig('images/coaching-instruction.webp', 'Brian Yue, in a white sweater and holding a volleyball, pointing across the court while giving instructions at practice.', 'Fig. 1', 'Running a girls\' volleyball practice.', 1070, 1080, mode='cover', group='coaching', pos='40% 50%'),
+                       fig('images/coaching-timeout.webp', 'Brian Yue, in a Spartans coaching shirt, kneeling with a tactics board while players gather around during a timeout.', 'Fig. 2', 'A timeout: drawing up the next rotation.', 1311, 843, mode='cover', group='coaching'),
+                       fig('images/coaching-with-coach.webp', 'Brian Yue talking with a fellow coach courtside, clipboard in hand.', 'Fig. 3', 'Talking through the lineup with a fellow coach.', 1928, 1080, mode='cover', group='coaching')) + '</div>'),
     ('skills', 'Skills', tags(['Leadership', 'Planning', 'Statistics', 'Feedback', 'Time management'])),
   ],
   todo='Add a Reflection section: what did coaching teach you that engineering uses?')

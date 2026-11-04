@@ -5,6 +5,126 @@
 */
 window.PERSONAL_GALLERY = [
   {
+    "src": "personal/_web/volleyball/01-ready-to-serve-900.webp",
+    "caption": "Ready to serve, #24",
+    "alt": "Brian Yue in a black number 24 jersey and glasses, holding a volleyball before serving, against a red wall.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/01-ready-to-serve.jpg",
+    "full": "personal/_web/volleyball/01-ready-to-serve-2000.webp",
+    "width": 900,
+    "height": 900
+  },
+  {
+    "src": "personal/_web/volleyball/02-attack-at-the-net-900.webp",
+    "caption": "Attack at the net, #15",
+    "alt": "A player in a black number 15 jersey jumping to hit the ball at the net while teammates watch.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/02-attack-at-the-net.jpg",
+    "full": "personal/_web/volleyball/02-attack-at-the-net-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/volleyball/03-block-900.webp",
+    "caption": "Up for the block",
+    "alt": "A player in black leaping at the net to block a hit, photographed from a low angle against a red wall.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/03-block.jpg",
+    "full": "personal/_web/volleyball/03-block-2000.webp",
+    "width": 900,
+    "height": 1350
+  },
+  {
+    "src": "personal/_web/volleyball/04-into-the-double-block-900.webp",
+    "caption": "Hitting into the double block",
+    "alt": "A player in black attacking the ball as two blockers in red jump at the net.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/04-into-the-double-block.jpg",
+    "full": "personal/_web/volleyball/04-into-the-double-block-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/volleyball/05-serve-toss-900.webp",
+    "caption": "Serve toss",
+    "alt": "Brian Yue tossing the volleyball for a serve, eyes on the ball.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/05-serve-toss.jpg",
+    "full": "personal/_web/volleyball/05-serve-toss-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/volleyball/06-swing-in-the-white-kit-900.webp",
+    "caption": "Swing in the white kit",
+    "alt": "A player in a white Tsinghua International School jersey spiking over the net against two blockers.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/06-swing-in-the-white-kit.jpg",
+    "full": "personal/_web/volleyball/06-swing-in-the-white-kit-2000.webp",
+    "width": 900,
+    "height": 931
+  },
+  {
+    "src": "personal/_web/volleyball/07-approach-900.webp",
+    "caption": "Approach and swing",
+    "alt": "A player in black reaching to spike a ball above the net in a bright gym.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/07-approach.jpg",
+    "full": "personal/_web/volleyball/07-approach-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/volleyball/08-full-swing-900.webp",
+    "caption": "Full swing",
+    "alt": "A player in black in mid-air, arm back, about to hit the ball across a wide gym.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/08-full-swing.jpg",
+    "full": "personal/_web/volleyball/08-full-swing-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/volleyball/09-between-points-900.webp",
+    "caption": "Between points, #24",
+    "alt": "Brian Yue in a number 24 jersey at the net between points.",
+    "category": "Volleyball",
+    "orig": "personal/volleyball/09-between-points.jpg",
+    "full": "personal/_web/volleyball/09-between-points-2000.webp",
+    "width": 900,
+    "height": 900
+  },
+  {
+    "src": "personal/_web/basketball/01-layup-900.webp",
+    "caption": "Layup, #24",
+    "alt": "A player in a black number 24 jersey driving to the basket for a layup against defenders in light blue.",
+    "category": "Basketball",
+    "orig": "personal/basketball/01-layup.jpg",
+    "full": "personal/_web/basketball/01-layup-2000.webp",
+    "width": 900,
+    "height": 599
+  },
+  {
+    "src": "personal/_web/basketball/02-at-the-rim-900.webp",
+    "caption": "At the rim",
+    "alt": "Two players contesting a shot at the rim, with teammates and defenders around the key.",
+    "category": "Basketball",
+    "orig": "personal/basketball/02-at-the-rim.jpg",
+    "full": "personal/_web/basketball/02-at-the-rim-2000.webp",
+    "width": 900,
+    "height": 675
+  },
+  {
+    "src": "personal/_web/basketball/03-team-photo-900.webp",
+    "caption": "The Spartans",
+    "alt": "A high school basketball team in black Spartans jerseys posing on the court with their coach.",
+    "category": "Basketball",
+    "orig": "personal/basketball/03-team-photo.jpg",
+    "full": "personal/_web/basketball/03-team-photo-2000.webp",
+    "width": 900,
+    "height": 599
+  },
+  {
     "src": "personal/_web/music/pregame-duke-football-900.webp",
     "caption": "Pregame with the Duke University Marching Band",
     "alt": "Brian Yue, in sunglasses, with the Duke University Marching Band in white and blue uniforms on the field before a football game.",

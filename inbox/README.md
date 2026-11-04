@@ -14,6 +14,10 @@ Drop files in, then tell Claude "I uploaded files to the inbox". Claude renames,
 
 File names don't matter, but a hint helps, e.g. `portrait.jpg`, `playseat-car.jpg`, `aiaa-talk.jpg`.
 
+## Waiting for your answer
+
+- `hold-ttbw-sources-chart.jpeg`: the two charts of your TTBW sources (by year, by type). They total **51** sources, but the paper and the site say **53**. Which is right? Once confirmed, it goes on the TTBW page.
+
 ## "File too large" when uploading?
 
 GitHub's upload page takes files up to **25 MB each**. Full-resolution edits from Lightroom are often bigger. The site never shows a photo larger than 2000 px, so export smaller copies.
@@ -48,7 +52,7 @@ Each photo comes out around 1–3 MB, well under the limit. Upload those exporte
 - [ ] **Happy Meal train:** the Duke 2025 Toy Fair: your booth, poster, costume, or the toy video.
 - [ ] **ISSDC:** the team at Kennedy Space Center, or the award. Also the **ISSDC logo**, if you have one (the ISSDC one, not the American SSDC one).
 - [ ] **Teaching:** you leading a lab or office hours.
-- [ ] **Coaching:** one of your teams.
+- [x] **Coaching:** done, three photos of you coaching on the coaching page.
 - [ ] **Shear-force balance:** any photo of the real parts or hardware, if it was built.
 
 Please don't upload photos where the PlaySeat client's face is visible, unless his family has said it's fine to put online.
