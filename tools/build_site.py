@@ -785,9 +785,14 @@ def project_page(i, kind, slug):
 # ---------------------------------------------------------------- home
 def home():
     P = ''
-    marquee_items = ['SolidWorks', 'Onshape', 'GD&amp;T · ASME Y14.5', 'Fits · ASME B4.1', 'FEA', 'Tolerance analysis', 'Load path design',
-                     'Lathe', 'Mill', 'CNC · 3- and 5-axis', 'Wire EDM', 'Laser cutting', 'Additive friction stir deposition', 'Load cells', 'Python']
-    mq = '<ul>' + ''.join(f'<li>{x}</li>' for x in marquee_items) + '</ul>'
+    # The numbers ticker: every figure is stated on its project page (keep them in sync if a page changes)
+    marquee_items = [('67%', 'fewer parts · forward closure'), ('2', 'machining setups cut · forward closure'),
+                     ('$159', 'carriage and rail · shear balance'), ('⌀.010', 'true position · shear balance drawings'),
+                     ('53', 'sources · AIAA 2026-4344'), ('$0.31', 'per toy · Happy Meal train'),
+                     ('6 / 6', 'requirements verified, 1 by proxy · PlaySeat'), ('15.7 lb', 'against a 20 lb target · PlaySeat'),
+                     ('24–48 h', 'to design a settlement · ISSDC'), ('1st', 'ISSDC Global Finals 2023'),
+                     ('2nd · 3rd', 'ISAC U14 placings · coaching')]
+    mq = '<ul>' + ''.join(f'<li><span class="mq"><b>{n}</b><span>{t}</span></span></li>' for n, t in marquee_items) + '</ul>'
     exp_cards = ''.join(card(s_, P, delay=n * 0.08) for n, s_ in enumerate(EXPER))
     proj_cards = ''.join(card(s_, P, delay=n * 0.08) for n, s_ in enumerate(PROJ))
     small_cards = ''.join(small_card(x, P, delay=n * 0.08) for n, x in enumerate(SMALL))
@@ -821,6 +826,8 @@ def home():
   </div>
 </section>
 
+
+<div class="marquee" aria-label="Results in numbers"><div class="marquee-track">{mq}</div></div>
 
 <section class="section" id="work">
   <div class="wrap">
