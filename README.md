@@ -9,6 +9,13 @@ Brian Yue's ePortfolio, live at **https://brianyue.me**.
 - **GitHub Actions** (`.github/workflows/deploy.yml`) runs after every push. It organizes the photo gallery, saves the result back to `main` (which Cloudflare then publishes), and updates a mirror at byue2006.github.io/eportfolio. Every page names brianyue.me as its main address, so search engines treat the mirror as a copy.
 - See each run's progress on the **Actions** tab. A green check means it worked.
 
+## Screen sharing in interviews
+
+- Press **P** on any page for **present mode**: no motion, larger text, light theme, the menu bar stays put, and **→ / ←** (or Space) step through the page section by section. It stays on across pages; press **P** again to turn it off. Opening a link with `?present` also turns it on.
+- Click any figure to show it full screen; **→ / ←** flip through the figures in that section. On drawings, **click the sheet to zoom** to the spot you clicked; click again to zoom out.
+- The shear-force balance's five sheets are also one PDF: `drawings/shear-balance-drawing-package.pdf`.
+- Share a single browser window about 1280–1440 px wide rather than your whole screen.
+
 ## Logo
 
 `assets/brand/` holds the logo: an italic serif **by.** with an orange full stop, echoing the "make it." headline.

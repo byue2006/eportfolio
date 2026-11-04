@@ -16,7 +16,7 @@
     if (header) {
       header.classList.toggle('scrolled', y > 12);
       var menuOpen = body.classList.contains('menu-open');
-      if (!menuOpen && y > 240 && y > lastY + 4) header.classList.add('hide');
+      if (!menuOpen && !doc.classList.contains('present') && y > 240 && y > lastY + 4) header.classList.add('hide');
       else if (y < lastY - 4 || y < 240) header.classList.remove('hide');
     }
     if (progress) {
@@ -325,6 +325,7 @@
     var lbImg = dlg.querySelector('img'), lbCap = dlg.querySelector('.lb-cap');
     var group = [], index = 0;
     var captionFor = function (a) {
+      if (a.getAttribute('data-caption')) return a.getAttribute('data-caption');
       var fig = a.closest('figure'); var cap = fig && fig.querySelector('figcaption');
       if (!cap) { var im = a.querySelector('img'); return im ? im.alt : ''; }
       var num = cap.querySelector('b'); var all = cap.textContent.trim();
@@ -333,6 +334,8 @@
     var show = function (i) {
       index = (i + group.length) % group.length;
       var a = group[index]; var im = a.querySelector('img');
+      dlg.classList.remove('zoomed'); dlg.classList.add('no-zoom');
+      lbImg.onload = function () { dlg.classList.toggle('no-zoom', lbImg.naturalWidth < lbImg.clientWidth * 1.2); };
       lbImg.src = a.getAttribute('href'); lbImg.alt = im ? im.alt : '';
       lbCap.textContent = captionFor(a);
       dlg.querySelectorAll('[data-step]').forEach(function (b) { b.hidden = group.length < 2; });
@@ -347,17 +350,27 @@
       });
       show(group.indexOf(a)); dlg.showModal();
     });
+    lbImg.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (dlg.classList.contains('no-zoom')) return;
+      if (dlg.classList.contains('zoomed')) { dlg.classList.remove('zoomed'); return; }
+      var r = lbImg.getBoundingClientRect();
+      var fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+      dlg.classList.add('zoomed');
+      dlg.scrollLeft = fx * lbImg.naturalWidth - e.clientX;
+      dlg.scrollTop = fy * lbImg.naturalHeight - e.clientY;
+    });
     dlg.addEventListener('click', function (e) {
       var step = e.target.closest('[data-step]');
       if (step) { show(index + Number(step.getAttribute('data-step'))); return; }
-      if (e.target.closest('[data-close]') || e.target === dlg || e.target.classList.contains('lb-inner')) dlg.close();
+      if (e.target.closest('[data-close]') || (!dlg.classList.contains('zoomed') && (e.target === dlg || e.target.classList.contains('lb-inner')))) dlg.close();
     });
     document.addEventListener('keydown', function (e) {
       if (!dlg.open || group.length < 2) return;
       if (e.key === 'ArrowRight') show(index + 1);
       if (e.key === 'ArrowLeft') show(index - 1);
     });
-    dlg.addEventListener('close', function () { lbImg.removeAttribute('src'); });
+    dlg.addEventListener('close', function () { lbImg.removeAttribute('src'); dlg.classList.remove('zoomed'); });
   }
 })();
 
@@ -368,4 +381,50 @@
     var ok = function () { if (img.naturalWidth && org) org.classList.add('has-logo'); };
     if (img.complete) ok(); else img.addEventListener('load', ok);
   });
+})();
+
+/* ---------- present mode, for screen sharing in interviews ----------
+   Press P (or open any page with ?present). Stops all motion, enlarges text, keeps the
+   menu visible, forces the light theme, and makes the arrow keys move section by section.
+   It stays on across pages until you press P again (or open ?present=0). */
+(function () {
+  var doc = document.documentElement, KEY = 'by-present';
+  var store = function (on) { try { on ? sessionStorage.setItem(KEY, '1') : sessionStorage.removeItem(KEY); } catch (e) {} };
+  var toast = document.createElement('div'); toast.className = 'present-toast'; toast.setAttribute('role', 'status');
+  document.body.appendChild(toast);
+  var tt;
+  var say = function (html) { toast.innerHTML = html; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('show'); }, 3200); };
+  var set = function (on) {
+    doc.classList.toggle('present', on);
+    if (on) doc.setAttribute('data-theme', 'light'); else doc.removeAttribute('data-theme');
+    store(on);
+    say(on ? 'Present mode on: <kbd>←</kbd><kbd>→</kbd> move between sections, <kbd>P</kbd> turns it off'
+           : 'Present mode off');
+  };
+  var stops = function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll(
+      'main > section, main > div > .p-lead, .p-body .glance, .p-sec, .pcat, .next, .site-footer'));
+    return els.filter(function (el) { return el.offsetParent !== null && !el.closest('[hidden]'); });
+  };
+  var go = function (dir) {
+    var header = document.querySelector('.site-header');
+    var off = (header ? header.offsetHeight : 0) + 16;
+    var list = stops().map(function (el) { return { el: el, top: el.getBoundingClientRect().top - off }; })
+                      .sort(function (a, b) { return a.top - b.top; });
+    var target = null;
+    if (dir > 0) { for (var i = 0; i < list.length; i++) if (list[i].top > 24) { target = list[i]; break; } }
+    else { for (var j = list.length - 1; j >= 0; j--) if (list[j].top < -24) { target = list[j]; break; } }
+    if (!target) { window.scrollTo({ top: dir > 0 ? document.documentElement.scrollHeight : 0, behavior: 'smooth' }); return; }
+    window.scrollTo({ top: window.scrollY + target.top, behavior: 'smooth' });
+  };
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
+    var t = e.target; if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    var lb = document.getElementById('lightbox'); if (lb && lb.open) return;
+    if (e.key === 'p' || e.key === 'P') { set(!doc.classList.contains('present')); return; }
+    if (!doc.classList.contains('present')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) { e.preventDefault(); go(1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) { e.preventDefault(); go(-1); }
+  });
+  if (doc.classList.contains('present')) setTimeout(function () { say('Present mode: <kbd>←</kbd><kbd>→</kbd> move between sections, <kbd>P</kbd> turns it off'); }, 400);
 })();
