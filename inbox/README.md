@@ -18,6 +18,33 @@ File names don't matter, but a hint helps, e.g. `portrait.jpg`, `playseat-car.jp
 
 - `hold-ttbw-sources-chart.jpeg`: the two charts of your TTBW sources (by year, by type). They total **51** sources, but the paper and the site say **53**. Which is right? Once confirmed, it goes on the TTBW page.
 
+## 3D models (CAD)
+
+Upload to the inbox. Claude converts them into a model visitors can rotate and zoom on the project page.
+
+**Onshape** (shear-force balance, forward closure):
+
+1. Open the document. At the bottom, right-click the tab you want: the **Assembly** tab for the whole balance, or the **Part Studio** tab for the closure.
+2. Click **Export…**
+3. **Format: STEP**. Leave the other options as they are. Choose **Download**, then **Export**.
+
+**SolidWorks:** File → Save As → "Save as type: **STEP AP214 (*.step)**" → Save.
+
+Name the files `closure.step`, `shear-balance.step`, `carriage.step` (or tell Claude which is which). Over 25 MB? Right-click → Compress to ZIP, and upload the zip.
+
+Only include parts you designed, plus the off-the-shelf parts they bolt to (rail, carriage, load cell). Leave out the NC State tunnel hardware, and check with the lab and Duke Aero that they're fine with the model being public.
+
+## Videos
+
+Under 25 MB: upload to the inbox. Any phone video is fine. Claude shrinks it, strips location data, and fixes iPhone HDR colors.
+
+Over 25 MB, pick one:
+
+- **Windows:** open the video in **Clipchamp** (built in), trim it, then Export → **720p** or **1080p**, and upload that.
+- **Or** put it on YouTube as **Unlisted** and paste the link in chat. The site plays YouTube videos the same way.
+
+Say what each clip is: a silent loop (like the hot fire) or a video with sound (like the toy video).
+
 ## "File too large" when uploading?
 
 GitHub's upload page takes files up to **25 MB each**. Full-resolution edits from Lightroom are often bigger. The site never shows a photo larger than 2000 px, so export smaller copies.

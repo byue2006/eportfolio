@@ -5,6 +5,7 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 ## How it's built
 - All page text lives in `tools/build_site.py`. Edit there, then run `python3 tools/build_site.py`; never hand-edit the generated `*.html`.
 - Personal gallery: photos go in `personal/<category>/`; `python3 tools/build_gallery.py` (needs Pillow, pillow-heif) writes `personal/_web/` and `personal/gallery.js` (captions/alt edited there persist). Category text: `personal/categories.js` (strict JSON).
+- 3D models and video: `python3 tools/build_media.py <file> <slug>` (CAD: STEP/STL/OBJ/GLB/zip, `--up y` for SolidWorks, `--finish aluminum`; video: `--loop` for silent b-roll, `--start/--end`) writes `media/<slug>.glb|.mp4` + `.webp` poster, ≤24 MB, and `tools/media.json`. Needs `pip install cascadio trimesh`. Place on a page with `model3d('slug', alt, num, cap, hotspots=[...])` or `video('slug', ..., loop=True)` / `video(None, ..., yt='ID')`; `lead=True` makes it the page's hero.
 - `.github/workflows/deploy.yml` runs both scripts on every push and commits results back to `main`.
 - `.assetsignore` keeps tools, READMEs, inbox, originals and stray root uploads off the live site. New top-level files that should NOT be public must be added there.
 - Never put `[skip ci]` in a commit message (Cloudflare skips the deploy too).

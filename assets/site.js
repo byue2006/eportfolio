@@ -421,10 +421,91 @@
     if (e.metaKey || e.ctrlKey || e.altKey || e.defaultPrevented) return;
     var t = e.target; if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
     var lb = document.getElementById('lightbox'); if (lb && lb.open) return;
+    if (t && t.closest && t.closest('.stage')) return;  // keys belong to the 3D viewer / video player
     if (e.key === 'p' || e.key === 'P') { set(!doc.classList.contains('present')); return; }
     if (!doc.classList.contains('present')) return;
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) { e.preventDefault(); go(1); }
     else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) { e.preventDefault(); go(-1); }
   });
   if (doc.classList.contains('present')) setTimeout(function () { say('Present mode: <kbd>←</kbd><kbd>→</kbd> move between sections, <kbd>P</kbd> turns it off'); }, 400);
+})();
+
+/* ---------- 3D models and video ---------- */
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function full(el) {
+    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (el.requestFullscreen) el.requestFullscreen(); else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else { var v = el.querySelector('video'); if (v && v.webkitEnterFullscreen) v.webkitEnterFullscreen(); }
+  }
+  function pauseOthers(me) {
+    Array.prototype.forEach.call(document.querySelectorAll('.vid:not(.loop) video'), function (v) { if (v !== me) v.pause(); });
+    Array.prototype.forEach.call(document.querySelectorAll('.vid iframe'), function (f) { if (f !== me) f.closest('.vid').reset(); });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.m3d'), function (fig) {
+    var mv = fig.querySelector('model-viewer'); if (!mv) return;
+    var stage = fig.querySelector('.stage'), home = mv.getAttribute('camera-orbit');
+    var spin = fig.querySelector('[data-act="rotate"]');
+    function setSpin(on) { mv.autoRotate = on; if (!on) mv.removeAttribute('auto-rotate'); spin.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+    if (reduce) setSpin(false);
+    mv.addEventListener('progress', function (e) { fig.style.setProperty('--p', e.detail.totalProgress); });
+    mv.addEventListener('load', function () { fig.classList.add('is-loaded'); });
+    mv.addEventListener('camera-change', function (e) { if (e.detail.source === 'user-interaction') fig.classList.add('is-touched'); });
+    mv.addEventListener('pointerdown', function () { setSpin(false); });
+    fig.querySelector('.ctl').addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      var a = b.getAttribute('data-act');
+      if (a === 'rotate') setSpin(!mv.autoRotate);
+      else if (a === 'in' || a === 'out') {
+        var o = mv.getCameraOrbit();
+        mv.cameraOrbit = o.theta + 'rad ' + o.phi + 'rad ' + (o.radius * (a === 'in' ? 0.8 : 1.25)) + 'm';
+      } else if (a === 'reset') { mv.cameraOrbit = home; mv.cameraTarget = 'auto auto auto'; mv.fieldOfView = 'auto'; mv.resetTurntableRotation && mv.resetTurntableRotation(0); }
+      else if (a === 'full') full(stage);
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.vid'), function (fig) {
+    var stage = fig.querySelector('.stage'), v = fig.querySelector('video'), start = fig.querySelector('.start');
+    var fb = fig.querySelector('[data-act="full"]');
+    if (fb) fb.addEventListener('click', function () { full(stage); });
+    if (fig.classList.contains('loop')) {
+      var btn = fig.querySelector('[data-act="pause"]'), wanted = !reduce;
+      function sync() {
+        var playing = !v.paused;
+        btn.setAttribute('aria-label', playing ? 'Pause video' : 'Play video'); btn.title = btn.getAttribute('aria-label');
+        btn.innerHTML = playing ? '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>'
+                                : '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
+      }
+      v.addEventListener('play', sync); v.addEventListener('pause', sync); sync();
+      btn.addEventListener('click', function () { wanted = v.paused; if (wanted) v.play(); else v.pause(); });
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (en.isIntersecting && wanted) { v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          else if (!en.isIntersecting) v.pause();
+        });
+      }, { threshold: 0.35 }).observe(fig);
+      return;
+    }
+    fig.reset = function () {  // YouTube: swap the player back for the poster
+      var f = stage.querySelector('iframe'); if (f) f.remove(); fig.classList.remove('is-playing');
+    };
+    start.addEventListener('click', function () {
+      var id = start.getAttribute('data-yt');
+      pauseOthers(null);
+      fig.classList.add('is-playing'); stage.removeAttribute('data-cursor');
+      if (id) {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&playsinline=1';
+        f.title = start.getAttribute('aria-label').replace(/^Play video: /, '');
+        f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture'; f.allowFullscreen = true;
+        f.referrerPolicy = 'strict-origin-when-cross-origin';
+        stage.appendChild(f); f.focus();
+        return;
+      }
+      v.controls = true; v.preload = 'auto'; v.focus();
+      var p = v.play(); if (p && p.catch) p.catch(function () {});
+    });
+    if (v) v.addEventListener('play', function () { pauseOthers(v); });
+  });
 })();

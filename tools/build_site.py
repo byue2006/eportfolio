@@ -60,6 +60,77 @@ def lead(src, alt, num, cap, w, h, mode='contain', group='g', pos=None):
             f'<img src="{{{{P}}}}{src}" width="{w}" height="{h}" fetchpriority="high"{style} alt="{esc(alt)}"></a></div>'
             f'<figcaption><b>{num}</b>{cap}</figcaption></figure>')
 
+# ---------------------------------------------------------------- 3D models and video
+# Media files come from tools/build_media.py, which writes media/<slug>.glb|.mp4 + .webp poster
+# and records size, length and shape in tools/media.json.
+try:
+    MEDIA = json.load(open(os.path.join(SCR, 'media.json'), encoding='utf-8'))
+except FileNotFoundError:
+    MEDIA = {}
+
+_I = {  # 20px stroke icons for the viewer buttons
+  'rotate': '<path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4h-4"/>',
+  'in': '<path d="M12 5v14M5 12h14"/>',
+  'out': '<path d="M5 12h14"/>',
+  'reset': '<path d="M4 10.5 12 4l8 6.5V20h-5.5v-5h-5v5H4z"/>',
+  'full': '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+  'play': '<path d="M8 5.5v13l11-6.5z" fill="currentColor" stroke="none"/>',
+  'pause': '<path d="M8 5v14M16 5v14"/>',
+}
+def _icon(k): return f'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{_I[k]}</svg>'
+def _btn(act, label, pressed=None):
+    p = f' aria-pressed="{pressed}"' if pressed is not None else ''
+    return f'<button type="button" data-act="{act}" aria-label="{label}" title="{label}"{p}>{_icon(act)}</button>'
+def _mb(b): return f'{b / 1048576:.1f} MB'
+def _dur(s): s = int(round(s)); return f'{s // 60}:{s % 60:02d}'
+
+def model3d(slug, alt, num, cap, ar=16/9, orbit=None, hotspots=(), lead=False, label='Interactive 3D', max_w=None):
+    """A rotatable 3D model. hotspots: (position "x y z" in model units, normal "x y z", text) callouts."""
+    m = MEDIA.get(f'{slug}.glb', {})
+    orbit = orbit or m.get('orbit', '-35deg 65deg auto')
+    hs = ''.join(f'<button type="button" class="hs" slot="hotspot-{i}" data-position="{p}" data-normal="{n}"><span>{t}</span></button>'
+                 for i, (p, n, t) in enumerate(hotspots, 1))
+    size = f' · {_mb(m["bytes"])}' if m.get('bytes') else ''
+    style = f'--ar: {ar:.3f}' + (f'; max-width: {max_w}px' if max_w else '')
+    return (f'<figure class="m3d{" p-lead" if lead else ""}" data-reveal style="{style}"><div class="stage" data-cursor="Drag">'
+            f'<model-viewer src="{{{{P}}}}media/{slug}.glb" poster="{{{{P}}}}media/{slug}.webp" alt="{esc(alt)}" camera-orbit="{orbit}" '
+            f'camera-controls touch-action="pan-y" disable-zoom interaction-prompt="none" auto-rotate auto-rotate-delay="1200" '
+            f'rotation-per-second="14deg" shadow-intensity="1" shadow-softness="0.8" environment-image="neutral" exposure="1.05" '
+            f'loading="lazy">{hs}<div class="bar" slot="progress-bar"></div></model-viewer>'
+            f'<img class="fallback" src="{{{{P}}}}media/{slug}.webp" alt="{esc(alt)}" loading="lazy">'
+            f'<span class="hud hud-tl">{label}{size}</span><span class="hud hud-bl" aria-hidden="true">Drag to rotate</span>'
+            f'<div class="ctl" role="toolbar" aria-label="3D view controls">'
+            + _btn('rotate', 'Auto-rotate', 'true') + _btn('in', 'Zoom in') + _btn('out', 'Zoom out')
+            + _btn('reset', 'Reset view') + _btn('full', 'Full screen') +
+            f'</div></div><figcaption><b>{num}</b>{cap}</figcaption></figure>')
+
+def video(slug, alt, num, cap, loop=False, yt=None, lead=False, label=None, ar=None, max_w=None):
+    """loop=True: silent clip that plays while on screen (with a pause button).
+    Otherwise a player: poster + play button, loads nothing until clicked.
+    yt='VIDEO_ID' plays a YouTube video instead (no YouTube code loads until clicked)."""
+    m = MEDIA.get(f'{slug}.mp4', {}) if slug else {}
+    ar = ar or (m['w'] / m['h'] if m.get('w') else 16 / 9)
+    style = f'--ar: {ar:.3f}' + (f'; max-width: {max_w}px' if max_w else '')
+    poster = f'{{{{P}}}}media/{slug}.webp' if slug else f'https://i.ytimg.com/vi/{yt}/hqdefault.jpg'
+    if loop:
+        label = label or 'Footage'
+        inner = (f'<video src="{{{{P}}}}media/{slug}.mp4" poster="{poster}" muted loop playsinline preload="none" aria-label="{esc(alt)}" data-loop></video>'
+                 f'<span class="hud hud-tl">{label}</span>'
+                 f'<div class="ctl">' + _btn('pause', 'Pause video') + _btn('full', 'Full screen') + '</div>')
+        cls, cur = 'vid loop', ''
+    else:
+        meta = ' · ' + _dur(m['dur']) if m.get('dur') else ''
+        label = label or 'Video'
+        src = f' data-yt="{esc(yt)}"' if yt else ''
+        media_el = '' if yt else f'<video src="{{{{P}}}}media/{slug}.mp4" poster="{poster}" playsinline preload="none" aria-label="{esc(alt)}"></video>'
+        inner = (media_el + f'<button type="button" class="start"{src} aria-label="Play video: {esc(alt)}">'
+                 + (f'<img src="{poster}" alt="" loading="lazy">' if yt else '')
+                 + f'<span class="ring">{_icon("play")}</span><span class="hud hud-bl">Play{meta}</span></button>'
+                 f'<span class="hud hud-tl">{label}</span>')
+        cls, cur = 'vid', ' data-cursor="Play"'
+    return (f'<figure class="{cls}{" p-lead" if lead else ""}" data-reveal style="{style}"><div class="stage"{cur}>{inner}</div>'
+            f'<figcaption><b>{num}</b>{cap}</figcaption></figure>')
+
 def media(card, hover=True):
     """Card / next-project thumbnail. Roles show the organization at rest and the work on hover."""
     t = card['thumb']
@@ -185,6 +256,7 @@ SCHEMA = '<script type="application/ld+json">' + '{"@context": "https://schema.o
 # ---------------------------------------------------------------- shell
 def page(title, desc, P, active, main, progress=False, path=None):
     def cur(k): return ' aria-current="page"' if active == k else ''
+    MV = f'<script type="module" src="{P}assets/vendor/model-viewer.min.js"></script>\n' if '<model-viewer' in main else ''
     home = '' if active == 'home' else P + 'index.html'
     nav = (f'<a href="{home}#work"{cur("work")}>Work</a>'
            f'<a href="{home}#leadership"{cur("leadership")}>Leadership</a>'
@@ -271,7 +343,7 @@ def page(title, desc, P, active, main, progress=False, path=None):
 <script src="{P}personal/categories.js"></script>
 <script src="{P}personal/gallery.js"></script>
 <script src="{P}assets/site.js"></script>
-</body>
+{MV}</body>
 </html>
 '''
     return out.replace('{{P}}', P)
