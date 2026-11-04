@@ -548,7 +548,7 @@
     iss: function (el, st) {
       var svg = el.querySelector('svg'), stn = svg.querySelector('.iss-st'), dot = svg.querySelector('.iss-dot'),
           flare = svg.querySelector('.iss-flare'), segs = svg.querySelectorAll('.iss-trail line'), alt = el.querySelector('.alt');
-      var CX = 250, CY = 210, R0 = 158, RA = 104, MU = Math.pow(2 * Math.PI * R0 / 1.7, 2) * R0, K = 0.0003, H = 20;
+      var CX = 250, CY = 200, R0 = 138, RA = 91, MU = Math.pow(2 * Math.PI * R0 / 1.7, 2) * R0, K = 0.00034, H = 17.5;
       var s, trail = [], boom = 0, acc = 0, rest = -40 * Math.PI / 180;
       function reset(a) { var v = Math.sqrt(MU / R0); s = [R0 * Math.sin(a), -R0 * Math.cos(a), v * Math.cos(a), v * Math.sin(a)]; trail = []; }
       function f(y) {
@@ -585,7 +585,7 @@
           dot.style.fill = 'rgb(' + Math.round(237 + 3 * hot) + ',' + Math.round(237 - 99 * hot) + ',' + Math.round(235 - 160 * hot) + ')';
           var fl = boom > 0 ? Math.sin(boom * Math.PI) : hot * 0.35;
           flare.setAttribute('opacity', fl.toFixed(3));
-          flare.setAttribute('r', (10 + 26 * (boom > 0 ? 1 - boom : hot)).toFixed(1));
+          flare.setAttribute('r', (9 + 19 * (boom > 0 ? 1 - boom : hot)).toFixed(1));
           dot.setAttribute('opacity', boom > 0 ? boom.toFixed(3) : 1);
           var n = trail.length;
           for (var i = 0; i < segs.length; i++) {

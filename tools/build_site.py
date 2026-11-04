@@ -699,6 +699,26 @@ def card(slug, P, delay=0.0):
   </a>
 </article>'''
 
+LOGO_AR = {'images/logo-duke-aero.svg': 3405 / 966, 'images/logo-ncstate.svg': 121.25 / 11, 'images/logo-duke.svg': 140 / 50,
+           'images/logo-egr-corp.webp': 604 / 246, 'images/logo-issdc.webp': 1.0, 'images/logo-tis.webp': 1600 / 274}
+LOGO_SCALE = {'images/logo-duke-aero.svg': 1.3, 'images/logo-egr-corp.webp': 1.5, 'images/logo-issdc.webp': 1.1}
+
+def org_mark(d, P):
+    """Small single-color organization mark for the project banner (a mask in the page's ink color, so it never clashes)."""
+    o = d.get('org')
+    if not o or not o.get('logo'):
+        return ''
+    ar = LOGO_AR.get(o['logo'], 2.5)
+    h = (60 if ar < 1.4 else 44) * LOGO_SCALE.get(o['logo'], 1.0)   # thin or detailed marks get a little more room
+    w = ar * h
+    if w > 200:
+        w, h = 200, 200 / ar
+    src = f'{P}{o["logo"]}'
+    sub = re.sub(r'<[^>]+>', ' ', o.get('sub', ''))
+    return (f'<aside class="p-org fade-in" style="--d:.35s">'
+            f'<span class="p-org-logo" role="img" aria-label="{esc(o["name"])}" style="--w:{w:.0f}px;--h:{h:.0f}px;--ar:{ar:.3f};-webkit-mask-image:url({src});mask-image:url({src})"></span>'
+            f'<span class="label">{sub}</span></aside>')
+
 def project_page(i, kind, slug):
     d = P_[slug]; P = '../'
     gname, gi, gn = GROUP_OF[slug]
@@ -722,9 +742,14 @@ def project_page(i, kind, slug):
       <a class="pill" href="{back_href}"><span class="arrow">←</span> {back_label}</a>
       <span class="label">{count}</span>
     </div>
-    <p class="label accent fade-in" style="--d:.1s">{d["cat"]}</p>
-    <h1 class="split">{d["title"]}</h1>
-    <p class="p-lede fade-in" style="--d:.55s">{d["lede"]}</p>
+    <div class="p-head">
+      <div>
+        <p class="label accent fade-in" style="--d:.1s">{d["cat"]}</p>
+        <h1 class="split">{d["title"]}</h1>
+        <p class="p-lede fade-in" style="--d:.55s">{d["lede"]}</p>
+      </div>
+      {org_mark(d, P)}
+    </div>
     <dl class="meta-grid fade-in" style="--d:.7s">{meta}</dl>
   </div>
 </section>
@@ -806,10 +831,6 @@ def home():
       <div class="sub-head" data-reveal><h3>Projects</h3><span class="label">Design team · coursework · client work</span></div>
       <div class="cards three">{proj_cards}</div>
     </div>
-    <div class="group" id="smaller">
-      <div class="sub-head" data-reveal><h3>Smaller work</h3><span class="label">Class projects · side work</span><a class="sub-link" href="work/smaller-work.html">All three <span class="arrow">→</span></a></div>
-      <div class="cards three">{small_cards}</div>
-    </div>
   </div>
 </section>
 
@@ -820,6 +841,16 @@ def home():
       <p>Captaining design teams, teaching engineering courses, and coaching.</p>
     </div>
     <div class="cards three">{lead_cards}</div>
+  </div>
+</section>
+
+<section class="section" id="smaller">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div><p class="label">Class projects &amp; side work</p><h2>Smaller work</h2></div>
+      <p>A computing project, an FEA check, and a CAD exercise I took too far. <a class="link" href="work/smaller-work.html">All three <span class="arrow">→</span></a></p>
+    </div>
+    <div class="cards three">{small_cards}</div>
   </div>
 </section>
 
@@ -935,12 +966,12 @@ def anim_iss():
   <radialGradient id="iss-flare"><stop offset="0" stop-color="#fff3e6"/><stop offset=".35" stop-color="#f08a4b"/><stop offset="1" stop-color="#f08a4b" stop-opacity="0"/></radialGradient></defs>
   <g class="par far">{STARS}</g>
   <g class="par near">
-    <circle cx="250" cy="210" r="158" class="iss-orbit"/>
-    <circle cx="250" cy="210" r="118" fill="url(#iss-glow)"/>
-    <circle cx="250" cy="210" r="104" class="iss-atm"/>
-    <circle cx="250" cy="210" r="92" fill="url(#iss-earth)" class="iss-earth"/>
+    <circle cx="250" cy="200" r="138" class="iss-orbit"/>
+    <circle cx="250" cy="200" r="103" fill="url(#iss-glow)"/>
+    <circle cx="250" cy="200" r="91" class="iss-atm"/>
+    <circle cx="250" cy="200" r="80" fill="url(#iss-earth)" class="iss-earth"/>
     <g class="iss-trail">{trail}</g>
-    <g class="iss-st" transform="translate(148.4 89)"><circle r="18" fill="url(#iss-flare)" class="iss-flare" opacity="0"/><circle r="5.5" class="iss-dot"/></g>
+    <g class="iss-st" transform="translate(161.3 94.3)"><circle r="16" fill="url(#iss-flare)" class="iss-flare" opacity="0"/><circle r="5" class="iss-dot"/></g>
   </g>
 </svg>'''
     return _anim_frame('iss', inner, ('Team SkyFall · EGR 105', 'Alt <b class="alt">420</b> km', 'Gravity + drag · RK4'))
@@ -960,13 +991,13 @@ def anim_snap():
     <rect x="110" y="96" width="24" height="208" class="wall"/>
     {arm("top", False)}{arm("bot", True)}
     <circle cx="362" cy="128" r="8" class="snapring" opacity="0"/><circle cx="362" cy="272" r="8" class="snapring" opacity="0"/>
-    <text x="110" y="78" class="eps"><tspan class="nc">ε</tspan> max 6.3 × 10<tspan class="nc">⁻³</tspan> · root corner</text>
+    <text x="242" y="338" text-anchor="middle" class="eps"><tspan class="nc">ε</tspan> max 6.3 × 10<tspan class="nc">⁻³</tspan> · root corner</text>
   </g>
 </svg>'''
     return _anim_frame('snap', inner, ('Snap-fit · FEA check', 'Move to push · pull', 'FOS ≈ 2.9'))
 
 # nozzle exits in images/card-vanguard.webp (% of width, % of height) and plume angle, measured from the 3D model
-VANGUARD_NOZZLES = ((65.97, 50.87, 14.5), (64.24, 58.52, 16.2), (68.5, 52.53, 14.7))
+VANGUARD_NOZZLES = ((65.07, 54.3, 14.5), (63.5, 61.29, 16.2), (67.39, 55.81, 14.7))
 
 def anim_vanguard(src, alt):
     plumes = ''.join(f'<span class="plume" style="--nx:{x}%;--ny:{y}%;--na:{a}deg"></span>' for x, y, a in VANGUARD_NOZZLES)

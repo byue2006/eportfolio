@@ -411,6 +411,17 @@ body.menu-open { overflow: hidden; }
 .crumbs { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: clamp(36px, 6vw, 72px); }
 .p-hero h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(2.5rem, 5.6vw, 4.9rem); line-height: .98; letter-spacing: -0.052em; margin: 14px 0 22px; max-width: 16ch; text-wrap: balance; }
 .p-lede { font-size: clamp(1.1rem, 1.9vw, 1.35rem); line-height: 1.5; color: var(--ink-2); max-width: 56ch; margin: 0; }
+.p-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 56px; align-items: end; }
+.p-org { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; text-align: right; padding-bottom: 4px; }
+.p-org .label { max-width: 26ch; color: var(--ink-3); line-height: 1.5; }
+.p-org-logo { display: block; width: var(--w); height: var(--h); background: var(--ink); opacity: .62; transition: opacity .3s var(--ease);
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: right center; mask-position: right center; }
+.p-org:hover .p-org-logo { opacity: .9; }
+@media (max-width: 760px) {
+  .p-head { grid-template-columns: minmax(0, 1fr); }
+  .p-org { order: -1; flex-direction: row; align-items: center; gap: 12px; text-align: left; padding: 0 0 6px; }
+  .p-org-logo { height: 26px; width: min(calc(26px * var(--ar)), 132px); -webkit-mask-position: left center; mask-position: left center; }
+}
 .meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 24px; margin-top: clamp(36px, 5vw, 56px); border-top: 1px solid var(--rule-strong); }
 .meta-grid > div { padding-top: 14px; }
 .meta-grid dt { font: 500 12px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
@@ -674,17 +685,16 @@ dialog.lb::backdrop { background: rgba(8, 8, 9, .92); -webkit-backdrop-filter: b
 /* ---------- animated card posters (smaller work) ----------
    Dark stage in the ISS style. Still at rest; on hover (or focus, or on screen on touch devices) assets/site.js runs a small
    physics loop per card (data-anim) and feeds --px/--py (smoothed pointer, -1..1) and --mx/--my (spotlight) here. */
-.media.anim { isolation: isolate; }
+.media.anim { isolation: isolate; container-type: inline-size; }
 .a-dark { background: radial-gradient(120% 95% at 50% 30%, #1c1e22 0%, #0b0c0e 72%); }
 .anim-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .anim-svg .nc { text-transform: none; }
 .a-dark .spot { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .5s var(--ease);
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 40%), rgba(240, 138, 75, .13), rgba(240, 138, 75, 0) 38%); mix-blend-mode: screen; }
 .card.mini:hover .a-dark .spot { opacity: 1; }
-.a-dark .hud-k { position: absolute; z-index: 4; font: 500 10.5px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .5); pointer-events: none; }
+.a-dark .hud-k { position: absolute; z-index: 4; font: 500 clamp(8.5px, 2.85cqw, 11px)/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .5); pointer-events: none; }
 .a-dark .hud-k b { font-weight: 500; color: rgba(255, 255, 255, .88); font-variant-numeric: tabular-nums; }
 .a-dark .hud-k.tl { left: 5%; top: 6.5%; } .a-dark .hud-k.bl { left: 5%; bottom: 6.5%; } .a-dark .hud-k.br { right: 5%; bottom: 6.5%; }
-@media (max-width: 1100px) { .a-dark .hud-k { font-size: 9.5px; } }
 /* parallax: the far layer drifts against the pointer, the near layer a little with it */
 .a-dark .par.far { transform: translate(calc(var(--px, 0) * -9px), calc(var(--py, 0) * -7px)); }
 .a-dark .par.near { transform: translate(calc(var(--px, 0) * 4px), calc(var(--py, 0) * 3px)); }
@@ -707,7 +717,7 @@ dialog.lb::backdrop { background: rgba(8, 8, 9, .92); -webkit-backdrop-filter: b
 .a-fly .warp { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .a-fly .ship { position: absolute; inset: 0; z-index: 1; will-change: transform; }
 .a-fly .ship img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.a-fly .plume { position: absolute; left: var(--nx); top: calc(var(--ny) - 3.15%); width: 22%; height: 6.3%; z-index: 2;
+.a-fly .plume { position: absolute; left: var(--nx); top: calc(var(--ny) - 2.9%); width: 20%; height: 5.8%; z-index: 2;
   transform-origin: 0 50%; transform: rotate(var(--na)) scaleX(0); opacity: 0; mix-blend-mode: screen; pointer-events: none;
   background: radial-gradient(ellipse 100% 50% at 0% 50%, #fff8ee 0%, #ffd7a3 16%, #ff9d52 38%, rgba(240, 110, 40, .35) 58%, rgba(240, 110, 40, 0) 76%); filter: blur(.5px); }
 .a-fly .plume::after { content: ""; position: absolute; left: -6%; top: -45%; width: 80%; height: 190%; border-radius: 50%;
