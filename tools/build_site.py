@@ -145,7 +145,7 @@ def media(card, hover=True):
         inner = f'<div class="{cls}"{mstyle}><img src="{{{{P}}}}{t["src"]}" loading="lazy"{style} alt="{esc(t["alt"])}">'
     org = card.get('org')
     if org and hover:
-        lw = f' style="--logo-w: {org["logo_w"]}"' if org.get('logo_w') else ''
+        lw = (f' style="--logo-w: {org["logo_w"]}' + (f'; --logo-h: {org["logo_h"]}' if org.get('logo_h') else '') + '"') if org.get('logo_w') else ''
         logo = f'<img class="logo" data-logo src="{{{{P}}}}{org["logo"]}"{lw} alt="{esc(org["name"])}">' if org.get('logo') else ''
         word_cls = 'word sm' if org.get('small') else 'word'
         inner += (f'<div class="org reveal" aria-hidden="true" style="--org-bg: {org["bg"]}; --org-fg: {org.get("fg", "#fff")}">'
@@ -619,7 +619,7 @@ CARD = {
       org=dict(word='DUKE', sub='Mechanical Engineering &amp; Materials Science', name='Duke University', bg='#00539b', logo='images/logo-duke.svg', logo_h=17)),
   'forward-closure': dict(card_title='Unified forward closure', status=['Project', 'Flown'], dates='Duke Aero · Aug 2025 → present',
       lede='Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.',
-      org=dict(word='DUKE AERO', sub='Solid Propulsion', name='Duke Aero', bg='#c84e00')),
+      org=dict(word='DUKE AERO', sub='Solid Propulsion', name='Duke AERO', bg='#c84e00', logo='images/logo-duke-aero.svg', logo_w='70%')),
   'happy-meal': dict(card_title='Modular Happy Meal train', status=['Project', 'Toy Fair 2025'], dates='Duke · Spring 2025',
       lede='An injection-moldable toy train with swappable snap-fit heads, at $0.31 a unit.',
       org=dict(word='DUKE', sub='Toy design · 2025 Toy Fair', name='Duke University', bg='#1d6363', logo='images/logo-duke.svg')),
@@ -628,7 +628,7 @@ CARD = {
       org=dict(word='DUKE', sub='EGR 101 · Engineering Design', name='Duke University', bg='#262626', logo='images/logo-duke.svg')),
   'issdc': dict(card_title='Captain &amp; Advisor @ ISSDC', status=['Leadership', 'Global Champion'], dates='Sep 2021 → Aug 2024',
       lede='Designed the operations and construction robots for a settlement proposal; Global Champion at Kennedy Space Center.',
-      org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='ISSDC', bg='#0b0d12')),
+      org=dict(word='ISSDC', sub='Space settlement design', name='International Space Settlement Design Competition', bg='#0b0d12', logo='images/logo-issdc.webp', logo_w='40%', logo_h='58%')),
   'teaching': dict(card_title='Teaching Assistant @ Duke', status=['Leadership', 'Ongoing'], dates='Aug 2025 → present',
       lede='EGR 105: office hours, lab sections, and one-on-one sessions. ME 221: grading.',
       org=dict(word='EGR 105<br>ME 221', sub='EGR 105 · ME 221 · Teaching Assistant', name='Duke University', bg='#012169', small=True, logo='images/logo-duke.svg', logo_h=17)),
@@ -730,7 +730,9 @@ def home():
       <h1 class="display split">I design hardware and then <em>make it.</em></h1>
       <dl class="titleblock fade-in" style="--d:.7s">
         <div class="wide"><dt>What I do</dt><dd>Mechanical design of aircraft hardware: detail design, engineering drawings and GD&amp;T, tolerance analysis, structural validation, and hands-on fabrication and assembly.</dd></div>
-        <div class="wide"><dt>School</dt><dd>Duke University: B.S.E. in Mechanical Engineering, Certificate in Aerospace Engineering</dd></div>
+        <div class="third"><dt>School</dt><dd>Duke University</dd></div>
+        <div class="third"><dt>Degree</dt><dd>B.S.E. in Mechanical Engineering</dd></div>
+        <div class="third"><dt>Certificate</dt><dd>Aerospace Engineering</dd></div>
         <div><dt>Graduating</dt><dd>May 2028</dd></div>
         <div><dt>Based in</dt><dd>Durham, NC</dd></div>
       </dl>
