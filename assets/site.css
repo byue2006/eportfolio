@@ -436,6 +436,9 @@ body.menu-open { overflow: hidden; }
 .prose { max-width: 68ch; }
 .prose p { margin: 0 0 16px; }
 .prose p:last-child { margin-bottom: 0; }
+.prose ul { margin: 0 0 16px; padding-left: 1.2em; }
+.prose li { margin: 0 0 8px; }
+.prose li::marker { color: var(--accent); }
 .prose strong { font-weight: 600; }
 .contrib { border-left: 2px solid var(--accent); padding: 4px 0 4px 20px; font-size: 18.5px; line-height: 1.6; }
 .next-note { color: var(--ink-2); }

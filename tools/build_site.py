@@ -177,6 +177,8 @@ def render_teaser(P):
                     f'alt="{esc(it.get("alt") or it.get("caption") or "")}" loading="lazy"></a>' for it in ITEMS[:4])
     return chips, strip
 
+SCHEMA = '<script type="application/ld+json">' + '{"@context": "https://schema.org", "@type": "Person", "name": "Brian Yue", "url": "https://brianyue.me/", "image": "https://brianyue.me/images/portrait.jpg", "email": "mailto:brian.yue@duke.edu", "jobTitle": "Mechanical engineering student", "affiliation": {"@type": "CollegeOrUniversity", "name": "Duke University", "url": "https://duke.edu"}, "knowsAbout": ["Mechanical design", "GD&T", "Finite element analysis", "Tolerance analysis", "Aerospace structures", "Machining"], "sameAs": ["https://www.linkedin.com/in/brianyihanyue/"]}' + '</script>\n'
+
 # ---------------------------------------------------------------- shell
 def page(title, desc, P, active, main, progress=False, path=None):
     def cur(k): return ' aria-current="page"' if active == k else ''
@@ -209,7 +211,7 @@ def page(title, desc, P, active, main, progress=False, path=None):
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">{canon}
-<link rel="icon" href="{P}favicon.svg" type="image/svg+xml">
+{SCHEMA if path in ('', 'about') else ''}<link rel="icon" href="{P}favicon.svg" type="image/svg+xml">
 <link rel="icon" href="{P}favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="{P}apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -280,6 +282,7 @@ P_ = {}
 P_['shear-balance'] = dict(
   kind='work', num='01', cat='Instrument design', year='2026',
   title='Floating-element shear-force balance',
+  desc='A floating-element shear-force balance for a subsonic wind tunnel: load path design, a GD&T drawing package, FEA, and a ~$159 carriage-and-rail redesign.',
   card_title='Floating-element shear-force balance',
   lede='Rerouted the load path onto about $159 of catalog parts after test data from a comparable instrument showed friction eroding ~40% of measured shear.',
   tags=['Onshape', 'GD&T', 'FEA', 'Instrumentation'],
@@ -297,7 +300,8 @@ P_['shear-balance'] = dict(
 <p>I also made the plate height adjustable. Setting it lower leaves a recess where a viscoelastic layer of varying thickness can be cured in place.</p></div>
 <div class="figs">''' + row(fig('images/balance-section-flow.webp', 'Section view along the flow axis showing the floating plate suspended inside the frame.', 'Fig. 2', 'Section along the flow axis. The mobile plate (light blue) floats and passes shear to the load cell only.', 1500, 178, group='balance')) +
       row(fig('images/balance-section-transverse.webp', 'Section view across the flow axis showing the carriage on its rail beneath the plate.', 'Fig. 3', 'Section along the transverse axis. The carriage and rail fix five degrees of freedom and leave the flow axis free.', 1068, 380, group='balance')) + '</div>'),
-    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>A five-sheet manufacturing drawing package and a bill of materials with vendor part numbers and unit costs. I modeled the assembly in Onshape and checked it under test loads with SolidWorks FEA. Mating surfaces carry ASME B4.1 fit classes, the M4 pattern that holds the non-contact gap around the mobile plate carries a ⌀.010 true-position tolerance, and the flow-facing surfaces get a 16 Ra finish, because roughness there would change the quantity being measured. Choosing those numbers meant weighing what a university machine shop can hold against what the instrument needs.</p>
+    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>A five-sheet manufacturing drawing package and a bill of materials with vendor part numbers and unit costs. I modeled the assembly in Onshape and checked it under test loads with SolidWorks FEA.</p>
+<p>Mating surfaces carry ASME B4.1 fit classes, the M4 pattern that holds the non-contact gap around the mobile plate carries a ⌀.010 true-position tolerance, and the flow-facing surfaces get a 16 Ra finish, because roughness there would change the quantity being measured. Choosing those numbers meant weighing what a university machine shop can hold against what the instrument needs.</p>
 <p>Only two of the five parts start from raw stock. The other three are catalog or existing lab parts with features added, which keeps custom fabrication to a minimum.</p></div>
 <div class="figs" data-reveal>
   <div class="sheets-head"><span class="label">Drawing package</span><span class="label">5 sheets · August 2026 · click for PDF</span></div>
@@ -327,7 +331,8 @@ P_['forward-closure'] = dict(
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>We were machining three separate forward closures for one solid rocket motor: one for the hydrostatic proof test, one for static hot fire, and one for flight. Three parts, three setups, three chances to get something wrong, and two of them thrown away after a single use.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">I drove the redesign and did the modeling, the analysis, and the fastener and sealing evaluation. Machining was shared with teammates. The thermal and mechanical loads came from our team lead by way of OpenRocket, and teammates produced the final drawings.</p>'''),
-    ('process', 'Process &amp; iteration', '''<div class="prose"><p>Consolidating all three into one part cut part count by 67% and eliminated two machining setups. The real work was deciding what each of the three roles absolutely needed and what was negotiable, and the hard part was the ports. A flight closure wants to be solid; a test closure needs instrumentation and fill ports. I merged the hydrostatic and hot fire ports into a single port that is sealed for flight, so one part can serve all three roles without compromising the one that matters.</p>
+    ('process', 'Process &amp; iteration', '''<div class="prose"><p>Consolidating all three into one part cut part count by 67% and eliminated two machining setups.</p>
+<p>The real work was deciding what each of the three roles absolutely needed and what was negotiable, and the hard part was the ports. A flight closure wants to be solid; a test closure needs instrumentation and fill ports. I merged the hydrostatic and hot fire ports into a single port that is sealed for flight, so one part can serve all three roles without compromising the one that matters.</p>
 <p>I modeled it in Onshape, ran SolidWorks Simulation on a preliminary design to check factor of safety under flight loads, and ran a trade study across commercial fasteners and sealing configurations from several suppliers, weighing manufacturability against the combustion chamber's specified thermal and mechanical loads.</p></div>
 <div class="figs">''' + row(fig('images/closure-section.webp', 'Half-section CAD view of the closure showing the bore, seal grooves, and threaded holes.', 'Fig. 2', 'Section view of the final design.', 685, 619, group='closure'),
                        fig('images/closure-port.webp', 'Section through the closure showing an L-shaped internal passage from the face to the side port.', 'Fig. 3', 'Section through the merged hydrostatic / hot fire port.', 696, 450, group='closure')) + '</div>'),
@@ -349,18 +354,21 @@ P_['ttbw'] = dict(
   glance=[('Paper', f'<a href="{DOI}" target="_blank" rel="noopener">AIAA 2026-4344</a>'), ('Venue', 'AIAA AVIATION Forum, San Diego, June 8–12, 2026'),
           ('Sources', '53, from NASA, Boeing, academia, and international groups'), ('Funding', 'Bellman Gift Travel Grant, $1,747')],
   sections=[
-    ('challenge', 'The challenge', '''<div class="prose"><p>A transonic truss-braced wing uses an external strut to carry part of the bending load, which lets the wing be much thinner and longer than a cantilever wing of the same weight. The aerodynamic case is strong, but it is fundamentally an aerostructural problem: the benefit of the ultra-high aspect ratio only pays off if the fuel savings survive the structural penalties that come with it. What I wanted to know was what still stands between the configuration and service. A thorough summary of NASA-led work already existed; no review had pulled in the research from outside it.</p></div>'''),
+    ('challenge', 'The challenge', '''<div class="prose"><p>A transonic truss-braced wing uses an external strut to carry part of the bending load, which lets the wing be much thinner and longer than a cantilever wing of the same weight. The aerodynamic case is strong, but it is fundamentally an aerostructural problem: the benefit of the ultra-high aspect ratio only pays off if the fuel savings survive the structural penalties that come with it.</p>
+<p>What I wanted to know was what still stands between the configuration and service. A thorough summary of NASA-led work already existed; no review had pulled in the research from outside it.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">Sole author. I reviewed and synthesized the literature, wrote the paper, and presented it at the 2026 AIAA AVIATION Forum in San Diego, with travel funded by a departmental grant. Dr. Dowell advised.</p>
 <div class="figs">''' + row(fig('images/aiaa-sign.webp', 'Brian Yue in a navy suit and conference badge, standing in front of the AIAA AVIATION 2026 expo-hours sign.', 'Fig. 2', 'At AIAA AVIATION 2026 in San Diego, June 8–12.', 960, 1280, mode='cover', group='ttbw'),
                        fig('images/aiaa-foyer.webp', 'Brian Yue leaning on large blue AIAA letters in the conference foyer.', 'Fig. 3', 'Between sessions in the conference foyer.', 1280, 960, mode='cover', group='ttbw'),
                        fig('images/aiaa-logo.webp', 'Brian Yue standing beside a large AIAA logo display.', 'Fig. 4', 'The forum where I presented AIAA 2026-4344.', 1280, 960, mode='cover', group='ttbw', pos='60% 50%')) + '</div>'),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>I worked through 53 sources from NASA, Boeing, and academic and international groups and organized them by discipline: aerodynamics, low-speed aerodynamics, structures and fatigue, aeroelasticity, sizing and MDO, aeroacoustics, icing, simulation, and systems integration. For each, I tracked what has been demonstrated and what is still open.</p></div>
 <div class="figs">''' + row(fig('images/ttbw-paper.webp', 'Title and abstract of the paper An Overview of Transonic Truss-Braced Wing Technology by Brian Y. Yue.', 'Fig. 5', 'First page of AIAA 2026-4344.', 1100, 1025, group='ttbw')) + '</div>'),
-    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p><strong>Certification.</strong> The configuration is novel enough that the usual means of compliance don't transfer. Comparative analysis can't be relied on for icing because there is no operational history to compare against, and current icing simulation tools aren't validated for TTBW certification. On noise, the baseline configuration clears FAA Stage 4 by about 23 EPNdB cumulative, but its sideline margin under Stage 5 is only 2.9 EPNdB, thin enough to be flagged as a certification risk even if modeling bias may explain part of it.</p>
+    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p><strong>Certification.</strong> The configuration is novel enough that the usual means of compliance don't transfer. Comparative analysis can't be relied on for icing because there is no operational history to compare against, and current icing simulation tools aren't validated for TTBW certification.</p>
+<p>On noise, the baseline configuration clears FAA Stage 4 by about 23 EPNdB cumulative, but its sideline margin under Stage 5 is only 2.9 EPNdB, thin enough to be flagged as a certification risk even if modeling bias may explain part of it.</p>
 <p><strong>Systems integration.</strong> The thin, high-aspect-ratio wing that makes the configuration efficient leaves little room for fuel, so proposals move tanks into the fuselage and struts, at some cost in L/D. Engine placement, the wing-fuselage junction, and control-surface layout get pulled along with it. Each is a decision in one subsystem forcing a change in another.</p></div>
 <div class="figs">''' + row(fig('images/ttbw-noise-margins.webp', 'Chart of cumulative noise margin against certification year, with FAA Stage 3, 4, and 5 limits and TTBW predictions near minus 20 EPNdB.', 'Fig. 6', 'Cumulative noise margins vs. FAA limits. Figure by June et al. (2022), not my work; reproduced with citation in my review as Fig. 15.', 753, 324, group='ttbw'),
                        fig('images/ttbw-control-layouts.webp', 'Five candidate wing planforms with different arrangements of Krueger flaps, spoilers, flaps, ailerons, and flaperons; planform 4 is marked final.', 'Fig. 7', 'Control-surface layouts studied for the TTBW. Figure by Harrison et al. (2020), not my work; reproduced with citation as Fig. 16.', 851, 509, group='ttbw')) + '</div>'),
-    ('reflection', 'Reflection', '''<div class="prose"><p>I rehearsed the talk more than a hundred times over three months and prepared answers for every question I could think of. Then a room of engineers who had spent their careers on this configuration asked about details I had never considered, used terms I had never heard, and questioned specifics of studies I had overlooked. I couldn't answer a single question.</p><p>After the session I tracked down the people who had asked, including two authors I had cited, and asked them to explain what they meant and how they had approached their studies. I'm still in touch with some of them. Spending a year on the literature taught me what had been published; that hour taught me how much I didn't know. At the forum I also sat in on technical panels and plenaries, met engineers on the expo floor, and joined the Rising Leaders speed-mentoring session.</p><p>Certification is the thread I keep coming back to. For something genuinely new, a real part of the engineering is working out how you would prove it at all.</p></div>'''),
+    ('reflection', 'Reflection', '''<div class="prose"><p>I rehearsed the talk more than a hundred times over three months and prepared answers for every question I could think of. Then a room of engineers who had spent their careers on this configuration asked about details I had never considered, used terms I had never heard, and questioned specifics of studies I had overlooked. I couldn't answer a single question.</p><p>After the session I tracked down the people who had asked, including two authors I had cited, and asked them to explain what they meant and how they had approached their studies. I'm still in touch with some of them. Spending a year on the literature taught me what had been published; that hour taught me how much I didn't know.</p>
+<p>At the forum I also sat in on technical panels and plenaries, met engineers on the expo floor, and joined the Rising Leaders speed-mentoring session.</p><p>Certification is the thread I keep coming back to. For something genuinely new, a real part of the engineering is working out how you would prove it at all.</p></div>'''),
     ('skills', 'Skills', tags(['Literature synthesis', 'Technical writing', 'Aerodynamics', 'Aeroelasticity', 'MDO', 'Aeroacoustics', 'Conference presentation'])),
   ])
 
@@ -454,7 +462,14 @@ P_['issdc'] = dict(
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>The International Space Settlement Design Competition runs like an industry proposal shop. A team is assigned, not chosen, an RFP lands, and a complete settlement design and presentation are due in 24 to 48 hours, then defended in front of judges who are former NASA engineers.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">Two sections were mine. On <strong>Bellevistat</strong>, Team Bread's proposal for the 30th ISSDC (2022–23), I designed nearly all of the operations and infrastructure section. On <strong>Alaskol</strong>, DAFC's lunar settlement (2023), I designed the atmosphere. I also built the team's design database and documented team strategy, which later teams worked from.</p>'''),
-    ('process', 'Process &amp; iteration', '''<div class="prose"><p>Bellevistat is an orbital settlement for 7,850 people. I sized its utilities from per-person and per-area assumptions: an Earth-normal air mix at 0.75 atm across 4.29 × 10⁸ m³ of pressurized volume, which works out to roughly 11,400 cargo containers of gas; a power budget of 1.12 × 10⁸ kWh per day, met by 3.37 × 10⁶ m² of solar panels with a reactor as backup; 170 million gallons of water stored in the central shaft; and a day/night cycle copied from Houston in mid-spring. I also wrote the hull material and construction equipment lists, the maintenance and repair plan, and the plan for expanding infrastructure.</p></div>
+    ('process', 'Process &amp; iteration', '''<div class="prose"><p>Bellevistat is an orbital settlement for 7,850 people. I sized its utilities from per-person and per-area assumptions:</p>
+<ul>
+  <li><strong>Air:</strong> an Earth-normal mix at 0.75 atm across 4.29 × 10⁸ m³ of pressurized volume, which works out to roughly 11,400 cargo containers of gas.</li>
+  <li><strong>Power:</strong> 1.12 × 10⁸ kWh per day, met by 3.37 × 10⁶ m² of solar panels with a reactor as backup.</li>
+  <li><strong>Water:</strong> 170 million gallons, stored in the central shaft.</li>
+  <li><strong>Day and night:</strong> a cycle copied from Houston in mid-spring.</li>
+</ul>
+<p>I also wrote the hull material and construction equipment lists, the maintenance and repair plan, and the plan for expanding infrastructure.</p></div>
 <div class="figs">''' + row(fig('images/issdc-bread-operations.webp', 'Section divider page reading 3.0 Operations and Infrastructure, Team Bread, with a rendering of a space station.', 'Fig. 2', 'Bellevistat: the operations section.', 1000, 1295, group='issdc'),
                        fig('images/issdc-bread-atmosphere.webp', 'Proposal page on community infrastructure with an air composition table and food production text.', 'Fig. 3', 'Atmosphere and food sizing.', 1100, 1424, group='issdc'),
                        fig('images/issdc-bread-power.webp', 'Proposal page with initial food quantity and power distribution tables.', 'Fig. 4', 'Food stores and power budget.', 1100, 1424, group='issdc')) + '''</div>
@@ -597,7 +612,7 @@ def project_page(i, kind, slug):
   </div>
 </section>'''
     title = f'{html.unescape(d["card_title"])} · Brian Yue'
-    return page(title, d['lede'], P, kind, main, progress=True, path=f'{kind}/{slug}')
+    return page(title, d.get('desc') or d['lede'], P, kind, main, progress=True, path=f'{kind}/{slug}')
 
 # ---------------------------------------------------------------- home
 def home():
@@ -693,7 +708,7 @@ def home():
     chips, strip = render_teaser(P)
     main = (main.replace('{TEASER_HIDDEN}', '' if HAS_PERSONAL else ' hidden')
                 .replace('{TEASER_CHIPS}', chips).replace('{TEASER_STRIP}', strip))
-    return page('Brian Yue · Mechanical Engineering', 'Brian Yue, mechanical engineering student at Duke. Instrument design, flight hardware, aerospace research, assistive devices, and leadership.', P, 'home', main, path='')
+    return page('Brian Yue · Mechanical Engineering', 'Brian Yue, Duke mechanical engineering student: instrument design, GD&T drawing packages, FEA, flight hardware, and a sole-author AIAA paper.', P, 'home', main, path='')
 
 # ---------------------------------------------------------------- about
 def about():
@@ -750,7 +765,7 @@ def about():
         <div><dt>Analysis</dt><dd>SolidWorks Simulation (FEA), hand calculations, tolerance and load path analysis, measurement system design, trade studies, root cause analysis, ANSYS Granta EduPack</dd></div>
         <div><dt>Fabrication</dt><dd>Lathe, mill, drill press, band saw, CNC (3- and 5-axis), wire EDM, metallographic grinding and polishing, laser cutting, 3D printing, additive friction stir deposition, load cell integration</dd></div>
         <div><dt>Materials testing</dt><dd>Metallography, fractography, tensile testing, exposure to SEM</dd></div>
-        <div><dt>Computing</dt><dd>Python (NumPy, Matplotlib)</dd></div>
+        <div><dt>Computing &amp; data</dt><dd>Python (NumPy, Matplotlib) for test-data processing; DAQ data collection in solid mechanics and dynamics labs</dd></div>
         <div><dt>Standards</dt><dd>ASME Y14.5, ASME B4.1</dd></div>
         <div><dt>Coursework</dt><dd>Mechanics of Solids (EGR 201), Structure &amp; Properties of Solids (ME 221), Dynamics (EGR 244: a gravity car whose run time I predicted from a dynamic model, then tested), Thermodynamics (ME 331), Mechatronics, Space Systems Design (ME 490-04); in progress: ME Analysis for Design (ME 321), Fluid Mechanics (ME 336), Aircraft Propulsion (ME 490-05)</dd></div>
         <div><dt>Memberships</dt><dd>AIAA and ASME student member since 2024</dd></div>
@@ -758,7 +773,7 @@ def about():
     </div>
   </div>
 </section>'''
-    return page('About · Brian Yue', 'About Brian Yue: background, experience, education, honors, and skills.', P, 'about', main, path='about')
+    return page('About · Brian Yue', 'About Brian Yue, a Duke mechanical engineering student: experience, education, honors, and skills in CAD, GD&T, FEA, and machining.', P, 'about', main, path='about')
 
 # ---------------------------------------------------------------- personal
 def personal():
