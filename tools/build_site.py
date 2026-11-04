@@ -404,7 +404,7 @@ P_['forward-closure'] = dict(
   lede='Three solid rocket motor closures merged into one flight part.',
   tags=['SolidWorks FEA', 'Lathe', 'Mill', 'Seals'],
   thumb=dict(kind='img', src='images/closure-machined.webp', mode='cover', pos='50% 60%', alt='Partially machined forward closure'),
-  meta=[('Role', 'Drove the redesign'), ('When', 'August 2025 – present'), ('Team', 'Duke Aero, Solid Propulsion'), ('Status', 'Flown')],
+  meta=[('Role', 'Drove the redesign'), ('When', 'August 2025 – present'), ('Team', 'Duke Aero, Solid Propulsion (member since August 2024)'), ('Status', 'Flown')],
   lead=lead('images/closure-machined.webp', 'A partially machined aluminum forward closure on a shop bench, with two eye bolts threaded into its face and radial ports around its side.',
             'Fig. 1', 'Forward closure, partially machined.', 1600, 1200, mode='cover', group='closure', pos='50% 58%'),
   glance=[('Consolidation', '3 closures → 1'), ('Part count', '−67%'), ('Machining setups', 'Two fewer'), ('Ports', 'Hydrostatic + hot fire merged, sealed for flight'),
@@ -414,7 +414,7 @@ P_['forward-closure'] = dict(
     ('contribution', 'My contribution', '''<p class="contrib">I drove the redesign and did the modeling, the analysis, and the fastener and sealing evaluation. Machining was shared with teammates. The thermal and mechanical loads came from our team lead by way of OpenRocket, and teammates produced the final drawings.</p>'''),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>Consolidating all three into one part cut part count by 67% and eliminated two machining setups.</p>
 <p>The real work was deciding what each of the three roles absolutely needed and what was negotiable, and the hard part was the ports. A flight closure wants to be solid; a test closure needs instrumentation and fill ports. I merged the hydrostatic and hot fire ports into a single port that is sealed for flight, so one part can serve all three roles without compromising the one that matters.</p>
-<p>I modeled it in Onshape, ran SolidWorks Simulation on a preliminary design to check factor of safety under flight loads, and ran a trade study comparing fastener patterns and seal configurations against the combustion chamber's specified thermal and mechanical loads and our assembly constraints, weighing manufacturability throughout.</p></div>
+<p>I modeled it in Onshape, ran SolidWorks Simulation on a preliminary design to check factor of safety under flight loads, and ran a trade study comparing fastener patterns and seal configurations against the combustion chamber's specified thermal and mechanical loads and our assembly constraints, weighing manufacturability throughout. Duke Aero ultimately scrapped the sealing solution that came out of that study, so it isn't part of what flew, but the evaluation behind it was my work.</p></div>
 <div class="figs">''' + model3d('closure', 'Interactive 3D model of the aluminum forward closure: a thick disc with a central bore, holes in its face, and radial ports around its side.', 'Fig. 2', 'The closure that flew, as modeled in Onshape. Drag to rotate, or zoom in on the ports.', max_w=820) + row(fig('images/closure-section.webp', 'Half-section CAD view of the closure showing the bore, seal grooves, and threaded holes.', 'Fig. 3', 'Section view of the final design.', 685, 619, group='closure'),
                        fig('images/closure-port.webp', 'Section through the closure showing an L-shaped internal passage from the face to the side port.', 'Fig. 4', 'Section through the merged hydrostatic / hot fire port.', 696, 450, group='closure')) + '</div>'),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>My teammates and I machined the final parts on a lathe, drill press, and mill. The closure went through the April 2026 static hot fire, and the motor flew.</p></div>
@@ -422,7 +422,7 @@ P_['forward-closure'] = dict(
     ('reflection', 'Reflection', '''<div class="prose"><p>The minimum factor of safety came out around 11, which is not a good number. It means the geometry was set by available stock, machinability, and handling rather than by load, and on a weight-critical vehicle that is mass we'd want back. I'd also verify the chamber pressure independently instead of taking it downstream of someone else's model, since every number after it depends on it.</p>
 <p class="next-note">Next: researching head-end ignition ahead of a two-stage vehicle next year.</p></div>
 <div class="figs">''' + row(fig('images/closure-fos.webp', 'SolidWorks factor-of-safety plot of the closure, mostly red, with a minimum factor of safety of 11.', 'Fig. 6', 'FEA on a preliminary design. Minimum FOS = 11.', 1400, 794, group='closure')) + '</div>'),
-    ('skills', 'Skills', tags(['Onshape', 'SolidWorks Simulation (FEA)', 'Fastener & seal selection', 'Pressure vessel design', 'Lathe', 'Mill', 'Drill press', 'DFM'])),
+    ('skills', 'Skills', tags(['Onshape', 'SolidWorks Simulation (FEA)', 'Fastener & seal trade study', 'Pressure vessel design', 'Lathe', 'Mill', 'Drill press', 'DFM'])),
   ])
 
 # The 53 references in AIAA 2026-4344, counted from the published reference list.
@@ -864,7 +864,7 @@ def about():
       <h1 class="split">Beijing, then Durham.</h1>
       <div class="prose fade-in" style="--d:.5s">
         <p>I'm a mechanical engineering junior at Duke's Pratt School of Engineering, working toward a certificate in aerospace engineering. Before Duke I was at Tsinghua International School in Beijing, where I captained our ISSDC teams and, as a full-time student-athlete, coached middle school volleyball and basketball, ending as head coach of both girls' teams.</p>
-        <p>At Duke I split my time between Duke Aero's solid propulsion subteam, research, and teaching. I like projects where the envelope is fixed and everything inside it is mine to decide.</p>
+        <p>At Duke I split my time between research, teaching, and Duke Aero's solid propulsion subteam, which I joined in August 2024. I like projects where the envelope is fixed and everything inside it is mine to decide.</p>
         <p>Outside engineering, I play trombone in the Duke University Marching Band, and I play volleyball and basketball.</p>
         <p>I'm a native speaker of English and Mandarin, and a US citizen.</p>
       </div>
@@ -884,7 +884,7 @@ def about():
         <li><span class="when">2026</span><a href="work/shear-balance.html">Research Intern<span class="sub">Turbulent Shear Flow Laboratory, NC State</span></a></li>
         <li><span class="when">2025–26</span><a href="work/ttbw.html">Student Researcher<span class="sub">Duke MEMS, with Dr. Earl H. Dowell</span></a></li>
         <li><span class="when">2025–</span><a href="leadership/teaching.html">Undergraduate Teaching Assistant<span class="sub">EGR 105 and ME 221, Duke</span></a></li>
-        <li><span class="when">2025–</span><a href="work/forward-closure.html">Solid Propulsion Subteam<span class="sub">Duke Aero</span></a></li>
+        <li><span class="when">2024–</span><a href="work/forward-closure.html">Solid Propulsion Subteam<span class="sub">Duke Aero, since August 2024</span></a></li>
         <li><span class="when">2021–24</span><a href="leadership/issdc.html">Captain, then Student Advisor<span class="sub">International Space Settlement Design Competition</span></a></li>
         <li><span class="when">2020–24</span><a href="leadership/coaching.html">Student Coach<span class="sub">Tsinghua International School athletics, Beijing</span></a></li>
       </ul>
