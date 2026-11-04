@@ -625,9 +625,9 @@ P_['teaching'] = dict(
   thumb=dict(kind='type', big='EGR 105', cap='Computing for Engineers · since 2025'),
   meta=[('Role', 'Undergraduate TA'), ('When', 'August 2025 – present'), ('Courses', 'EGR 105 (teaching), ME 221 (grading)'), ('Where', 'Duke University')],
   lead='',
-  glance=[('EGR 105', 'Computing for Engineers, since fall 2025: office hours, lab sections, one-on-one sessions'), ('ME 221', 'Structure & Properties of Solids: grading')],
+  glance=[('EGR 105', 'Computing for Engineers, since fall 2025: office hours, lab sections, one-on-one sessions'), ('ME 221', 'Structure & Properties of Solids: grading'), ('Students', 'Two sections of 39 each')],
   sections=[
-    ('challenge', 'The job', '''<div class="prose"><p>I've been a teaching assistant for EGR 105, Computing for Engineers, since fall 2025, and I grade for ME 221, Structure and Properties of Solids. In EGR 105, students come in with very different backgrounds, and the work spans coding projects, lab work, mini-activities, and problem sets. In ME 221, my job is grading.</p></div>'''),
+    ('challenge', 'The job', '''<div class="prose"><p>I've been a teaching assistant for EGR 105, Computing for Engineers, since fall 2025, and I grade for ME 221, Structure and Properties of Solids. I work with two sections of 39 students each. In EGR 105, students come in with very different backgrounds, and the work spans coding projects, lab work, mini-activities, and problem sets. In ME 221, my job is grading.</p></div>'''),
     ('contribution', 'What I do', '''<p class="contrib">In EGR 105, I hold weekly office hours, lead lab sections, and run one-on-one sessions, and I review student projects, quizzes, and lab work. In ME 221, I grade.</p>'''),
     ('process', 'How I teach', '''<div class="prose"><p>I break hard concepts down into their fundamentals and teach the process instead of supplying answers. When I review EGR 105 work, I give feedback, suggest more efficient approaches where they exist, and recommend specific changes for resubmission.</p></div>
 <div class="figs">''' + row(fig('images/teaching.jpg', 'Teaching a lab section.', 'Fig. 1', 'Teaching.', ar=1.5, mode='cover', group='teaching', dropin=True, optional=True)) + '</div>'),
@@ -739,6 +739,8 @@ NUMS = {
                    ('+0.55', 'Pugh score for the train'), ('100,000', 'units a week per press'), ('1.25 in', 'choke tube, passed')],
     'playseat': [('6 / 6', 'requirements verified, 1 by proxy'), ('15.72 lb', 'against a 20 lb target'), ('11', 'weeks, concept to delivery'),
                  ('4 ft', 'highest drop test survived'), ('10 ft / 20 s', 'mobility target, met on every surface'), ('0.6 in', 'largest gap allowed')],
+    'teaching': [('78', 'students across two sections of 39'), ('2', 'courses, EGR 105 and ME 221'), ('2nd', "year TA'ing EGR 105"),
+                 ('1:1', 'sessions with students who ask'), ('Fall 2025', 'TA since')],
     'issdc': [('1st', '2023 Global Finals, Kennedy Space Center'), ('24–48 h', 'to design a settlement'), ('7,850', 'residents on Bellevistat'),
               ('33', 'repair robots, 11 of each type'), ('28%', 'residential oxygen on Alaskol'), ('0.15%', 'agricultural CO₂ on Alaskol')],
 }
