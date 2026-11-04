@@ -21,7 +21,8 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Brian is #24 and #15 (volleyball), #24 (basketball). Only caption a number when it is visible.
 - Verify after each push: both checks (GitHub Actions, "Workers Builds: eportfolio") succeed and the live page shows the change.
 - Open questions for Brian are listed in `inbox/README.md`.
-- Private documents Brian shared (high-school résumé, college applications, transcript, application forms) are for checking facts only. Never publish grades, GPA, test scores, addresses, phone numbers, birth date or application IDs.
+- Private documents Brian shared (high-school résumé, college applications, transcript, application forms) are for checking facts only. Never publish grades, test scores, addresses, phone numbers, birth date or application IDs from them. The cumulative GPA (3.776) and coursework on About come from his résumé and are fine.
+- ISS deorbit (EGR 105, fall 2024, Team SkyFall): a team project; Brian wrote only the orbital decay script (gravity + drag, COESA76 density, hand-written RK4). Don't publish the script: he TAs EGR 105.
 - Never add: the AFSD research (its absence is deliberate); any ME 221 labs/office hours/discussion; modal analysis, vibration, shock or nonlinear dynamics in skills; TA class sizes or student stats.
 - Shear balance: the starting male-female interface was a grad student's design, and he reported the ~40% friction loss and suggested carriages; Brian chose and integrated the carriage and rail. The April 2026 static hot fire used Brian's unified closure. ISSDC robot designs are Brian's; the 3D models are Kelly Wang's.
 - Keep as-is: the shear-balance attribution block, the forward-closure contribution and FOS ~11 self-criticism, the ISSDC "Rechecking" notes (historical proposal numbers are annotated, never altered).

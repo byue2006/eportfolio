@@ -105,14 +105,15 @@ def model3d(slug, alt, num, cap, ar=16/9, orbit=None, hotspots=(), lead=False, l
             + _btn('reset', 'Reset view') + _btn('full', 'Full screen') +
             f'</div></div><figcaption><b>{num}</b>{cap}</figcaption></figure>')
 
-def video(slug, alt, num, cap, loop=False, yt=None, lead=False, label=None, ar=None, max_w=None):
+def video(slug, alt, num, cap, loop=False, yt=None, lead=False, label=None, ar=None, max_w=None, poster=None):
     """loop=True: silent clip that plays while on screen (with a pause button).
     Otherwise a player: poster + play button, loads nothing until clicked.
-    yt='VIDEO_ID' plays a YouTube video instead (no YouTube code loads until clicked)."""
+    yt='VIDEO_ID' plays a YouTube video instead (no YouTube code loads until clicked).
+    poster='images/x.webp' overrides the poster (e.g. a sharper one than YouTube's thumbnail)."""
     m = MEDIA.get(f'{slug}.mp4', {}) if slug else {}
     ar = ar or (m['w'] / m['h'] if m.get('w') else 16 / 9)
     style = f'--ar: {ar:.3f}' + (f'; max-width: {max_w}px' if max_w else '')
-    poster = f'{{{{P}}}}media/{slug}.webp' if slug else f'https://i.ytimg.com/vi/{yt}/hqdefault.jpg'
+    poster = f'{{{{P}}}}{poster}' if poster else (f'{{{{P}}}}media/{slug}.webp' if slug else f'https://i.ytimg.com/vi/{yt}/hqdefault.jpg')
     if loop:
         label = label or 'Footage'
         inner = (f'<video src="{{{{P}}}}media/{slug}.mp4" poster="{poster}" muted loop playsinline preload="none" aria-label="{esc(alt)}" data-loop></video>'
@@ -912,17 +913,21 @@ def about():
 
 <section class="section" id="more-cad">
   <div class="wrap">
-    <div class="sec-head" data-reveal><div><p class="label">Class CAD and analysis</p><h2>Smaller work.</h2></div></div>
+    <div class="sec-head" data-reveal><div><p class="label">Class projects and side work</p><h2>Smaller work.</h2></div></div>
     <div class="group">
-      <div class="sub-head" data-reveal><h3>Space Shuttle <i>Vanguard</i></h3><span class="label">For fun · Fall 2024</span></div>
-      <div class="prose" data-reveal><p>A CAD exercise from my first semester at Duke where I went well past the assignment for fun: a 4.9-inch Space Shuttle with DUKE and VANGUARD lettering and three engine bells, modeled to print in PLA, plus a fully dimensioned drawing.</p></div>
-      <div class="figs">''' + model3d('shuttle', 'Interactive 3D model of a small Space Shuttle with a tail fin, three engine bells, and VANGUARD lettering along its back.', 'Fig. 1', 'The <i>Vanguard</i> model in 3D. Drag to rotate.', max_w=980) + row(fig('images/dwg-shuttle-2400.webp', 'Drawing of the Space Shuttle Duke Vanguard model: top, right, front and isometric views at 1:1.7 scale, dimensioned in inches, PLA plastic, drawn by Brian Yue on 09/27/2024.', 'Fig. 2', 'Its drawing: four views, dimensioned in inches. Click to zoom.', 1000, 773, group='shuttle')) + '''</div>
+      <div class="sub-head" data-reveal><h3>Simulating the ISS deorbit</h3><span class="label">EGR 105 · Fall 2024 · Team project</span></div>
+      <div class="prose" data-reveal><p>A team project for EGR 105, Computing for Engineers: simulate the International Space Station deorbiting. I wrote the orbital decay script. It treats the station as a point mass under Earth's gravity and aerodynamic drag, takes air density from the 1976 U.S. Standard Atmosphere, and steps the orbit forward with a fourth-order Runge-Kutta integrator I wrote by hand in Python. The project reported the station's altitude at each critical threshold and animated the whole descent.</p></div>
+      <div class="figs">''' + video(None, 'Team SkyFall ISS deorbit demonstration video', 'Fig. 1', 'Team SkyFall\'s demonstration video, with the animation of the full deorbit. Plays from YouTube.', yt='yojsCxUHBxU', max_w=980, poster='images/iss-deorbit-poster.webp') + '''</div>
     </div>
     <div class="group">
       <div class="sub-head" data-reveal><h3>Checking a snap-fit with FEA</h3><span class="label">ME 321 · Fall 2026</span></div>
       <div class="prose" data-reveal><p>A 3D-printed snap-fit grip that holds a 38 mm cube, for an ME 321 lab. My part here was the check, not the sizing. I ran a SolidWorks static study with the tab pushed 1.5 mm, a margin over the real 1.2 mm, which put the peak strain at 6.3 × 10⁻³ and the minimum factor of safety near 2.9, both at the inner arm-to-wall corner. That corner is sharp, so part of that peak is a stress singularity, and I wouldn't trust the exact number until it's filleted and the mesh converges. Then I printed and tested it: the cube snaps in, holds, and slides back out with a firm pull.</p></div>
-      <div class="figs">''' + row(fig('images/me321-grip-fos.webp', 'SolidWorks factor-of-safety plot of the U-shaped grip, mostly red, with the minimum of about 2.9 marked at the inner corner.', 'Fig. 3', 'Factor of safety: minimum about 2.9, at the inner arm-to-wall corner.', 1400, 717, group='me321'),
-                       fig('images/me321-grip-strain.webp', 'SolidWorks strain plot of the grip, highest along the arm near the corner.', 'Fig. 4', 'Strain under the 1.5 mm tab displacement: peak 6.3 × 10⁻³.', 1400, 716, group='me321')) + '<div class="row" data-reveal style="max-width: 560px">' + fig('images/me321-grip-print.webp', 'A purple 3D-printed grip holding a purple printed cube between its two arms, on a shop bench.', 'Fig. 5', 'Printed and assembled: the cube held in the grip.', 682, 511, group='me321') + '</div>' + '''</div>
+      <div class="figs">''' + row(fig('images/me321-grip-fos.webp', 'SolidWorks factor-of-safety plot of the U-shaped grip, mostly red, with the minimum of about 2.9 marked at the inner corner.', 'Fig. 2', 'Factor of safety: minimum about 2.9, at the inner arm-to-wall corner.', 1400, 717, group='me321'),
+                       fig('images/me321-grip-strain.webp', 'SolidWorks strain plot of the grip, highest along the arm near the corner.', 'Fig. 3', 'Strain under the 1.5 mm tab displacement: peak 6.3 × 10⁻³.', 1400, 716, group='me321')) + '<div class="row" data-reveal style="max-width: 560px">' + fig('images/me321-grip-print.webp', 'A purple 3D-printed grip holding a purple printed cube between its two arms, on a shop bench.', 'Fig. 4', 'Printed and assembled: the cube held in the grip.', 682, 511, group='me321') + '</div>' + '''</div>
+    <div class="group">
+      <div class="sub-head" data-reveal><h3>Space Shuttle <i>Vanguard</i></h3><span class="label">For fun · Fall 2024</span></div>
+      <div class="prose" data-reveal><p>A CAD exercise from my first semester at Duke where I went well past the assignment for fun: a 4.9-inch Space Shuttle with DUKE and VANGUARD lettering and three engine bells, modeled to print in PLA, plus a fully dimensioned drawing.</p></div>
+      <div class="figs">''' + model3d('shuttle', 'Interactive 3D model of a small Space Shuttle with a tail fin, three engine bells, and VANGUARD lettering along its back.', 'Fig. 5', 'The <i>Vanguard</i> model in 3D. Drag to rotate.', max_w=980) + row(fig('images/dwg-shuttle-2400.webp', 'Drawing of the Space Shuttle Duke Vanguard model: top, right, front and isometric views at 1:1.7 scale, dimensioned in inches, PLA plastic, drawn by Brian Yue on 09/27/2024.', 'Fig. 6', 'Its drawing: four views, dimensioned in inches. Click to zoom.', 1000, 773, group='shuttle')) + '''</div>
     </div>
   </div>
 </section>'''
