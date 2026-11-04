@@ -363,9 +363,9 @@ P_['shear-balance'] = dict(
   meta=[('Role', 'Designer, end to end'), ('When', 'June – August 2026'), ('Where', 'Turbulent Shear Flow Lab, NC State'), ('Advisor', 'Dr. Venkat Narayanaswamy')],
   lead=lead('images/balance-rear.webp', 'CAD render of the sidewall-insert plate: a blue aluminum frame with a light-blue floating plate, a small rail and carriage at the center, and the load-cell mount at the right.',
             'Fig. 1', 'Rear face of the sidewall-insert assembly. Carriage, rail, and load-cell mount visible; mounting plate hidden.', 1120, 541, mode='pad', group='balance'),
-  glance=[('Constraint', '5 DOF fixed, 1 free'), ('Sensing', 'Uniaxial load cell, single load path'), ('Fits', 'RC4 / LC2, ASME B4.1'),
-          ('Position', '⌀.010 true position, ASME Y14.5'), ('Material', '6061 aluminum, 16 Ra flow surfaces'), ('Comparable instrument', 'Friction eroded ~40% of measured shear'),
-          ('Carriage + rail', '~$159, catalog parts'), ('Deliverables', '5-sheet drawing set, BOM')],
+  glance=[('Constraint', 'Held rigid in 5 degrees of freedom, free to slide in 1'), ('Sensing', 'Uniaxial load cell, single load path'), ('Fits', 'RC4 running and LC2 locational fits (ASME B4.1)'),
+          ('Position tolerance', '⌀0.010 in true position (ASME Y14.5)'), ('Material', '6061 aluminum; 16 µin Ra finish on flow surfaces'), ('Comparable instrument', 'Friction eroded ~40% of measured shear'),
+          ('Carriage + rail', 'About $159 of off-the-shelf parts'), ('Deliverables', '5-sheet drawing set, BOM')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>Skin friction is a wall shear stress, and measuring it directly means letting a small element of the wall float free in one direction while holding it still in the other five. Every parallel path that load can take is measurement error. The instrument also had to fit inside a cavity that already existed in the lab's subsonic tunnel wall, so the envelope, the mounting, and the flow-facing surface were fixed before I drew anything.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">Design, analysis, the drawing package, and the bill of materials were mine. The tunnel hardware, the cavity and the load cell were not: I designed into them.</p>'''),
@@ -401,8 +401,8 @@ P_['forward-closure'] = dict(
   meta=[('Role', 'Drove the redesign'), ('When', 'August 2025 – present'), ('Team', 'Duke Aero, Solid Propulsion'), ('Status', 'Flown')],
   lead=lead('images/closure-machined.webp', 'A partially machined aluminum forward closure on a shop bench, with two eye bolts threaded into its face and radial ports around its side.',
             'Fig. 1', 'Forward closure, partially machined.', 1600, 1200, mode='cover', group='closure', pos='50% 58%'),
-  glance=[('Consolidation', '3 closures → 1'), ('Part count', '−67%'), ('Machining setups', '−2'), ('Ports', 'Hydrostatic + hot fire merged, sealed for flight'),
-          ('Min. factor of safety', '≈11, preliminary design'), ('Processes', 'Lathe, drill press, mill')],
+  glance=[('Consolidation', '3 closures → 1'), ('Part count', '−67%'), ('Machining setups', 'Two fewer'), ('Ports', 'Hydrostatic + hot fire merged, sealed for flight'),
+          ('Min. factor of safety', 'About 11 (preliminary design)'), ('Processes', 'Lathe, drill press, mill')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>We were machining three separate forward closures for one solid rocket motor: one for the hydrostatic proof test, one for static hot fire, and one for flight. Three parts, three setups, three chances to get something wrong, and two of them thrown away after a single use.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">I drove the redesign and did the modeling, the analysis, and the fastener and sealing evaluation. Machining was shared with teammates. The thermal and mechanical loads came from our team lead by way of OpenRocket, and teammates produced the final drawings.</p>'''),
@@ -535,7 +535,7 @@ P_['issdc'] = dict(
   lead=lead('images/issdc-robot-welder.webp', 'Rendering of a boxy robot on magnetic tank treads with RCS thrusters and two articulated arms ending in a laser welder with an oxygen sprayer and a nanobot dispenser; dimension arrows show 2 m, 3 m and 5 m.',
             'Fig. 1', 'My dual-mode welding configuration of the F1M8, a vendor robot. 3D model by Kelly Wang.', 980, 351, mode='pad', group='issdc'),
   glance=[('Result', 'Global Champion, 2023, Kennedy Space Center'), ('Also', 'Asia Regional Finals twice; Best Representor, China Finals 2021–22'),
-          ('Format', 'Assigned team, RFP, 24–48 hours'), ('Judges', 'Former NASA engineers')],
+          ('Format', 'Assigned team answers a request for proposal (RFP) in 24–48 hours'), ('Judges', 'Former NASA engineers')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>The International Space Settlement Design Competition runs like an industry proposal shop. A team is assigned, not chosen, an RFP lands, and a complete settlement design and presentation are due in 24 to 48 hours, then defended in front of judges who are former NASA engineers.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">On <strong>Bellevistat</strong>, Team Bread's proposal for the 30th ISSDC (2022–23), I designed nearly all of the operations and infrastructure section, including its construction and repair robots. On <strong>Alaskol</strong>, DAFC's lunar settlement (2023), I designed the atmosphere. I also built the team's design database and documented team strategy, which later teams worked from.</p>
@@ -720,14 +720,14 @@ def home():
       <figcaption><span class="label">View A · Portrait</span><span class="label">Scale 1:1</span></figcaption>
     </figure>
     <div>
-      <p class="label kicker fade-in" style="--d:.05s">Mechanical Engineering · Duke University · Class of 2028</p>
+      <p class="label kicker fade-in" style="--d:.05s">Mechanical engineering student · Duke University</p>
       <h1 class="display split">I design hardware and then <em>make it.</em></h1>
       <dl class="titleblock fade-in" style="--d:.7s">
-        <div class="wide"><dt>Scope</dt><dd>Mechanical design of aircraft hardware: detail design, engineering drawings and GD&amp;T, tolerance analysis, structural validation, and hands-on fabrication and assembly.</dd></div>
-        <div><dt>Drawn by</dt><dd>Brian Yue</dd></div>
-        <div><dt>School</dt><dd>Duke, B.S.E. ME, 2028</dd></div>
-        <div><dt>Location</dt><dd>Durham, NC</dd></div>
-        <div><dt>Rev</dt><dd>November 2026</dd></div>
+        <div class="wide"><dt>What I do</dt><dd>Mechanical design of aircraft hardware: detail design, engineering drawings and GD&amp;T, tolerance analysis, structural validation, and hands-on fabrication and assembly.</dd></div>
+        <div><dt>Degree</dt><dd>B.S.E. in Mechanical Engineering</dd></div>
+        <div><dt>Certificate</dt><dd>Aerospace Engineering</dd></div>
+        <div><dt>Graduating</dt><dd>May 2028</dd></div>
+        <div><dt>Based in</dt><dd>Durham, NC</dd></div>
       </dl>
       <div class="actions fade-in" style="--d:.85s">
         <a class="pill solid" href="#work">See the work <span class="arrow">↓</span></a>
