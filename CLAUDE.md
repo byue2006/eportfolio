@@ -33,6 +33,8 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Verify after each push: both checks (GitHub Actions, "Workers Builds: eportfolio") succeed and the live page shows the change.
 - Open questions for Brian are listed in `inbox/README.md`.
 - Private documents Brian shared (high-school résumé, college applications, transcript, application forms) are for checking facts only. Never publish grades, test scores, addresses, phone numbers, birth date or application IDs from them. The cumulative GPA (3.776) and coursework on About come from his résumé and are fine.
+- The Vanguard shuttle was an EGR 101 CAD assignment (fall 2024) that Brian took well past the brief.
+- Card tile colors: keep the brand colors Brian likes, but nothing warm or flat on this cool-themed site: Duke AERO uses Duke Magnolia #1d6363, the EGR 101 (PlaySeat) tile Duke Shale Blue #0577b1.
 - ISS deorbit (EGR 105, fall 2024, Team SkyFall): a team project; Brian wrote only the orbital decay script (gravity + drag, COESA76 density, hand-written RK4). Don't publish the script: he TAs EGR 105.
 - Never add: the AFSD research (its absence is deliberate); any ME 221 labs/office hours/discussion; modal analysis, vibration, shock or nonlinear dynamics in skills.
 - Teaching: student counts are fine (Brian asked for them). Use his résumé's wording, two sections of 39 students each, without assigning the sections to one course.
