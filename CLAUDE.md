@@ -20,7 +20,7 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 ## Voice (Brian asked for the site to feel human-made, not AI-written)
 - Write the way Brian writes in his cover letters and essays: first person, plain sentences, specific details, a little personality ("which I'll admit is a strange way to fall in love with airplanes"). Contractions are fine.
 - Avoid the tells: slogan or aphorism lines ("the drawing is the design"), "X, not Y" reversals, tidy rule-of-three lists, colon-reveal summaries ("Thing: detail, detail"), "@" in titles, decorative drafting labels.
-- The home page ticker is a numbers ticker (Brian likes it: numbers matter and it has visual impact). Every figure in `marquee_items` must be stated on its project page; no skill keywords.
+- The home page ticker is a numbers ticker (Brian likes it: numbers matter and it has visual impact). Every figure in `marquee_items` must be stated on its project page; no skill keywords. Each project page also has its own numbers strip under the banner (`NUMS` in `build_site.py`; same rule: every figure must be stated on that page). Teaching has none on purpose (no student stats); coaching shows its numbers as the big stats at the top.
 - Section headings are specific to each project (e.g. "Merging the ports", "The Q&A"), not one template.
 - His origin story (The Martian at ten, Mayday: Air Crash Investigation, "watching something I drew turn into a part that works") comes from his own cover letters and essays and is fine to use.
 

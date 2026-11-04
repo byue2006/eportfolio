@@ -726,6 +726,32 @@ def org_mark(d, P):
             f'<span class="p-org-logo" role="img" aria-label="{esc(o["name"])}" style="--w:{w:.0f}px;--h:{h:.0f}px;--ar:{ar:.3f};-webkit-mask-image:url({src});mask-image:url({src})"></span>'
             f'<span class="label">{sub}</span></aside>')
 
+# Numbers strip under each project banner (same style as the home ticker). Every figure is stated on that page.
+NUMS = {
+    'shear-balance': [('$159', 'carriage and rail'), ('~40%', 'of measured shear lost to friction in the old interface'),
+                      ('5 / 1', 'degrees of freedom held / free'), ('⌀.010', 'true position on the M4 pattern'),
+                      ('16 Ra', 'finish on the flow-facing surfaces'), ('5', 'drawing sheets'), ('2 of 5', 'parts machined from raw stock')],
+    'forward-closure': [('3 → 1', 'closures per motor'), ('67%', 'fewer parts'), ('2', 'machining setups cut'),
+                        ('Apr 2026', 'static hot fire'), ('Aug 2024', 'on Duke Aero since')],
+    'ttbw': [('53', 'sources'), ('9', 'disciplines covered'), ('~23 EPNdB', 'cumulative margin to FAA Stage 4'),
+             ('2.9 EPNdB', 'sideline margin under Stage 5'), ('100+', 'rehearsals before the talk'), ('$1,747', 'travel grant')],
+    'happy-meal': [('$0.31', 'per unit in PETG'), ('3', 'swappable heads'), ('±0.01 mm', 'shaft collar bore'),
+                   ('+0.55', 'Pugh score for the train'), ('100,000', 'units a week per press'), ('1.25 in', 'choke tube, passed')],
+    'playseat': [('6 / 6', 'requirements verified, 1 by proxy'), ('15.72 lb', 'against a 20 lb target'), ('11', 'weeks, concept to delivery'),
+                 ('4 ft', 'highest drop test survived'), ('10 ft / 20 s', 'mobility target, met on every surface'), ('0.6 in', 'largest gap allowed')],
+    'issdc': [('1st', '2023 Global Finals, Kennedy Space Center'), ('24–48 h', 'to design a settlement'), ('7,850', 'residents on Bellevistat'),
+              ('33', 'repair robots, 11 of each type'), ('28%', 'residential oxygen on Alaskol'), ('0.15%', 'agricultural CO₂ on Alaskol')],
+}
+
+def nums_strip(slug, title):
+    nums = NUMS.get(slug)
+    if not nums:
+        return ''
+    reps = max(1, -(-8 // len(nums)))   # repeat short lists so the loop never shows a gap on wide screens
+    items = ''.join((f'<li{"" if r == 0 else " aria-hidden=\"true\""}><span class="mq"><b>{n}</b><span>{t}</span></span></li>')
+                    for r in range(reps) for n, t in nums)
+    return f'<div class="marquee p-marquee" aria-label="{esc(title)} in numbers"><div class="marquee-track"><ul>{items}</ul></div></div>\n'
+
 def project_page(i, kind, slug):
     d = P_[slug]; P = '../'
     gname, gi, gn = GROUP_OF[slug]
@@ -760,7 +786,7 @@ def project_page(i, kind, slug):
     <dl class="meta-grid fade-in" style="--d:.7s">{meta}</dl>
   </div>
 </section>
-
+{nums_strip(slug, html.unescape(d["card_title"]))}
 <div class="wrap">
   {d["lead"]}
   <div class="p-body">
