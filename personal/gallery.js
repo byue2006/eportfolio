@@ -115,16 +115,6 @@ window.PERSONAL_GALLERY = [
     "height": 599
   },
   {
-    "src": "personal/_web/basketball/04-bench-burning-after-unc-900.webp",
-    "caption": "Bench burning on the quad after a Duke–UNC win",
-    "alt": "Brian Yue smiling in a blue and white striped shirt in front of a bonfire on Duke's campus at night, sparks rising and Duke Chapel lit up behind him.",
-    "category": "Basketball",
-    "orig": "personal/basketball/04-bench-burning-after-unc.jpg",
-    "full": "personal/_web/basketball/04-bench-burning-after-unc-2000.webp",
-    "width": 900,
-    "height": 1200
-  },
-  {
     "src": "personal/_web/music/01-playing-up-close-900.webp",
     "caption": "Playing trombone with the Duke University Marching Band",
     "alt": "Close-up of Brian Yue, in sunglasses and a white Duke band cap and uniform, playing trombone against a background of green trees.",
@@ -213,6 +203,16 @@ window.PERSONAL_GALLERY = [
     "full": "personal/_web/music/09-marching-at-a-day-game-2000.webp",
     "width": 900,
     "height": 600
+  },
+  {
+    "src": "personal/_web/music/10-bench-burning-after-unc-900.webp",
+    "caption": "Bench burning on the quad after a Duke–UNC win. I played that game in the pep band.",
+    "alt": "Brian Yue smiling in his blue and white striped pep band shirt in front of a bonfire on Duke's campus at night, sparks rising and Duke Chapel lit up behind him.",
+    "category": "Music",
+    "orig": "personal/music/10-bench-burning-after-unc.jpg",
+    "full": "personal/_web/music/10-bench-burning-after-unc-2000.webp",
+    "width": 900,
+    "height": 1200
   },
   {
     "src": "personal/_web/music/pregame-duke-football-900.webp",
