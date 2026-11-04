@@ -597,7 +597,12 @@ P_['issdc'] = dict(
   <li><strong>Power:</strong> 1.12 × 10⁸ kWh per day, summed from residential, industrial, agricultural, and warehouse demand, met by 3.37 × 10⁶ m² of solar panels with a reactor as backup. The panel area uses the competition program book's figure of 1.39 kW of electricity per m² of panel.</li>
 </ul>
 <p>Rechecking that power figure now: 1.39 kW per m² is about all the sunlight that reaches a panel near Earth, so it assumes the panels convert nearly all of it. At a realistic 30% efficiency the same load needs about 1.1 × 10⁷ m², roughly 3.4 times the area. That's the check I'd run now before using a number someone hands me.</p>
-<p>Alaskol sits on the Moon next to mining operations. I gave each sector its own atmosphere: residential air at 28% oxygen, industrial and agricultural air close to Earth-normal, carbon dioxide raised to 0.15% in the agricultural unit, and humidity set per sector at 50, 40, and 70%. Residential areas also run a three-season climate calendar. Like every choice in a proposal, the composition had to be defended against the alternatives.</p>
+<p>Alaskol sits on the Moon next to mining operations. I gave each sector its own atmosphere, and every number had a reason I had to defend:</p>
+<ul>
+  <li><strong>Residential:</strong> 28% oxygen, to make physical labor easier, at 50% humidity, with a three-season climate calendar.</li>
+  <li><strong>Industrial:</strong> oxygen down to 20.7% and humidity down to 40% to slow oxidation, but not bone-dry, because some moisture prevents static buildup.</li>
+  <li><strong>Agricultural:</strong> carbon dioxide raised to 0.15% to help plants grow, but held below the level that would start acidifying the soil, at 70% humidity.</li>
+</ul>
 <p>One gap I'd close now: the slide gives the mix but not the total pressure, and 28% oxygen only makes sense with one. At sea-level pressure it's a fire risk. At a reduced cabin pressure it's the right call, because it holds the oxygen partial pressure near Earth's: 28% of 0.75 atm is 0.21 atm, the same as sea level. I'd state the pressure first.</p></div>
 <div class="figs">''' + row(fig('images/issdc-bread-atmosphere.webp', 'Proposal page on community infrastructure with an air composition table and food production text.', 'Fig. 5', 'Bellevistat air composition and amounts.', 1100, 1424, group='issdc'),
                        fig('images/issdc-bread-power.webp', 'Proposal page with initial food quantity and power distribution tables.', 'Fig. 6', 'Bellevistat power budget.', 1100, 1424, group='issdc'),
@@ -606,7 +611,8 @@ P_['issdc'] = dict(
 <div class="figs">''' + row(fig('images/issdc-presenting.webp', 'A video-call screenshot of a slide titled 5.3 Automation Devices showing a cleaning bot, delivery bot, and butler bot, with Brian Yue speaking in a video tile at the top right.', 'Fig. 8', 'Presenting for Grumbo, the fictional aerospace company ISSDC assigned our team (that\'s me, top right). The robots on this slide are teammates\' designs.', 1728, 1080, group='issdc'),
                        fig('images/issdc-alaskol-cover.webp', 'Title slide: ALASKOL, with a domed lunar habitat and the DAFC logo.', 'Fig. 9', 'Alaskol title slide, our winning Global Finals design. Art by teammates.', 1600, 900, mode='cover', group='issdc')) + '</div>'),
     ('reflection', 'Reflection', '''<div class="prose"><p>You hand off work and trust it comes back, and you decide fast which parts of the problem are worth the time you have left. That carries straight over to engineering.</p>
-<p>The Global Finals gave us 24 hours to design and present a moon base. Under that deadline, with no sleep, it would have been easy to lift designs from NASA and other legacy projects and present them as ours. I wouldn't, and pushed for our own work instead. Every design decision had to be ours, and defensible.</p></div>'''),
+<p>The Global Finals gave us 24 hours to design and present a moon base. Under that deadline, with no sleep, it would have been easy to lift designs from NASA and other legacy projects and present them as ours. I wouldn't, and pushed for our own work instead. Every design decision had to be ours, and defensible.</p>
+<p>Alaskol's atmosphere is where that stuck. I was drilled on every one of those numbers: why more oxygen where people live, why any humidity at all in a factory, why stop the carbon dioxide at 0.15%. It taught me to justify every design decision I make.</p></div>'''),
     ('skills', 'Skills', tags(['Robotics concept design', 'COTS integration', 'Operations planning', 'Life-support sizing', 'Trade studies', 'Technical writing', 'Team leadership', 'Presenting to judges'])),
   ])
 
