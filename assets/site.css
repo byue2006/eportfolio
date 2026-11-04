@@ -640,7 +640,7 @@ dialog.lb::backdrop { background: rgba(8, 8, 9, .92); -webkit-backdrop-filter: b
 .sc-tick em { position: absolute; right: calc(100% + 8px); top: -.65em; font: 400 11px/1.3 var(--mono); font-style: normal; color: var(--ink-3); font-variant-numeric: tabular-nums; }
 .sc-cols { position: absolute; inset: 0; display: flex; align-items: flex-end; }
 .sc-cols > *, .sc-x > * { flex: 1 1 0; min-width: 0; }
-.sc-cols > .sc-gap, .sc-x > .sc-gap { flex: .55 1 0; }
+.sc-cols > .sc-gap, .sc-x > .sc-gap { flex: 1.4 1 0; }
 .sc-col { position: relative; height: 100%; display: flex; justify-content: center; align-items: flex-end; outline: none; cursor: default; }
 .sc-col i { display: block; width: min(18px, 64%); height: calc(var(--v) / var(--ymax) * 100%); background: var(--chart-bar); border-radius: 4px 4px 0 0; transition: opacity .15s; }
 .sc-v { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(var(--v) / var(--ymax) * 100% + 6px); font: 500 12px/1 var(--mono); color: var(--ink); }
