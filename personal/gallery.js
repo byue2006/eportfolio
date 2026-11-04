@@ -115,6 +115,46 @@ window.PERSONAL_GALLERY = [
     "height": 599
   },
   {
+    "src": "personal/_web/music/01-playing-on-the-field-900.webp",
+    "caption": "Playing trombone on the field at Wallace Wade Stadium",
+    "alt": "Brian Yue, in sunglasses and a white Duke band cap, playing trombone while marching with the Duke University Marching Band on the field at Wallace Wade Stadium.",
+    "category": "Music",
+    "orig": "personal/music/01-playing-on-the-field.jpg",
+    "full": "personal/_web/music/01-playing-on-the-field-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/music/02-on-the-field-900.webp",
+    "caption": "On the field with the brass section",
+    "alt": "Brian Yue, in sunglasses and the white and blue Duke band uniform, standing on the field holding his trombone, with sousaphones and the stands behind him.",
+    "category": "Music",
+    "orig": "personal/music/02-on-the-field.jpg",
+    "full": "personal/_web/music/02-on-the-field-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/music/03-trombone-section-900.webp",
+    "caption": "The trombone section. I'm second from left.",
+    "alt": "Seven Duke University Marching Band trombonists in uniform standing in a row with their trombones; Brian Yue, in sunglasses, is second from left.",
+    "category": "Music",
+    "orig": "personal/music/03-trombone-section.jpg",
+    "full": "personal/_web/music/03-trombone-section-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/music/04-heading-off-the-field-900.webp",
+    "caption": "Heading off the field after the show",
+    "alt": "Brian Yue, in sunglasses, carrying his trombone as the Duke University Marching Band walks off the field past the stands.",
+    "category": "Music",
+    "orig": "personal/music/04-heading-off-the-field.jpg",
+    "full": "personal/_web/music/04-heading-off-the-field-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
     "src": "personal/_web/music/pregame-duke-football-900.webp",
     "caption": "Pregame with the Duke University Marching Band",
     "alt": "Brian Yue, in sunglasses, with the Duke University Marching Band in white and blue uniforms on the field before a football game.",

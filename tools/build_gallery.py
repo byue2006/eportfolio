@@ -206,9 +206,12 @@ def main():
     def order(e):
         c = e["category"]
         ci = CATEGORY_ORDER.index(c) if c in CATEGORY_ORDER else len(CATEGORY_ORDER)
-        # newest first: undated photos go last within their category
+        # a number at the start of the file name ("01-...") sets the order; then newest first,
+        # and undated photos go last within their category
+        m = re.match(r"(\d+)[-_ ]", os.path.basename(e["orig"]))
+        n = int(m.group(1)) if m else 10 ** 6
         t = e.get("taken") or ""
-        return (ci, c, 0 if t else 1, "".join(chr(0x10FFFF - ord(ch)) for ch in t), e["orig"].lower())
+        return (ci, c, n, 0 if t else 1, "".join(chr(0x10FFFF - ord(ch)) for ch in t), e["orig"].lower())
     out.sort(key=order)
 
     # remove web copies whose original was deleted or renamed
