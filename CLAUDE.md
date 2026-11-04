@@ -17,6 +17,7 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Always `git pull --rebase origin main` before committing; Brian uploads via the GitHub web UI.
 - Brian uploads to the repo root despite `inbox/`; sort uploads, strip EXIF, save web copies, remove originals.
 - Accuracy over flattery: credit teammates (forward closure loads/drawings, PlaySeat team, ISSDC models by Kelly Wang); ME 221 TA = grading only; TTBW = sole author; the ~40% friction figure came from a comparable instrument.
+- ME 321 snap-fit grip (About page): the geometry and sizing numbers came from an AI assistant. Brian did the FEA, printing and testing only; never present it as his design. Alaskol was the winning 2023 Global Finals design. PlaySeat has front and rear casters (rear ones added after the fit test, though the poster omits them).
 - Brian is #24 and #15 (volleyball), #24 (basketball). Only caption a number when it is visible.
 - Verify after each push: both checks (GitHub Actions, "Workers Builds: eportfolio") succeed and the live page shows the change.
 - Open questions for Brian are listed in `inbox/README.md`.

@@ -16,7 +16,7 @@ File names don't matter, but a hint helps, e.g. `portrait.jpg`, `playseat-car.jp
 
 ## 3D models (CAD)
 
-Upload to the inbox. Claude converts them into a model visitors can rotate and zoom on the project page.
+Done so far: the shear-force balance (the hero of its page), the forward closure, the standard train head, and the Vanguard shuttle (About page). To add another, upload to the inbox. Claude converts them into a model visitors can rotate and zoom on the project page.
 
 **Onshape** (shear-force balance, forward closure):
 
@@ -86,11 +86,10 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 - [x] Happy Meal train: done. Engineer alongside the team, most of the CAD.
 - [x] Teaching and coaching reflections: done (leadership; breaking concepts down to fundamentals).
 - [x] TTBW sources: 53. The chart is redrawn from the paper's reference list as Fig. 7 on the TTBW page.
-- [ ] ISSDC: which round was the Grumbo video presentation?
 - [ ] ISSDC robots: Kelly Wang is credited with the 3D models. Correct?
 - [ ] Forward closure: was the April 2026 static hot fire the motor with your unified closure?
 - [ ] Shear-force balance: any specific approaches you tried before the male-female interface?
-- [ ] PlaySeat: what offset the CG shift (rear wheels, or the wooden posts)? Acrylic or polycarbonate?
+- [x] PlaySeat: rear casters offset the CG shift (front and rear casters); material is polycarbonate (per the poster). Done.
 - [x] Coaching: both placements were girls' basketball (from your high-school résumé). Done.
 
 ## Already done (no need to send)

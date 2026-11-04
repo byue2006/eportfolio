@@ -82,14 +82,14 @@ def _icon(k): return f'<svg viewBox="0 0 24 24" width="18" height="18" fill="non
 def _btn(act, label, pressed=None):
     p = f' aria-pressed="{pressed}"' if pressed is not None else ''
     return f'<button type="button" data-act="{act}" aria-label="{label}" title="{label}"{p}>{_icon(act)}</button>'
-def _mb(b): return f'{b / 1048576:.1f} MB'
+def _mb(b): return f'{b / 1048576:.1f} MB' if b >= 1048576 else f'{max(1, round(b / 1024))} KB'
 def _dur(s): s = int(round(s)); return f'{s // 60}:{s % 60:02d}'
 
 def model3d(slug, alt, num, cap, ar=16/9, orbit=None, hotspots=(), lead=False, label='Interactive 3D', max_w=None):
     """A rotatable 3D model. hotspots: (position "x y z" in model units, normal "x y z", text) callouts."""
     m = MEDIA.get(f'{slug}.glb', {})
     orbit = orbit or m.get('orbit', '-35deg 65deg auto')
-    hs = ''.join(f'<button type="button" class="hs" slot="hotspot-{i}" data-position="{p}" data-normal="{n}"><span>{t}</span></button>'
+    hs = ''.join(f'<button type="button" class="hs" slot="hotspot-{i}" data-position="{p}" data-normal="{n}" data-visibility-attribute="visible"><span>{t}</span></button>'
                  for i, (p, n, t) in enumerate(hotspots, 1))
     size = f' · {_mb(m["bytes"])}' if m.get('bytes') else ''
     style = f'--ar: {ar:.3f}' + (f'; max-width: {max_w}px' if max_w else '')
@@ -364,9 +364,11 @@ P_['shear-balance'] = dict(
   tags=['Onshape', 'GD&T', 'FEA', 'Instrumentation'],
   thumb=dict(kind='img', src='images/card-shear-balance.webp', mode='fit', alt='CAD render of the shear-force balance'),
   meta=[('Role', 'Designer, end to end'), ('When', 'June – August 2026'), ('Where', 'Turbulent Shear Flow Lab, NC State'), ('Advisor', 'Dr. Venkat Narayanaswamy')],
-  lead=lead('images/balance-rear.webp', 'CAD render of the sidewall-insert plate: a blue aluminum frame with a light-blue floating plate, a small rail and carriage at the center, and the load-cell mount at the right.',
-            'Fig. 1', 'Rear face of the sidewall-insert assembly. Carriage, rail, and load-cell mount visible; mounting plate hidden.', 1120, 541, mode='pad', group='balance'),
-  glance=[('Constraint', 'Held rigid in 5 degrees of freedom, free to slide in 1'), ('Sensing', 'Uniaxial load cell, single load path'), ('Fits', 'RC4 running and LC2 locational fits (ASME B4.1)'),
+  lead=model3d('shear-balance', 'Interactive 3D model of the shear-force balance: a grey tunnel insert plate holding an aluminum frame and a light-blue floating plate, with a small rail, carriage and load cell on the rear face.',
+               'Fig. 1', 'The full assembly in 3D. Drag to rotate. The rear face carries the rail, carriage and load cell; turn it over for the flush, flow-facing floating plate. The outer plate is the lab\'s existing tunnel insert, shown for context.',
+               lead=True, hotspots=[('0.165 0.051 0.0345', '0 0 -1', 'Rail + carriage'), ('0.040 0.048 0.0425', '0 0 -1', 'Load cell'),
+                                    ('0.262 0.024 0.0520', '0 0 -1', 'Floating plate'), ('0.230 0.051 0.0712', '0 0 1', 'Flow surface')]),
+glance=[('Constraint', 'Held rigid in 5 degrees of freedom, free to slide in 1'), ('Sensing', 'Uniaxial load cell, single load path'), ('Fits', 'RC4 running and LC2 locational fits (ASME B4.1)'),
           ('Position tolerance', '⌀0.010 in true position (ASME Y14.5)'), ('Material', '6061 aluminum; 16 µin Ra finish on flow surfaces'), ('Comparable instrument', 'Friction eroded ~40% of measured shear'),
           ('Carriage + rail', 'About $159 of off-the-shelf parts'), ('Deliverables', '5-sheet drawing set, BOM')],
   sections=[
@@ -412,13 +414,13 @@ P_['forward-closure'] = dict(
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>Consolidating all three into one part cut part count by 67% and eliminated two machining setups.</p>
 <p>The real work was deciding what each of the three roles absolutely needed and what was negotiable, and the hard part was the ports. A flight closure wants to be solid; a test closure needs instrumentation and fill ports. I merged the hydrostatic and hot fire ports into a single port that is sealed for flight, so one part can serve all three roles without compromising the one that matters.</p>
 <p>I modeled it in Onshape, ran SolidWorks Simulation on a preliminary design to check factor of safety under flight loads, and ran a trade study comparing fastener patterns and seal configurations against the combustion chamber's specified thermal and mechanical loads and our assembly constraints, weighing manufacturability throughout.</p></div>
-<div class="figs">''' + row(fig('images/closure-section.webp', 'Half-section CAD view of the closure showing the bore, seal grooves, and threaded holes.', 'Fig. 2', 'Section view of the final design.', 685, 619, group='closure'),
-                       fig('images/closure-port.webp', 'Section through the closure showing an L-shaped internal passage from the face to the side port.', 'Fig. 3', 'Section through the merged hydrostatic / hot fire port.', 696, 450, group='closure')) + '</div>'),
+<div class="figs">''' + model3d('closure', 'Interactive 3D model of the aluminum forward closure: a thick disc with a central bore, holes in its face, and radial ports around its side.', 'Fig. 2', 'The closure that flew, as modeled in Onshape. Drag to rotate, or zoom in on the ports.', max_w=820) + row(fig('images/closure-section.webp', 'Half-section CAD view of the closure showing the bore, seal grooves, and threaded holes.', 'Fig. 3', 'Section view of the final design.', 685, 619, group='closure'),
+                       fig('images/closure-port.webp', 'Section through the closure showing an L-shaped internal passage from the face to the side port.', 'Fig. 4', 'Section through the merged hydrostatic / hot fire port.', 696, 450, group='closure')) + '</div>'),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>My teammates and I machined the final parts on a lathe, drill press, and mill. The motor flew.</p></div>
-<div class="figs"><div class="row" data-reveal style="max-width: 420px">''' + fig('images/closure-hotfire.webp', 'A solid rocket motor firing vertically on a test stand in a green field, its purple and orange plume rising into the sky.', 'Fig. 4', 'Static hot fire, April 2026.', 1100, 1956, mode='cover', group='closure') + '</div></div>'),
+<div class="figs"><div class="row" data-reveal style="max-width: 420px">''' + fig('images/closure-hotfire.webp', 'A solid rocket motor firing vertically on a test stand in a green field, its purple and orange plume rising into the sky.', 'Fig. 5', 'Static hot fire, April 2026.', 1100, 1956, mode='cover', group='closure') + '</div></div>'),
     ('reflection', 'Reflection', '''<div class="prose"><p>The minimum factor of safety came out around 11, which is not a good number. It means the geometry was set by available stock, machinability, and handling rather than by load, and on a weight-critical vehicle that is mass we'd want back. I'd also verify the chamber pressure independently instead of taking it downstream of someone else's model, since every number after it depends on it.</p>
 <p class="next-note">Next: researching head-end ignition ahead of a two-stage vehicle next year.</p></div>
-<div class="figs">''' + row(fig('images/closure-fos.webp', 'SolidWorks factor-of-safety plot of the closure, mostly red, with a minimum factor of safety of 11.', 'Fig. 5', 'FEA on a preliminary design. Minimum FOS = 11.', 1400, 794, group='closure')) + '</div>'),
+<div class="figs">''' + row(fig('images/closure-fos.webp', 'SolidWorks factor-of-safety plot of the closure, mostly red, with a minimum factor of safety of 11.', 'Fig. 6', 'FEA on a preliminary design. Minimum FOS = 11.', 1400, 794, group='closure')) + '</div>'),
     ('skills', 'Skills', tags(['Onshape', 'SolidWorks Simulation (FEA)', 'Fastener & seal selection', 'Pressure vessel design', 'Lathe', 'Mill', 'Drill press', 'DFM'])),
   ])
 
@@ -516,13 +518,13 @@ P_['happy-meal'] = dict(
 <p>Our first prints didn't fit. The 3D printers hold about 0.1 mm, looser than the fits we had designed, so the head and chassis mated badly. We opened up the tolerances in the CAD for the printed prototypes, and because we had started CAD early, there was time to reprint.</p></div>
 <div class="figs">''' + row(fig('images/toy-sketch-1.webp', 'Hand sketch of early concepts.', 'Fig. 2', 'Early concept sketch.', 900, 1193, group='toy'),
                        fig('images/toy-sketch-2.webp', 'Hand sketch of the train with rough dimensions in centimeters.', 'Fig. 3', 'Sizing sketch, 5 × 4 × 2.5 cm.', 900, 1193, group='toy'),
-                       fig('images/toy-exploded.webp', 'SolidWorks exploded view of the train: top, head, mate, chassis, axle, wheel, and shaft collar.', 'Fig. 4', 'Exploded assembly in SolidWorks.', 889, 604, group='toy')) + '''</div>'''),
+                       fig('images/toy-exploded.webp', 'SolidWorks exploded view of the train: top, head, mate, chassis, axle, wheel, and shaft collar.', 'Fig. 4', 'Exploded assembly in SolidWorks.', 889, 604, group='toy')) + model3d('toy-head', 'Interactive 3D model of the standard train head: a boiler with a smokestack and a cab, on a flat base that slides onto the chassis.', 'Fig. 5', 'The standard head in 3D. Drag to rotate; the flat base is the half of the mate that slides onto the chassis.', max_w=820) + '''</div>'''),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>Every detachable piece passed the choke-tube test in every orientation. Three heads (standard, subway, and bullet) share one mate, so they work as collectibles. In production PETG, the toy comes to $0.31 a unit, with one 100-ton press per head design running 100,000 units a week. We presented it at the Duke 2025 Toy Fair.</p>
 <p>The tightest tolerance sits where safety does: the shaft collar bore is ⌀10.11 ±0.01 mm on a ⌀10.16 mm axle, a press fit that keeps the wheels on. The head-to-chassis mate is looser, at ±0.05 mm, because a head that comes off is the point of the toy, not a hazard.</p></div>
-<div class="figs">''' + row(fig('images/toy-choke.webp', 'The train head and chassis resting on top of a choke test tube, too large to fall in.', 'Fig. 5', 'Passing the choke-tube test.', 1000, 1333, group='toy'),
-                       fig('images/toy-final.webp', 'Orange 3D-printed train head mounted on a green chassis.', 'Fig. 6', 'Final head on its chassis, before wheels.', 1000, 1333, group='toy'),
-                       fig('images/toy-section.webp', 'Cross-section of the train head CAD model showing it is solid.', 'Fig. 7', 'Section through the head: solid, for drop strength.', 1200, 934, group='toy')) +
-      row(fig('images/toy-drawing-head.webp', 'Dimensioned drawing of a train head with 5.00 ±0.05 mm mate callouts.', 'Fig. 8', 'Toleranced drawing of one train head.', 1600, 689, group='toy')) + '''</div>'''),
+<div class="figs">''' + row(fig('images/toy-choke.webp', 'The train head and chassis resting on top of a choke test tube, too large to fall in.', 'Fig. 6', 'Passing the choke-tube test.', 1000, 1333, group='toy'),
+                       fig('images/toy-final.webp', 'Orange 3D-printed train head mounted on a green chassis.', 'Fig. 7', 'Final head on its chassis, before wheels.', 1000, 1333, group='toy'),
+                       fig('images/toy-section.webp', 'Cross-section of the train head CAD model showing it is solid.', 'Fig. 8', 'Section through the head: solid, for drop strength.', 1200, 934, group='toy')) +
+      row(fig('images/toy-drawing-head.webp', 'Dimensioned drawing of a train head with 5.00 ±0.05 mm mate callouts.', 'Fig. 9', 'Toleranced drawing of one train head.', 1600, 689, group='toy')) + '''</div>'''),
     ('reflection', 'Reflection', '''<div class="prose"><p>The biggest takeaway was to start early. We finished most of the CAD before spring break, which left time to print, find the tolerance problem, and work around it without lowering the standard of the toy. The snap-fit was the other lesson: one connection idea solved several problems at once and stayed injection-moldable.</p></div>'''),
     ('skills', 'Skills', tags(['SolidWorks', 'Pugh matrix', 'Tolerance analysis', 'Design for injection molding', '3D printing', 'Cost analysis', 'Technical memo'])),
   ])
@@ -537,14 +539,14 @@ P_['playseat'] = dict(
   lead=lead('images/playseat-iso.webp', 'The finished PlaySeat outdoors: a padded seat with a five-point harness on a white base, a clamp-on tray, a large three-spoke side wheel, and a black faux carbon-fiber front wing over the leg padding.',
             'Fig. 1', 'The finished chair, with its clamp-on tray.', 2000, 1500, mode='cover', group='playseat', pos='50% 58%'),
   glance=[('Timeline', '11 weeks, concept to delivery'), ('Verification', 'Fit test with client and caregivers; six pass/fail tests against target values, one by proxy'),
-          ('Change from testing', 'Drive wheels moved forward, rear wheels added'), ('Weight', '15.72 lb (target 20 lb or less)'),
+          ('Change from testing', 'Drive wheels moved forward, rear casters added'), ('Weight', '15.72 lb (target 20 lb or less)'),
           ('Materials', 'Plastic, polycarbonate, vinyl wrap'), ('Processes', 'Laser cutting, acrylic bending, manual machining')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>A three-year-old with spinal conditions needed more upper-body support than any wheelchair on the market gave him, and without it he couldn't play with the other kids in his classroom. Our job over eleven weeks was the full requirements loop: elicit what he and his caregivers needed, decompose it into requirements with measurable targets, design to them, and verify each one.</p>
 <p>The chair had to let him reach the ground to play with toys on the floor, right himself after leaning, move on his own and get over obstacles, keep up with his peers, and be something he actually enjoyed sitting in.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">I worked on the seating structure design and the fabrication, and shared requirements elicitation and verification testing with my teammates Anna Karius, Ethan Liao, and Julia Morgan.</p>'''),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>We started from a booster highchair with a removable base and built around it: a five-point harness and foam padding for support, side wheels he can push himself, front casters so it turns in place, a cane attachment so caregivers can push him, and a clamp-on tray. He loves Formula 1, so it also got a faux carbon-fiber rear spoiler and front wing, which is how "not clinical" turned into a design requirement.</p>
-<p>A prototype fit test, our first validation against the real user, showed he couldn't reach the push rims. That was a requirement we had written down and gotten wrong. Moving the drive wheels forward fixed the reach and shifted the center of gravity, so we added rear wheels to offset it. One test invalidated an assumption, the fix created a second problem, and we fixed that too, all inside an eleven-week build.</p></div>
+<p>A prototype fit test, our first validation against the real user, showed he couldn't reach the push rims. That was a requirement we had written down and gotten wrong. Moving the drive wheels forward fixed the reach and shifted the center of gravity, so we added rear casters to offset it, giving the final chair casters front and back. One test invalidated an assumption, the fix created a second problem, and we fixed that too, all inside an eleven-week build.</p></div>
 <div class="figs">''' + row(fig('images/playseat-wheel.webp', "Close-up side view of the final chair's large three-spoke wheel, footrest, and small front caster.", 'Fig. 2', 'Three-spoke side wheel he propels himself, and a front caster for turning in place.', 1400, 965, group='playseat'),
                        fig('images/playseat-rear.webp', 'Rear view of the chair: a black faux carbon-fiber spoiler bolted across the seat back, and a grey mount holding a black cane.', 'Fig. 3', 'Rear view: the faux carbon-fiber spoiler and the cane mount.', 1200, 1600, mode='cover', group='playseat')) + '</div>'),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>We verified the finished chair against every requirement with a target value. All six passed: five directly, and durability by proxy, since two years of service can't be tested in eleven weeks. The chair was delivered to the client at the end of the build.</p></div>
@@ -580,7 +582,7 @@ P_['issdc'] = dict(
           ('Format', 'Assigned team answers a request for proposal (RFP) in 24–48 hours'), ('Judges', 'Former NASA engineers')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>The International Space Settlement Design Competition runs like an industry proposal shop. A team is assigned, not chosen, an RFP lands, and a complete settlement design and presentation are due in 24 to 48 hours, then defended in front of judges who are former NASA engineers.</p></div>'''),
-    ('contribution', 'My contribution', '''<p class="contrib">On <strong>Bellevistat</strong>, Team Bread's proposal for the 30th ISSDC (2022–23), I designed nearly all of the operations and infrastructure section, including its construction and repair robots. On <strong>Alaskol</strong>, DAFC's lunar settlement (2023), I designed the atmosphere. I also built the team's design database and documented team strategy, which later teams worked from.</p>
+    ('contribution', 'My contribution', '''<p class="contrib">On <strong>Bellevistat</strong>, Team Bread's proposal for the 30th ISSDC (2022–23), I designed nearly all of the operations and infrastructure section, including its construction and repair robots. On <strong>Alaskol</strong>, DAFC's lunar settlement and the winning design at the 2023 Global Finals, I designed the atmosphere. I also built the team's design database and documented team strategy, which later teams worked from.</p>
 <p class="contrib"><strong>Not mine:</strong> on Bellevistat, the structural, human factors, automation, and schedule and cost sections, though I added tables and figure labels to some of them; Kelly Wang built the 3D models of my robots. On Alaskol, everything but the atmosphere.</p>'''),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>Bellevistat is an orbital settlement for 7,850 people, built mostly by assembling prefabricated modules in orbit. The robots that do that assembly were my design, built the way I'd build hardware now: start from a part you can buy, then design around it.</p>
 <p>The base is the F1M8, a multipurpose industrial robot offered by one of the competition's vendors, so effectively a COTS part. I configured it as a dual-mode welding robot: it flies in zero gravity on RCS thrusters and crawls along the hull on magnetic tank treads, so it only spends propellant when it has to. It carries two laser welders, each with an oxygen sprayer so the weld works in vacuum, and a magnetic clamp holds the two sections together while it welds. The robots ship as modules with magnets on their mating faces and assemble themselves on arrival.</p>
@@ -601,8 +603,9 @@ P_['issdc'] = dict(
                        fig('images/issdc-alaskol-atmosphere.webp', 'Proposal slide titled Atmosphere: a table of nitrogen, oxygen, carbon dioxide, and humidity for residential, industrial, and agricultural sectors, and a table of residential seasons.', 'Fig. 7', 'Alaskol atmosphere: gas mix by sector and the season calendar.', 1600, 900, group='issdc')) + '</div>'),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>I led a team to the Asia Regional Finals twice, was invited onto the Chinese national team for the 2022–23 Global Championship, and was named a Global Champion at Kennedy Space Center. After aging out as a competitor, I came back as a student advisor, and in November 2023 the ISSDC China organizing committee brought me on as a co-CEO for the China Finals: I helped manage one of the competing companies, taught its students STEM topics, and coached them on presenting.</p></div>
 <div class="figs">''' + row(fig('images/issdc-presenting.webp', 'A video-call screenshot of a slide titled 5.3 Automation Devices showing a cleaning bot, delivery bot, and butler bot, with Brian Yue speaking in a video tile at the top right.', 'Fig. 8', 'Presenting for Grumbo, the fictional aerospace company ISSDC assigned our team (that\'s me, top right). The robots on this slide are teammates\' designs.', 1728, 1080, group='issdc'),
-                       fig('images/issdc-alaskol-cover.webp', 'Title slide: ALASKOL, with a domed lunar habitat and the DAFC logo.', 'Fig. 9', 'Alaskol title slide. Art by teammates.', 1600, 900, mode='cover', group='issdc')) + '</div>'),
-    ('reflection', 'Reflection', '''<div class="prose"><p>You hand off work and trust it comes back, and you decide fast which parts of the problem are worth the time you have left. That carries straight over to engineering.</p></div>'''),
+                       fig('images/issdc-alaskol-cover.webp', 'Title slide: ALASKOL, with a domed lunar habitat and the DAFC logo.', 'Fig. 9', 'Alaskol title slide, our winning Global Finals design. Art by teammates.', 1600, 900, mode='cover', group='issdc')) + '</div>'),
+    ('reflection', 'Reflection', '''<div class="prose"><p>You hand off work and trust it comes back, and you decide fast which parts of the problem are worth the time you have left. That carries straight over to engineering.</p>
+<p>The Global Finals gave us 24 hours to design and present a moon base. Under that deadline, with no sleep, it would have been easy to lift designs from NASA and other legacy projects and present them as ours. I wouldn't, and pushed for our own work instead. Every design decision had to be ours, and defensible.</p></div>'''),
     ('skills', 'Skills', tags(['Robotics concept design', 'COTS integration', 'Operations planning', 'Life-support sizing', 'Trade studies', 'Technical writing', 'Team leadership', 'Presenting to judges'])),
   ])
 
@@ -644,7 +647,8 @@ P_['coaching'] = dict(
 <div class="figs">''' + row(fig('images/coaching-instruction.webp', 'Brian Yue, in a white sweater and holding a volleyball, pointing across the court while giving instructions at practice.', 'Fig. 1', 'Running a girls\' volleyball practice.', 1070, 1080, mode='cover', group='coaching', pos='40% 50%'),
                        fig('images/coaching-timeout.webp', 'Brian Yue, in a Spartans coaching shirt, kneeling with a tactics board while players gather around during a timeout.', 'Fig. 2', 'A timeout: drawing up the next rotation.', 1311, 843, mode='cover', group='coaching'),
                        fig('images/coaching-with-coach.webp', 'Brian Yue talking with a fellow coach courtside, clipboard in hand.', 'Fig. 3', 'Talking through the lineup with a fellow coach.', 1928, 1080, mode='cover', group='coaching')) + '</div>'),
-    ('reflection', 'Reflection', '''<div class="prose"><p>Coaching taught me leadership, and how to break something complicated down into its basics. A play or a rotation only works once every player understands their own part of it, so I taught it one piece at a time and then put it back together. I learn and explain engineering the same way.</p></div>'''),
+    ('reflection', 'Reflection', '''<div class="prose"><p>Coaching taught me leadership, and how to break something complicated down into its basics. A play or a rotation only works once every player understands their own part of it, so I taught it one piece at a time and then put it back together. I learn and explain engineering the same way.</p>
+<p>It also taught me to plan with failure in mind. Almost nothing in a practice or a game went exactly to plan, so I prepared for it and changed things on the spot when the situation called for it.</p></div>'''),
     ('skills', 'Skills', tags(['Leadership', 'Planning', 'Statistics', 'Feedback', 'Time management'])),
   ])
 
@@ -902,6 +906,23 @@ def about():
         <div><dt>Coursework</dt><dd>Mechanics of Solids (EGR 201), Structure &amp; Properties of Solids (ME 221), Dynamics (EGR 244: a gravity car whose run time I predicted from a dynamic model, then tested), Thermodynamics (ME 331), Mechatronics, Space Systems Design (ME 490-04); in progress: ME Analysis for Design (ME 321), Fluid Mechanics (ME 336), Aircraft Propulsion (ME 490-05)</dd></div>
         <div><dt>Memberships</dt><dd>AIAA and ASME student member since 2024</dd></div>
       </dl>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="more-cad">
+  <div class="wrap">
+    <div class="sec-head" data-reveal><div><p class="label">Class CAD and analysis</p><h2>Smaller work.</h2></div></div>
+    <div class="group">
+      <div class="sub-head" data-reveal><h3>Space Shuttle <i>Vanguard</i></h3><span class="label">For fun · Fall 2024</span></div>
+      <div class="prose" data-reveal><p>A CAD exercise from my first semester at Duke where I went well past the assignment for fun: a 4.9-inch Space Shuttle with DUKE and VANGUARD lettering and three engine bells, modeled to print in PLA, plus a fully dimensioned drawing.</p></div>
+      <div class="figs">''' + model3d('shuttle', 'Interactive 3D model of a small Space Shuttle with a tail fin, three engine bells, and VANGUARD lettering along its back.', 'Fig. 1', 'The <i>Vanguard</i> model in 3D. Drag to rotate.', max_w=980) + row(fig('images/dwg-shuttle-2400.webp', 'Drawing of the Space Shuttle Duke Vanguard model: top, right, front and isometric views at 1:1.7 scale, dimensioned in inches, PLA plastic, drawn by Brian Yue on 09/27/2024.', 'Fig. 2', 'Its drawing: four views, dimensioned in inches. Click to zoom.', 1000, 773, group='shuttle')) + '''</div>
+    </div>
+    <div class="group">
+      <div class="sub-head" data-reveal><h3>Checking a snap-fit with FEA</h3><span class="label">ME 321 · Fall 2026</span></div>
+      <div class="prose" data-reveal><p>A 3D-printed snap-fit grip that holds a 38 mm cube. The geometry and sizing numbers came from an AI assistant, so I don't count the design as mine. My part was the check. I ran a SolidWorks static study with the tab pushed 1.5 mm, a margin over the real 1.2 mm, which put the peak strain at 6.3 × 10⁻³ and the minimum factor of safety near 2.9, both at the inner arm-to-wall corner. That corner is sharp, so part of that peak is a stress singularity, and I wouldn't trust the exact number until it's filleted and the mesh converges. Then I printed and tested it: the cube snaps in, holds, and slides back out with a firm pull.</p></div>
+      <div class="figs">''' + row(fig('images/me321-grip-fos.webp', 'SolidWorks factor-of-safety plot of the U-shaped grip, mostly red, with the minimum of about 2.9 marked at the inner corner.', 'Fig. 3', 'Factor of safety: minimum about 2.9, at the inner arm-to-wall corner.', 1400, 717, group='me321'),
+                       fig('images/me321-grip-strain.webp', 'SolidWorks strain plot of the grip, highest along the arm near the corner.', 'Fig. 4', 'Strain under the 1.5 mm tab displacement: peak 6.3 × 10⁻³.', 1400, 716, group='me321')) + '<div class="row" data-reveal style="max-width: 560px">' + fig('images/me321-grip-print.webp', 'A purple 3D-printed grip holding a purple printed cube between its two arms, on a shop bench.', 'Fig. 5', 'Printed and assembled: the cube held in the grip.', 682, 511, group='me321') + '</div>' + '''</div>
     </div>
   </div>
 </section>'''
