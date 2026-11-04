@@ -17,6 +17,12 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 ## Design
 - Sleek, hardware-company feel (Brian likes Anduril and Swarm Aero; inspired by, never copied): Geist display headings with tight tracking; Instrument Serif italic only for the hero accent and the "by." logo; one orange accent; 8px radius; dark theme by default with a header switch (choice saved in localStorage as `by-theme`; present mode forces light); every card (experience, projects, leadership) shows the organization's logo tile at rest and the work on hover (Brian likes this, keep it; hover images are cropped to the card shape as images/card-*.webp); renders, diagrams and the 3D viewer sit in a light studio grey (graphite in dark mode); video stages are always dark.
 
+## Voice (Brian asked for the site to feel human-made, not AI-written)
+- Write the way Brian writes in his cover letters and essays: first person, plain sentences, specific details, a little personality ("which I'll admit is a strange way to fall in love with airplanes"). Contractions are fine.
+- Avoid the tells: slogan or aphorism lines ("the drawing is the design"), "X, not Y" reversals, tidy rule-of-three lists, colon-reveal summaries ("Thing: detail, detail"), "@" in titles, keyword tickers, decorative drafting labels.
+- Section headings are specific to each project (e.g. "Merging the ports", "The Q&A"), not one template.
+- His origin story (The Martian at ten, Mayday: Air Crash Investigation, "watching something I drew turn into a part that works") comes from his own cover letters and essays and is fine to use.
+
 ## Working rules
 - Always `git pull --rebase origin main` before committing; Brian uploads via the GitHub web UI.
 - Brian uploads to the repo root despite `inbox/`; sort uploads, strip EXIF, save web copies, remove originals.

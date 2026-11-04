@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Unified forward closure · Brian Yue</title>
-<meta name="description" content="Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.">
+<meta name="description" content="We used to machine three forward closures for every motor. I redesigned them as one part, and that part flew.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#0b0c0d">
 <meta property="og:title" content="Unified forward closure · Brian Yue">
-<meta property="og:description" content="Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.">
+<meta property="og:description" content="We used to machine three forward closures for every motor. I redesigned them as one part, and that part flew.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://brianyue.me/images/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -56,7 +56,7 @@
       <div>
         <p class="label accent fade-in" style="--d:.1s">Flight hardware</p>
         <h1 class="split">Unified forward closure</h1>
-        <p class="p-lede fade-in" style="--d:.55s">Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.</p>
+        <p class="p-lede fade-in" style="--d:.55s">We used to machine three forward closures for every motor. I redesigned them as one part, and that part flew.</p>
       </div>
       <aside class="p-org fade-in" style="--d:.35s"><span class="p-org-logo" role="img" aria-label="Duke AERO" style="--w:200px;--h:57px;--ar:3.525;-webkit-mask-image:url(../images/logo-duke-aero.svg);mask-image:url(../images/logo-duke-aero.svg)"></span><span class="label">Solid Propulsion</span></aside>
     </div>
@@ -67,31 +67,31 @@
 <div class="wrap">
   <figure class="p-lead" data-reveal><div class="frame"><a href="../images/closure-machined.webp" data-lightbox="closure"><img src="../images/closure-machined.webp" width="1600" height="1200" fetchpriority="high" style="object-position: 50% 58%" alt="A partially machined aluminum forward closure on a shop bench, with two eye bolts threaded into its face and radial ports around its side."></a></div><figcaption><b>Fig. 1</b>Forward closure, partially machined.</figcaption></figure>
   <div class="p-body">
-    <aside class="toc" aria-label="On this page"><p class="label">On this page</p><ol><li><a href="#challenge"><span>01</span>The challenge</a></li><li><a href="#contribution"><span>02</span>My contribution</a></li><li><a href="#process"><span>03</span>Process &amp; iteration</a></li><li><a href="#outcome"><span>04</span>Outcome &amp; evidence</a></li><li><a href="#reflection"><span>05</span>Reflection</a></li><li><a href="#skills"><span>06</span>Skills</a></li></ol></aside>
+    <aside class="toc" aria-label="On this page"><p class="label">On this page</p><ol><li><a href="#challenge"><span>01</span>Three closures for one motor</a></li><li><a href="#contribution"><span>02</span>What was mine</a></li><li><a href="#process"><span>03</span>Merging the ports</a></li><li><a href="#outcome"><span>04</span>Hot fire and flight</a></li><li><a href="#reflection"><span>05</span>What I'd change</a></li><li><a href="#skills"><span>06</span>Skills</a></li></ol></aside>
     <div>
       <div class="glance" data-reveal><dl><div><dt>Consolidation</dt><dd>3 closures → 1</dd></div><div><dt>Part count</dt><dd>−67%</dd></div><div><dt>Machining setups</dt><dd>Two fewer</dd></div><div><dt>Ports</dt><dd>Hydrostatic + hot fire merged, sealed for flight</dd></div><div><dt>Min. factor of safety</dt><dd>About 11 (preliminary design)</dd></div><div><dt>Processes</dt><dd>Lathe, drill press, mill</dd></div></dl></div>
       <section class="p-sec" id="challenge" data-reveal>
-        <h2><span class="n">01</span>The challenge</h2>
-        <div class="prose"><p>We were machining three separate forward closures for one solid rocket motor: one for the hydrostatic proof test, one for static hot fire, and one for flight. Three parts, three setups, three chances to get something wrong, and two of them thrown away after a single use.</p></div>
+        <h2><span class="n">01</span>Three closures for one motor</h2>
+        <div class="prose"><p>We were machining three separate forward closures for one solid rocket motor: one for the hydrostatic proof test, one for static hot fire, and one for flight. That meant three parts and three machining setups for every motor, and two of those closures were done after one use.</p></div>
       </section>
       <section class="p-sec" id="contribution" data-reveal>
-        <h2><span class="n">02</span>My contribution</h2>
+        <h2><span class="n">02</span>What was mine</h2>
         <p class="contrib">I drove the redesign and did the modeling, the analysis, and the fastener and sealing evaluation. Machining was shared with teammates. The thermal and mechanical loads came from our team lead by way of OpenRocket, and teammates produced the final drawings.</p>
       </section>
       <section class="p-sec" id="process" data-reveal>
-        <h2><span class="n">03</span>Process &amp; iteration</h2>
-        <div class="prose"><p>Consolidating all three into one part cut part count by 67% and eliminated two machining setups.</p>
-<p>The real work was deciding what each of the three roles absolutely needed and what was negotiable, and the hard part was the ports. A flight closure wants to be solid; a test closure needs instrumentation and fill ports. I merged the hydrostatic and hot fire ports into a single port that is sealed for flight, so one part can serve all three roles without compromising the one that matters.</p>
+        <h2><span class="n">03</span>Merging the ports</h2>
+        <div class="prose"><p>Going from three closures to one cut the part count by 67% and got rid of two machining setups.</p>
+<p>Most of the work was figuring out what each version really needed. The ports were the tricky part. The test closures need fill and instrumentation ports, and for flight you'd rather have no holes at all. I merged the hydrostatic and hot fire ports into one port that gets sealed for flight, so the same part works for all three without weakening the flight version.</p>
 <p>I modeled it in Onshape, ran SolidWorks Simulation on a preliminary design to check factor of safety under flight loads, and ran a trade study comparing fastener patterns and seal configurations against the combustion chamber's specified thermal and mechanical loads and our assembly constraints, weighing manufacturability throughout. Duke Aero ultimately scrapped the sealing solution that came out of that study, so it isn't part of what flew, but the evaluation behind it was my work.</p></div>
 <div class="figs"><figure class="m3d" data-reveal style="--ar: 1.778; max-width: 820px"><div class="stage" data-cursor="Drag"><model-viewer src="../media/closure.glb" poster="../media/closure.webp" alt="Interactive 3D model of the aluminum forward closure: a thick disc with a central bore, holes in its face, and radial ports around its side." camera-orbit="-30deg 58deg auto" camera-controls touch-action="pan-y" disable-zoom interaction-prompt="none" auto-rotate auto-rotate-delay="1200" rotation-per-second="14deg" shadow-intensity="1" shadow-softness="0.8" environment-image="../assets/studio.hdr" exposure="1" loading="lazy"><div class="bar" slot="progress-bar"></div></model-viewer><img class="fallback" src="../media/closure.webp" alt="Interactive 3D model of the aluminum forward closure: a thick disc with a central bore, holes in its face, and radial ports around its side." loading="lazy"><span class="hud hud-tl">Interactive 3D · 242 KB</span><span class="hud hud-bl" aria-hidden="true">Drag to rotate</span><div class="ctl" role="toolbar" aria-label="3D view controls"><button type="button" data-act="rotate" aria-label="Auto-rotate" title="Auto-rotate" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4h-4"/></svg></button><button type="button" data-act="in" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><button type="button" data-act="out" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></button><button type="button" data-act="reset" aria-label="Reset view" title="Reset view"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5.5v-5h-5v5H4z"/></svg></button><button type="button" data-act="full" aria-label="Full screen" title="Full screen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></div><figcaption><b>Fig. 2</b>The closure that flew, as modeled in Onshape. Drag to rotate, or zoom in on the ports.</figcaption></figure><div class="row" data-reveal><figure style="--ar: 1.107"><div class="frame contain"><a href="../images/closure-section.webp" data-lightbox="closure"><img src="../images/closure-section.webp" width="685" height="619" loading="lazy" alt="Half-section CAD view of the closure showing the bore, seal grooves, and threaded holes."></a></div><figcaption><b>Fig. 3</b>Section view of the final design.</figcaption></figure><figure style="--ar: 1.547"><div class="frame contain"><a href="../images/closure-port.webp" data-lightbox="closure"><img src="../images/closure-port.webp" width="696" height="450" loading="lazy" alt="Section through the closure showing an L-shaped internal passage from the face to the side port."></a></div><figcaption><b>Fig. 4</b>Section through the merged hydrostatic / hot fire port.</figcaption></figure></div></div>
       </section>
       <section class="p-sec" id="outcome" data-reveal>
-        <h2><span class="n">04</span>Outcome &amp; evidence</h2>
+        <h2><span class="n">04</span>Hot fire and flight</h2>
         <div class="prose"><p>My teammates and I machined the final parts on a lathe, drill press, and mill. The closure went through the April 2026 static hot fire, and the motor flew.</p></div>
 <div class="figs"><div class="row" data-reveal style="max-width: 420px"><figure style="--ar: 0.562"><div class="frame"><a href="../images/closure-hotfire.webp" data-lightbox="closure"><img src="../images/closure-hotfire.webp" width="1100" height="1956" loading="lazy" alt="A solid rocket motor firing vertically on a test stand in a green field, its purple and orange plume rising into the sky."></a></div><figcaption><b>Fig. 5</b>Static hot fire, April 2026, with the unified closure on the motor.</figcaption></figure></div></div>
       </section>
       <section class="p-sec" id="reflection" data-reveal>
-        <h2><span class="n">05</span>Reflection</h2>
+        <h2><span class="n">05</span>What I'd change</h2>
         <div class="prose"><p>The minimum factor of safety came out around 11, which is not a good number. It means the geometry was set by available stock, machinability, and handling rather than by load, and on a weight-critical vehicle that is mass we'd want back. I'd also verify the chamber pressure independently instead of taking it downstream of someone else's model, since every number after it depends on it.</p>
 <p class="next-note">Next: researching head-end ignition ahead of a two-stage vehicle next year.</p></div>
 <div class="figs"><div class="row" data-reveal><figure style="--ar: 1.763"><div class="frame contain"><a href="../images/closure-fos.webp" data-lightbox="closure"><img src="../images/closure-fos.webp" width="1400" height="794" loading="lazy" alt="SolidWorks factor-of-safety plot of the closure, mostly red, with a minimum factor of safety of 11."></a></div><figcaption><b>Fig. 6</b>FEA on a preliminary design. Minimum FOS = 11.</figcaption></figure></div></div>
