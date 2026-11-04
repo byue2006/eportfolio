@@ -33,12 +33,13 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Verify after each push: both checks (GitHub Actions, "Workers Builds: eportfolio") succeed and the live page shows the change.
 - Open questions for Brian are listed in `inbox/README.md`.
 - Private documents Brian shared (high-school résumé, college applications, transcript, application forms) are for checking facts only. Never publish grades, test scores, addresses, phone numbers, birth date or application IDs from them. The cumulative GPA (3.776) and coursework on About come from his résumé and are fine.
-- The Happy Meal Toy Fair poster was designed by Saina Srivastava and Mariangle Mendez; always credit them. The PlaySeat sketches, Pugh matrix and prototype photos are from the team's EGR 101 oral presentation (Nov 7, 2024).
+- Happy Meal train: the team built three heads (the design allows any number on the same mate); Brian made the exploded view in an Onshape assembly. The Toy Fair poster was designed by Saina Srivastava and Mariangle Mendez; always credit them. The PlaySeat sketches, Pugh matrix and prototype photos are from the team's EGR 101 oral presentation (Nov 7, 2024).
 - The Vanguard shuttle was an EGR 101 CAD assignment (fall 2024) that Brian took well past the brief.
 - Card tile colors: keep the brand colors Brian likes, but nothing warm or flat on this cool-themed site: Duke AERO uses Duke Magnolia #1d6363, the EGR 101 (PlaySeat) tile Duke Shale Blue #0577b1.
 - ISS deorbit (EGR 105, fall 2024, Team SkyFall): a team project; Brian wrote only the orbital decay script (gravity + drag, COESA76 density, hand-written RK4). Don't publish the script: he TAs EGR 105.
-- Never add: the AFSD research (its absence is deliberate); any ME 221 labs/office hours/discussion; modal analysis, vibration, shock or nonlinear dynamics in skills.
-- Teaching: student counts are fine (Brian asked for them). Use his résumé's wording, two sections of 39 students each, without assigning the sections to one course.
+- AFSD: Brian does additive friction stir deposition, but can't say where. Keep it as a skill (About, home ticker); never add the research, the lab or any details about it.
+- Never add: any ME 221 labs/office hours/discussion; modal analysis, vibration, shock or nonlinear dynamics in skills.
+- Teaching: student counts are fine (Brian asked for them): a section of 39 students in EGR 105 and one of 39 in ME 221.
 - Duke Aero: Brian has been on the Solid Propulsion subteam since August 2024 (two-plus years); the forward-closure project started August 2025. The sealing solution from his fastener/seal trade study was ultimately scrapped by the team; the evaluation was his, but don't imply his seals flew.
 - Shear balance: the starting male-female interface was a grad student's design, and he reported the ~40% friction loss and suggested carriages; Brian chose and integrated the carriage and rail. The April 2026 static hot fire used Brian's unified closure. ISSDC robot designs are Brian's; the 3D models are Kelly Wang's.
 - Keep as-is: the shear-balance attribution block, the forward-closure contribution and FOS ~11 self-criticism, the ISSDC "Rechecking" notes (historical proposal numbers are annotated, never altered).
