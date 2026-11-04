@@ -11,7 +11,7 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Never put `[skip ci]` in a commit message (Cloudflare skips the deploy too).
 
 ## Design
-- Sleek, hardware-company feel (Brian likes Anduril and Swarm Aero; inspired by, never copied): Geist display headings with tight tracking; Instrument Serif italic only for the hero accent and the "by." logo; one orange accent; 8px radius; cards lead with the work photo and a small glass org tag; renders, diagrams and the 3D viewer sit in a light studio grey (graphite in dark mode); video stages are always dark.
+- Sleek, hardware-company feel (Brian likes Anduril and Swarm Aero; inspired by, never copied): Geist display headings with tight tracking; Instrument Serif italic only for the hero accent and the "by." logo; one orange accent; 8px radius; dark theme by default with a header switch (choice saved in localStorage as `by-theme`; present mode forces light); cards show the organization's logo tile at rest and the work on hover (Brian likes this, keep it); renders, diagrams and the 3D viewer sit in a light studio grey (graphite in dark mode); video stages are always dark.
 
 ## Working rules
 - Always `git pull --rebase origin main` before committing; Brian uploads via the GitHub web UI.

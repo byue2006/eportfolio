@@ -396,7 +396,8 @@
   var say = function (html) { toast.innerHTML = html; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('show'); }, 3200); };
   var set = function (on) {
     doc.classList.toggle('present', on);
-    if (on) doc.setAttribute('data-theme', 'light'); else doc.removeAttribute('data-theme');
+    doc.setAttribute('data-theme', on ? 'light' : (window.byTheme ? window.byTheme() : 'dark'));
+    if (window.byThemeLabel) window.byThemeLabel();
     store(on);
     say(on ? 'Present mode on: <kbd>←</kbd><kbd>→</kbd> move between sections, <kbd>P</kbd> turns it off'
            : 'Present mode off');
@@ -508,4 +509,23 @@
     });
     if (v) v.addEventListener('play', function () { pauseOthers(v); });
   });
+})();
+
+/* ---------- theme switch: dark by default; a visitor's choice is remembered ---------- */
+(function () {
+  var doc = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
+  window.byTheme = function () { var t = null; try { t = localStorage.getItem('by-theme'); } catch (e) {} return t === 'light' ? 'light' : 'dark'; };
+  window.byThemeLabel = function () {
+    var dark = doc.getAttribute('data-theme') === 'dark', t = dark ? 'Switch to light theme' : 'Switch to dark theme';
+    Array.prototype.forEach.call(document.querySelectorAll('.theme-btn'), function (b) { b.setAttribute('aria-label', t); b.title = t; });
+    if (meta) meta.content = dark ? '#0b0c0d' : '#f5f5f2';
+  };
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest || !e.target.closest('.theme-btn')) return;
+    var next = doc.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    doc.setAttribute('data-theme', next);
+    try { localStorage.setItem('by-theme', next); } catch (err) {}
+    window.byThemeLabel();
+  });
+  window.byThemeLabel();
 })();
