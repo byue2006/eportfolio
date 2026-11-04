@@ -422,6 +422,45 @@ P_['forward-closure'] = dict(
     ('skills', 'Skills', tags(['Onshape', 'SolidWorks Simulation (FEA)', 'Fastener & seal selection', 'Pressure vessel design', 'Lathe', 'Mill', 'Drill press', 'DFM'])),
   ])
 
+# The 53 references in AIAA 2026-4344, counted from the published reference list.
+# Types: journal articles; conference papers ("Proceedings of ..."); NASA/CR and NASA TM
+# reports plus workshop presentations; one set of MIT lecture notes (2002).
+SRC_YEARS = {2002: 1, 2012: 2, 2013: 0, 2014: 0, 2015: 3, 2016: 1, 2017: 0, 2018: 2, 2019: 2,
+             2020: 4, 2021: 4, 2022: 7, 2023: 8, 2024: 12, 2025: 7}
+SRC_TYPES = [('Conference papers', 28), ('Journal articles', 18), ('Reports &amp; presentations', 6), ('Lecture notes', 1)]
+assert sum(SRC_YEARS.values()) == 53 and sum(n for _, n in SRC_TYPES) == 53
+
+def srcchart(num):
+    ymax, tmax = 12, max(n for _, n in SRC_TYPES)
+    years = list(SRC_YEARS)
+    major = {2002, 2012, 2016, 2020, 2024}
+    cols, xs = [], []
+    for i, (y, n) in enumerate(SRC_YEARS.items()):
+        tip = f'{y} · {n} source{"" if n == 1 else "s"}'
+        edge = ' start' if i == 0 else (' end' if i >= len(years) - 2 else '')
+        peak = f'<b class="sc-v">{n}</b>' if n == ymax else ''
+        cols.append(f'<div class="sc-col{edge}" tabindex="0" style="--v:{n}" data-tip="{tip}" aria-label="{tip}"><i></i>{peak}</div>')
+        xs.append(f'<span class="{"" if y in major else "minor"}">{y}</span>')
+        if y == 2002:
+            cols.append('<div class="sc-gap" aria-hidden="true"></div>')
+            xs.append('<span class="sc-gap" aria-hidden="true"></span>')
+    ticks = ''.join(f'<span class="sc-tick" style="--t:{t}"><em>{t}</em></span>' for t in (0, 4, 8, 12))
+    rows = ''.join(f'<div class="sc-row"><span class="sc-k">{k}</span><span class="sc-track"><i style="--v:{n}"></i><b>{n}</b></span></div>' for k, n in SRC_TYPES)
+    t_year = ''.join(f'<tr><th scope="row">{y}</th><td>{n}</td></tr>' for y, n in SRC_YEARS.items() if n)
+    t_type = ''.join(f'<tr><th scope="row">{k}</th><td>{n}</td></tr>' for k, n in SRC_TYPES)
+    return f'''<div class="figs" data-reveal><figure class="srcchart" style="--ymax:{ymax};--tmax:{tmax}">
+  <div class="sc-grid">
+    <div class="sc"><p class="sc-h" aria-hidden="true">By publication year</p>
+      <div class="sc-plot" aria-hidden="true">{ticks}<div class="sc-cols">{''.join(cols)}</div></div>
+      <div class="sc-x" aria-hidden="true">{''.join(xs)}</div></div>
+    <div class="sc"><p class="sc-h" aria-hidden="true">By type</p>
+      <div class="sc-rows" aria-hidden="true">{rows}</div></div>
+  </div>
+  <table class="sr-only"><caption>Sources by publication year</caption><thead><tr><th scope="col">Year</th><th scope="col">Sources</th></tr></thead><tbody>{t_year}</tbody></table>
+  <table class="sr-only"><caption>Sources by type</caption><thead><tr><th scope="col">Type</th><th scope="col">Sources</th></tr></thead><tbody>{t_type}</tbody></table>
+  <figcaption><b>{num}</b>All 53 sources in the review, counted from the paper's reference list. Most were published in 2020 or later.</figcaption>
+</figure></div>'''
+
 P_['ttbw'] = dict(
   kind='work', num='03', cat='Research · publication', year='2025–26',
   title='An Overview of Transonic Truss-Braced Wing Technology', card_title='Transonic truss-braced wing review',
@@ -441,12 +480,12 @@ P_['ttbw'] = dict(
                        fig('images/aiaa-logo.webp', 'Brian Yue standing beside a large AIAA logo display.', 'Fig. 4', 'The forum where I presented AIAA 2026-4344.', 1280, 960, mode='cover', group='ttbw', pos='60% 50%')) + '</div>'),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>I worked through 53 sources from NASA, Boeing, and academic and international groups and organized them by discipline: aerodynamics, low-speed aerodynamics, structures and fatigue, aeroelasticity, sizing and MDO, aeroacoustics, icing, simulation, and systems integration. For each, I tracked what has been demonstrated and what is still open.</p></div>
 <div class="figs">''' + row(fig('images/ttbw-paper.webp', 'Title and abstract of the paper An Overview of Transonic Truss-Braced Wing Technology by Brian Y. Yue.', 'Fig. 5', 'First page of AIAA 2026-4344.', 1100, 1025, group='ttbw'),
-                       fig('images/ttbw-slide-title.webp', 'Title slide: An Overview of Transonic Truss-Braced Wing Technology, Brian Yue, AIAA AVIATION, 9 June 2026.', 'Fig. 6', 'Title slide from my talk. <a class="link" href="{{P}}docs/aiaa-2026-4344-slides.pdf" target="_blank" rel="noopener">Full 26-slide deck (PDF) ↗</a>', 1920, 1080, mode='cover', group='ttbw')) + '</div>'),
+                       fig('images/ttbw-slide-title.webp', 'Title slide: An Overview of Transonic Truss-Braced Wing Technology, Brian Yue, AIAA AVIATION, 9 June 2026.', 'Fig. 6', 'Title slide from my talk. <a class="link" href="{{P}}docs/aiaa-2026-4344-slides.pdf" target="_blank" rel="noopener">Full 26-slide deck (PDF) ↗</a>', 1920, 1080, mode='cover', group='ttbw')) + '</div>' + srcchart('Fig. 7')),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p><strong>Certification.</strong> The configuration is novel enough that the usual means of compliance don't transfer. Comparative analysis can't be relied on for icing because there is no operational history to compare against, and current icing simulation tools aren't validated for TTBW certification.</p>
 <p>On noise, the baseline configuration clears FAA Stage 4 by about 23 EPNdB cumulative, but its sideline margin under Stage 5 is only 2.9 EPNdB, thin enough to be flagged as a certification risk even if modeling bias may explain part of it.</p>
 <p><strong>Systems integration.</strong> The thin, high-aspect-ratio wing that makes the configuration efficient leaves little room for fuel, so proposals move tanks into the fuselage and struts, at some cost in L/D. Engine placement, the wing-fuselage junction, and control-surface layout get pulled along with it. Each is a decision in one subsystem forcing a change in another.</p></div>
-<div class="figs">''' + row(fig('images/ttbw-noise-margins.webp', 'Chart of cumulative noise margin against certification year, with FAA Stage 3, 4, and 5 limits and TTBW predictions near minus 20 EPNdB.', 'Fig. 7', 'Cumulative noise margins vs. FAA limits. Figure by June et al. (2022), not my work; reproduced with citation in my review as Fig. 15.', 753, 324, group='ttbw'),
-                       fig('images/ttbw-control-layouts.webp', 'Five candidate wing planforms with different arrangements of Krueger flaps, spoilers, flaps, ailerons, and flaperons; planform 4 is marked final.', 'Fig. 8', 'Control-surface layouts studied for the TTBW. Figure by Harrison et al. (2020), not my work; reproduced with citation as Fig. 16.', 851, 509, group='ttbw')) + '</div>'),
+<div class="figs">''' + row(fig('images/ttbw-noise-margins.webp', 'Chart of cumulative noise margin against certification year, with FAA Stage 3, 4, and 5 limits and TTBW predictions near minus 20 EPNdB.', 'Fig. 8', 'Cumulative noise margins vs. FAA limits. Figure by June et al. (2022), not my work; reproduced with citation in my review as Fig. 15.', 753, 324, group='ttbw'),
+                       fig('images/ttbw-control-layouts.webp', 'Five candidate wing planforms with different arrangements of Krueger flaps, spoilers, flaps, ailerons, and flaperons; planform 4 is marked final.', 'Fig. 9', 'Control-surface layouts studied for the TTBW. Figure by Harrison et al. (2020), not my work; reproduced with citation as Fig. 16.', 851, 509, group='ttbw')) + '</div>'),
     ('reflection', 'Reflection', '''<div class="prose"><p>I rehearsed the talk more than a hundred times over three months and prepared answers for every question I could think of. Then a room of engineers who had spent their careers on this configuration asked about details I had never considered, used terms I had never heard, and questioned specifics of studies I had overlooked. I couldn't answer a single question.</p><p>After the session I tracked down the people who had asked, including two authors I had cited, and asked them to explain what they meant and how they had approached their studies. I'm still in touch with some of them. Spending a year on the literature taught me what had been published; that hour taught me how much I didn't know.</p>
 <p>At the forum I also sat in on technical panels and plenaries, met engineers on the expo floor, and joined the Rising Leaders speed-mentoring session.</p><p>Certification is the thread I keep coming back to. For something genuinely new, a real part of the engineering is working out how you would prove it at all.</p></div>'''),
     ('skills', 'Skills', tags(['Literature synthesis', 'Technical writing', 'Aerodynamics', 'Aeroelasticity', 'MDO', 'Aeroacoustics', 'Conference presentation'])),
@@ -458,14 +497,14 @@ P_['happy-meal'] = dict(
   lede='An injection-moldable toy train with swappable snap-fit heads, at $0.31 a unit.',
   tags=['SolidWorks', 'Tolerancing', 'DFM'],
   thumb=dict(kind='img', src='images/card-toy.webp', mode='cover', alt='Three 3D-printed train heads on a workbench'),
-  meta=[('Role', 'Design team member'), ('When', 'Spring 2025'), ('Team', '3 people'), ('Shown at', 'Duke 2025 Toy Fair')],
+  meta=[('Role', 'Design engineer, most of the CAD'), ('When', 'Spring 2025'), ('Team', '3 people'), ('Shown at', 'Duke 2025 Toy Fair')],
   lead=lead('images/toy-heads.webp', 'Three 3D-printed train heads, orange, green, and purple, lined up on a workbench.',
             'Fig. 1', 'The three swappable train heads: standard, subway, and bullet.', 1600, 1200, mode='cover', group='toy', pos='50% 62%'),
   glance=[('Brief', 'Injection-moldable, mass-producible Happy Meal toy'), ('Production material', 'PETG (prototypes in PLA)'), ('Unit cost', '$0.31 in PETG'),
           ('Critical fit', 'Shaft collar bore ⌀10.11 ±0.01 mm on a ⌀10.16 mm axle'), ('Mate tolerance', '5.00 ±0.05 mm, head to chassis'), ('Safety', 'Passes the 1.25-inch choke-tube test')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>Design a McDonald's Happy Meal toy that is attractive and cheap, can be injection molded, and can be mass-produced. The memo to the client weighed practicality, sustainability, safety, cost, ease of use, and looks, and the toy had to be safe for children aged 4 to 8, which means nothing small enough to choke on, even after a child takes it apart.</p></div>'''),
-    ('contribution', 'My contribution', '''<p class="contrib">Three-person team with Saina Srivastava and Mariangle Mendez. We brainstormed, scored concepts, modeled in SolidWorks, and 3D-printed prototypes together, and co-wrote the technical memo. For the Duke 2025 Toy Fair, I made the toy's video.</p>'''),
+    ('contribution', 'My contribution', '''<p class="contrib">Three-person team with Saina Srivastava and Mariangle Mendez, all three of us working as engineers. I did most of the CAD in SolidWorks. We brainstormed, scored concepts, and 3D-printed prototypes together, and co-wrote the technical memo. For the Duke 2025 Toy Fair, I made the toy's video.</p>'''),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>Brainstorming started wide; an early favorite was a carrier jet with Toy Story soldiers. We narrowed the field with a weighted Pugh matrix that favored price above everything else, and the plain train won.</p></div>
 <div class="figs" data-reveal><div class="glance" style="margin:0"><dl>
   <div><dt>Weights</dt><dd>Price 0.40 · Fun 0.30 · Safety 0.15 · Durability 0.15</dd></div>
@@ -560,7 +599,7 @@ P_['issdc'] = dict(
 <div class="figs">''' + row(fig('images/issdc-bread-atmosphere.webp', 'Proposal page on community infrastructure with an air composition table and food production text.', 'Fig. 5', 'Bellevistat air composition and amounts.', 1100, 1424, group='issdc'),
                        fig('images/issdc-bread-power.webp', 'Proposal page with initial food quantity and power distribution tables.', 'Fig. 6', 'Bellevistat power budget.', 1100, 1424, group='issdc'),
                        fig('images/issdc-alaskol-atmosphere.webp', 'Proposal slide titled Atmosphere: a table of nitrogen, oxygen, carbon dioxide, and humidity for residential, industrial, and agricultural sectors, and a table of residential seasons.', 'Fig. 7', 'Alaskol atmosphere: gas mix by sector and the season calendar.', 1600, 900, group='issdc')) + '</div>'),
-    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>I led a team to the Asia Regional Finals twice, was invited onto the Chinese national team for the 2022–23 Global Championship, and was named a Global Champion at Kennedy Space Center. After aging out as a competitor, I came back as a student advisor.</p></div>
+    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>I led a team to the Asia Regional Finals twice, was invited onto the Chinese national team for the 2022–23 Global Championship, and was named a Global Champion at Kennedy Space Center. After aging out as a competitor, I came back as a student advisor, and in November 2023 the ISSDC China organizing committee brought me on as a co-CEO for the China Finals: I helped manage one of the competing companies, taught its students STEM topics, and coached them on presenting.</p></div>
 <div class="figs">''' + row(fig('images/issdc-presenting.webp', 'A video-call screenshot of a slide titled 5.3 Automation Devices showing a cleaning bot, delivery bot, and butler bot, with Brian Yue speaking in a video tile at the top right.', 'Fig. 8', 'Presenting for Grumbo, the fictional aerospace company ISSDC assigned our team (that\'s me, top right). The robots on this slide are teammates\' designs.', 1728, 1080, group='issdc'),
                        fig('images/issdc-alaskol-cover.webp', 'Title slide: ALASKOL, with a domed lunar habitat and the DAFC logo.', 'Fig. 9', 'Alaskol title slide. Art by teammates.', 1600, 900, mode='cover', group='issdc')) + '</div>'),
     ('reflection', 'Reflection', '''<div class="prose"><p>You hand off work and trust it comes back, and you decide fast which parts of the problem are worth the time you have left. That carries straight over to engineering.</p></div>'''),
@@ -581,9 +620,9 @@ P_['teaching'] = dict(
     ('contribution', 'My contribution', '''<p class="contrib">In EGR 105, I hold weekly office hours, lead lab sections, and run one-on-one sessions, and I review student projects, quizzes, and lab work. In ME 221, I grade.</p>'''),
     ('process', 'Approach', '''<div class="prose"><p>I break hard concepts down into their fundamentals and teach the process instead of supplying answers. When I review EGR 105 work, I give feedback, suggest more efficient approaches where they exist, and recommend specific changes for resubmission.</p></div>
 <div class="figs">''' + row(fig('images/teaching.jpg', 'Teaching a lab section.', 'Fig. 1', 'Teaching.', ar=1.5, mode='cover', group='teaching', dropin=True, optional=True)) + '</div>'),
+    ('reflection', 'Reflection', '''<div class="prose"><p>Teaching has taught me the same two things coaching did: leadership, and how to break a complicated concept down into its fundamentals. When a student is stuck, handing over the answer rarely helps; finding the one basic idea they're missing does. I work through my own engineering problems the same way, from the fundamentals up.</p></div>'''),
     ('skills', 'Skills', tags(['Technical communication', 'Python', 'Materials science', 'Mentoring', 'Feedback'])),
-  ],
-  todo='Add a Reflection section: what has teaching changed about how you work?')
+  ])
 
 P_['coaching'] = dict(
   kind='leadership', num='03', cat='Coaching · 2020–24', year='2020–24',
@@ -594,20 +633,20 @@ P_['coaching'] = dict(
   meta=[('Role', 'Assistant, then head coach'), ('When', 'September 2020 – May 2024'), ('Where', 'Tsinghua International School, Beijing'), ('Teams', 'Volleyball, basketball')],
   lead='''<div class="p-lead stats" data-reveal>
   <div><div class="big">3</div><div class="cap">Teams coached: boys' volleyball, girls' volleyball, girls' basketball</div></div>
-  <div><div class="big">2nd</div><div class="cap">ISAC U14 Division III, 2020–21, as assistant coach</div></div>
-  <div><div class="big">3rd</div><div class="cap">ISAC U14 Division IV, 2022–23, as assistant coach</div></div>
+  <div><div class="big">2nd</div><div class="cap">Girls' basketball, ISAC U14 Division III, 2020–21, as assistant coach</div></div>
+  <div><div class="big">3rd</div><div class="cap">Girls' basketball, ISAC U14 Division IV, 2022–23, as assistant coach</div></div>
 </div>''',
   glance=[('Started as', 'Assistant coach, three middle school teams'), ('Senior year', 'Head coach, girls\' volleyball and girls\' basketball'), ('Alongside', 'Full-time student-athlete')],
   sections=[
     ('challenge', 'The role', '''<div class="prose"><p>I started as an assistant coach for the middle school boys' volleyball, girls' volleyball, and girls' basketball teams at Tsinghua International School, and in my senior year became head coach of girls' volleyball and girls' basketball, all while playing as a full-time student-athlete.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">I ran practices, set lineups, gave individual feedback and advice, tracked and analyzed statistics, and managed rosters across multiple teams.</p>'''),
-    ('outcome', 'Outcome', '''<div class="prose"><p>Both placements came while I was an assistant coach, before my senior year: second in ISAC U14 Division III in 2020–21, and third in Division IV in 2022–23.</p></div>
+    ('outcome', 'Outcome', '''<div class="prose"><p>Both placements came with the girls' basketball team while I was an assistant coach, before my senior year: second in ISAC U14 Division III in 2020–21, and third in Division IV in 2022–23.</p></div>
 <div class="figs">''' + row(fig('images/coaching-instruction.webp', 'Brian Yue, in a white sweater and holding a volleyball, pointing across the court while giving instructions at practice.', 'Fig. 1', 'Running a girls\' volleyball practice.', 1070, 1080, mode='cover', group='coaching', pos='40% 50%'),
                        fig('images/coaching-timeout.webp', 'Brian Yue, in a Spartans coaching shirt, kneeling with a tactics board while players gather around during a timeout.', 'Fig. 2', 'A timeout: drawing up the next rotation.', 1311, 843, mode='cover', group='coaching'),
                        fig('images/coaching-with-coach.webp', 'Brian Yue talking with a fellow coach courtside, clipboard in hand.', 'Fig. 3', 'Talking through the lineup with a fellow coach.', 1928, 1080, mode='cover', group='coaching')) + '</div>'),
+    ('reflection', 'Reflection', '''<div class="prose"><p>Coaching taught me leadership, and how to break something complicated down into its basics. A play or a rotation only works once every player understands their own part of it, so I taught it one piece at a time and then put it back together. I learn and explain engineering the same way.</p></div>'''),
     ('skills', 'Skills', tags(['Leadership', 'Planning', 'Statistics', 'Feedback', 'Time management'])),
-  ],
-  todo='Add a Reflection section: what did coaching teach you that engineering uses?')
+  ])
 
 CARD = {
   'shear-balance': dict(card_title='Floating-element shear-force balance', status=['Internship · NC State', 'Finished'], dates='Jun 2026 → Aug 2026',

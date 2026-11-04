@@ -14,10 +14,6 @@ Drop files in, then tell Claude "I uploaded files to the inbox". Claude renames,
 
 File names don't matter, but a hint helps, e.g. `portrait.jpg`, `playseat-car.jpg`, `aiaa-talk.jpg`.
 
-## Waiting for your answer
-
-- `hold-ttbw-sources-chart.jpeg`: the two charts of your TTBW sources (by year, by type). They total **51** sources, but the paper and the site say **53**. Which is right? Once confirmed, it goes on the TTBW page.
-
 ## 3D models (CAD)
 
 Upload to the inbox. Claude converts them into a model visitors can rotate and zoom on the project page.
@@ -87,16 +83,15 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 
 **Words, not files.** Just answer these in the chat:
 
-- [ ] Happy Meal train: what did *you* do? (CAD of which parts, printing, tolerances, the video, the memo...)
-- [ ] Teaching: one or two sentences on what teaching taught you.
-- [ ] Coaching: one or two sentences on what coaching taught you.
-- [ ] TTBW sources chart (`hold-ttbw-sources-chart.jpeg`): it totals 51 sources; the paper says 53. Which is right?
+- [x] Happy Meal train: done. Engineer alongside the team, most of the CAD.
+- [x] Teaching and coaching reflections: done (leadership; breaking concepts down to fundamentals).
+- [x] TTBW sources: 53. The chart is redrawn from the paper's reference list as Fig. 7 on the TTBW page.
 - [ ] ISSDC: which round was the Grumbo video presentation?
 - [ ] ISSDC robots: Kelly Wang is credited with the 3D models. Correct?
 - [ ] Forward closure: was the April 2026 static hot fire the motor with your unified closure?
 - [ ] Shear-force balance: any specific approaches you tried before the male-female interface?
 - [ ] PlaySeat: what offset the CG shift (rear wheels, or the wooden posts)? Acrylic or polycarbonate?
-- [ ] Coaching: which team placed 2nd in 2020–21 and 3rd in 2022–23 (boys' volleyball, girls' volleyball, or girls' basketball)? The site now says both were as assistant coach.
+- [x] Coaching: both placements were girls' basketball (from your high-school résumé). Done.
 
 ## Already done (no need to send)
 
