@@ -12,7 +12,7 @@ const [root, glb, out, orbit] = process.argv.slice(2);
       `<!doctype html><style>html,body{margin:0;background:transparent}model-viewer{width:1600px;height:900px;--poster-color:transparent}</style>
        <script type="module" src="/assets/vendor/model-viewer.min.js"></script>
        <model-viewer src="/${glb}" camera-orbit="${orbit}" shadow-intensity="1" shadow-softness="0.8"
-         environment-image="legacy" exposure="1" interaction-prompt="none"></model-viewer>` });
+         environment-image="/assets/studio.hdr" exposure="1" interaction-prompt="none"></model-viewer>` });
     const f = path.join(root, decodeURIComponent(u.pathname));
     if (!fs.existsSync(f)) return r.fulfill({ status: 404 });
     r.fulfill({ body: fs.readFileSync(f), contentType: f.endsWith('.js') ? 'text/javascript' : 'model/gltf-binary' });

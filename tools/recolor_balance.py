@@ -7,7 +7,7 @@ path = sys.argv[1]
 s = trimesh.load(path, force='scene', process=False)
 
 M = {  # base color 0-1, metallic, roughness
-    'insert':    ([0.30, 0.32, 0.35, 1], 0.40, 0.50),   # lab's tunnel insert (context)
+    'insert':    ([0.075, 0.08, 0.09, 1], 0.15, 0.55),  # lab's tunnel insert (context): dark, so the parts read
     'aluminum':  ([0.80, 0.81, 0.83, 1], 0.85, 0.38),   # frame, 6061
     'float':     ([0.36, 0.62, 0.86, 1], 0.55, 0.40),   # floating plate + carriage block (light blue, as in the figures)
     'steel':     ([0.66, 0.67, 0.69, 1], 0.90, 0.30),   # rail, carriage, bracket

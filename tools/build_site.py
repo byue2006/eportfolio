@@ -96,7 +96,7 @@ def model3d(slug, alt, num, cap, ar=16/9, orbit=None, hotspots=(), lead=False, l
     return (f'<figure class="m3d{" p-lead" if lead else ""}" data-reveal style="{style}"><div class="stage" data-cursor="Drag">'
             f'<model-viewer src="{{{{P}}}}media/{slug}.glb" poster="{{{{P}}}}media/{slug}.webp" alt="{esc(alt)}" camera-orbit="{orbit}" '
             f'camera-controls touch-action="pan-y" disable-zoom interaction-prompt="none" auto-rotate auto-rotate-delay="1200" '
-            f'rotation-per-second="14deg" shadow-intensity="1" shadow-softness="0.8" environment-image="legacy" exposure="1" '
+            f'rotation-per-second="14deg" shadow-intensity="1" shadow-softness="0.8" environment-image="{{{{P}}}}assets/studio.hdr" exposure="1" '
             f'loading="lazy">{hs}<div class="bar" slot="progress-bar"></div></model-viewer>'
             f'<img class="fallback" src="{{{{P}}}}media/{slug}.webp" alt="{esc(alt)}" loading="lazy">'
             f'<span class="hud hud-tl">{label}{size}</span><span class="hud hud-bl" aria-hidden="true">Drag to rotate</span>'
@@ -919,45 +919,60 @@ def about():
 
 
 # ---------------------------------------------------------------- animated card posters (smaller work)
-ISS_SPIRAL = "M148.4 89.0 L156.1 83.2 L164.0 78.0 L172.2 73.2 L180.7 68.9 L189.4 65.2 L198.4 62.0 L207.5 59.3 L216.7 57.3 L226.0 55.7 L235.4 54.8 L244.8 54.4 L254.2 54.5 L263.5 55.3 L272.8 56.6 L282.0 58.5 L291.0 60.9 L299.9 63.8 L308.6 67.3 L317.0 71.3 L325.1 75.7 L333.0 80.7 L340.5 86.1 L347.7 92.0 L354.5 98.2 L360.9 104.9 L366.9 111.9 L372.4 119.3 L377.5 126.9 L382.1 134.9 L386.2 143.1 L389.8 151.5 L392.9 160.1 L395.5 168.9 L397.5 177.8 L398.9 186.8 L399.9 195.9 L400.2 205.0 L400.1 214.0 L399.3 223.1 L398.1 232.0 L396.3 240.9 L393.9 249.6 L391.1 258.2 L387.7 266.5 L383.9 274.6 L379.5 282.5 L374.8 290.1 L369.5 297.3 L363.9 304.3 L357.8 310.8 L351.4 317.0 L344.6 322.8 L337.5 328.1 L330.1 333.0 L322.4 337.4 L314.5 341.4 L306.4 344.8 L298.1 347.8 L289.6 350.3 L281.0 352.2 L272.3 353.6 L263.6 354.5 L254.9 354.8 L246.1 354.7 L237.4 354.0 L228.8 352.7 L220.2 351.0 L211.8 348.7 L203.6 346.0 L195.5 342.7 L187.7 339.0 L180.1 334.8 L172.8 330.2 L165.9 325.2 L159.2 319.7 L152.9 313.9 L146.9 307.7 L141.4 301.1 L136.2 294.3 L131.5 287.2 L127.3 279.8 L123.5 272.1 L120.1 264.3 L117.3 256.3 L114.9 248.1 L113.1 239.9 L111.7 231.5 L110.9 223.1 L110.6 214.7 L110.7 206.3 L111.4 197.9 L112.6 189.6 L114.3 181.3 L116.5 173.3 L119.1 165.3 L122.3 157.6 L125.9 150.1 L129.9 142.8 L134.3 135.8 L139.2 129.0 L144.4 122.6 L150.1 116.6 L156.0 110.8 L162.3 105.5 L168.9 100.6 L175.8 96.1 L182.9 92.0 L190.2 88.3 L197.8 85.1 L205.5 82.4 L213.3 80.1 L221.3 78.4 L229.3 77.1 L237.4 76.3 L245.5 76.0 L253.6 76.1 L261.7 76.8 L269.6 78.0 L277.5 79.6 L285.3 81.7 L292.9 84.3 L300.4 87.3 L307.6 90.7 L314.6 94.6 L321.3 98.9 L327.8 103.6 L333.9 108.6 L339.8 114.0 L345.2 119.7 L350.4 125.8 L355.1 132.1 L359.4 138.7 L363.3 145.6 L366.8 152.6 L369.9 159.9 L372.5 167.3 L374.7 174.8 L376.4 182.4 L377.6 190.1 L378.4 197.9 L378.6 205.7 L378.5 213.5 L377.8 221.2 L376.7 228.8 L375.1 236.4 L373.1 243.9 L370.6 251.2 L367.7 258.3 L364.4 265.2 L360.7 271.9 L356.6 278.4 L352.1 284.6 L347.2 290.5 L342.0 296.1 L336.5 301.3 L330.7 306.2 L324.7 310.7 L318.3 314.9 L311.8 318.7 L305.0 322.0 L298.1 324.9 L291.0 327.4 L283.7 329.5 L276.4 331.1 L269.0 332.3 L261.6 333.0 L254.1 333.2 L246.7 333.1 L239.3 332.4 L231.9 331.4 L224.7 329.8 L217.6 327.9 L210.6 325.5 L203.7 322.7 L197.1 319.6 L190.7 316.0 L184.5 312.0 L178.6 307.7 L173.0 303.1 L167.6 298.1 L162.6 292.8 L157.9 287.3 L153.6 281.4 L149.6 275.4 L146.0 269.1 L142.9 262.6 L140.1 256.0 L137.7 249.2 L135.7 242.3 L134.2 235.3 L133.1 228.2 L132.4 221.1 L132.2 214.0 L132.3 206.8 L132.9 199.8 L134.0 192.7 L135.4 185.8 L137.3 179.0 L139.6 172.3 L142.3 165.8 L145.3 159.5 L148.7 153.3 L152.5 147.4 L156.6 141.8 L161.1 136.4 L165.8 131.3 L170.9 126.5 L176.2 122.1 L181.8 117.9 L187.6 114.2 L193.6 110.7 L199.8 107.7 L206.1 105.0 L212.6 102.8 L219.2 100.9 L225.9 99.5 L232.6 98.4 L239.4 97.8 L246.2 97.5 L253.0 97.7 L259.8 98.3 L266.5 99.3 L273.1 100.7 L279.6 102.5 L285.9 104.7 L292.2 107.3 L298.2 110.2 L304.0 113.4 L309.7 117.1 L315.0 121.0 L320.2 125.2 L325.0 129.8 L329.6 134.6 L333.8 139.7 L337.7 145.0 L341.3 150.5 L344.6 156.2 L347.5 162.1 L350.0 168.2 L352.1 174.4 L353.9 180.7 L355.3 187.0 L356.3 193.5 L356.8 199.9 L357.1 206.4 L356.9 212.9 L356.3 219.3 L355.3 225.7 L354.0 232.0 L352.3 238.1 L350.2 244.2 L347.8 250.1 L345.0 255.8 L341.8 261.4 L338.4 266.7 L334.6 271.8 L330.6 276.7 L326.3 281.3 L321.7 285.6 L316.8 289.7"
+# Dark, pointer-reactive posters driven by small physics loops in assets/site.js (data-anim). Still at rest.
+STARS = '<circle cx="162" cy="60" r="0.6" opacity="0.18"/><circle cx="268" cy="146" r="0.6" opacity="0.56"/><circle cx="107" cy="34" r="1.2" opacity="0.18"/><circle cx="45" cy="170" r="1.6" opacity="0.21"/><circle cx="112" cy="251" r="0.6" opacity="0.41"/><circle cx="198" cy="391" r="0.6" opacity="0.40"/><circle cx="67" cy="168" r="1.6" opacity="0.20"/><circle cx="154" cy="326" r="0.8" opacity="0.20"/><circle cx="286" cy="75" r="0.6" opacity="0.40"/><circle cx="31" cy="24" r="0.8" opacity="0.37"/><circle cx="266" cy="311" r="1.2" opacity="0.41"/><circle cx="227" cy="120" r="0.8" opacity="0.46"/><circle cx="122" cy="230" r="1.6" opacity="0.37"/><circle cx="172" cy="180" r="1.6" opacity="0.59"/><circle cx="59" cy="167" r="1" opacity="0.22"/><circle cx="244" cy="16" r="0.6" opacity="0.49"/><circle cx="287" cy="350" r="1" opacity="0.30"/><circle cx="175" cy="199" r="1.2" opacity="0.18"/><circle cx="47" cy="108" r="0.6" opacity="0.18"/><circle cx="351" cy="259" r="1.2" opacity="0.28"/><circle cx="193" cy="267" r="0.6" opacity="0.57"/><circle cx="178" cy="244" r="1.2" opacity="0.18"/><circle cx="384" cy="52" r="0.8" opacity="0.33"/><circle cx="458" cy="199" r="0.8" opacity="0.35"/><circle cx="275" cy="353" r="1.2" opacity="0.54"/><circle cx="139" cy="166" r="1" opacity="0.46"/><circle cx="190" cy="92" r="0.6" opacity="0.23"/><circle cx="116" cy="93" r="1.2" opacity="0.52"/><circle cx="91" cy="113" r="0.8" opacity="0.34"/><circle cx="185" cy="227" r="0.8" opacity="0.46"/><circle cx="258" cy="247" r="0.6" opacity="0.36"/><circle cx="435" cy="381" r="1.6" opacity="0.33"/><circle cx="199" cy="41" r="1.2" opacity="0.18"/><circle cx="34" cy="84" r="0.8" opacity="0.20"/><circle cx="300" cy="41" r="1.6" opacity="0.22"/><circle cx="51" cy="145" r="0.6" opacity="0.18"/><circle cx="104" cy="150" r="1" opacity="0.58"/><circle cx="301" cy="190" r="0.6" opacity="0.53"/><circle cx="497" cy="186" r="1.2" opacity="0.29"/><circle cx="72" cy="300" r="1" opacity="0.37"/><circle cx="346" cy="207" r="0.8" opacity="0.58"/><circle cx="264" cy="59" r="1.6" opacity="0.56"/><circle cx="379" cy="119" r="0.6" opacity="0.46"/><circle cx="131" cy="147" r="0.8" opacity="0.31"/><circle cx="111" cy="217" r="1.6" opacity="0.30"/><circle cx="112" cy="325" r="0.8" opacity="0.51"/>'
+
+def _anim_frame(kind, inner, labels):
+    """Shared shell: parallax starfield/grid layer, cursor spotlight, the scene, corner labels."""
+    return (f'<span class="spot" aria-hidden="true"></span>{inner}'
+            f'<span class="hud-k tl">{labels[0]}</span><span class="hud-k bl">{labels[1]}</span><span class="hud-k br">{labels[2]}</span>')
 
 def anim_iss():
-    tail = ''.join(f'<g class="iss-spin t{i}"><g class="iss-r"><circle cx="250" cy="210" r="{5.2 - i * 0.7:.1f}" class="iss-dot" style="opacity:{0.55 - i * 0.1:.2f}"/></g></g>' for i in range(1, 5))
-    return f'''<svg class="anim-svg iss" viewBox="0 0 500 400" aria-hidden="true" focusable="false">
+    trail = ''.join('<line x1="0" y1="0" x2="0" y2="0"/>' for _ in range(28))
+    inner = f'''<svg class="anim-svg iss" viewBox="0 0 500 400" aria-hidden="true" focusable="false">
   <defs><radialGradient id="iss-earth" cx="38%" cy="32%" r="78%"><stop offset="0" stop-color="#2c3036"/><stop offset="1" stop-color="#0c0e10"/></radialGradient>
+  <radialGradient id="iss-glow"><stop offset=".55" stop-color="#f08a4b" stop-opacity="0"/><stop offset=".78" stop-color="#f08a4b" stop-opacity=".16"/><stop offset="1" stop-color="#f08a4b" stop-opacity="0"/></radialGradient>
   <radialGradient id="iss-flare"><stop offset="0" stop-color="#fff3e6"/><stop offset=".35" stop-color="#f08a4b"/><stop offset="1" stop-color="#f08a4b" stop-opacity="0"/></radialGradient></defs>
-  <path d="{ISS_SPIRAL}" class="iss-path"/>
-  <circle cx="250" cy="210" r="104" class="iss-atm"/>
-  <circle cx="250" cy="210" r="92" fill="url(#iss-earth)" class="iss-earth"/>
-  {tail}
-  <g class="iss-spin"><g class="iss-r"><circle cx="250" cy="210" r="16" fill="url(#iss-flare)" class="iss-flare"/><circle cx="250" cy="210" r="6" class="iss-dot"/></g></g>
-  <text x="26" y="40" class="k">Team SkyFall · EGR 105</text>
-  <text x="26" y="378" class="k">Orbit decay · RK4</text>
-  <text x="474" y="378" class="k end">Gravity + drag</text>
+  <g class="par far">{STARS}</g>
+  <g class="par near">
+    <circle cx="250" cy="210" r="158" class="iss-orbit"/>
+    <circle cx="250" cy="210" r="118" fill="url(#iss-glow)"/>
+    <circle cx="250" cy="210" r="104" class="iss-atm"/>
+    <circle cx="250" cy="210" r="92" fill="url(#iss-earth)" class="iss-earth"/>
+    <g class="iss-trail">{trail}</g>
+    <g class="iss-st" transform="translate(148.4 89)"><circle r="18" fill="url(#iss-flare)" class="iss-flare" opacity="0"/><circle r="5.5" class="iss-dot"/></g>
+  </g>
 </svg>'''
-
-def anim_vanguard(src, alt):
-    streaks = ''.join(f'<i style="--y:{y}%;--w:{w}%;--d:{d}s;--tx:-{int(140 / w * 100)}%"></i>'
-                      for y, w, d in ((14, 22, 0), (27, 34, .35), (39, 18, .7), (52, 28, .15), (64, 20, .55), (76, 32, .9), (88, 24, .4)))
-    return (f'<div class="streaks" aria-hidden="true">{streaks}</div>'
-            f'<div class="ship"><span class="flame" aria-hidden="true"></span><img src="{{{{P}}}}{src}" loading="lazy" alt="{esc(alt)}"></div>')
+    return _anim_frame('iss', inner, ('Team SkyFall · EGR 105', 'Alt <b class="alt">420</b> km', 'Gravity + drag · RK4'))
 
 def anim_snap():
     top_arm = '<polygon points="110,96 374,96 374,112 362,128 351,128 343,114 134,119"/>'
     strain_arm = top_arm.replace('<polygon', '<polygon fill="url(#strain)"')
     def arm(cls, flip):
-        g = f'<g class="arm {cls}"><g class="arm-shape">{top_arm}</g><g class="arm-strain">{strain_arm}</g></g>'
+        g = f'<g class="arm {cls}"><g class="arm-shape">{top_arm}</g><g class="arm-strain" opacity="0">{strain_arm}</g></g>'
         return f'<g transform="matrix(1 0 0 -1 0 400)">{g}</g>' if flip else g
-    return f'''<svg class="anim-svg snap" viewBox="0 0 500 400" aria-hidden="true" focusable="false">
-  <defs><linearGradient id="strain" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#e5482b"/><stop offset=".22" stop-color="#f08a4b"/><stop offset=".6" stop-color="#f6c36b" stop-opacity=".55"/><stop offset="1" stop-color="#f6c36b" stop-opacity="0"/></linearGradient></defs>
-  <g class="cube"><rect x="150" y="125" width="150" height="150" rx="3"/><path d="M150 155h150M150 185h150M150 215h150M150 245h150" class="layers"/></g>
-  <rect x="110" y="96" width="24" height="208" class="wall"/>
-  {arm("top", False)}{arm("bot", True)}
-  <circle cx="362" cy="128" r="10" class="snapring top"/><circle cx="362" cy="272" r="10" class="snapring bot"/>
-  <text x="110" y="76" class="k"><tspan class="nc">ε</tspan> max 6.3 × 10<tspan class="nc">⁻³</tspan> · root corner</text>
-  <text x="26" y="378" class="k">ME 321 · snap-fit check</text>
-  <text x="474" y="378" class="k end">FOS ≈ 2.9</text>
+    inner = f'''<svg class="anim-svg snap" viewBox="0 0 500 400" aria-hidden="true" focusable="false">
+  <defs><linearGradient id="strain" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#ff5a36"/><stop offset=".22" stop-color="#f08a4b"/><stop offset=".6" stop-color="#f6c36b" stop-opacity=".5"/><stop offset="1" stop-color="#f6c36b" stop-opacity="0"/></linearGradient>
+  <pattern id="snap-grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".9" fill="#ffffff" opacity=".13"/></pattern></defs>
+  <g class="par far"><rect x="-40" y="-40" width="580" height="480" fill="url(#snap-grid)"/></g>
+  <g class="par near">
+    <g class="cube"><rect x="150" y="125" width="150" height="150" rx="3"/><path d="M150 155h150M150 185h150M150 215h150M150 245h150" class="layers"/></g>
+    <rect x="110" y="96" width="24" height="208" class="wall"/>
+    {arm("top", False)}{arm("bot", True)}
+    <circle cx="362" cy="128" r="8" class="snapring" opacity="0"/><circle cx="362" cy="272" r="8" class="snapring" opacity="0"/>
+    <text x="110" y="78" class="eps"><tspan class="nc">ε</tspan> max 6.3 × 10<tspan class="nc">⁻³</tspan> · root corner</text>
+  </g>
 </svg>'''
+    return _anim_frame('snap', inner, ('Snap-fit · FEA check', 'Move to push · pull', 'FOS ≈ 2.9'))
+
+# nozzle exits in images/card-vanguard.webp (% of width, % of height) and plume angle, measured from the 3D model
+VANGUARD_NOZZLES = ((65.97, 50.87, 14.5), (64.24, 58.52, 16.2), (68.5, 52.53, 14.7))
+
+def anim_vanguard(src, alt):
+    plumes = ''.join(f'<span class="plume" style="--nx:{x}%;--ny:{y}%;--na:{a}deg"></span>' for x, y, a in VANGUARD_NOZZLES)
+    inner = (f'<canvas class="warp" aria-hidden="true"></canvas>'
+             f'<div class="ship"><img src="{{{{P}}}}{src}" loading="lazy" alt="{esc(alt)}">{plumes}</div>')
+    return _anim_frame('fly', inner, ('Duke Vanguard · 1:1.7', 'Onshape · PLA', 'Thrust <b class="thr">0</b>%'))
 
 # ---------------------------------------------------------------- smaller work (its own page + a row of cards on home)
 SMALL = [
@@ -977,7 +992,7 @@ SMALL = [
        card='A class CAD exercise I took too far: a 4.9-inch shuttle with raised lettering, modeled in Onshape, plus its drawing.',
        thumb=dict(anim='vanguard', src='images/card-vanguard.webp', alt='Render of the Vanguard shuttle model with its raised lettering'),
        prose='A CAD exercise from my first semester at Duke where I went well past the assignment for fun: a 4.9-inch Space Shuttle with DUKE and VANGUARD lettering and three engine bells, modeled in Onshape to print in PLA, plus a fully dimensioned drawing.',
-       figs=lambda: model3d('shuttle', 'Interactive 3D model of a small Space Shuttle with a tail fin, three engine bells, and VANGUARD lettering along its back.', 'Fig. 5', 'The <i>Vanguard</i> model in 3D. Drag to rotate; tilt it to read the lettering.', max_w=980)
+       figs=lambda: model3d('shuttle', 'Interactive 3D model of a small Space Shuttle with a tail fin, three engine bells, and VANGUARD lettering along its back.', 'Fig. 5', 'The <i>Vanguard</i> model in 3D. Drag to rotate.', max_w=980)
                     + row(fig('images/dwg-shuttle-2400.webp', 'Drawing of the Space Shuttle Duke Vanguard model: top, right, front and isometric views at 1:1.7 scale, dimensioned in inches, PLA plastic, drawn by Brian Yue on 09/27/2024.', 'Fig. 6', 'Its drawing: four views, dimensioned in inches. Click to zoom.', 1000, 773, group='shuttle'))),
 ]
 
@@ -985,10 +1000,10 @@ def small_card(x, P, delay=0.0):
     t = x['thumb']
     kind = t['anim']
     inner = {'iss': anim_iss, 'snap': anim_snap}[kind]() if kind != 'vanguard' else anim_vanguard(t['src'], t['alt'])
-    cls = {'iss': 'media anim a-iss', 'snap': 'media anim a-snap', 'vanguard': 'media anim a-fly'}[kind]
+    da = {'iss': 'iss', 'snap': 'snap', 'vanguard': 'fly'}[kind]
     return f'''<article class="card mini" data-reveal style="--d:{delay:.2f}s">
   <a href="{P}work/smaller-work.html#{x["id"]}" data-cursor="View">
-    <div class="{cls}">{inner}<span class="go">View <span class="arrow">→</span></span></div>
+    <div class="media anim a-dark a-{da}" data-anim="{da}">{inner}<span class="go">View <span class="arrow">→</span></span></div>
     <div class="card-info"><h3>{x["title"]}</h3> <span class="dates">{x["label"]}</span> <p>{x["card"]}</p></div>
   </a>
 </article>'''

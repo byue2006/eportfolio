@@ -669,83 +669,47 @@ dialog.lb::backdrop { background: rgba(8, 8, 9, .92); -webkit-backdrop-filter: b
 .sc-x .minor { visibility: hidden; }
 @media (max-width: 560px) { .srcchart { padding: 18px 16px 14px; } }
 
-/* ---------- animated card posters (smaller work): still at rest, they move on hover / focus / in view on touch ---------- */
+/* ---------- animated card posters (smaller work) ----------
+   Dark stage in the ISS style. Still at rest; on hover (or focus, or on screen on touch devices) assets/site.js runs a small
+   physics loop per card (data-anim) and feeds --px/--py (smoothed pointer, -1..1) and --mx/--my (spotlight) here. */
 .media.anim { isolation: isolate; }
+.a-dark { background: radial-gradient(120% 95% at 50% 30%, #1c1e22 0%, #0b0c0e 72%); }
 .anim-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.anim-svg .k { font: 500 13px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-.anim-svg .k.end { text-anchor: end; }
 .anim-svg .nc { text-transform: none; }
-.a-snap, .a-fly { background: radial-gradient(120% 95% at 50% 28%, #ffffff 0%, #eceef0 55%, #dcdee1 100%); }
-.a-iss { background: radial-gradient(120% 95% at 50% 30%, #1c1e22 0%, #0b0c0e 72%); }
+.a-dark .spot { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .5s var(--ease);
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 40%), rgba(240, 138, 75, .13), rgba(240, 138, 75, 0) 38%); mix-blend-mode: screen; }
+.card.mini:hover .a-dark .spot { opacity: 1; }
+.a-dark .hud-k { position: absolute; z-index: 4; font: 500 10.5px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .5); pointer-events: none; }
+.a-dark .hud-k b { font-weight: 500; color: rgba(255, 255, 255, .88); font-variant-numeric: tabular-nums; }
+.a-dark .hud-k.tl { left: 5%; top: 6.5%; } .a-dark .hud-k.bl { left: 5%; bottom: 6.5%; } .a-dark .hud-k.br { right: 5%; bottom: 6.5%; }
+@media (max-width: 1100px) { .a-dark .hud-k { font-size: 9.5px; } }
+/* parallax: the far layer drifts against the pointer, the near layer a little with it */
+.a-dark .par.far { transform: translate(calc(var(--px, 0) * -9px), calc(var(--py, 0) * -7px)); }
+.a-dark .par.near { transform: translate(calc(var(--px, 0) * 4px), calc(var(--py, 0) * 3px)); }
+.a-dark .par circle[opacity] { fill: #fff; }
 
-/* ISS: the station spirals in along its decaying orbit and flares at the atmosphere */
-.iss .k { fill: rgba(255, 255, 255, .5); }
-.iss-path { fill: none; stroke: rgba(255, 255, 255, .16); stroke-width: 1.2; stroke-dasharray: 2 5; }
-.iss-atm { fill: none; stroke: rgba(240, 138, 75, .4); stroke-width: 1; stroke-dasharray: 3 4; }
+/* ISS */
+.iss-orbit { fill: none; stroke: rgba(255, 255, 255, .14); stroke-width: 1; stroke-dasharray: 2 6; }
+.iss-atm { fill: none; stroke: rgba(240, 138, 75, .45); stroke-width: 1; stroke-dasharray: 3 4; }
 .iss-dot { fill: #ededeb; }
-.iss-flare { opacity: 0; transform-box: fill-box; transform-origin: center; }
-.iss-spin { transform-box: view-box; transform-origin: 250px 210px; transform: rotate(-40deg); }
-.iss-r { transform: translateY(-158px); }
-.iss-spin[class*=" t"] { visibility: hidden; }
+.iss-trail line { stroke: #f2f2f0; stroke-linecap: round; }
 
-/* Vanguard: cruising, engine lit, speed streaks along the flight axis */
-.a-fly .ship { position: absolute; inset: 0; }
-.a-fly .ship img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; z-index: 1; }
-.a-fly .flame { position: absolute; left: var(--fx, 1.5%); top: var(--fy, 44.8%); width: 17%; height: 8%; transform-origin: 100% 50%; transform: rotate(-12deg) scaleX(.2);
-  opacity: 0; background: radial-gradient(ellipse 100% 50% at 100% 50%, #fff6ea 0%, #ffc07a 24%, #f08a4b 50%, rgba(240, 138, 75, 0) 76%); filter: blur(1.2px); }
-.a-fly .streaks { position: absolute; inset: -25%; transform: rotate(-12deg); pointer-events: none; }
-.a-fly .streaks i { position: absolute; right: -6%; top: var(--y); width: var(--w); height: 2px; border-radius: 2px; opacity: 0;
-  background: linear-gradient(90deg, rgba(40, 43, 48, .32), rgba(40, 43, 48, 0)); }
+/* Snap-fit */
+.snap .wall, .snap .arm-shape polygon { fill: #24272c; stroke: rgba(255, 255, 255, .62); stroke-width: 1.4; stroke-linejoin: round; }
+.snap .cube rect { fill: rgba(255, 255, 255, .05); stroke: rgba(255, 255, 255, .55); stroke-width: 1.4; }
+.snap .cube .layers { fill: none; stroke: rgba(255, 255, 255, .12); stroke-width: 1; }
+.snap .snapring { fill: none; stroke: #f08a4b; stroke-width: 2.2; }
+.snap .eps { font: 500 13px var(--mono); letter-spacing: .1em; text-transform: uppercase; fill: #f6b380; opacity: .5; }
 
-/* Snap-fit: the cube slides in, the arms flex (strain glows at the root), then snap shut; then it comes back out */
-.snap .k { fill: #6b6e73; }
-.snap .wall, .snap .arm-shape polygon { fill: #2b2e33; }
-.snap .arm-strain { opacity: 0; }
-.snap .arm { transform-box: view-box; transform-origin: 122px 107px; }
-.snap .cube rect { fill: #f6f6f7; stroke: #9a9ea5; stroke-width: 1.5; }
-.snap .cube .layers { fill: none; stroke: #dfe1e4; stroke-width: 1; }
-.snap .snapring { fill: none; stroke: #f08a4b; stroke-width: 2.5; opacity: 0; transform-box: fill-box; transform-origin: center; }
-
-@media (prefers-reduced-motion: no-preference) {
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .iss-spin { visibility: visible; animation: iss-spin 4.2s cubic-bezier(.42, 0, .9, .55) infinite backwards; }
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .iss-r { animation: iss-r 4.2s cubic-bezier(.42, 0, .9, .55) infinite backwards, iss-fade 4.2s linear infinite backwards; }
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .iss-spin:not([class*=" t"]) .iss-dot { animation: iss-heat 4.2s linear infinite; }
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .iss-flare { animation: iss-flare 4.2s linear infinite; }
-  .iss-spin.t1, .iss-spin.t1 .iss-r { animation-delay: .05s !important; }
-  .iss-spin.t2, .iss-spin.t2 .iss-r { animation-delay: .1s !important; }
-  .iss-spin.t3, .iss-spin.t3 .iss-r { animation-delay: .15s !important; }
-  .iss-spin.t4, .iss-spin.t4 .iss-r { animation-delay: .2s !important; }
-
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .a-fly .ship { animation: fly-ship 2.6s ease-in-out infinite; }
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .a-fly .flame { animation: fly-flame .16s ease-in-out infinite alternate; }
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .a-fly .streaks i { animation: fly-streak 1.05s linear infinite; animation-delay: var(--d); }
-
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .snap .cube { animation: snap-cube 3.4s linear infinite; }
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .snap .arm { animation: snap-arm 3.4s linear infinite; }
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .snap .arm-strain { animation: snap-strain 3.4s linear infinite; }
-  :is(.card.mini:hover, .card.mini:focus-within, .card.mini.play) .snap .snapring { animation: snap-ring 3.4s linear infinite; }
-}
-@keyframes iss-spin { from { transform: rotate(-40deg); } to { transform: rotate(860deg); } }
-@keyframes iss-r { from { transform: translateY(-158px); } to { transform: translateY(-104px); } }
-@keyframes iss-fade { 0% { opacity: 0; } 5% { opacity: 1; } 95% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes iss-heat { 0%, 84% { fill: #ededeb; } 93%, 100% { fill: #f08a4b; } }
-@keyframes iss-flare { 0%, 82% { opacity: 0; transform: scale(.4); } 94% { opacity: 1; transform: scale(1.5); } 100% { opacity: 0; transform: scale(2.2); } }
-
-@keyframes fly-ship { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(2.2%, -3.2%) rotate(-1.5deg); } }
-@keyframes fly-flame { from { opacity: .8; transform: rotate(-12deg) scaleX(.82) scaleY(.88); } to { opacity: 1; transform: rotate(-12deg) scaleX(1.12) scaleY(1.06); } }
-@keyframes fly-streak { 0% { transform: translateX(0); opacity: 0; } 12% { opacity: 1; } 100% { transform: translateX(var(--tx)); opacity: 0; } }
-
-@keyframes snap-cube {
-  0% { transform: translateX(280px); opacity: 0; } 5% { transform: translateX(260px); opacity: 1; }
-  14% { transform: translateX(212px); } 34% { transform: translateX(43px); } 40%, 80% { transform: translateX(0); }
-  84% { transform: translateX(43px); } 94% { transform: translateX(212px); opacity: 1; } 100% { transform: translateX(280px); opacity: 0; }
-}
-@keyframes snap-arm {
-  0%, 14% { transform: rotate(0); } 16.5%, 34% { transform: rotate(-4deg); } 35.5% { transform: rotate(1.2deg); } 37% { transform: rotate(-.5deg); } 39%, 84% { transform: rotate(0); }
-  86.5%, 94% { transform: rotate(-4deg); } 95.5% { transform: rotate(1.2deg); } 97% { transform: rotate(-.4deg); } 99%, 100% { transform: rotate(0); }
-}
-@keyframes snap-strain { 0%, 14% { opacity: 0; } 16.5%, 34% { opacity: .95; } 35.5%, 84% { opacity: 0; } 86.5%, 94% { opacity: .95; } 95.5%, 100% { opacity: 0; } }
-@keyframes snap-ring { 0%, 34.8% { opacity: 0; transform: scale(.4); } 35.5% { opacity: .95; transform: scale(.6); } 39%, 95% { opacity: 0; transform: scale(2); } 95.5% { opacity: .95; transform: scale(.6); } 99%, 100% { opacity: 0; transform: scale(2); } }
+/* Vanguard */
+.a-fly .warp { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.a-fly .ship { position: absolute; inset: 0; z-index: 1; will-change: transform; }
+.a-fly .ship img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.a-fly .plume { position: absolute; left: var(--nx); top: calc(var(--ny) - 3.15%); width: 22%; height: 6.3%; z-index: 2;
+  transform-origin: 0 50%; transform: rotate(var(--na)) scaleX(0); opacity: 0; mix-blend-mode: screen; pointer-events: none;
+  background: radial-gradient(ellipse 100% 50% at 0% 50%, #fff8ee 0%, #ffd7a3 16%, #ff9d52 38%, rgba(240, 110, 40, .35) 58%, rgba(240, 110, 40, 0) 76%); filter: blur(.5px); }
+.a-fly .plume::after { content: ""; position: absolute; left: -6%; top: -45%; width: 80%; height: 190%; border-radius: 50%;
+  background: radial-gradient(ellipse at 10% 50%, rgba(255, 150, 80, .45), rgba(255, 150, 80, 0) 65%); filter: blur(4px); }
 
 @media print {
   :root, :root[data-theme] { --paper: #fff; --surface: #fff; --ink: #141414; --ink-2: #55585d; --ink-3: #6b6e73; --rule: #e0e0db; --accent: #c2410c; --chart-bar: #c2410c; color-scheme: light; }

@@ -530,13 +530,200 @@
   window.byThemeLabel();
 })();
 
-/* Animated card posters: on touch screens (no hover), play each one while it is on screen */
+/* Animated card posters (Smaller work). Each card runs a small physics loop while hovered (or focused, or on screen on
+   touch devices): an RK4 orbit with drag (ISS), a spring-loaded snap-fit you push with the cursor, and a shuttle that
+   banks toward the cursor through a starfield. Pointer input is smoothed (critically damped), so motion eases instead of
+   jumping. Nothing runs under prefers-reduced-motion; at rest every card shows a still frame. */
 (function () {
-  var cards = document.querySelectorAll('.card.mini');
-  if (!cards.length || !('IntersectionObserver' in window)) return;
-  if (window.matchMedia && matchMedia('(hover: hover)').matches) return;
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) { e.target.classList.toggle('play', e.isIntersecting); });
-  }, { threshold: 0.6 });
-  cards.forEach(function (c) { io.observe(c); });
+  var els = document.querySelectorAll('.media.anim[data-anim]');
+  if (!els.length) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia && matchMedia('(hover: hover)').matches;
+  var NS = 'http://www.w3.org/2000/svg';
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function ease(cur, tgt, rate, dt) { return cur + (tgt - cur) * (1 - Math.exp(-rate * dt)); }
+
+  var SIMS = {
+    /* ---- ISS: gravity + exponential-atmosphere drag, integrated with RK4 (the same method as the project) ---- */
+    iss: function (el, st) {
+      var svg = el.querySelector('svg'), stn = svg.querySelector('.iss-st'), dot = svg.querySelector('.iss-dot'),
+          flare = svg.querySelector('.iss-flare'), segs = svg.querySelectorAll('.iss-trail line'), alt = el.querySelector('.alt');
+      var CX = 250, CY = 210, R0 = 158, RA = 104, MU = Math.pow(2 * Math.PI * R0 / 1.7, 2) * R0, K = 0.0003, H = 20;
+      var s, trail = [], boom = 0, acc = 0, rest = -40 * Math.PI / 180;
+      function reset(a) { var v = Math.sqrt(MU / R0); s = [R0 * Math.sin(a), -R0 * Math.cos(a), v * Math.cos(a), v * Math.sin(a)]; trail = []; }
+      function f(y) {
+        var r = Math.sqrt(y[0] * y[0] + y[1] * y[1]), g = -MU / (r * r * r), sp = Math.sqrt(y[2] * y[2] + y[3] * y[3]),
+            d = K * Math.exp(-(r - RA) / H) * sp;
+        return [y[2], y[3], g * y[0] - d * y[2], g * y[1] - d * y[3]];
+      }
+      function rk4(h) {
+        var k1 = f(s), y2 = [], y3 = [], y4 = [], i;
+        for (i = 0; i < 4; i++) y2[i] = s[i] + h / 2 * k1[i];
+        var k2 = f(y2); for (i = 0; i < 4; i++) y3[i] = s[i] + h / 2 * k2[i];
+        var k3 = f(y3); for (i = 0; i < 4; i++) y4[i] = s[i] + h * k3[i];
+        var k4 = f(y4); for (i = 0; i < 4; i++) s[i] += h / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
+      }
+      reset(rest);
+      return {
+        step: function (dt) {
+          var live = st.on || st.auto;
+          if (boom > 0) { boom -= dt / 0.9; if (boom <= 0) { boom = 0; reset(Math.random() * Math.PI * 2); } return true; }
+          if (!live) return false;
+          var h = 1 / 240, n = Math.ceil(dt / h);
+          for (var i = 0; i < n; i++) {
+            rk4(dt / n);
+            acc += dt / n;
+            if (acc >= 1 / 60) { acc = 0; trail.push([s[0], s[1]]); if (trail.length > segs.length + 1) trail.shift(); }
+            if (s[0] * s[0] + s[1] * s[1] < RA * RA) { boom = 1; break; }
+          }
+          return true;
+        },
+        draw: function () {
+          var r = Math.sqrt(s[0] * s[0] + s[1] * s[1]), heat = clamp((R0 - r) / (R0 - RA), 0, 1);
+          stn.setAttribute('transform', 'translate(' + (CX + s[0]).toFixed(1) + ' ' + (CY + s[1]).toFixed(1) + ')');
+          var hot = Math.pow(heat, 2.2);
+          dot.style.fill = 'rgb(' + Math.round(237 + 3 * hot) + ',' + Math.round(237 - 99 * hot) + ',' + Math.round(235 - 160 * hot) + ')';
+          var fl = boom > 0 ? Math.sin(boom * Math.PI) : hot * 0.35;
+          flare.setAttribute('opacity', fl.toFixed(3));
+          flare.setAttribute('r', (10 + 26 * (boom > 0 ? 1 - boom : hot)).toFixed(1));
+          dot.setAttribute('opacity', boom > 0 ? boom.toFixed(3) : 1);
+          var n = trail.length;
+          for (var i = 0; i < segs.length; i++) {
+            var a = trail[n - 2 - i], b = trail[n - 1 - i], ln = segs[i];
+            if (!a || !b || boom > 0.6) { ln.setAttribute('opacity', 0); continue; }
+            var k = 1 - i / segs.length;
+            ln.setAttribute('x1', (CX + a[0]).toFixed(1)); ln.setAttribute('y1', (CY + a[1]).toFixed(1));
+            ln.setAttribute('x2', (CX + b[0]).toFixed(1)); ln.setAttribute('y2', (CY + b[1]).toFixed(1));
+            ln.setAttribute('opacity', (0.55 * k * k * (boom > 0 ? boom : 1)).toFixed(3));
+            ln.setAttribute('stroke-width', (0.6 + 3.2 * k).toFixed(2));
+          }
+          if (alt) alt.textContent = boom > 0 ? '120' : Math.round(120 + clamp((r - RA) / (R0 - RA), 0, 1) * 300);
+        }
+      };
+    },
+
+    /* ---- Snap-fit: the cube follows the cursor on a spring; the arms ride the tabs, then spring back (and ring) ---- */
+    snap: function (el, st) {
+      var svg = el.querySelector('svg'), cube = svg.querySelector('.cube'), arms = svg.querySelectorAll('.arm'),
+          strains = svg.querySelectorAll('.arm-strain'), rings = svg.querySelectorAll('.snapring'), eps = svg.querySelector('.eps');
+      var x = 0, v = 0, th = 0, w = 0, dir = -1, contact = false, ring = 0, autoT = 0;
+      var OUT = 280, INNER = 43, OUTER = 212, RAMP = 22, MAXD = -4.5;
+      return {
+        step: function (dt) {
+          var target = 0;
+          if (st.on) target = clamp((st.tx + 0.55) / 1.4, 0, 1) * OUT;                    // cursor left = push in, right = pull out
+          else if (st.auto) { autoT += dt; target = Math.floor(autoT / 1.9) % 2 ? OUT : 0; }
+          var n = Math.ceil(dt / (1 / 240)), h = dt / n;
+          for (var i = 0; i < n; i++) {
+            var a = 160 * (target - x) - 2 * Math.sqrt(160) * 0.82 * v;                 // slightly underdamped spring
+            v += a * h; x += v * h;
+            if (Math.abs(v) > 3) dir = v < 0 ? -1 : 1;
+            var amt = 0;
+            if (x > INNER && x < OUTER) amt = dir < 0 ? Math.min(1, (OUTER - x) / RAMP) : Math.min(1, (x - INNER) / RAMP);
+            if (amt > 0) { var g = MAXD * amt; w = (g - th) / h; th = g; contact = true; }
+            else {
+              if (contact) { contact = false; ring = 1; }
+              var aa = -1100 * th - 2 * Math.sqrt(1100) * 0.11 * w;                        // the arm snaps back and rings down
+              w += aa * h; th += w * h;
+            }
+          }
+          ring = Math.max(0, ring - dt * 2.4);
+          return Math.abs(x - target) > 0.3 || Math.abs(v) > 0.5 || Math.abs(th) > 0.02 || Math.abs(w) > 0.2 || ring > 0;
+        },
+        draw: function () {
+          cube.setAttribute('transform', 'translate(' + x.toFixed(2) + ' 0)');
+          for (var i = 0; i < arms.length; i++) arms[i].setAttribute('transform', 'rotate(' + th.toFixed(3) + ' 122 107)');
+          var sv = clamp(-th / -MAXD, 0, 1);
+          for (i = 0; i < strains.length; i++) strains[i].setAttribute('opacity', sv.toFixed(3));
+          for (i = 0; i < rings.length; i++) { rings[i].setAttribute('opacity', (ring * 0.95).toFixed(3)); rings[i].setAttribute('r', (6 + (1 - ring) * 26).toFixed(1)); }
+          eps.style.opacity = (0.5 + 0.5 * sv).toFixed(3);
+        }
+      };
+    },
+
+    /* ---- Vanguard: throttle spools up, three plumes flicker, stars stream past, the ship banks toward the cursor ---- */
+    fly: function (el, st) {
+      var cv = el.querySelector('canvas'), ctx = cv.getContext('2d'), ship = el.querySelector('.ship'),
+          plumes = el.querySelectorAll('.plume'), thrEl = el.querySelector('.thr');
+      var stars = [], thr = 0, t = 0, W = 0, Hh = 0, dx = Math.cos(15 * Math.PI / 180), dy = Math.sin(15 * Math.PI / 180);
+      for (var i = 0; i < 70; i++) stars.push({ x: Math.random(), y: Math.random(), z: 0.25 + Math.random() * 0.75 });
+      function size() {
+        var r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
+        if (Math.round(r.width * d) !== cv.width || Math.round(r.height * d) !== cv.height) {
+          cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d);
+        }
+        W = cv.width; Hh = cv.height;
+      }
+      return {
+        step: function (dt) {
+          t += dt;
+          var want = (st.on || st.auto) ? 0.78 + 0.22 * clamp((st.sx + 1) / 2, 0, 1) : 0;   // cursor toward the plume side = more thrust
+          thr = ease(thr, want, want > thr ? 2.6 : 3.4, dt);
+          var sp = 0.025 + 0.85 * thr;
+          for (var i = 0; i < stars.length; i++) {
+            var p = stars[i];
+            p.x += dx * sp * p.z * dt; p.y += dy * sp * p.z * dt * 1.25;
+            if (p.x > 1.05 || p.y > 1.05) { if (Math.random() < 0.5) { p.x = -0.05; p.y = Math.random(); } else { p.x = Math.random(); p.y = -0.05; } }
+          }
+          return thr > 0.004 || st.on || st.auto;
+        },
+        draw: function () {
+          size();
+          ctx.clearRect(0, 0, W, Hh);
+          var sp = 0.025 + 0.85 * thr;
+          ctx.lineCap = 'round';
+          for (var i = 0; i < stars.length; i++) {
+            var p = stars[i], x = p.x * W, y = p.y * Hh, len = (2 + sp * p.z * 90) * (W / 500);
+            ctx.strokeStyle = 'rgba(255,255,255,' + (0.18 + 0.5 * p.z).toFixed(3) + ')';
+            ctx.lineWidth = (0.6 + p.z) * (W / 500);
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - dx * len, y - dy * len); ctx.stroke();
+          }
+          var bank = st.sy * 4 + Math.sin(t * 1.4) * 0.8 * thr, lift = st.sy * 2.2 + Math.sin(t * 1.1) * 0.9 * thr;
+          ship.style.transform = 'translate(' + (-st.sx * 1.6 - thr * 1.2).toFixed(2) + '%,' + lift.toFixed(2) + '%) rotate(' + bank.toFixed(2) + 'deg)';
+          for (var j = 0; j < plumes.length; j++) {
+            var fl = 0.86 + 0.09 * Math.sin(t * 37 + j * 2.1) + 0.06 * Math.sin(t * 61 + j * 1.3) + 0.05 * Math.sin(t * 13 + j);
+            plumes[j].style.transform = 'rotate(var(--na)) scaleX(' + (thr * fl).toFixed(3) + ') scaleY(' + (0.75 + 0.25 * thr).toFixed(3) + ')';
+            plumes[j].style.opacity = Math.min(1, thr * 1.4).toFixed(3);
+          }
+          if (thrEl) thrEl.textContent = Math.round(thr * 100);
+        }
+      };
+    }
+  };
+
+  els.forEach(function (el) {
+    var kind = el.getAttribute('data-anim'), card = el.closest('.card') || el;
+    var st = { on: false, auto: false, tx: 0, ty: 0, sx: 0, sy: 0, vx: 0, vy: 0, raf: 0, last: 0 };
+    var sim = SIMS[kind] && SIMS[kind](el, st);
+    if (!sim) return;
+    sim.draw();
+    if (reduce) return;
+    function loop(now) {
+      var dt = st.last ? Math.min(0.05, (now - st.last) / 1000) : 1 / 60; st.last = now;
+      // critically damped follow of the pointer (smooth, no overshoot), like a lerp but frame-rate independent
+      var k = 60, c = 2 * Math.sqrt(k);
+      st.vx += (k * (st.tx - st.sx) - c * st.vx) * dt; st.sx += st.vx * dt;
+      st.vy += (k * (st.ty - st.sy) - c * st.vy) * dt; st.sy += st.vy * dt;
+      el.style.setProperty('--px', st.sx.toFixed(4)); el.style.setProperty('--py', st.sy.toFixed(4));
+      var busy = sim.step(dt);
+      sim.draw();
+      var moving = Math.abs(st.tx - st.sx) > 0.002 || Math.abs(st.ty - st.sy) > 0.002 || Math.abs(st.vx) + Math.abs(st.vy) > 0.004;
+      if (st.on || st.auto || busy || moving) st.raf = requestAnimationFrame(loop);
+      else { st.raf = 0; st.last = 0; }
+    }
+    function kick() { if (!st.raf) st.raf = requestAnimationFrame(loop); }
+    function point(e) {
+      var r = el.getBoundingClientRect();
+      st.tx = clamp((e.clientX - r.left) / r.width * 2 - 1, -1, 1); st.ty = clamp((e.clientY - r.top) / r.height * 2 - 1, -1, 1);
+      el.style.setProperty('--mx', (e.clientX - r.left).toFixed(0) + 'px'); el.style.setProperty('--my', (e.clientY - r.top).toFixed(0) + 'px');
+    }
+    card.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse' || e.pointerType === 'pen') { st.on = true; point(e); kick(); } });
+    card.addEventListener('pointermove', function (e) { if (st.on) { point(e); kick(); } });
+    card.addEventListener('pointerleave', function () { st.on = false; st.tx = 0; st.ty = 0; kick(); });
+    card.addEventListener('focusin', function () { st.auto = true; kick(); });
+    card.addEventListener('focusout', function () { st.auto = false; kick(); });
+    if (!canHover && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { st.auto = es[0].isIntersecting; kick(); }, { threshold: 0.55 }).observe(card);
+    }
+  });
 })();

@@ -9,6 +9,7 @@ CAD  (.step .stp .stl .obj .3mf .glb .gltf, or a .zip holding one of them)
   -> media/SLUG.webp    a studio render, shown until the model loads (and without JavaScript)
      --up z|y           which axis points up in the source (Onshape: z, SolidWorks: y). Default z.
      --finish NAME      repaint every part: aluminum, steel, dark, white. Default: keep CAD colors.
+     --yaw DEG          turn the model about the vertical axis (e.g. 180 so lettering reads from the default view).
      --tol N            mesh tolerance in model units (smaller = smoother, bigger file). Default 0.05.
      --orbit "θ φ r"    starting camera, e.g. "-35deg 65deg auto".
 
@@ -33,10 +34,10 @@ LIMIT = 24 * 1024 * 1024
 CAD = ('.step', '.stp', '.stl', '.obj', '.3mf', '.glb', '.gltf')
 VIDEO = ('.mov', '.mp4', '.m4v', '.webm', '.mkv', '.avi')
 FINISHES = {  # base color (linear-ish sRGB 0-1), metallic, roughness
-    'aluminum': ([0.80, 0.81, 0.83, 1], 0.85, 0.38),
+    'aluminum': ([0.66, 0.67, 0.69, 1], 0.92, 0.30),
     'steel':    ([0.62, 0.63, 0.65, 1], 0.90, 0.30),
     'dark':     ([0.10, 0.10, 0.11, 1], 0.40, 0.45),
-    'white':    ([0.90, 0.90, 0.89, 1], 0.00, 0.55),
+    'white':    ([0.62, 0.63, 0.65, 1], 0.00, 0.38),   # satin white (reads as white under the studio light)
 }
 
 
@@ -66,7 +67,7 @@ def unzip_first(path, tmp):
 
 
 # ------------------------------------------------------------------ CAD
-def to_glb(src, out, tol, up, finish):
+def to_glb(src, out, tol, up, finish, yaw=0.0):
     import trimesh, numpy as np
     ext = os.path.splitext(src)[1].lower()
     raw = out + '.raw.glb'
@@ -79,6 +80,8 @@ def to_glb(src, out, tol, up, finish):
     os.remove(raw)
     if up == 'z':  # glTF is y-up; most CAD (Onshape, STEP) is z-up
         scene.apply_transform(trimesh.transformations.rotation_matrix(-np.pi / 2, [1, 0, 0]))
+    if yaw:  # turn about the vertical (y) axis, through the model's center
+        scene.apply_transform(trimesh.transformations.rotation_matrix(np.radians(yaw), [0, 1, 0], scene.centroid))
     for g in scene.geometry.values():
         if not isinstance(g, trimesh.Trimesh):
             continue  # sketch curves and other wire geometry: no surface to shade
@@ -97,7 +100,7 @@ def to_glb(src, out, tol, up, finish):
             c = np.asarray(c if c is not None else [200, 200, 200, 255], dtype=float) / 255.0
             lin = [((v + 0.055) / 1.055) ** 2.4 if v > 0.04045 else v / 12.92 for v in c[:3]]
             g.visual = trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
-                baseColorFactor=lin + [float(c[3])], metallicFactor=0.0, roughnessFactor=0.5, doubleSided=False))
+                baseColorFactor=lin + [float(c[3])], metallicFactor=0.0, roughnessFactor=0.42, doubleSided=False))
     scene.export(out, include_normals=True)
     return os.path.getsize(out), len(scene.geometry)
 
@@ -111,7 +114,7 @@ def do_model(src, slug, a):
     out = os.path.join(MEDIA, slug + '.glb')
     tol = a.tol
     for _ in range(5):
-        size, parts = to_glb(src, out, tol, a.up, a.finish)
+        size, parts = to_glb(src, out, tol, a.up, a.finish, a.yaw)
         print(f'{slug}.glb: {size / 1048576:.1f} MB, {parts} parts (tolerance {tol:g})')
         if size <= LIMIT: break
         tol *= 2.5
@@ -189,6 +192,7 @@ def main():
     ap.add_argument('--finish', choices=sorted(FINISHES))
     ap.add_argument('--tol', type=float, default=0.05)
     ap.add_argument('--orbit')
+    ap.add_argument('--yaw', type=float, default=0.0)
     ap.add_argument('--loop', action='store_true')
     ap.add_argument('--start', type=float); ap.add_argument('--end', type=float)
     ap.add_argument('--poster-at', type=float, dest='poster_at')
