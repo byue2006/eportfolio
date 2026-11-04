@@ -35,3 +35,5 @@ node_modules
 /*.docx
 /*.pptx
 !/apple-touch-icon.png
+/*.pdf
+!/resume.pdf

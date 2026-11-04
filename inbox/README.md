@@ -47,7 +47,7 @@ Each photo comes out around 1–3 MB, well under the limit. Upload those exporte
 
 **Nice to have.** Each one adds a photo to a page that doesn't have one there yet:
 
-- [ ] **Forward closure:** the motor on the pad, the hot fire or launch, or the finished machined part.
+- [x] **Forward closure:** done, the April 2026 static hot fire.
 - [x] **TTBW paper:** done, three photos from AIAA AVIATION 2026. (A photo of you *at the podium* would still be great.)
 - [ ] **Happy Meal train:** the Duke 2025 Toy Fair: your booth, poster, costume, or the toy video.
 - [ ] **ISSDC:** the team at Kennedy Space Center, or the award. Also the **ISSDC logo**, if you have one (the ISSDC one, not the American SSDC one).
