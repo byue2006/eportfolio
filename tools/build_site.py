@@ -960,9 +960,14 @@ def about():
 STARS = '<circle cx="162" cy="60" r="0.6" opacity="0.18"/><circle cx="268" cy="146" r="0.6" opacity="0.56"/><circle cx="107" cy="34" r="1.2" opacity="0.18"/><circle cx="45" cy="170" r="1.6" opacity="0.21"/><circle cx="112" cy="251" r="0.6" opacity="0.41"/><circle cx="198" cy="391" r="0.6" opacity="0.40"/><circle cx="67" cy="168" r="1.6" opacity="0.20"/><circle cx="154" cy="326" r="0.8" opacity="0.20"/><circle cx="286" cy="75" r="0.6" opacity="0.40"/><circle cx="31" cy="24" r="0.8" opacity="0.37"/><circle cx="266" cy="311" r="1.2" opacity="0.41"/><circle cx="227" cy="120" r="0.8" opacity="0.46"/><circle cx="122" cy="230" r="1.6" opacity="0.37"/><circle cx="172" cy="180" r="1.6" opacity="0.59"/><circle cx="59" cy="167" r="1" opacity="0.22"/><circle cx="244" cy="16" r="0.6" opacity="0.49"/><circle cx="287" cy="350" r="1" opacity="0.30"/><circle cx="175" cy="199" r="1.2" opacity="0.18"/><circle cx="47" cy="108" r="0.6" opacity="0.18"/><circle cx="351" cy="259" r="1.2" opacity="0.28"/><circle cx="193" cy="267" r="0.6" opacity="0.57"/><circle cx="178" cy="244" r="1.2" opacity="0.18"/><circle cx="384" cy="52" r="0.8" opacity="0.33"/><circle cx="458" cy="199" r="0.8" opacity="0.35"/><circle cx="275" cy="353" r="1.2" opacity="0.54"/><circle cx="139" cy="166" r="1" opacity="0.46"/><circle cx="190" cy="92" r="0.6" opacity="0.23"/><circle cx="116" cy="93" r="1.2" opacity="0.52"/><circle cx="91" cy="113" r="0.8" opacity="0.34"/><circle cx="185" cy="227" r="0.8" opacity="0.46"/><circle cx="258" cy="247" r="0.6" opacity="0.36"/><circle cx="435" cy="381" r="1.6" opacity="0.33"/><circle cx="199" cy="41" r="1.2" opacity="0.18"/><circle cx="34" cy="84" r="0.8" opacity="0.20"/><circle cx="300" cy="41" r="1.6" opacity="0.22"/><circle cx="51" cy="145" r="0.6" opacity="0.18"/><circle cx="104" cy="150" r="1" opacity="0.58"/><circle cx="301" cy="190" r="0.6" opacity="0.53"/><circle cx="497" cy="186" r="1.2" opacity="0.29"/><circle cx="72" cy="300" r="1" opacity="0.37"/><circle cx="346" cy="207" r="0.8" opacity="0.58"/><circle cx="264" cy="59" r="1.6" opacity="0.56"/><circle cx="379" cy="119" r="0.6" opacity="0.46"/><circle cx="131" cy="147" r="0.8" opacity="0.31"/><circle cx="111" cy="217" r="1.6" opacity="0.30"/><circle cx="112" cy="325" r="0.8" opacity="0.51"/>'
 
 def _anim_frame(kind, inner, labels):
-    """Shared shell: parallax starfield/grid layer, cursor spotlight, the scene, corner labels."""
-    return (f'<span class="spot" aria-hidden="true"></span>{inner}'
-            f'<span class="hud-k tl">{labels[0]}</span><span class="hud-k bl">{labels[1]}</span><span class="hud-k br">{labels[2]}</span>')
+    """Shared shell: cursor spotlight, the scene, and corner labels. The labels are SVG text in the same 500 x 400 frame as
+    the art, so they scale with the card and stay put even when a visitor's browser enlarges small text."""
+    tl, bl, br = labels
+    hud = (f'<svg class="anim-svg hud" viewBox="0 0 500 400" aria-hidden="true" focusable="false">'
+           f'<text x="25" y="40" class="hk">{tl}</text><text x="25" y="374" class="hk">{bl}</text>'
+           f'<text x="475" y="374" class="hk end">{br}</text></svg>')
+    return f'<span class="spot" aria-hidden="true"></span>{inner}{hud}'
+
 
 def anim_iss():
     trail = ''.join('<line x1="0" y1="0" x2="0" y2="0"/>' for _ in range(28))
@@ -980,7 +985,7 @@ def anim_iss():
     <g class="iss-st" transform="translate(161.3 94.3)"><circle r="16" fill="url(#iss-flare)" class="iss-flare" opacity="0"/><circle r="5" class="iss-dot"/></g>
   </g>
 </svg>'''
-    return _anim_frame('iss', inner, ('Team SkyFall · EGR 105', 'Alt <b class="alt">420</b> km', 'Gravity + drag · RK4'))
+    return _anim_frame('iss', inner, ('Team SkyFall · EGR 105', 'Alt <tspan class="hv alt">420</tspan> km', 'Gravity + drag · RK4'))
 
 def anim_snap():
     top_arm = '<polygon points="110,96 374,96 374,112 362,128 351,128 343,114 134,119"/>'
@@ -1009,7 +1014,7 @@ def anim_vanguard(src, alt):
     plumes = ''.join(f'<span class="plume" style="--nx:{x}%;--ny:{y}%;--na:{a}deg"></span>' for x, y, a in VANGUARD_NOZZLES)
     inner = (f'<canvas class="warp" aria-hidden="true"></canvas>'
              f'<div class="ship"><img src="{{{{P}}}}{src}" loading="lazy" alt="{esc(alt)}">{plumes}</div>')
-    return _anim_frame('fly', inner, ('Duke Vanguard · 1:1.7', 'Onshape · PLA', 'Thrust <b class="thr">0</b>%'))
+    return _anim_frame('fly', inner, ('Duke Vanguard · 1:1.7', 'Onshape · PLA', 'Thrust <tspan class="hv thr">0</tspan>%'))
 
 # ---------------------------------------------------------------- smaller work (its own page + a row of cards on home)
 SMALL = [

@@ -692,9 +692,11 @@ dialog.lb::backdrop { background: rgba(8, 8, 9, .92); -webkit-backdrop-filter: b
 .a-dark .spot { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .5s var(--ease);
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 40%), rgba(240, 138, 75, .13), rgba(240, 138, 75, 0) 38%); mix-blend-mode: screen; }
 .card.mini:hover .a-dark .spot { opacity: 1; }
-.a-dark .hud-k { position: absolute; z-index: 4; font: 500 clamp(8.5px, 2.85cqw, 11px)/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .5); pointer-events: none; }
-.a-dark .hud-k b { font-weight: 500; color: rgba(255, 255, 255, .88); font-variant-numeric: tabular-nums; }
-.a-dark .hud-k.tl { left: 5%; top: 6.5%; } .a-dark .hud-k.bl { left: 5%; bottom: 6.5%; } .a-dark .hud-k.br { right: 5%; bottom: 6.5%; }
+.a-dark .anim-svg.hud { z-index: 4; pointer-events: none; }
+.a-dark .hk { font: 500 14.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; fill: rgba(255, 255, 255, .5);
+  paint-order: stroke; stroke: #0d0e10; stroke-width: 4px; stroke-linejoin: round; }
+.a-dark .hk .hv { fill: rgba(255, 255, 255, .9); font-variant-numeric: tabular-nums; }
+.a-dark .hk.end { text-anchor: end; }
 /* parallax: the far layer drifts against the pointer, the near layer a little with it */
 .a-dark .par.far { transform: translate(calc(var(--px, 0) * -9px), calc(var(--py, 0) * -7px)); }
 .a-dark .par.near { transform: translate(calc(var(--px, 0) * 4px), calc(var(--py, 0) * 3px)); }
