@@ -32,7 +32,7 @@ PROJ = ['forward-closure', 'happy-meal', 'playseat']
 LEAD = ['issdc', 'teaching', 'coaching']
 ORDER = [('work', s) for s in EXPER + PROJ] + [('leadership', s) for s in LEAD]
 GROUP_OF = {}
-for _name, _lst in (('Experience', EXPER), ('Project', PROJ), ('Leadership', LEAD)):
+for _name, _lst in (('Work', EXPER + PROJ), ('Leadership', LEAD)):
     for _i, _s in enumerate(_lst):
         GROUP_OF[_s] = (_name, _i + 1, len(_lst))
 
@@ -338,7 +338,7 @@ P_['forward-closure'] = dict(
     ('contribution', 'My contribution', '''<p class="contrib">I drove the redesign and did the modeling, the analysis, and the fastener and sealing evaluation. Machining was shared with teammates. The thermal and mechanical loads came from our team lead by way of OpenRocket, and teammates produced the final drawings.</p>'''),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>Consolidating all three into one part cut part count by 67% and eliminated two machining setups.</p>
 <p>The real work was deciding what each of the three roles absolutely needed and what was negotiable, and the hard part was the ports. A flight closure wants to be solid; a test closure needs instrumentation and fill ports. I merged the hydrostatic and hot fire ports into a single port that is sealed for flight, so one part can serve all three roles without compromising the one that matters.</p>
-<p>I modeled it in Onshape, ran SolidWorks Simulation on a preliminary design to check factor of safety under flight loads, and ran a trade study across commercial fasteners and sealing configurations from several suppliers, weighing manufacturability against the combustion chamber's specified thermal and mechanical loads.</p></div>
+<p>I modeled it in Onshape, ran SolidWorks Simulation on a preliminary design to check factor of safety under flight loads, and ran a trade study comparing fastener patterns and seal configurations against the combustion chamber's specified thermal and mechanical loads and our assembly constraints, weighing manufacturability throughout.</p></div>
 <div class="figs">''' + row(fig('images/closure-section.webp', 'Half-section CAD view of the closure showing the bore, seal grooves, and threaded holes.', 'Fig. 2', 'Section view of the final design.', 685, 619, group='closure'),
                        fig('images/closure-port.webp', 'Section through the closure showing an L-shaped internal passage from the face to the side port.', 'Fig. 3', 'Section through the merged hydrostatic / hot fire port.', 696, 450, group='closure')) + '</div>'),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>My teammates and I machined the final parts on a lathe, drill press, and mill. The motor flew.</p></div>
@@ -418,41 +418,41 @@ P_['happy-meal'] = dict(
 P_['playseat'] = dict(
   kind='work', num='04', cat='Assistive device', year='2024',
   title='Accessible PlaySeat', card_title='Accessible PlaySeat',
-  lede='A mobile play seat for a three-year-old, where one fit test moved the wheels and six tests proved the rest.',
+  lede='A mobile play seat for a three-year-old, where one fit test moved the wheels and every requirement got a pass/fail test.',
   tags=['User testing', 'Fabrication', 'Requirements'],
   thumb=dict(kind='img', src='images/playseat-iso.webp', mode='cover', pos='45% 55%', alt='The finished PlaySeat with its tray'),
   meta=[('Role', 'Seating structure, fabrication'), ('When', 'September – December 2024'), ('Team', 'Team P-Play, 4 people · EGR 101'), ('Advisor', 'Dr. George Delagrammatikas')],
   lead=lead('images/playseat-iso.webp', 'The finished PlaySeat outdoors: a padded seat with a five-point harness on a white base, a clamp-on tray, a large three-spoke side wheel, and a black faux carbon-fiber front wing over the leg padding.',
             'Fig. 1', 'The finished chair, with its clamp-on tray.', 2000, 1500, mode='cover', group='playseat', pos='50% 58%'),
-  glance=[('Timeline', '11 weeks, concept to delivery'), ('Verification', 'Fit test with client and caregivers; six pass/fail tests against target values'),
+  glance=[('Timeline', '11 weeks, concept to delivery'), ('Verification', 'Fit test with client and caregivers; six pass/fail tests against target values, one by proxy'),
           ('Change from testing', 'Drive wheels moved forward, rear wheels added'), ('Weight', '15.72 lb (target 20 lb or less)'),
           ('Materials', 'Plastic, polycarbonate, vinyl wrap'), ('Processes', 'Laser cutting, acrylic bending, manual machining')],
   sections=[
-    ('challenge', 'The challenge', '''<div class="prose"><p>A three-year-old with spinal conditions needed more upper-body support than any wheelchair on the market gave him, and without it he couldn't play with the other kids in his classroom. Our job over eleven weeks was to turn what he and his caregivers needed into requirements we could design and test against.</p>
+    ('challenge', 'The challenge', '''<div class="prose"><p>A three-year-old with spinal conditions needed more upper-body support than any wheelchair on the market gave him, and without it he couldn't play with the other kids in his classroom. Our job over eleven weeks was the full requirements loop: elicit what he and his caregivers needed, decompose it into requirements with measurable targets, design to them, and verify each one.</p>
 <p>The chair had to let him reach the ground to play with toys on the floor, right himself after leaning, move on his own and get over obstacles, keep up with his peers, and be something he actually enjoyed sitting in.</p></div>'''),
-    ('contribution', 'My contribution', '''<p class="contrib">I worked on the seating structure design and the fabrication, and shared the requirements work and the testing with my teammates Anna Karius, Ethan Liao, and Julia Morgan.</p>'''),
+    ('contribution', 'My contribution', '''<p class="contrib">I worked on the seating structure design and the fabrication, and shared requirements elicitation and verification testing with my teammates Anna Karius, Ethan Liao, and Julia Morgan.</p>'''),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>We started from a booster highchair with a removable base and built around it: a five-point harness and foam padding for support, side wheels he can push himself, front casters so it turns in place, a cane attachment so caregivers can push him, and a clamp-on tray. He loves Formula 1, so it also got a faux carbon-fiber rear spoiler and front wing, which is how "not clinical" turned into a design requirement.</p>
-<p>A prototype fit test showed he couldn't reach the push rims. That was a requirement we had written down and gotten wrong. Moving the drive wheels forward fixed the reach and shifted the center of gravity, so we added rear wheels to offset it. One test invalidated an assumption, the fix created a second problem, and we fixed that too, all inside an eleven-week build.</p></div>
+<p>A prototype fit test, our first validation against the real user, showed he couldn't reach the push rims. That was a requirement we had written down and gotten wrong. Moving the drive wheels forward fixed the reach and shifted the center of gravity, so we added rear wheels to offset it. One test invalidated an assumption, the fix created a second problem, and we fixed that too, all inside an eleven-week build.</p></div>
 <div class="figs">''' + row(fig('images/playseat-wheel.webp', "Close-up side view of the final chair's large three-spoke wheel, footrest, and small front caster.", 'Fig. 2', 'Three-spoke side wheel he propels himself, and a front caster for turning in place.', 1400, 965, group='playseat'),
                        fig('images/playseat-rear.webp', 'Rear view of the chair: a black faux carbon-fiber spoiler bolted across the seat back, and a grey mount holding a black cane.', 'Fig. 3', 'Rear view: the faux carbon-fiber spoiler and the cane mount.', 1200, 1600, mode='cover', group='playseat')) + '</div>'),
-    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>We tested the finished chair against every requirement with a target value. All six passed, and the chair was delivered to the client at the end of the build.</p></div>
+    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>We verified the finished chair against every requirement with a target value. All six passed: five directly, and durability by proxy, since two years of service can't be tested in eleven weeks. The chair was delivered to the client at the end of the build.</p></div>
 <div class="figs" data-reveal><div class="vtable-wrap"><table class="vtable">
   <thead><tr><th scope="col">Criterion</th><th scope="col">Target</th><th scope="col">Test</th><th scope="col">Result</th></tr></thead>
   <tbody>
-    <tr><th scope="row">Safety</th><td data-label="Target">No reachable gaps of 15 mm or more</td><td data-label="Test">Measured every gap he could reach</td><td data-label="Result"><span class="pass">Pass</span> None 15 mm or larger</td></tr>
+    <tr><th scope="row">Safety</th><td data-label="Target">No reachable gaps of 0.6 in (15 mm) or more</td><td data-label="Test">Measured every gap he could reach</td><td data-label="Result"><span class="pass">Pass</span> None 0.6 in or larger</td></tr>
     <tr><th scope="row">Support</th><td data-label="Target">Holds his head 80–100° from the ground</td><td data-label="Test">He leaned away from vertical and tried to return upright</td><td data-label="Result"><span class="pass">Pass</span> Stayed upright</td></tr>
     <tr><th scope="row">Mobility</th><td data-label="Target">10 ft or more in 20 s</td><td data-label="Test">Pushed across carpet, tile, concrete, and over toys</td><td data-label="Result"><span class="pass">Pass</span> All surfaces</td></tr>
-    <tr><th scope="row">Aesthetics</th><td data-label="Target">His rating of 4 or more</td><td data-label="Test">He rated it on a scale he defined</td><td data-label="Result"><span class="pass">Pass</span> 4, and visibly enjoyed it</td></tr>
-    <tr><th scope="row">Durability</th><td data-label="Target">Lasts 2 years or more</td><td data-label="Test">Accelerated drop test</td><td data-label="Result"><span class="pass">Pass</span> Survived drops up to 4 ft</td></tr>
+    <tr><th scope="row">Aesthetics</th><td data-label="Target">A rating of 4 or more from him</td><td data-label="Test">He rated it on a scale he set himself</td><td data-label="Result"><span class="pass">Pass</span> 4, and visibly enjoyed it</td></tr>
+    <tr><th scope="row">Durability</th><td data-label="Target">2 or more years of service</td><td data-label="Test">Verified by proxy: drop tests up to 4 ft, the most severe case we could run in 11 weeks</td><td data-label="Result"><span class="pass proxy">Proxy</span> Survived every drop. Service life itself was not tested.</td></tr>
     <tr><th scope="row">Weight</th><td data-label="Target">20 lb or less</td><td data-label="Test">Crane scale</td><td data-label="Result"><span class="pass">Pass</span> 15.72 lb</td></tr>
   </tbody>
 </table></div></div>
 <div class="figs">''' + row(fig('images/playseat-cane.webp', 'A black cane clamped into a grey 3D-printed mount on the back of the chair.', 'Fig. 4', 'The cane attachment lets a caregiver push the seat…', 1600, 1200, mode='cover', group='playseat'),
                        fig('images/playseat-cane-out.webp', 'The same mount with the cane lifted out, showing its two metal clamps.', 'Fig. 5', '…and lifts out of its printed mount.', 1600, 1200, mode='cover', group='playseat'),
                        fig('images/playseat-poster.webp', 'Team poster titled Creating an Accessible Seating Solution, with sections for motivation, project goals, design blocks, the final design with labeled features, the design criteria and testing table, conclusions, and acknowledgements.', 'Fig. 6', 'Our final poster. Click to read it full size.', 2400, 2400, group='playseat')) + '</div>'),
-    ('reflection', 'Reflection', '''<div class="prose"><p>It's the smallest project here and the one that taught me the most about verification. A requirement you haven't tested against the real user is a guess written in a confident font.</p>
+    ('reflection', 'Reflection', '''<div class="prose"><p>It's the smallest project here and the one that taught me the most about requirements and verification. A requirement you haven't tested against the real user is a guess written in a confident font. And a test isn't always the requirement: a drop test can stand in for two years of service, but it doesn't prove it, so the table says so.</p>
 <p>The next change would be foam inserts that come out more easily, so the seat can be resized as he grows.</p></div>'''),
-    ('skills', 'Skills', tags(['Requirements definition', 'User testing', 'Verification testing', 'Ergonomics', 'Laser cutting', 'Acrylic bending', 'Manual machining', 'Teamwork'])),
+    ('skills', 'Skills', tags(['Requirements elicitation', 'Requirements decomposition', 'Verification testing', 'User testing', 'Ergonomics', 'Laser cutting', 'Acrylic bending', 'Manual machining', 'Teamwork'])),
   ])
 
 P_['issdc'] = dict(
@@ -468,7 +468,8 @@ P_['issdc'] = dict(
           ('Format', 'Assigned team, RFP, 24–48 hours'), ('Judges', 'Former NASA engineers')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>The International Space Settlement Design Competition runs like an industry proposal shop. A team is assigned, not chosen, an RFP lands, and a complete settlement design and presentation are due in 24 to 48 hours, then defended in front of judges who are former NASA engineers.</p></div>'''),
-    ('contribution', 'My contribution', '''<p class="contrib">On <strong>Bellevistat</strong>, Team Bread's proposal for the 30th ISSDC (2022–23), I designed nearly all of the operations and infrastructure section, including its construction and repair robots. On <strong>Alaskol</strong>, DAFC's lunar settlement (2023), I designed the atmosphere. I also built the team's design database and documented team strategy, which later teams worked from.</p>'''),
+    ('contribution', 'My contribution', '''<p class="contrib">On <strong>Bellevistat</strong>, Team Bread's proposal for the 30th ISSDC (2022–23), I designed nearly all of the operations and infrastructure section, including its construction and repair robots. On <strong>Alaskol</strong>, DAFC's lunar settlement (2023), I designed the atmosphere. I also built the team's design database and documented team strategy, which later teams worked from.</p>
+<p class="contrib"><strong>Not mine:</strong> on Bellevistat, the structural, human factors, automation, and schedule and cost sections, though I added tables and figure labels to some of them; Kelly Wang built the 3D models of my robots. On Alaskol, everything but the atmosphere.</p>'''),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>Bellevistat is an orbital settlement for 7,850 people, built mostly by assembling prefabricated modules in orbit. The robots that do that assembly were my design, built the way I'd build hardware now: start from a part you can buy, then design around it.</p>
 <p>The base is the F1M8, a multipurpose industrial robot offered by one of the competition's vendors, so effectively a COTS part. I configured it as a dual-mode welding robot: it flies in zero gravity on RCS thrusters and crawls along the hull on magnetic tank treads, so it only spends propellant when it has to. It carries two laser welders, each with an oxygen sprayer so the weld works in vacuum, and a magnetic clamp holds the two sections together while it welds. The robots ship as modules with magnets on their mating faces and assemble themselves on arrival.</p>
 <p>Once construction ends, the same fleet becomes the settlement's ship-repair service. Swapping parts turns each robot into one of three types, eleven of each per fleet: cutting bots that remove damaged modules from a docked ship, grabber bots that fetch spares from cargo and hold them in place, and welding bots that attach them. Repurposing the construction fleet instead of building a second one kept the cost down.</p></div>
@@ -478,14 +479,16 @@ P_['issdc'] = dict(
 <div class="prose" style="margin-top:32px"><p>I also sized the settlement's life support and power from per-person and per-area assumptions:</p>
 <ul>
   <li><strong>Air:</strong> an Earth-normal mix at 0.75 atm across 4.29 × 10⁸ m³ of pressurized volume, which works out to roughly 11,400 cargo containers of gas.</li>
-  <li><strong>Power:</strong> 1.12 × 10⁸ kWh per day, met by 3.37 × 10⁶ m² of solar panels with a reactor as backup.</li>
+  <li><strong>Power:</strong> 1.12 × 10⁸ kWh per day, summed from residential, industrial, agricultural, and warehouse demand, met by 3.37 × 10⁶ m² of solar panels with a reactor as backup. The panel area uses the competition program book's figure of 1.39 kW of electricity per m² of panel.</li>
 </ul>
-<p>Alaskol sits on the Moon next to mining operations. I gave each sector its own atmosphere: residential air at 28% oxygen, industrial and agricultural air close to Earth-normal, carbon dioxide raised to 0.15% in the agricultural unit, and humidity set per sector at 50, 40, and 70%. Residential areas also run a three-season climate calendar. Like every choice in a proposal, the composition had to be defended against the alternatives.</p></div>
+<p>Rechecking that power figure now: 1.39 kW per m² is about all the sunlight that reaches a panel near Earth, so it assumes the panels convert nearly all of it. At a realistic 30% efficiency the same load needs about 1.1 × 10⁷ m², roughly 3.4 times the area. That's the check I'd run now before using a number someone hands me.</p>
+<p>Alaskol sits on the Moon next to mining operations. I gave each sector its own atmosphere: residential air at 28% oxygen, industrial and agricultural air close to Earth-normal, carbon dioxide raised to 0.15% in the agricultural unit, and humidity set per sector at 50, 40, and 70%. Residential areas also run a three-season climate calendar. Like every choice in a proposal, the composition had to be defended against the alternatives.</p>
+<p>One gap I'd close now: the slide gives the mix but not the total pressure, and 28% oxygen only makes sense with one. At sea-level pressure it's a fire risk. At a reduced cabin pressure it's the right call, because it holds the oxygen partial pressure near Earth's: 28% of 0.75 atm is 0.21 atm, the same as sea level. I'd state the pressure first.</p></div>
 <div class="figs">''' + row(fig('images/issdc-bread-atmosphere.webp', 'Proposal page on community infrastructure with an air composition table and food production text.', 'Fig. 5', 'Bellevistat air composition and amounts.', 1100, 1424, group='issdc'),
                        fig('images/issdc-bread-power.webp', 'Proposal page with initial food quantity and power distribution tables.', 'Fig. 6', 'Bellevistat power budget.', 1100, 1424, group='issdc'),
                        fig('images/issdc-alaskol-atmosphere.webp', 'Proposal slide titled Atmosphere: a table of nitrogen, oxygen, carbon dioxide, and humidity for residential, industrial, and agricultural sectors, and a table of residential seasons.', 'Fig. 7', 'Alaskol atmosphere: gas mix by sector and the season calendar.', 1600, 900, group='issdc')) + '</div>'),
     ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>I led a team to the Asia Regional Finals twice, was invited onto the Chinese national team for the 2022–23 Global Championship, and was named a Global Champion at Kennedy Space Center. After aging out as a competitor, I came back as a student advisor.</p></div>
-<div class="figs">''' + row(fig('images/issdc-presenting.webp', 'A video-call screenshot of a slide titled 5.3 Automation Devices showing a cleaning bot, delivery bot, and butler bot, with Brian Yue speaking in a video tile at the top right.', 'Fig. 8', 'Presenting for our company, Grumbo (that\'s me, top right). The robots on this slide are teammates\' designs.', 1728, 1080, group='issdc'),
+<div class="figs">''' + row(fig('images/issdc-presenting.webp', 'A video-call screenshot of a slide titled 5.3 Automation Devices showing a cleaning bot, delivery bot, and butler bot, with Brian Yue speaking in a video tile at the top right.', 'Fig. 8', 'Presenting for Grumbo, the fictional aerospace company ISSDC assigned our team (that\'s me, top right). The robots on this slide are teammates\' designs.', 1728, 1080, group='issdc'),
                        fig('images/issdc-alaskol-cover.webp', 'Title slide: ALASKOL, with a domed lunar habitat and the DAFC logo.', 'Fig. 9', 'Alaskol title slide. Art by teammates.', 1600, 900, mode='cover', group='issdc')) + '</div>'),
     ('reflection', 'Reflection', '''<div class="prose"><p>You hand off work and trust it comes back, and you decide fast which parts of the problem are worth the time you have left. That carries straight over to engineering.</p></div>'''),
     ('skills', 'Skills', tags(['Robotics concept design', 'COTS integration', 'Operations planning', 'Life-support sizing', 'Trade studies', 'Technical writing', 'Team leadership', 'Presenting to judges'])),
@@ -496,12 +499,12 @@ P_['teaching'] = dict(
   title='Undergraduate Teaching Assistant', card_title='Teaching assistant, EGR 105 & ME 221',
   lede='Teaching EGR 105, Computing for Engineers, and grading for ME 221, Structure and Properties of Solids.',
   tags=['EGR 105', 'ME 221', 'Mentoring'],
-  thumb=dict(kind='type', big='EGR 105', cap='Computing for Engineers · two years'),
+  thumb=dict(kind='type', big='EGR 105', cap='Computing for Engineers · since 2025'),
   meta=[('Role', 'Undergraduate TA'), ('When', 'August 2025 – present'), ('Courses', 'EGR 105 (teaching), ME 221 (grading)'), ('Where', 'Duke University')],
   lead='',
-  glance=[('EGR 105', 'Computing for Engineers, two years: office hours, lab sections, one-on-one sessions'), ('ME 221', 'Structure & Properties of Solids, one year: grading')],
+  glance=[('EGR 105', 'Computing for Engineers, since fall 2025: office hours, lab sections, one-on-one sessions'), ('ME 221', 'Structure & Properties of Solids: grading')],
   sections=[
-    ('challenge', 'The role', '''<div class="prose"><p>I'm a teaching assistant for EGR 105, Computing for Engineers, for two years, and ME 221, Structure and Properties of Solids, for one. In EGR 105, students come in with very different backgrounds, and the work spans coding projects, lab work, mini-activities, and problem sets. In ME 221, my job is grading.</p></div>'''),
+    ('challenge', 'The role', '''<div class="prose"><p>I've been a teaching assistant for EGR 105, Computing for Engineers, since fall 2025, and I grade for ME 221, Structure and Properties of Solids. In EGR 105, students come in with very different backgrounds, and the work spans coding projects, lab work, mini-activities, and problem sets. In ME 221, my job is grading.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">In EGR 105, I hold weekly office hours, lead lab sections, and run one-on-one sessions, and I review student projects, quizzes, and lab work. In ME 221, I grade.</p>'''),
     ('process', 'Approach', '''<div class="prose"><p>I break hard concepts down into their fundamentals and teach the process instead of supplying answers. When I review EGR 105 work, I give feedback, suggest more efficient approaches where they exist, and recommend specific changes for resubmission.</p></div>
 <div class="figs">''' + row(fig('images/teaching.jpg', 'Teaching a lab section.', 'Fig. 1', 'Teaching.', ar=1.5, mode='cover', group='teaching', dropin=True, optional=True)) + '</div>'),
@@ -518,14 +521,14 @@ P_['coaching'] = dict(
   meta=[('Role', 'Assistant, then head coach'), ('When', 'September 2020 – May 2024'), ('Where', 'Tsinghua International School, Beijing'), ('Teams', 'Volleyball, basketball')],
   lead='''<div class="p-lead stats" data-reveal>
   <div><div class="big">3</div><div class="cap">Teams coached: boys' volleyball, girls' volleyball, girls' basketball</div></div>
-  <div><div class="big">2nd</div><div class="cap">ISAC U14 Division III, 2020–21</div></div>
-  <div><div class="big">3rd</div><div class="cap">ISAC U14 Division IV, 2022–23</div></div>
+  <div><div class="big">2nd</div><div class="cap">ISAC U14 Division III, 2020–21, as assistant coach</div></div>
+  <div><div class="big">3rd</div><div class="cap">ISAC U14 Division IV, 2022–23, as assistant coach</div></div>
 </div>''',
   glance=[('Started as', 'Assistant coach, three middle school teams'), ('Senior year', 'Head coach, girls\' volleyball and girls\' basketball'), ('Alongside', 'Full-time student-athlete')],
   sections=[
     ('challenge', 'The role', '''<div class="prose"><p>I started as an assistant coach for the middle school boys' volleyball, girls' volleyball, and girls' basketball teams at Tsinghua International School, and in my senior year became head coach of girls' volleyball and girls' basketball, all while playing as a full-time student-athlete.</p></div>'''),
     ('contribution', 'My contribution', '''<p class="contrib">I ran practices, set lineups, gave individual feedback and advice, tracked and analyzed statistics, and managed rosters across multiple teams.</p>'''),
-    ('outcome', 'Outcome', '''<div class="prose"><p>Teams I coached placed second in ISAC U14 Division III in 2020–21 and third in Division IV in 2022–23.</p></div>
+    ('outcome', 'Outcome', '''<div class="prose"><p>Both placements came while I was an assistant coach, before my senior year: second in ISAC U14 Division III in 2020–21, and third in Division IV in 2022–23.</p></div>
 <div class="figs">''' + row(fig('images/coaching-instruction.webp', 'Brian Yue, in a white sweater and holding a volleyball, pointing across the court while giving instructions at practice.', 'Fig. 1', 'Running a girls\' volleyball practice.', 1070, 1080, mode='cover', group='coaching', pos='40% 50%'),
                        fig('images/coaching-timeout.webp', 'Brian Yue, in a Spartans coaching shirt, kneeling with a tactics board while players gather around during a timeout.', 'Fig. 2', 'A timeout: drawing up the next rotation.', 1311, 843, mode='cover', group='coaching'),
                        fig('images/coaching-with-coach.webp', 'Brian Yue talking with a fellow coach courtside, clipboard in hand.', 'Fig. 3', 'Talking through the lineup with a fellow coach.', 1928, 1080, mode='cover', group='coaching')) + '</div>'),
@@ -538,7 +541,7 @@ CARD = {
       lede='Owned the design, analysis, drawing package and BOM. Rerouted the load path onto about $159 of catalog parts after test data showed friction eroding ~40% of measured shear.',
       org=dict(word='NC STATE', sub='Turbulent Shear Flow Laboratory', name='NC State University', bg='#cc0000', logo='images/logo-ncstate.svg', logo_w='78%'),
       thumb_tint='#e9edf3'),
-  'ttbw': dict(card_title='Transonic truss-braced wing review', status=['Research · Duke', 'Published'], dates='Apr 2025 → Jun 2026',
+  'ttbw': dict(card_title='Transonic truss-braced wing review', status=['Research · Duke', 'Published'], dates='AIAA AVIATION · Jun 2026',
       lede='Sole-author AIAA paper synthesizing 53 sources on transonic truss-braced wings; presented at AVIATION 2026.',
       org=dict(word='DUKE', sub='Mechanical Engineering &amp; Materials Science', name='Duke University', bg='#00539b', logo='images/logo-duke.svg')),
   'forward-closure': dict(card_title='Unified forward closure', status=['Project', 'Flown'], dates='Duke Aero · Aug 2025 → present',
@@ -546,7 +549,7 @@ CARD = {
   'happy-meal': dict(card_title='Modular Happy Meal train', status=['Project', 'Toy Fair 2025'], dates='Duke · Spring 2025',
       lede='An injection-moldable toy train with swappable snap-fit heads, at $0.31 a unit.'),
   'playseat': dict(card_title='Accessible PlaySeat', status=['Project', 'Delivered'], dates='Duke EGR 101 · Sep 2024 → Dec 2024',
-      lede='A mobile play seat for a three-year-old: one fit test moved the wheels, then six pass/fail tests proved the rest.'),
+      lede='A mobile play seat for a three-year-old: one fit test moved the wheels, then every requirement got a pass/fail test.'),
   'issdc': dict(card_title='Captain &amp; Advisor @ ISSDC', status=['Leadership', 'Global Champion'], dates='Sep 2021 → Aug 2024',
       lede='Designed the operations and construction robots for a settlement proposal; Global Champion at Kennedy Space Center.',
       org=dict(word='ISSDC', sub='International Space Settlement Design Competition', name='ISSDC', bg='#0b0d12')),
@@ -652,7 +655,7 @@ def home():
       <dl class="titleblock fade-in" style="--d:.7s">
         <div class="wide"><dt>Scope</dt><dd>Mechanical design of aircraft hardware: detail design, engineering drawings and GD&amp;T, tolerance analysis, structural validation, and hands-on fabrication and assembly.</dd></div>
         <div><dt>Drawn by</dt><dd>Brian Yue</dd></div>
-        <div><dt>School</dt><dd>Duke, B.S.E. ME 2028</dd></div>
+        <div><dt>School</dt><dd>Duke, B.S.E. ME, 2028</dd></div>
         <div><dt>Location</dt><dd>Durham, NC</dd></div>
         <div><dt>Rev</dt><dd>November 2026</dd></div>
       </dl>

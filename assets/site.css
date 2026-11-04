@@ -450,6 +450,9 @@ body.menu-open { overflow: hidden; }
 .vtable .pass { display: inline-block; margin-right: 6px; font: 500 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 4px 7px; border-radius: 5px; background: rgba(22, 128, 61, .12); color: #15803d; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .vtable .pass { background: rgba(74, 222, 128, .12); color: #4ade80; } }
 :root[data-theme="dark"] .vtable .pass { background: rgba(74, 222, 128, .12); color: #4ade80; }
+.vtable .pass.proxy { background: rgba(180, 120, 0, .14); color: #8a5a00; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .vtable .pass.proxy { background: rgba(251, 191, 36, .14); color: #fbbf24; } }
+:root[data-theme="dark"] .vtable .pass.proxy { background: rgba(251, 191, 36, .14); color: #fbbf24; }
 @media (max-width: 640px) {
   .vtable-wrap { overflow: visible; border: 0; background: none; }
   .vtable { min-width: 0; }

@@ -68,6 +68,7 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 - [ ] Forward closure: was the April 2026 static hot fire the motor with your unified closure?
 - [ ] Shear-force balance: any specific approaches you tried before the male-female interface?
 - [ ] PlaySeat: what offset the CG shift (rear wheels, or the wooden posts)? Acrylic or polycarbonate?
+- [ ] Coaching: which team placed 2nd in 2020–21 and 3rd in 2022–23 (boys' volleyball, girls' volleyball, or girls' basketball)? The site now says both were as assistant coach.
 
 ## Already done (no need to send)
 
