@@ -125,14 +125,14 @@ window.PERSONAL_GALLERY = [
     "height": 600
   },
   {
-    "src": "personal/_web/music/02-on-the-field-900.webp",
-    "caption": "On the field with the brass section",
-    "alt": "Brian Yue, in sunglasses and the white and blue Duke band uniform, standing on the field holding his trombone, with sousaphones and the stands behind him.",
+    "src": "personal/_web/music/02-under-the-lights-900.webp",
+    "caption": "Under the lights at a night game",
+    "alt": "Brian Yue, in glasses and the Duke band uniform, smiling and holding his trombone up in the stands during a night game.",
     "category": "Music",
-    "orig": "personal/music/02-on-the-field.jpg",
-    "full": "personal/_web/music/02-on-the-field-2000.webp",
+    "orig": "personal/music/02-under-the-lights.jpg",
+    "full": "personal/_web/music/02-under-the-lights-2000.webp",
     "width": 900,
-    "height": 600
+    "height": 1350
   },
   {
     "src": "personal/_web/music/03-trombone-section-900.webp",
@@ -145,12 +145,32 @@ window.PERSONAL_GALLERY = [
     "height": 600
   },
   {
-    "src": "personal/_web/music/04-heading-off-the-field-900.webp",
-    "caption": "Heading off the field after the show",
-    "alt": "Brian Yue, in sunglasses, carrying his trombone as the Duke University Marching Band walks off the field past the stands.",
+    "src": "personal/_web/music/04-off-the-field-at-night-900.webp",
+    "caption": "Heading off the field at a night game",
+    "alt": "Brian Yue, in glasses, raising a fist and carrying his trombone as the Duke University Marching Band files off the field at night.",
     "category": "Music",
-    "orig": "personal/music/04-heading-off-the-field.jpg",
-    "full": "personal/_web/music/04-heading-off-the-field-2000.webp",
+    "orig": "personal/music/04-off-the-field-at-night.jpg",
+    "full": "personal/_web/music/04-off-the-field-at-night-2000.webp",
+    "width": 900,
+    "height": 600
+  },
+  {
+    "src": "personal/_web/music/05-with-the-trombones-900.webp",
+    "caption": "With the trombones in the stands",
+    "alt": "Brian Yue, in glasses and a white Duke band cap, smiling at the camera in the stands with fellow trombonists behind him under the stadium lights.",
+    "category": "Music",
+    "orig": "personal/music/05-with-the-trombones.jpg",
+    "full": "personal/_web/music/05-with-the-trombones-2000.webp",
+    "width": 900,
+    "height": 1350
+  },
+  {
+    "src": "personal/_web/music/06-laughing-on-the-field-900.webp",
+    "caption": "Mid-laugh with the band on the field",
+    "alt": "Brian Yue, in glasses and a white Duke band cap, laughing among band members in uniform on the field.",
+    "category": "Music",
+    "orig": "personal/music/06-laughing-on-the-field.jpg",
+    "full": "personal/_web/music/06-laughing-on-the-field-2000.webp",
     "width": 900,
     "height": 600
   },
@@ -164,17 +184,6 @@ window.PERSONAL_GALLERY = [
     "width": 900,
     "height": 600,
     "taken": "2025-09-21"
-  },
-  {
-    "src": "personal/_web/music/in-the-stands-900.webp",
-    "caption": "Playing trombone in the stands at a Duke football game",
-    "alt": "Brian Yue, in sunglasses, playing trombone with the Duke University Marching Band in the stadium stands.",
-    "category": "Music",
-    "orig": "personal/music/in-the-stands.jpg",
-    "full": "personal/_web/music/in-the-stands-2000.webp",
-    "width": 900,
-    "height": 600,
-    "taken": "2025-09-06"
   },
   {
     "src": "personal/_web/photography/01-roof-guardians-at-dusk-900.webp",
