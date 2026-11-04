@@ -622,7 +622,7 @@ CARD = {
       org=dict(word='DUKE AERO', sub='Solid Propulsion', name='Duke AERO', bg='#c84e00', logo='images/logo-duke-aero.svg', logo_w='70%')),
   'happy-meal': dict(card_title='Modular Happy Meal train', status=['Project', 'Toy Fair 2025'], dates='Duke · Spring 2025',
       lede='An injection-moldable toy train with swappable snap-fit heads, at $0.31 a unit.',
-      org=dict(word='DUKE', sub='Toy design · 2025 Toy Fair', name='Duke University', bg='#1d6363', logo='images/logo-duke.svg')),
+      org=dict(word='EGR CORP', sub='Toy design · 2025 Toy Fair', name='EGR Corp', bg='#ffffff', fg='#1d1f24', logo='images/logo-egr-corp.webp', logo_w='88%', logo_h='70%')),
   'playseat': dict(card_title='Accessible PlaySeat', status=['Project', 'Delivered'], dates='Duke EGR 101 · Sep 2024 → Dec 2024',
       lede='A mobile play seat for a three-year-old: one fit test moved the wheels, then every requirement got a pass/fail test.',
       org=dict(word='DUKE', sub='EGR 101 · Engineering Design', name='Duke University', bg='#262626', logo='images/logo-duke.svg')),
