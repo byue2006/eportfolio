@@ -62,6 +62,12 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 - [ ] Happy Meal train: what did *you* do? (CAD of which parts, printing, tolerances, the video, the memo...)
 - [ ] Teaching: one or two sentences on what teaching taught you.
 - [ ] Coaching: one or two sentences on what coaching taught you.
+- [ ] TTBW sources chart (`hold-ttbw-sources-chart.jpeg`): it totals 51 sources; the paper says 53. Which is right?
+- [ ] ISSDC: which round was the Grumbo video presentation?
+- [ ] ISSDC robots: Kelly Wang is credited with the 3D models. Correct?
+- [ ] Forward closure: was the April 2026 static hot fire the motor with your unified closure?
+- [ ] Shear-force balance: any specific approaches you tried before the male-female interface?
+- [ ] PlaySeat: what offset the CG shift (rear wheels, or the wooden posts)? Acrylic or polycarbonate?
 
 ## Already done (no need to send)
 

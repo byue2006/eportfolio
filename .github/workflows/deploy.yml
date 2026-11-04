@@ -69,7 +69,7 @@ jobs:
         run: |
           find personal -type f -not -path 'personal/_web/*' \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.gif' -o -iname '*.avif' -o -iname '*.heic' -o -iname '*.heif' \) -delete
           find . -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.heic' -o -iname '*.heif' -o -iname '*.webp' -o -iname '*.gif' -o -iname '*.tif*' -o -iname '*.docx' -o -iname '*.pptx' -o -iname '*.pdf' \) ! -name apple-touch-icon.png ! -name resume.pdf -delete
-          rm -rf tools inbox .git
+          rm -rf tools inbox .git CLAUDE.md
 
       - uses: actions/configure-pages@v5
 
