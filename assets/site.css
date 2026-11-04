@@ -300,6 +300,12 @@ body.menu-open { overflow: hidden; }
 .sub-head { display: flex; align-items: baseline; gap: 14px; margin: 0 0 22px; }
 .sub-head h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 600; letter-spacing: -0.025em; margin: 0; }
 .group + .group { margin-top: clamp(56px, 7vw, 88px); }
+.sub-head .sub-link { margin-left: auto; font: 500 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; white-space: nowrap; }
+.sub-head .sub-link:hover { color: var(--accent); }
+@media (max-width: 560px) { .sub-head:has(.sub-link) .label { display: none; } }
+.sw { padding-bottom: clamp(72px, 10vw, 136px); }
+.sw .group { scroll-margin-top: 96px; }
+.sw .group + .group { border-top: 1px solid var(--rule); padding-top: clamp(40px, 5vw, 64px); }
 .sec-head p { margin: 0; color: var(--ink-2); max-width: 44ch; }
 
 /* ---------- cards ---------- */

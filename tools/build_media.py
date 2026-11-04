@@ -80,12 +80,24 @@ def to_glb(src, out, tol, up, finish):
     if up == 'z':  # glTF is y-up; most CAD (Onshape, STEP) is z-up
         scene.apply_transform(trimesh.transformations.rotation_matrix(-np.pi / 2, [1, 0, 0]))
     for g in scene.geometry.values():
+        if not isinstance(g, trimesh.Trimesh):
+            continue  # sketch curves and other wire geometry: no surface to shade
         if ext in ('.stl', '.obj', '.3mf') and finish is None:
             finish = 'aluminum'  # no colors in the file: give it a machined finish
         if finish:
             c, m, r = FINISHES[finish]
             g.visual = trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
                 baseColorFactor=c, metallicFactor=m, roughnessFactor=r, doubleSided=False))
+        else:
+            # CAD keeps display colors (sRGB) and no PBR values. glTF reads the color as linear and
+            # defaults to fully metallic, which washes the part out and hides detail like lettering.
+            # Convert the color to linear and make the part a satin plastic.
+            mat = getattr(g.visual, 'material', None)
+            c = getattr(mat, 'baseColorFactor', None)
+            c = np.asarray(c if c is not None else [200, 200, 200, 255], dtype=float) / 255.0
+            lin = [((v + 0.055) / 1.055) ** 2.4 if v > 0.04045 else v / 12.92 for v in c[:3]]
+            g.visual = trimesh.visual.TextureVisuals(material=trimesh.visual.material.PBRMaterial(
+                baseColorFactor=lin + [float(c[3])], metallicFactor=0.0, roughnessFactor=0.5, doubleSided=False))
     scene.export(out, include_normals=True)
     return os.path.getsize(out), len(scene.geometry)
 

@@ -96,7 +96,7 @@ def model3d(slug, alt, num, cap, ar=16/9, orbit=None, hotspots=(), lead=False, l
     return (f'<figure class="m3d{" p-lead" if lead else ""}" data-reveal style="{style}"><div class="stage" data-cursor="Drag">'
             f'<model-viewer src="{{{{P}}}}media/{slug}.glb" poster="{{{{P}}}}media/{slug}.webp" alt="{esc(alt)}" camera-orbit="{orbit}" '
             f'camera-controls touch-action="pan-y" disable-zoom interaction-prompt="none" auto-rotate auto-rotate-delay="1200" '
-            f'rotation-per-second="14deg" shadow-intensity="1" shadow-softness="0.8" environment-image="neutral" exposure="1.05" '
+            f'rotation-per-second="14deg" shadow-intensity="1" shadow-softness="0.8" environment-image="legacy" exposure="1" '
             f'loading="lazy">{hs}<div class="bar" slot="progress-bar"></div></model-viewer>'
             f'<img class="fallback" src="{{{{P}}}}media/{slug}.webp" alt="{esc(alt)}" loading="lazy">'
             f'<span class="hud hud-tl">{label}{size}</span><span class="hud hud-bl" aria-hidden="true">Drag to rotate</span>'
@@ -497,8 +497,8 @@ P_['ttbw'] = dict(
 P_['happy-meal'] = dict(
   kind='work', num='03', cat='Product design · injection molding', year='2025',
   title='Celebration of Imagination: a Happy Meal train', card_title='Modular Happy Meal train',
-  lede='An injection-moldable toy train with swappable snap-fit heads, at $0.31 a unit.',
-  tags=['SolidWorks', 'Tolerancing', 'DFM'],
+  lede='A modular, injection-moldable toy train: kids swap the snap-fit heads to build it however they like, at $0.31 a unit.',
+  tags=['Onshape', 'Modular design', 'DFM'],
   thumb=dict(kind='img', src='images/card-toy.webp', mode='cover', alt='Three 3D-printed train heads on a workbench'),
   meta=[('Role', 'Design engineer, most of the CAD'), ('When', 'Spring 2025'), ('Team', '3 people'), ('Shown at', 'Duke 2025 Toy Fair')],
   lead=lead('images/toy-heads.webp', 'Three 3D-printed train heads, orange, green, and purple, lined up on a workbench.',
@@ -507,7 +507,7 @@ P_['happy-meal'] = dict(
           ('Critical fit', 'Shaft collar bore ⌀10.11 ±0.01 mm on a ⌀10.16 mm axle'), ('Mate tolerance', '5.00 ±0.05 mm, head to chassis'), ('Safety', 'Passes the 1.25-inch choke-tube test')],
   sections=[
     ('challenge', 'The challenge', '''<div class="prose"><p>Design a McDonald's Happy Meal toy that is attractive and cheap, can be injection molded, and can be mass-produced. The memo to the client weighed practicality, sustainability, safety, cost, ease of use, and looks, and the toy had to be safe for children aged 4 to 8, which means nothing small enough to choke on, even after a child takes it apart.</p></div>'''),
-    ('contribution', 'My contribution', '''<p class="contrib">Three-person team with Saina Srivastava and Mariangle Mendez, all three of us working as engineers. I did most of the CAD in SolidWorks. We brainstormed, scored concepts, and 3D-printed prototypes together, and co-wrote the technical memo. For the Duke 2025 Toy Fair, I made the toy's video.</p>'''),
+    ('contribution', 'My contribution', '''<p class="contrib">Three-person team with Saina Srivastava and Mariangle Mendez, all three of us working as engineers. I did most of the CAD in Onshape. We brainstormed, scored concepts, and 3D-printed prototypes together, and co-wrote the technical memo. For the Duke 2025 Toy Fair, I made the toy's video.</p>'''),
     ('process', 'Process &amp; iteration', '''<div class="prose"><p>Brainstorming started wide; an early favorite was a carrier jet with Toy Story soldiers. We narrowed the field with a weighted Pugh matrix that favored price above everything else, and the plain train won.</p></div>
 <div class="figs" data-reveal><div class="glance" style="margin:0"><dl>
   <div><dt>Weights</dt><dd>Price 0.40 · Fun 0.30 · Safety 0.15 · Durability 0.15</dd></div>
@@ -519,15 +519,15 @@ P_['happy-meal'] = dict(
 <p>Our first prints didn't fit. The 3D printers hold about 0.1 mm, looser than the fits we had designed, so the head and chassis mated badly. We opened up the tolerances in the CAD for the printed prototypes, and because we had started CAD early, there was time to reprint.</p></div>
 <div class="figs">''' + row(fig('images/toy-sketch-1.webp', 'Hand sketch of early concepts.', 'Fig. 2', 'Early concept sketch.', 900, 1193, group='toy'),
                        fig('images/toy-sketch-2.webp', 'Hand sketch of the train with rough dimensions in centimeters.', 'Fig. 3', 'Sizing sketch, 5 × 4 × 2.5 cm.', 900, 1193, group='toy'),
-                       fig('images/toy-exploded.webp', 'SolidWorks exploded view of the train: top, head, mate, chassis, axle, wheel, and shaft collar.', 'Fig. 4', 'Exploded assembly in SolidWorks.', 889, 604, group='toy')) + model3d('toy-head', 'Interactive 3D model of the standard train head: a boiler with a smokestack and a cab, on a flat base that slides onto the chassis.', 'Fig. 5', 'The standard head in 3D. Drag to rotate; the flat base is the half of the mate that slides onto the chassis.', max_w=820) + '''</div>'''),
-    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>Every detachable piece passed the choke-tube test in every orientation. Three heads (standard, subway, and bullet) share one mate, so they work as collectibles. In production PETG, the toy comes to $0.31 a unit, with one 100-ton press per head design running 100,000 units a week. We presented it at the Duke 2025 Toy Fair.</p>
+                       fig('images/toy-exploded.webp', 'Exploded view of the train: top, head, mate, chassis, axle, wheel, and shaft collar.', 'Fig. 4', 'Exploded assembly.', 889, 604, group='toy')) + model3d('toy-head', 'Interactive 3D model of the standard train head: a boiler with a smokestack and a cab, on a flat base that slides onto the chassis.', 'Fig. 5', 'The standard head in 3D, modeled in Onshape. Drag to rotate. The flat base is its half of the mate: every head slides onto the same chassis, so kids can swap and rebuild the train however they like.', max_w=820) + '''</div>'''),
+    ('outcome', 'Outcome &amp; evidence', '''<div class="prose"><p>Every detachable piece passed the choke-tube test in every orientation. The train is modular: three heads (standard, subway, and bullet) share one mate, so kids can swap them onto the chassis and rebuild the train however they like, and they work as collectibles. In production PETG, the toy comes to $0.31 a unit, with one 100-ton press per head design running 100,000 units a week. We presented it at the Duke 2025 Toy Fair.</p>
 <p>The tightest tolerance sits where safety does: the shaft collar bore is ⌀10.11 ±0.01 mm on a ⌀10.16 mm axle, a press fit that keeps the wheels on. The head-to-chassis mate is looser, at ±0.05 mm, because a head that comes off is the point of the toy, not a hazard.</p></div>
 <div class="figs">''' + row(fig('images/toy-choke.webp', 'The train head and chassis resting on top of a choke test tube, too large to fall in.', 'Fig. 6', 'Passing the choke-tube test.', 1000, 1333, group='toy'),
                        fig('images/toy-final.webp', 'Orange 3D-printed train head mounted on a green chassis.', 'Fig. 7', 'Final head on its chassis, before wheels.', 1000, 1333, group='toy'),
                        fig('images/toy-section.webp', 'Cross-section of the train head CAD model showing it is solid.', 'Fig. 8', 'Section through the head: solid, for drop strength.', 1200, 934, group='toy')) +
       row(fig('images/toy-drawing-head.webp', 'Dimensioned drawing of a train head with 5.00 ±0.05 mm mate callouts.', 'Fig. 9', 'Toleranced drawing of one train head.', 1600, 689, group='toy')) + '''</div>'''),
     ('reflection', 'Reflection', '''<div class="prose"><p>The biggest takeaway was to start early. We finished most of the CAD before spring break, which left time to print, find the tolerance problem, and work around it without lowering the standard of the toy. The snap-fit was the other lesson: one connection idea solved several problems at once and stayed injection-moldable.</p></div>'''),
-    ('skills', 'Skills', tags(['SolidWorks', 'Pugh matrix', 'Tolerance analysis', 'Design for injection molding', '3D printing', 'Cost analysis', 'Technical memo'])),
+    ('skills', 'Skills', tags(['Onshape', 'Modular design', 'Pugh matrix', 'Tolerance analysis', 'Design for injection molding', '3D printing', 'Cost analysis', 'Technical memo'])),
   ])
 
 P_['playseat'] = dict(
@@ -665,7 +665,7 @@ CARD = {
       lede='Three solid rocket motor closures merged into one flight part: 67% fewer parts, two fewer setups.',
       org=dict(word='DUKE AERO', sub='Solid Propulsion', name='Duke AERO', bg='#c84e00', logo='images/logo-duke-aero.svg', logo_w='70%')),
   'happy-meal': dict(card_title='Modular Happy Meal train', status=['Project', 'Toy Fair 2025'], dates='Duke · Spring 2025',
-      lede='An injection-moldable toy train with swappable snap-fit heads, at $0.31 a unit.',
+      lede='A modular, injection-moldable toy train: kids swap the snap-fit heads to build their own, at $0.31 a unit.',
       org=dict(word='EGR CORP', sub='Toy design · 2025 Toy Fair', name='EGR Corp', bg='#ffffff', fg='#1d1f24', logo='images/logo-egr-corp.webp', logo_w='88%', logo_h='70%')),
   'playseat': dict(card_title='Accessible PlaySeat', status=['Project', 'Delivered'], dates='Duke EGR 101 · Sep 2024 → Dec 2024',
       lede='A mobile play seat for a three-year-old: one fit test moved the wheels, then every requirement got a pass/fail test.',
@@ -758,6 +758,7 @@ def home():
     mq = '<ul>' + ''.join(f'<li>{x}</li>' for x in marquee_items) + '</ul>'
     exp_cards = ''.join(card(s_, P, delay=n * 0.08) for n, s_ in enumerate(EXPER))
     proj_cards = ''.join(card(s_, P, delay=n * 0.08) for n, s_ in enumerate(PROJ))
+    small_cards = ''.join(small_card(x, P, delay=n * 0.08) for n, x in enumerate(SMALL))
     lead_cards = ''.join(card(s_, P, delay=n * 0.08) for n, s_ in enumerate(LEAD))
     main = f'''
 <section class="hero">
@@ -804,6 +805,10 @@ def home():
     <div class="group">
       <div class="sub-head" data-reveal><h3>Projects</h3><span class="label">Design team · coursework · client work</span></div>
       <div class="cards three">{proj_cards}</div>
+    </div>
+    <div class="group" id="smaller">
+      <div class="sub-head" data-reveal><h3>Smaller work</h3><span class="label">Class projects · side work</span><a class="sub-link" href="work/smaller-work.html">All three <span class="arrow">→</span></a></div>
+      <div class="cards three">{small_cards}</div>
     </div>
   </div>
 </section>
@@ -909,29 +914,65 @@ def about():
       </dl>
     </div>
   </div>
-</section>
-
-<section class="section" id="more-cad">
-  <div class="wrap">
-    <div class="sec-head" data-reveal><div><p class="label">Class projects and side work</p><h2>Smaller work.</h2></div></div>
-    <div class="group">
-      <div class="sub-head" data-reveal><h3>Simulating the ISS deorbit</h3><span class="label">EGR 105 · Fall 2024 · Team project</span></div>
-      <div class="prose" data-reveal><p>A team project for EGR 105, Computing for Engineers: simulate the International Space Station deorbiting. I wrote the orbital decay script. It treats the station as a point mass under Earth's gravity and aerodynamic drag, takes air density from the 1976 U.S. Standard Atmosphere, and steps the orbit forward with a fourth-order Runge-Kutta integrator I wrote by hand in Python. The project reported the station's altitude at each critical threshold and animated the whole descent.</p></div>
-      <div class="figs">''' + video(None, 'Team SkyFall ISS deorbit demonstration video', 'Fig. 1', 'Team SkyFall\'s demonstration video, with the animation of the full deorbit. Plays from YouTube.', yt='yojsCxUHBxU', max_w=980, poster='images/iss-deorbit-poster.webp') + '''</div>
-    </div>
-    <div class="group">
-      <div class="sub-head" data-reveal><h3>Checking a snap-fit with FEA</h3><span class="label">ME 321 · Fall 2026</span></div>
-      <div class="prose" data-reveal><p>A 3D-printed snap-fit grip that holds a 38 mm cube, for an ME 321 lab. My part here was the check, not the sizing. I ran a SolidWorks static study with the tab pushed 1.5 mm, a margin over the real 1.2 mm, which put the peak strain at 6.3 × 10⁻³ and the minimum factor of safety near 2.9, both at the inner arm-to-wall corner. That corner is sharp, so part of that peak is a stress singularity, and I wouldn't trust the exact number until it's filleted and the mesh converges. Then I printed and tested it: the cube snaps in, holds, and slides back out with a firm pull.</p></div>
-      <div class="figs">''' + row(fig('images/me321-grip-fos.webp', 'SolidWorks factor-of-safety plot of the U-shaped grip, mostly red, with the minimum of about 2.9 marked at the inner corner.', 'Fig. 2', 'Factor of safety: minimum about 2.9, at the inner arm-to-wall corner.', 1400, 717, group='me321'),
-                       fig('images/me321-grip-strain.webp', 'SolidWorks strain plot of the grip, highest along the arm near the corner.', 'Fig. 3', 'Strain under the 1.5 mm tab displacement: peak 6.3 × 10⁻³.', 1400, 716, group='me321')) + '<div class="row" data-reveal style="max-width: 560px">' + fig('images/me321-grip-print.webp', 'A purple 3D-printed grip holding a purple printed cube between its two arms, on a shop bench.', 'Fig. 4', 'Printed and assembled: the cube held in the grip.', 682, 511, group='me321') + '</div>' + '''</div>
-    <div class="group">
-      <div class="sub-head" data-reveal><h3>Space Shuttle <i>Vanguard</i></h3><span class="label">For fun · Fall 2024</span></div>
-      <div class="prose" data-reveal><p>A CAD exercise from my first semester at Duke where I went well past the assignment for fun: a 4.9-inch Space Shuttle with DUKE and VANGUARD lettering and three engine bells, modeled to print in PLA, plus a fully dimensioned drawing.</p></div>
-      <div class="figs">''' + model3d('shuttle', 'Interactive 3D model of a small Space Shuttle with a tail fin, three engine bells, and VANGUARD lettering along its back.', 'Fig. 5', 'The <i>Vanguard</i> model in 3D. Drag to rotate.', max_w=980) + row(fig('images/dwg-shuttle-2400.webp', 'Drawing of the Space Shuttle Duke Vanguard model: top, right, front and isometric views at 1:1.7 scale, dimensioned in inches, PLA plastic, drawn by Brian Yue on 09/27/2024.', 'Fig. 6', 'Its drawing: four views, dimensioned in inches. Click to zoom.', 1000, 773, group='shuttle')) + '''</div>
-    </div>
-  </div>
 </section>'''
     return page('About · Brian Yue', 'About Brian Yue, a Duke mechanical engineering student: experience, education, honors, and skills in CAD, GD&T, FEA, and machining.', P, 'about', main, path='about')
+
+# ---------------------------------------------------------------- smaller work (its own page + a row of cards on home)
+SMALL = [
+  dict(id='iss-deorbit', title='Simulating the ISS deorbit', label='EGR 105 · Fall 2024 · Team project',
+       card='Computing project: gravity and drag, a hand-written RK4 integrator, and an animation of the whole descent.',
+       thumb=dict(src='images/iss-deorbit-poster.webp', mode='cover', alt='ISS deorbit demonstration title card'),
+       prose="A team project for EGR 105, Computing for Engineers: simulate the International Space Station deorbiting. I wrote the orbital decay script. It treats the station as a point mass under Earth's gravity and aerodynamic drag, takes air density from the 1976 U.S. Standard Atmosphere, and steps the orbit forward with a fourth-order Runge-Kutta integrator I wrote by hand in Python. The project reported the station's altitude at each critical threshold and animated the whole descent.",
+       figs=lambda: video(None, 'Team SkyFall ISS deorbit demonstration video', 'Fig. 1', "Team SkyFall's demonstration video, with the animation of the full deorbit. Plays from YouTube.", yt='yojsCxUHBxU', max_w=980, poster='images/iss-deorbit-poster.webp')),
+  dict(id='snap-fit-fea', title='Checking a snap-fit with FEA', label='ME 321 · Fall 2026',
+       card='A SolidWorks static study on a printed snap-fit grip: peak strain, factor of safety, and where not to trust the number.',
+       thumb=dict(src='images/card-snap-fit.webp', mode='cover', alt='Strain plot of the snap-fit grip, peak marked at the inner corner'),
+       prose="A 3D-printed snap-fit grip that holds a 38 mm cube, for an ME 321 lab. My part here was the check, not the sizing. I ran a SolidWorks static study with the tab pushed 1.5 mm, a margin over the real 1.2 mm, which put the peak strain at 6.3 × 10⁻³ and the minimum factor of safety near 2.9, both at the inner arm-to-wall corner. That corner is sharp, so part of that peak is a stress singularity, and I wouldn't trust the exact number until it's filleted and the mesh converges. Then I printed and tested it: the cube snaps in, holds, and slides back out with a firm pull.",
+       figs=lambda: row(fig('images/me321-grip-fos.webp', 'SolidWorks factor-of-safety plot of the U-shaped grip, mostly red, with the minimum of about 2.9 marked at the inner corner.', 'Fig. 2', 'Factor of safety: minimum about 2.9, at the inner arm-to-wall corner.', 1400, 717, group='me321'),
+                         fig('images/me321-grip-strain.webp', 'SolidWorks strain plot of the grip, highest along the arm near the corner.', 'Fig. 3', 'Strain under the 1.5 mm tab displacement: peak 6.3 × 10⁻³.', 1400, 716, group='me321'))
+                    + '<div class="row" data-reveal style="max-width: 560px">' + fig('images/me321-grip-print.webp', 'A purple 3D-printed grip holding a purple printed cube between its two arms, on a shop bench.', 'Fig. 4', 'Printed and assembled: the cube held in the grip.', 682, 511, group='me321') + '</div>'),
+  dict(id='vanguard', title='Space Shuttle <i>Vanguard</i>', label='For fun · Fall 2024',
+       card='A class CAD exercise I took too far: a 4.9-inch shuttle with raised lettering, modeled in Onshape, plus its drawing.',
+       thumb=dict(src='images/card-vanguard.webp', mode='contain', alt='Render of the Vanguard shuttle model with its raised lettering'),
+       prose='A CAD exercise from my first semester at Duke where I went well past the assignment for fun: a 4.9-inch Space Shuttle with DUKE and VANGUARD lettering and three engine bells, modeled in Onshape to print in PLA, plus a fully dimensioned drawing.',
+       figs=lambda: model3d('shuttle', 'Interactive 3D model of a small Space Shuttle with a tail fin, three engine bells, and VANGUARD lettering along its back.', 'Fig. 5', 'The <i>Vanguard</i> model in 3D. Drag to rotate; tilt it to read the lettering.', max_w=980)
+                    + row(fig('images/dwg-shuttle-2400.webp', 'Drawing of the Space Shuttle Duke Vanguard model: top, right, front and isometric views at 1:1.7 scale, dimensioned in inches, PLA plastic, drawn by Brian Yue on 09/27/2024.', 'Fig. 6', 'Its drawing: four views, dimensioned in inches. Click to zoom.', 1000, 773, group='shuttle'))),
+]
+
+def small_card(x, P, delay=0.0):
+    t = x['thumb']
+    cls = 'media' + (' contain' if t['mode'] == 'contain' else '')
+    return f'''<article class="card mini" data-reveal style="--d:{delay:.2f}s">
+  <a href="{P}work/smaller-work.html#{x["id"]}" data-cursor="View">
+    <div class="{cls}"><img src="{{{{P}}}}{t["src"]}" loading="lazy" alt="{esc(t["alt"])}"><span class="go">View <span class="arrow">→</span></span></div>
+    <div class="card-info"><h3>{x["title"]}</h3> <span class="dates">{x["label"]}</span> <p>{x["card"]}</p></div>
+  </a>
+</article>'''
+
+def smaller_work():
+    P = '../'
+    groups = ''.join(f'''
+  <section class="group" id="{x["id"]}">
+    <div class="sub-head" data-reveal><h3>{x["title"]}</h3><span class="label">{x["label"]}</span></div>
+    <div class="prose" data-reveal><p>{x["prose"]}</p></div>
+    <div class="figs">{x["figs"]()}</div>
+  </section>''' for x in SMALL)
+    main = f'''
+<section class="p-hero">
+  <div class="wrap">
+    <div class="crumbs fade-in" style="--d:.05s">
+      <a class="pill" href="../index.html#smaller"><span class="arrow">←</span> All work</a>
+      <span class="label">{len(SMALL)} projects</span>
+    </div>
+    <p class="label accent fade-in" style="--d:.1s">Class projects · side work</p>
+    <h1 class="split">Smaller work</h1>
+    <p class="p-lede fade-in" style="--d:.55s">Shorter pieces: a computing project, an FEA check, and a CAD exercise I took too far.</p>
+  </div>
+</section>
+
+<div class="wrap sw">{groups}
+</div>'''
+    return page('Smaller work · Brian Yue', 'Smaller projects by Brian Yue: an ISS deorbit simulation, an FEA check on a snap-fit, and a 3D-printable Space Shuttle model.', P, 'work', main, path='work/smaller-work')
 
 # ---------------------------------------------------------------- personal
 def personal():
@@ -982,7 +1023,7 @@ def not_found():
 def sitemap():
     import datetime
     today = datetime.date.today().isoformat()
-    paths = [''] + ['about', 'personal'] + [f'{k}/{s_}' for k, s_ in ORDER]
+    paths = [''] + ['about', 'personal'] + [f'{k}/{s_}' for k, s_ in ORDER] + ['work/smaller-work']
     urls = ''.join(f'  <url><loc>{SITE}/{x}</loc></url>\n' for x in paths)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
 
@@ -991,5 +1032,6 @@ write('404.html', not_found())
 write('sitemap.xml', sitemap())
 write('about.html', about())
 write('personal.html', personal())
+write('work/smaller-work.html', smaller_work())
 for i, (kind, slug) in enumerate(ORDER):
     write(f'{kind}/{slug}.html', project_page(i, kind, slug))
