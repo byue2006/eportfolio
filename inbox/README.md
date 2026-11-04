@@ -78,7 +78,7 @@ Each photo comes out around 1–3 MB, well under the limit. Upload those exporte
 - [x] **TTBW paper:** done, three photos from AIAA AVIATION 2026. (A photo of you *at the podium* would still be great.)
 - [ ] **Happy Meal train:** the Duke 2025 Toy Fair: your booth, poster, costume, or the toy video.
 - [ ] **ISSDC:** the team at Kennedy Space Center, or the award. (Logo done: the ISSDC seal from your application form.)
-- [ ] **Happy Meal train:** the **EGR Corp logo** as a file (images pasted in chat don't come through as files).
+- [x] **Happy Meal train:** EGR Corp logo, done.
 - [ ] **Teaching:** you leading a lab or office hours.
 - [x] **Coaching:** done, three photos of you coaching on the coaching page.
 - [ ] **Shear-force balance:** any photo of the real parts or hardware, if it was built.
