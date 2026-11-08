@@ -296,7 +296,7 @@ def page(title, desc, P, active, main, progress=False, path=None):
 <link rel="apple-touch-icon" href="{P}apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,400;0,500;0,600;0,700;1,700&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,400;0,500;0,600;0,700;1,600..700&family=Geist+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="{P}assets/site.css">
 <script>{HEAD_SCRIPT}</script>
 </head>

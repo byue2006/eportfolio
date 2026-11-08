@@ -81,7 +81,7 @@ def lockup_svg(c, pad=48):
 def og_card_html(lockup):
     # The share card. Headline style follows the home page hero.
     return f'''<!doctype html><html><head><meta charset="utf-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,500;0,600;1,700&family=Geist+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,500;0,600;1,600..700&family=Geist+Mono:wght@500&display=swap">
 <style>
 *{{box-sizing:border-box}}body{{margin:0}}
 .c{{position:relative;width:1200px;height:630px;background:#f5f5f2;color:#141414;font-family:Geist,sans-serif;padding:64px 72px 0;overflow:hidden}}
@@ -91,7 +91,7 @@ def og_card_html(lockup):
 .top img{{height:61.75px;display:block;margin:-4.9px 0 -4.9px -4.9px}}  /* tile 52px; the svg has 48/512 padding */
 .lab{{font:500 16px/1 'Geist Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#55585d}}
 h1{{position:relative;margin:92px 0 0;font:500 120px/.98 Geist,sans-serif;letter-spacing:-.052em}}
-h1 em{{font-weight:700;font-style:italic;letter-spacing:-.05em;color:#c2410c}}
+h1 em{{font-weight:640;font-style:italic;letter-spacing:-.05em;color:#c2410c}}
 .foot{{position:absolute;left:72px;right:72px;top:514px;border-top:2px solid #141414;padding-top:24px;display:flex;justify-content:space-between;align-items:center}}
 .url{{font:600 28px/1 Geist,sans-serif;letter-spacing:-.02em}}
 </style></head><body><div class="c" id="card">
