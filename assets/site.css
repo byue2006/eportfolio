@@ -285,12 +285,15 @@ body.menu-open { overflow: hidden; }
 @keyframes fadeup { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 /* ---------- marquee ---------- */
-.marquee { border-block: 1px solid var(--rule); overflow: hidden; padding: 16px 0; user-select: none; }
+/* plain text, not links: a fixed label on the left, muted items and separators, no pause on hover */
+.marquee { position: relative; border-block: 1px solid var(--rule); overflow: hidden; padding: 16px 0; user-select: none; }
+.marquee-label { position: absolute; left: 0; top: 0; bottom: 0; z-index: 1; display: flex; align-items: center; padding: 0 64px 0 var(--gutter);
+  font: 500 12.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
+  background: linear-gradient(90deg, var(--paper) calc(100% - 52px), transparent); }
 .marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
 .marquee ul { display: flex; list-style: none; margin: 0; padding: 0; }
-.marquee li { font: 500 12.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); padding: 0 22px; white-space: nowrap; display: flex; align-items: center; gap: 44px; }
-.marquee li::after { content: "+"; color: var(--accent); }
+.marquee li { font: 500 12.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); padding: 0 18px; white-space: nowrap; display: flex; align-items: center; gap: 36px; }
+.marquee li::after { content: "+"; color: var(--ink-3); opacity: .7; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
@@ -624,19 +627,6 @@ a.ptile.type:hover .t { color: var(--accent); }
   html.js [data-reveal].in { opacity: 1; transform: none; }
 }
 
-/* ---------- custom cursor (mouse only) ---------- */
-.cursor {
-  position: fixed; left: 0; top: 0; z-index: 70; pointer-events: none;
-  width: 88px; height: 88px; margin: -44px 0 0 -44px; border-radius: 50%;
-  background: var(--accent); color: var(--accent-ink);
-  display: grid; place-items: center;
-  font: 600 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
-  transform: translate3d(-200px, -200px, 0) scale(0);
-  transition: opacity .2s ease;
-  will-change: transform;
-}
-@media (hover: none), (pointer: coarse) { .cursor { display: none; } }
-
 /* ---------- lightbox ---------- */
 dialog.lb { border: 0; padding: 0; margin: auto; width: min(96vw, 1400px); max-height: 94vh; background: transparent; color: #f2f2f0; overflow: visible; }
 dialog.lb::backdrop { background: rgba(8, 8, 9, .92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
@@ -740,11 +730,9 @@ dialog.lb::backdrop { background: rgba(8, 8, 9, .92); -webkit-backdrop-filter: b
 
 @media print {
   :root, :root[data-theme] { --paper: #fff; --surface: #fff; --ink: #141414; --ink-2: #55585d; --ink-3: #6b6e73; --rule: #e0e0db; --accent: #c2410c; --chart-bar: #c2410c; color-scheme: light; }
-  .site-header, .menu, .cursor, .progress, .toc, dialog, .marquee { display: none !important; }
+  .site-header, .menu, .progress, .toc, dialog, .marquee { display: none !important; }
   html.js [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
-/* with the custom cursor active, the cursor bubble replaces the in-card "View" pill */
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) { html.js .media .go { display: none; } }
 
 /* ---------- lightbox zoom (drawings and figures) ---------- */
 .lb img { cursor: zoom-in; }
@@ -761,7 +749,7 @@ html.present figcaption { font-size: 14px; }
 html.present .label, html.present .meta-grid dt, html.present .glance dt { font-size: 12.5px; color: var(--ink-2); }
 html.present .prose, html.present .p-lede { max-width: 72ch; }
 html.present .marquee-track, html.present .scroll-cue .line::after { animation: none !important; }
-html.present .xhair, html.present .cursor { display: none !important; }
+html.present .xhair { display: none !important; }
 html.present .media .go { display: none !important; }
 html.present [data-reveal], html.present .fade-in, html.present .split .w > span { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
 html.present .site-header.hide { transform: none; }

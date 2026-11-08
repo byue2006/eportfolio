@@ -97,7 +97,7 @@ def model3d(slug, alt, num, cap, ar=16/9, orbit=None, hotspots=(), lead=False, l
                  for i, (p, n, t) in enumerate(hotspots, 1))
     size = f' · {_mb(m["bytes"])}' if m.get('bytes') else ''
     style = f'--ar: {ar:.3f}' + (f'; max-width: {max_w}px' if max_w else '')
-    return (f'<figure class="m3d{" p-lead" if lead else ""}" data-reveal style="{style}"><div class="stage" data-cursor="Drag">'
+    return (f'<figure class="m3d{" p-lead" if lead else ""}" data-reveal style="{style}"><div class="stage">'
             f'<model-viewer src="{{{{P}}}}media/{slug}.glb" poster="{{{{P}}}}media/{slug}.webp" alt="{esc(alt)}" camera-orbit="{orbit}" '
             f'camera-controls touch-action="pan-y" disable-zoom interaction-prompt="none" auto-rotate auto-rotate-delay="1200" '
             f'rotation-per-second="14deg" shadow-intensity="1" shadow-softness="0.8" environment-image="{{{{P}}}}assets/studio.hdr" exposure="1" '
@@ -133,7 +133,7 @@ def video(slug, alt, num, cap, loop=False, yt=None, lead=False, label=None, ar=N
                  + (f'<img src="{poster}" alt="" loading="lazy">' if yt else '')
                  + f'<span class="ring">{_icon("play")}</span><span class="hud hud-bl">Play{meta}</span></button>'
                  f'<span class="hud hud-tl">{label}</span>')
-        cls, cur = 'vid', ' data-cursor="Play"'
+        cls, cur = 'vid', ''
     return (f'<figure class="{cls}{" p-lead" if lead else ""}" data-reveal style="{style}"><div class="stage"{cur}>{inner}</div>'
             f'<figcaption><b>{num}</b>{cap}</figcaption></figure>')
 
@@ -223,7 +223,7 @@ def render_personal(P):
         meta = (f'<div class="ptile-meta"><div class="ptile-top"><span class="num">{num}</span> <span class="n">{_count(c)}</span></div> '
                 f'<span class="t">{esc(c["title"])}</span></div>')
         if c['live']:
-            tiles.append(f'<a class="{cls}" href="#{c["key"]}" data-cursor="Open"><div class="ptile-media">{media}</div>{meta}</a>')
+            tiles.append(f'<a class="{cls}" href="#{c["key"]}"><div class="ptile-media">{media}</div>{meta}</a>')
         else:
             tiles.append(f'<div class="{cls}"><div class="ptile-media">{media}</div>{meta}</div>')
             continue
@@ -722,7 +722,7 @@ def card(slug, P, delay=0.0):
     href = f'{P}{d["kind"]}/{slug}.html'
     status = ' '.join(f'<span class="{"k" if n == 0 else ""}">{x}</span>' for n, x in enumerate(d['status']))
     return f'''<article class="card" data-reveal style="--d:{delay:.2f}s">
-  <a href="{href}" data-cursor="View">
+  <a href="{href}">
     {media(d)}
     <div class="card-info"><h3>{d["card_title"]}</h3> <div class="status">{status}</div> <span class="dates">{d["dates"]}</span> <p>{d["lede"]}</p></div>
   </a>
@@ -821,7 +821,7 @@ def project_page(i, kind, slug):
 
 <section class="next">
   <div class="wrap">
-    <a href="../{nk}/{ns}.html" data-cursor="Next">
+    <a href="../{nk}/{ns}.html">
       <div><p class="label">Next · {GROUP_OF[ns][0]}</p><p class="t">{nd["card_title"]} <span class="arrow">→</span></p></div>
       {media(nd, hover=False)}
     </a>
@@ -870,7 +870,7 @@ def home():
 </section>
 
 
-<div class="marquee" aria-label="Tools and processes"><div class="marquee-track">{mq}</div></div>
+<div class="marquee"><span class="marquee-label">Tools &amp; skills</span><div class="marquee-track" aria-hidden="true">{mq}</div><p class="sr-only">Tools and skills: {", ".join(marquee_items)}.</p></div>
 
 <section class="section" id="work">
   <div class="wrap">
@@ -1094,7 +1094,7 @@ def small_card(x, P, delay=0.0):
     inner = {'iss': anim_iss, 'snap': anim_snap}[kind]() if kind != 'vanguard' else anim_vanguard(t['src'], t['alt'])
     da = {'iss': 'iss', 'snap': 'snap', 'vanguard': 'fly'}[kind]
     return f'''<article class="card mini" data-reveal style="--d:{delay:.2f}s">
-  <a href="{P}work/smaller-work.html#{x["id"]}" data-cursor="View">
+  <a href="{P}work/smaller-work.html#{x["id"]}">
     <div class="media anim a-dark a-{da}" data-anim="{da}">{inner}<span class="go">View <span class="arrow">→</span></span></div>
     <div class="card-info"><h3>{x["title"]}</h3> <span class="dates">{x["label"]}</span> <p>{x["card"]}</p></div>
   </a>

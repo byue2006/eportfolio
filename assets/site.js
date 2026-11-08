@@ -113,25 +113,6 @@
     });
   }
 
-  /* ---------- custom cursor on cards ---------- */
-  if (finePointer && !reduce) {
-    var cur = document.createElement('div');
-    cur.className = 'cursor'; cur.setAttribute('aria-hidden', 'true');
-    body.appendChild(cur);
-    var mx = -200, my = -200, cx = -200, cy = -200, sc = 0, target = 0;
-    document.addEventListener('pointermove', function (e) {
-      mx = e.clientX; my = e.clientY;
-      var t = e.target.closest && e.target.closest('[data-cursor]');
-      if (t) { cur.textContent = t.getAttribute('data-cursor'); target = 1; } else target = 0;
-    }, { passive: true });
-    document.addEventListener('pointerleave', function () { target = 0; });
-    (function loop() {
-      cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2; sc += (target - sc) * 0.18;
-      cur.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0) scale(' + sc.toFixed(3) + ')';
-      requestAnimationFrame(loop);
-    })();
-  }
-
   /* ---------- table of contents scroll-spy (project pages) ---------- */
   var tocLinks = document.querySelectorAll('.toc a');
   if (tocLinks.length && 'IntersectionObserver' in window) {
@@ -237,7 +218,7 @@
       var num = String(i + 1).padStart(2, '0');
       /* tile */
       var t = el(c.live ? 'a' : 'div', 'ptile' + (c.items.length ? '' : ' type'));
-      if (c.live) { t.href = '#' + c.key; t.setAttribute('data-cursor', 'Open'); }
+      if (c.live) t.href = '#' + c.key;
       var media = el('div', 'ptile-media');
       var cov = coverOf(c);
       if (cov) { var im = el('img'); im.src = base + cov.src; im.alt = ''; im.loading = 'lazy'; media.appendChild(im); }
@@ -494,7 +475,7 @@
     start.addEventListener('click', function () {
       var id = start.getAttribute('data-yt');
       pauseOthers(null);
-      fig.classList.add('is-playing'); stage.removeAttribute('data-cursor');
+      fig.classList.add('is-playing');
       if (id) {
         var f = document.createElement('iframe');
         f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&playsinline=1';
