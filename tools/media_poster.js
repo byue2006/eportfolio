@@ -10,6 +10,7 @@ const [root, glb, out, orbit] = process.argv.slice(2);
     const u = new URL(r.request().url());
     if (u.pathname === '/') return r.fulfill({ contentType: 'text/html', body:
       `<!doctype html><style>html,body{margin:0;background:transparent}model-viewer{width:1600px;height:900px;--poster-color:transparent}</style>
+       <script>self.ModelViewerElement = { meshoptDecoderLocation: "/assets/vendor/meshopt_decoder.js" };</script>
        <script type="module" src="/assets/vendor/model-viewer.min.js"></script>
        <model-viewer src="/${glb}" camera-orbit="${orbit}" shadow-intensity="1" shadow-softness="0.8"
          environment-image="/assets/studio.hdr" exposure="1" interaction-prompt="none"></model-viewer>` });

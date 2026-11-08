@@ -1,28 +1,28 @@
 {
   "closure.glb": {
     "kind": "model",
-    "bytes": 248240,
+    "bytes": 58264,
     "parts": 1,
     "poster": "media/closure.webp",
     "orbit": "-30deg 58deg auto"
   },
   "shear-balance.glb": {
     "kind": "model",
-    "bytes": 3380992,
+    "bytes": 846200,
     "parts": 80,
     "poster": "media/shear-balance.webp",
     "orbit": "150deg 64deg auto"
   },
   "shuttle.glb": {
     "kind": "model",
-    "bytes": 416800,
+    "bytes": 104372,
     "parts": 1,
     "poster": "media/shuttle.webp",
     "orbit": "38deg 52deg auto"
   },
   "toy-head.glb": {
     "kind": "model",
-    "bytes": 19320,
+    "bytes": 6004,
     "parts": 1,
     "poster": "media/toy-head.webp",
     "orbit": "-40deg 68deg auto"

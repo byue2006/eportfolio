@@ -262,7 +262,16 @@ SCHEMA = '<script type="application/ld+json">' + '{"@context": "https://schema.o
 # ---------------------------------------------------------------- shell
 def page(title, desc, P, active, main, progress=False, path=None):
     def cur(k): return ' aria-current="page"' if active == k else ''
-    MV = f'<script type="module" src="{P}assets/vendor/model-viewer.min.js"></script>\n' if '<model-viewer' in main else ''
+    # 3D models are meshopt-compressed (tools/compress_models.py); the viewer loads this small decoder from our own server
+    # The viewer library (~250 KB) loads only when a model comes within ~700px of the screen; until then the
+    # pre-rendered poster shows, exactly as it does while a model loads.
+    MV = ('<script>self.ModelViewerElement = { meshoptDecoderLocation: "' + P + 'assets/vendor/meshopt_decoder.js" };\n'
+          '(function () { var done = false, els = document.querySelectorAll("model-viewer");\n'
+          '  function load() { if (done) return; done = true; var s = document.createElement("script"); s.type = "module";'
+          ' s.src = "' + P + 'assets/vendor/model-viewer.min.js"; document.head.appendChild(s); }\n'
+          '  if (!("IntersectionObserver" in window)) return load();\n'
+          '  var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); load(); } }, { rootMargin: "700px 0px" });\n'
+          '  els.forEach(function (m) { io.observe(m); }); })();</script>\n') if '<model-viewer' in main else ''
     home = '' if active == 'home' else P + 'index.html'
     nav = (f'<a href="{home}#work"{cur("work")}>Work</a>'
            f'<a href="{home}#leadership"{cur("leadership")}>Leadership</a>'
@@ -1145,7 +1154,23 @@ def personal():
     return page('Personal · Brian Yue', 'Volleyball, basketball, music, and photography: what Brian Yue does away from engineering.', P, 'personal', main, path='personal')
 
 # ---------------------------------------------------------------- write
+_DISPLAY_IMG = re.compile(r'(\ssrc="|url\()((?:\.\./)*/?)(images/[^"/)]+\.(?:webp|jpe?g|png))(?=[")])')
+_DISPLAY_MAP = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'display_map.json')
+DISPLAY_MAP = json.load(open(_DISPLAY_MAP)) if os.path.exists(_DISPLAY_MAP) else {}
+
+def use_display_copies(rel, html):
+    """Point this page's on-page images (<img src>, masked logos) at the lighter copies sized for this page
+    (tools/make_display_images.py writes them and tools/display_map.json). Links are untouched, so the
+    lightbox still opens the full original."""
+    swaps = DISPLAY_MAP.get(rel, {})
+    def sub(m):
+        lead, prefix, path = m.groups()
+        copy = swaps.get(path)
+        return f'{lead}{prefix}{copy}' if copy and os.path.exists(os.path.join(OUT, copy)) else m.group(0)
+    return _DISPLAY_IMG.sub(sub, html) if swaps else html
+
 def write(rel, text):
+    text = use_display_copies(rel.replace(os.sep, '/'), text) if rel.endswith('.html') else text
     path = os.path.join(OUT, rel)
     os.makedirs(os.path.dirname(path) or OUT, exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:

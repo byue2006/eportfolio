@@ -70,17 +70,65 @@ def main():
 
 
 def write_hdr(path, rgb):
-    """Uncompressed Radiance RGBE (readers fall back to flat scanlines when there is no RLE marker)."""
+    """Radiance RGBE with the standard run-length compression (lossless; the studio is mostly black, so it packs small)."""
     m = rgb.max(-1)
     e = np.where(m > 1e-32, np.floor(np.log2(np.maximum(m, 1e-32))) + 1, 0)
     scale = np.where(m > 1e-32, 256.0 / np.exp2(e), 0)
     rgbe = np.zeros(rgb.shape[:2] + (4,), np.uint8)
     rgbe[..., :3] = np.clip(rgb * scale[..., None], 0, 255).astype(np.uint8)
     rgbe[..., 3] = np.where(m > 1e-32, e + 128, 0).astype(np.uint8)
+    write_rgbe(path, rgbe)
+
+
+def _rle(row):
+    """New-style Radiance run-length encoding of one channel of one scanline."""
+    out, i, n = bytearray(), 0, len(row)
+    while i < n:
+        j = i
+        while j < n and j - i < 127 and row[j] == row[i]:
+            j += 1
+        if j - i > 2:                      # a run
+            out += bytes((128 + j - i, row[i])); i = j; continue
+        j = i                               # a literal stretch, up to the next run of 3+
+        while j < n and j - i < 128 and not (j + 2 < n and row[j] == row[j + 1] == row[j + 2]):
+            j += 1
+        out.append(j - i); out += bytes(row[i:j]); i = j
+    return out
+
+
+def write_rgbe(path, rgbe):
+    h, w = rgbe.shape[:2]
     with open(path, 'wb') as f:
         f.write(b'#?RADIANCE\nFORMAT=32-bit_rle_rgbe\n\n')
-        f.write(f'-Y {rgb.shape[0]} +X {rgb.shape[1]}\n'.encode())
-        f.write(rgbe.tobytes())
+        f.write(f'-Y {h} +X {w}\n'.encode())
+        for y in range(h):
+            f.write(bytes((2, 2, w >> 8, w & 255)))
+            for c in range(4):
+                f.write(_rle(rgbe[y, :, c].tolist()))
+
+
+def read_rgbe(path):
+    """Read an RGBE .hdr written flat or with new-style RLE (used to re-pack and to check)."""
+    d = open(path, 'rb').read()
+    head_end = d.index(b'\n\n') + 2
+    line_end = d.index(b'\n', head_end)
+    _, h, _, w = d[head_end:line_end].split()
+    h, w, p = int(h), int(w), line_end + 1
+    out = np.zeros((h, w, 4), np.uint8)
+    for y in range(h):
+        if d[p] == 2 and d[p + 1] == 2:
+            p += 4
+            for c in range(4):
+                x = 0
+                while x < w:
+                    k = d[p]; p += 1
+                    if k > 128:
+                        out[y, x:x + k - 128, c] = d[p]; p += 1; x += k - 128
+                    else:
+                        out[y, x:x + k, c] = list(d[p:p + k]); p += k; x += k
+        else:
+            out[y] = np.frombuffer(d[p:p + 4 * w], np.uint8).reshape(w, 4); p += 4 * w
+    return out
 
 
 if __name__ == '__main__':

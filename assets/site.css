@@ -794,6 +794,7 @@ html.present *, html.present *::before, html.present *::after { scroll-behavior:
 .stage model-viewer:focus-visible { outline: 2px solid var(--st-acc); outline-offset: -2px; }
 .stage .fallback { object-fit: contain; }
 model-viewer:defined ~ .fallback { display: none; }
+model-viewer:not(:defined) > * { display: none; }  /* hotspots and progress bar wait for the viewer (it loads on approach) */
 .stage video { object-fit: cover; background: #000; }
 .stage:fullscreen { aspect-ratio: auto; border-radius: 0; }
 .stage:fullscreen video { object-fit: contain; }

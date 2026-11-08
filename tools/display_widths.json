@@ -1,0 +1,766 @@
+{
+ "about.html": {
+  "images/portrait.jpg": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  }
+ },
+ "index.html": {
+  "images/aiaa-foyer.webp": {
+   "px": 1104,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/aiaa-sign.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/card-issdc.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/card-shear-balance.webp": {
+   "px": 1104,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/card-toy.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/card-vanguard.webp": {
+   "px": 1058,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/closure-machined.webp": {
+   "px": 1128,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-timeout.webp": {
+   "px": 1316,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-duke-aero.svg": {
+   "px": 641,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-duke.svg": {
+   "px": 444,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-egr-corp.webp": {
+   "px": 805,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-issdc.webp": {
+   "px": 366,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-ncstate.svg": {
+   "px": 787,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-tis.webp": {
+   "px": 769,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-iso.webp": {
+   "px": 1128,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/portrait.jpg": {
+   "px": 894,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "personal/_web/volleyball/01-ready-to-serve-900.webp": {
+   "px": 547,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "personal/_web/volleyball/02-attack-at-the-net-900.webp": {
+   "px": 821,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "personal/_web/volleyball/03-block-900.webp": {
+   "px": 547,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "personal/_web/volleyball/04-jump-serve-900.webp": {
+   "px": 547,
+   "box": [
+    0,
+    0
+   ]
+  }
+ },
+ "leadership/coaching.html": {
+  "images/card-shear-balance.webp": {
+   "px": 880,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-bball-squad.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-bball-team.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-bench.webp": {
+   "px": 1672,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-instruction.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-timeout.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-vball-dark.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-vball-white.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/coaching-with-coach.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-tis.webp": {
+   "px": 0,
+   "box": [
+    400,
+    78
+   ]
+  }
+ },
+ "leadership/issdc.html": {
+  "images/issdc-alaskol-atmosphere.webp": {
+   "px": 1054,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-alaskol-cover.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-bread-atmosphere.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-bread-power.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-china-finals.webp": {
+   "px": 1116,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-ksc-team.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-presenting.webp": {
+   "px": 1056,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-robot-clamp.webp": {
+   "px": 1232,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-robot-cutter.webp": {
+   "px": 1047,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-robot-grabber.webp": {
+   "px": 1050,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-robot-welder.webp": {
+   "px": 2284,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-rocket-garden.webp": {
+   "px": 1061,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/issdc-with-dad.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-issdc.webp": {
+   "px": 0,
+   "box": [
+    132,
+    132
+   ]
+  }
+ },
+ "leadership/teaching.html": {
+  "images/coaching-timeout.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-duke.svg": {
+   "px": 0,
+   "box": [
+    246,
+    88
+   ]
+  }
+ },
+ "work/forward-closure.html": {
+  "images/card-toy.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/closure-fos.webp": {
+   "px": 1669,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/closure-hotfire.webp": {
+   "px": 1063,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/closure-machined.webp": {
+   "px": 2284,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/closure-port.webp": {
+   "px": 1056,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/closure-section.webp": {
+   "px": 1058,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-duke-aero.svg": {
+   "px": 0,
+   "box": [
+    400,
+    114
+   ]
+  },
+  "media/closure.webp": {
+   "px": 1640,
+   "box": [
+    0,
+    0
+   ]
+  }
+ },
+ "work/happy-meal.html": {
+  "images/logo-egr-corp.webp": {
+   "px": 0,
+   "box": [
+    324,
+    132
+   ]
+  },
+  "images/playseat-iso.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-choke.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-drawing-head.webp": {
+   "px": 1667,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-exploded.webp": {
+   "px": 1056,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-final.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-heads.webp": {
+   "px": 2284,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-poster-1.webp": {
+   "px": 1052,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-poster-2.webp": {
+   "px": 1052,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-section.webp": {
+   "px": 1057,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-sketch-1.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/toy-sketch-2.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "media/toy-head.webp": {
+   "px": 1640,
+   "box": [
+    0,
+    0
+   ]
+  }
+ },
+ "work/playseat.html": {
+  "images/card-issdc.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-duke.svg": {
+   "px": 0,
+   "box": [
+    246,
+    88
+   ]
+  },
+  "images/playseat-cane-out.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-cane.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-car63.webp": {
+   "px": 1672,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-iso.webp": {
+   "px": 2284,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-poster.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-proto-1.webp": {
+   "px": 1062,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-proto-2.webp": {
+   "px": 1060,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-pugh.webp": {
+   "px": 1667,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-rear.webp": {
+   "px": 1061,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-sketch-12.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-sketch-8.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/playseat-wheel.webp": {
+   "px": 1078,
+   "box": [
+    0,
+    0
+   ]
+  }
+ },
+ "work/shear-balance.html": {
+  "images/aiaa-foyer.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/balance-section-flow.webp": {
+   "px": 1642,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/balance-section-transverse.webp": {
+   "px": 1664,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/dwg-1-panel-frame.webp": {
+   "px": 509,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/dwg-2-panel.webp": {
+   "px": 509,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/dwg-3-l-bracket.webp": {
+   "px": 509,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/dwg-4-sidewall-mounting-plate.webp": {
+   "px": 509,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/dwg-5-carriage-rail.webp": {
+   "px": 509,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-ncstate.svg": {
+   "px": 0,
+   "box": [
+    400,
+    78
+   ]
+  }
+ },
+ "work/smaller-work.html": {
+  "images/dwg-shuttle-2400.webp": {
+   "px": 2283,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/iss-deorbit-poster.webp": {
+   "px": 1960,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/me321-grip-fos.webp": {
+   "px": 1120,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/me321-grip-print.webp": {
+   "px": 1115,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/me321-grip-strain.webp": {
+   "px": 1121,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "media/shuttle.webp": {
+   "px": 1960,
+   "box": [
+    0,
+    0
+   ]
+  }
+ },
+ "work/ttbw.html": {
+  "images/aiaa-foyer.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/aiaa-logo.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/aiaa-sign.webp": {
+   "px": 1061,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/closure-machined.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/logo-duke.svg": {
+   "px": 0,
+   "box": [
+    246,
+    88
+   ]
+  },
+  "images/ttbw-control-layouts.webp": {
+   "px": 1055,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/ttbw-noise-margins.webp": {
+   "px": 1051,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/ttbw-paper.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  },
+  "images/ttbw-slide-title.webp": {
+   "px": 1059,
+   "box": [
+    0,
+    0
+   ]
+  }
+ }
+}

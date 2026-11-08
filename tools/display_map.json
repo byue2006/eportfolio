@@ -1,0 +1,51 @@
+{
+ "about.html": {
+  "images/portrait.jpg": "images/d/portrait-1152.webp"
+ },
+ "index.html": {
+  "images/closure-machined.webp": "images/d/closure-machined-1280.webp",
+  "images/logo-issdc.webp": "images/d/logo-issdc-448.webp",
+  "images/logo-tis.webp": "images/d/logo-tis-832.webp",
+  "images/playseat-iso.webp": "images/d/playseat-iso-1280.webp",
+  "images/portrait.jpg": "images/d/portrait-1024.webp"
+ },
+ "leadership/coaching.html": {
+  "images/coaching-vball-dark.webp": "images/d/coaching-vball-dark-1152.webp",
+  "images/coaching-vball-white.webp": "images/d/coaching-vball-white-1152.webp",
+  "images/coaching-with-coach.webp": "images/d/coaching-with-coach-1152.webp",
+  "images/logo-tis.webp": "images/d/logo-tis-448.webp"
+ },
+ "leadership/issdc.html": {
+  "images/issdc-alaskol-atmosphere.webp": "images/d/issdc-alaskol-atmosphere-1152.webp",
+  "images/issdc-china-finals.webp": "images/d/issdc-china-finals-1216.webp",
+  "images/issdc-ksc-team.webp": "images/d/issdc-ksc-team-1152.webp",
+  "images/issdc-presenting.webp": "images/d/issdc-presenting-1152.webp",
+  "images/issdc-robot-cutter.webp": "images/d/issdc-robot-cutter-1152.webp",
+  "images/issdc-robot-grabber.webp": "images/d/issdc-robot-grabber-1097.webp",
+  "images/issdc-with-dad.webp": "images/d/issdc-with-dad-1152.webp",
+  "images/logo-issdc.webp": "images/d/logo-issdc-192.webp"
+ },
+ "work/happy-meal.html": {
+  "images/playseat-iso.webp": "images/d/playseat-iso-1152.webp",
+  "images/toy-poster-2.webp": "images/d/toy-poster-2-936.webp"
+ },
+ "work/playseat.html": {
+  "images/playseat-cane-out.webp": "images/d/playseat-cane-out-1152.webp",
+  "images/playseat-cane.webp": "images/d/playseat-cane-1152.webp",
+  "images/playseat-poster.webp": "images/d/playseat-poster-1152.webp"
+ },
+ "work/shear-balance.html": {
+  "images/dwg-1-panel-frame.webp": "images/d/dwg-1-panel-frame-576.webp",
+  "images/dwg-2-panel.webp": "images/d/dwg-2-panel-576.webp",
+  "images/dwg-3-l-bracket.webp": "images/d/dwg-3-l-bracket-576.webp",
+  "images/dwg-4-sidewall-mounting-plate.webp": "images/d/dwg-4-sidewall-mounting-plate-576.webp",
+  "images/dwg-5-carriage-rail.webp": "images/d/dwg-5-carriage-rail-576.webp"
+ },
+ "work/smaller-work.html": {
+  "images/me321-grip-fos.webp": "images/d/me321-grip-fos-1216.webp"
+ },
+ "work/ttbw.html": {
+  "images/closure-machined.webp": "images/d/closure-machined-1152.webp",
+  "images/ttbw-slide-title.webp": "images/d/ttbw-slide-title-1152.webp"
+ }
+}
