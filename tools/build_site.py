@@ -296,7 +296,7 @@ def page(title, desc, P, active, main, progress=False, path=None):
 <link rel="apple-touch-icon" href="{P}apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,400;0,500;0,600;0,700;1,700&family=Geist+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="{P}assets/site.css">
 <script>{HEAD_SCRIPT}</script>
 </head>
@@ -914,7 +914,7 @@ def home():
     <div class="portrait" data-reveal><img src="images/aiaa-sign.webp" loading="lazy" style="object-position: 50% 40%" alt="Brian Yue at the AIAA AVIATION 2026 forum in San Diego."></div>
     <div data-reveal style="--d:.1s">
       <p class="label">About</p>
-      <p class="big-text" style="font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.02em; line-height: 1.05">Beijing, then Durham.</p>
+      <p class="big-text" style="font-weight: 600; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.045em; line-height: 1.05">Beijing, then Durham.</p>
       <p class="big-text" style="margin-top:0"> <span>I'm a mechanical engineering junior at Duke working toward an aerospace certificate. Before that, I captained ISSDC teams and coached middle school volleyball and basketball in Beijing.</span></p>
       <div class="actions">
         <a class="pill solid" href="about.html">More about me <span class="arrow">→</span></a>

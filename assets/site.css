@@ -24,7 +24,6 @@
 
   --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --serif: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
 
   --gutter: clamp(16px, 4.5vw, 48px);
   --max: 1240px;
@@ -256,7 +255,8 @@ body.menu-open { overflow: hidden; }
   font-size: clamp(2.7rem, 6vw, 5.6rem); line-height: .98; letter-spacing: -0.052em;
   margin: 0 0 clamp(24px, 3.5vw, 36px); text-wrap: balance;
 }
-.display em { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 1.1em; letter-spacing: -0.02em; line-height: .8; color: var(--accent); }
+.display em { font-weight: 700; font-style: italic; letter-spacing: -0.05em; color: var(--accent); }  /* "make it.": Geist Bold Italic */
+.display em .w { padding-right: .08em; margin-right: -.08em; }  /* keep the italic overhang out of the word-reveal mask */
 
 /* title block, in the format of a drawing's */
 .titleblock {
