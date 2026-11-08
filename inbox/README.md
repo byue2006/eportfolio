@@ -93,6 +93,12 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 - [x] Shear-force balance: male-female interface from a grad student, who flagged the friction and suggested carriages. Done.
 - [x] PlaySeat: rear casters offset the CG shift (front and rear casters); material is polycarbonate (per the poster). Done.
 - [x] Coaching: both placements were girls' basketball (from your high-school résumé). Done.
+- [ ] Coaching Fig. 4 (volleyball, dark gym): are you the one in sunglasses?
+- [ ] ISSDC China Finals photo: are you crouching in front, and which year was it?
+
+**Files to send when ready:**
+
+- [ ] **Updated résumé PDF.** It should say "sole author" for the TTBW paper and list Duke Aero from August 2024. Upload it and it replaces `resume.pdf`.
 
 ## Already done (no need to send)
 

@@ -2,6 +2,16 @@
 
 Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Workers static assets, deploys from `main`). GitHub Pages mirror at byue2006.github.io/eportfolio.
 
+## Working with Brian (read first, especially after compacting)
+- Brian is new to code. Explain in plain words, walk him through anything he has to do himself, and fix whatever breaks along the way. Always work on the latest repo (`git pull --rebase origin main` first).
+- Design changes: show before building. He asks for alternatives "but don't implement yet": render options on the real page (dark and light, desktop and phone) and send them as PNGs in chat, labeled with letters/numbers, plus a recommendation. He narrows down in rounds ("I like A, B, E", "between A and B", "something like 2"), then says "live it". Only then change the site.
+- Small tweaks he describes by feel ("very slightly less bold") are fine to do directly; show a before/after image.
+- When a decision is his, ask a short multiple-choice question; otherwise pick a sensible default and say so.
+- Outside feedback (advisors, recruiters): he takes it selectively. Give your take on each point and let him choose; record what was kept and declined in the log below.
+- "Lighter/faster" means no visible change: compare screenshots/renders against the originals before shipping.
+- After every change: add a line to the Decision log below and to the Change log in README.md, push, and confirm both checks plus the live page.
+- The repository is public. Never commit private details (contact info, private documents, names of people giving private feedback).
+
 ## How it's built
 - All page text lives in `tools/build_site.py`. Edit there, then run `python3 tools/build_site.py`; never hand-edit the generated `*.html`.
 - Personal gallery: photos go in `personal/<category>/`; `python3 tools/build_gallery.py` (needs Pillow, pillow-heif) writes `personal/_web/` and `personal/gallery.js` (captions/alt edited there persist). Category text: `personal/categories.js` (strict JSON).
@@ -38,6 +48,8 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Brian is #24 and #15 (volleyball), #24 (basketball). Only caption a number when it is visible.
 - Verify after each push: both checks (GitHub Actions, "Workers Builds: eportfolio") succeed and the live page shows the change.
 - Open questions for Brian are listed in `inbox/README.md`.
+- Photos: keep minors unnamed or out of frame; never show the PlaySeat client's face unless his family agrees.
+- Only use cloud-drive files Brian points to by name; not everything in a connected drive is his.
 - Private documents Brian shared (high-school résumé, college applications, transcript, application forms) are for checking facts only. Never publish grades, test scores, addresses, phone numbers, birth date or application IDs from them. The cumulative GPA (3.776) and coursework on About come from his résumé and are fine.
 - Happy Meal train: the team built three heads (the design allows any number on the same mate); Brian made the exploded view in an Onshape assembly. The Toy Fair poster was designed by Saina Srivastava and Mariangle Mendez; always credit them. The PlaySeat sketches, Pugh matrix and prototype photos are from the team's EGR 101 oral presentation (Nov 7, 2024).
 - The Vanguard shuttle was an EGR 101 CAD assignment (fall 2024) that Brian took well past the brief.
@@ -50,3 +62,27 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Shear balance: the starting male-female interface was a grad student's design, and he reported the ~40% friction loss and suggested carriages; Brian chose and integrated the carriage and rail. The April 2026 static hot fire used Brian's unified closure. ISSDC robot designs are Brian's; the 3D models are Kelly Wang's.
 - Navigation, decided Nov 2026: Personal stays in the main nav, and Résumé is the last item in the main nav (↗, opens the PDF in a new tab) on every page; there is no separate Résumé button in the header. The phone menu and the footer also link the résumé.
 - Keep as-is: the shear-balance attribution block, the forward-closure contribution and FOS ~11 self-criticism, the ISSDC "Rechecking" notes (historical proposal numbers are annotated, never altered).
+
+## Open items (also in inbox/README.md)
+- Updated résumé PDF: when Brian uploads it, replace `resume.pdf`; it must say "sole author" for TTBW and list Duke Aero from August 2024.
+- Photos he could add: him leading an EGR 105 lab, shear-balance hardware (if built), the AVIATION podium, the Toy Fair booth.
+- Unconfirmed captions, kept neutral until he answers: is he the one in sunglasses in coaching Fig. 4; is he crouching in front in the ISSDC China Finals photo, and what year.
+- Unused images kept for now (delete only when he says): `images/ttbw-diagram.webp`, `images/balance-rear.webp`.
+
+## Decision log (newest first; add a line for every change)
+- 2026-11-08 · Brian asked for his preferences and a running log to survive compacting: added "Working with Brian", "Open items" and this log here, plus a speed section and a change log in README.md; inbox/README.md lists the open questions.
+- 2026-11-08 · Site made lighter with no visible change: per-page image copies (`images/d/`, about 2.3 MB less across pages), meshopt 3D models (4.1 MB to 1 MB), lossless RLE studio lighting (524 KB to 76 KB), 3D viewer library loads only as a model nears the screen. Gallery thumbnails left as they are (already the size phones need). Verified by full-page screenshot and 3D render comparisons.
+- 2026-11-08 · Removed the five single-sheet drawing PDFs (the five-page package holds them). Brian: don't delete unused photos yet.
+- 2026-11-08 · Résumé moved into the top menu as its last item (option 2 of 3); the separate header button is gone. Personal stays in the menu (Brian: "def keep personal in the top"). Rejected: a filled Résumé menu item (that style already marks the current page).
+- 2026-11-08 · Advisor feedback: removed the orange "View" cursor bubble (cards show a small "View →" tag); the tools ticker got a fixed "Tools & skills" label, muted items, grey "+" separators and no pause on hover. Declined at first: moving Personal under About; Résumé in the menu was adopted later (above). Brian likes the hero crosshair/coordinate readout and the ticker: keep both.
+- 2026-11-08 · Hero headline: "make it." moved from the Instrument Serif italic ("that weird swoopy font") to Geist Italic in orange, first 700, then 640 ("very slightly less bold"). Considered and passed on: two-tone grey, weight contrast, name-first, uppercase, underline, highlight block, corner marks, outline, mono. Instrument Serif is no longer loaded anywhere; "Beijing, then Durham." on the home About teaser is Geist SemiBold. The share card headline follows the hero.
+- 2026-11-08 · New logo: bold Geist "BY." (orange square full stop) on a white tile + "Brian Yue" in Geist SemiBold, mixed case, no stop after the name (option A over a square stop). Favicon and phone icon: the same white BY tile ("definitely uppercase BY for favicon"). Considered and passed on: serif "by." (old), lowercase "by." in Geist, axis-triad Y, parting-line BY, corner-mark and monospace BY, uppercase "BRIAN YUE". All logo files come from `tools/make_brand.py`.
+- 2026-11-04 · Personal gallery: bench-burning photo is Music (pep band, not basketball); four more volleyball photos; only photos where Brian (#24/#15) is confirmed.
+- 2026-11-04 · Coaching and ISSDC photos; PlaySeat design story from the oral presentation; Toy Fair poster credited; train: three heads built, exploded view credited; teaching: 39 students in each course; AFSD stays a skill.
+- 2026-11-04 · Card tiles: only Duke AERO (Magnolia #1d6363) and EGR 101 (Shale Blue #0577b1) recolored; the rest keep their brand colors. Vanguard labeled as the EGR 101 assignment.
+- 2026-11-04 · Numbers: home ticker is tools and skills only; each project page shows its figures as a still grid under the banner (Brian: numbers matter and must all be visible at once).
+- 2026-11-04 · Voice pass: copy rewritten in Brian's own voice (plain summaries, page-specific headings, no slogans); About gets his origin story.
+- 2026-11-04 · Home order: Experience, Projects, Leadership, then Smaller work, then About. Smaller work cards are dark ISS-style posters with pointer-reactive physics; 3D models re-rendered with studio lighting.
+- 2026-11-04 · Attribution fixes: shear balance (grad student's interface and carriage suggestion), forward closure (hot fire used the unified closure; scrapped seals noted), ISSDC (gas mix only is Brian's; robots his, models Kelly Wang's), ME 321 (FEA check only).
+- 2026-11-04 · Email button opens the visitor's mail app to the Duke address; Duke Aero dated from August 2024; project banners show a small org mark.
+- 2026-11-03/04 · Site built: Cloudflare Workers + GitHub Pages mirror, present mode for screen sharing, 3D viewer and video players, personal gallery, light/dark themes.
