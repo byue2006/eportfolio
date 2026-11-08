@@ -18,16 +18,15 @@ Brian Yue's ePortfolio, live at **https://brianyue.me**.
 
 ## Logo
 
-`assets/brand/` holds the logo: an italic serif **by.** with an orange full stop, echoing the "make it." headline.
+`assets/brand/` holds the logo: a bold **BY** with an orange square full stop on a white tile, next to "Brian Yue" in Geist.
 
 | File | Use |
 |---|---|
-| `logo-mark.svg`, `logo-mark-1024.png` | Square mark, dark tile (profile pictures, LinkedIn, résumé) |
-| `logo-mark-light.svg`, `logo-mark-light-1024.png` | Square mark, light tile (for dark backgrounds) |
-| `logo-lockup.svg`, `logo-lockup-2400.png` | Mark + "Brian Yue." for light backgrounds |
+| `logo-mark.svg`, `logo-mark-1024.png` | Square mark, white tile with a hairline edge (profile pictures, LinkedIn, résumé; works on light or dark) |
+| `logo-lockup.svg`, `logo-lockup-2400.png` | Mark + "Brian Yue" for light backgrounds |
 | `logo-lockup-on-dark.svg`, `logo-lockup-on-dark-2400.png` | Same, for dark backgrounds |
 
-`favicon.svg`, `favicon.ico` and `apple-touch-icon.png` (browser tab and phone home screen) are made from the same mark. The site header draws it inline, so it follows light/dark mode.
+`favicon.svg`, `favicon.ico`, `apple-touch-icon.png` (browser tab and phone home screen) and the share card `images/og-card.png` are made from the same outline by `python3 tools/make_brand.py`. The site header draws the mark inline, so it follows light/dark mode.
 
 ## Pages
 

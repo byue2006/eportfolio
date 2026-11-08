@@ -17,6 +17,7 @@
   --accent-ink: #ffffff;
   --accent-soft: rgba(194, 65, 12, 0.08);
   --chart-bar: #c2410c;
+  --mark-tile: #ffffff; --mark-edge: #d3d3ce; --mark-ink: #141414; --mark-dot: #c2410c;  /* header logo: white tile, hairline edge on light pages */
   --dot: rgba(20, 20, 20, 0.16);
   --img-dim: 1;
   --shadow: 0 1px 2px rgba(0,0,0,.04), 0 12px 32px -12px rgba(0,0,0,.12);
@@ -45,6 +46,7 @@
     --accent-ink: #140b05;
     --accent-soft: rgba(240, 138, 75, 0.10);
     --chart-bar: #dc6a2c;
+    --mark-tile: #f5f5f2; --mark-edge: transparent; --mark-ink: #0b0c0d; --mark-dot: #d4541a;
     --dot: rgba(237, 237, 235, 0.14);
     --img-dim: 0.92;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
@@ -64,6 +66,7 @@
   --accent-ink: #140b05;
   --accent-soft: rgba(240, 138, 75, 0.10);
   --chart-bar: #dc6a2c;
+  --mark-tile: #f5f5f2; --mark-edge: transparent; --mark-ink: #0b0c0d; --mark-dot: #d4541a;
   --dot: rgba(237, 237, 235, 0.14);
   --img-dim: 0.92;
   --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
@@ -161,11 +164,10 @@ button { font: inherit; color: inherit; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; white-space: nowrap; }
 .brand .mark { width: 30px; height: 30px; flex: none; display: block; transition: transform .4s var(--ease); }
 .brand:hover .mark { transform: rotate(-6deg); }
-.brand .m-bg { fill: var(--ink); }
-.brand .m-fg { fill: var(--paper); }
-.brand .m-dot { fill: var(--accent); }
-.brand .wm { font-family: var(--serif); font-weight: 400; font-size: 23px; letter-spacing: -0.01em; line-height: 1; }
-.brand .stop { color: var(--accent); }
+.brand .m-bg { fill: var(--mark-tile); stroke: var(--mark-edge); stroke-width: 16; }
+.brand .m-fg { fill: var(--mark-ink); }
+.brand .m-dot { fill: var(--mark-dot); }
+.brand .wm { font-family: var(--sans); font-weight: 600; font-size: 17px; letter-spacing: -0.025em; line-height: 1; }
 .navpill {
   display: flex; gap: 2px; padding: 4px;
   border: 1px solid var(--rule); border-radius: 999px;
