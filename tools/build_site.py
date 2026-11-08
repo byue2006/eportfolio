@@ -267,7 +267,8 @@ def page(title, desc, P, active, main, progress=False, path=None):
     nav = (f'<a href="{home}#work"{cur("work")}>Work</a>'
            f'<a href="{home}#leadership"{cur("leadership")}>Leadership</a>'
            f'<a href="{P}about.html"{cur("about")}>About</a>'
-           f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}{"" if HAS_PERSONAL else " hidden"}>Personal</a>')
+           f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}{"" if HAS_PERSONAL else " hidden"}>Personal</a>'
+           f'<a href="{P}resume.pdf" target="_blank" rel="noopener">Résumé <span class="ext" aria-hidden="true">↗</span></a>')
     menu_links = (f'<a href="{P}index.html"{cur("home")}>Home <span>00</span></a>'
                   f'<a href="{home}#work"{cur("work")}>Work <span>01</span></a>'
                   f'<a href="{home}#leadership"{cur("leadership")}>Leadership <span>02</span></a>'
@@ -309,7 +310,6 @@ def page(title, desc, P, active, main, progress=False, path=None):
     <nav class="navpill" aria-label="Primary">{nav}</nav>
     <div class="bar-right">
       <button class="pill theme-btn" type="button" aria-label="Switch to light theme" title="Switch to light theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
-      <a class="pill solid" href="{P}resume.pdf" target="_blank" rel="noopener">Résumé <span class="arrow">↗</span></a>
       <button class="pill menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span>Menu</span></button>
     </div>
   </div>

@@ -181,6 +181,7 @@ button { font: inherit; color: inherit; }
 }
 .navpill a:hover { color: var(--ink); background: var(--accent-soft); }
 .navpill a[aria-current="page"] { color: var(--paper); background: var(--ink); }
+.navpill .ext { font-size: .85em; margin-left: 2px; }  /* Résumé opens the PDF in a new tab */
 .bar-right { display: flex; align-items: center; gap: 10px; }
 .menu-btn { display: none; }
 @media (max-width: 860px) {
