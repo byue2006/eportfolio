@@ -79,6 +79,8 @@ Each photo comes out around 1–3 MB, well under the limit. Upload those exporte
 - [x] **Coaching:** done, three photos of you coaching on the coaching page.
 - [ ] **Shear-force balance:** any photo of the real parts or hardware, if it was built.
 
+**Unused images, kept for now (Nov 2026).** Nothing on the site shows these; say the word and they go: `images/ttbw-diagram.webp` (the old TTBW diagram, replaced by the redrawn figure) and `images/balance-rear.webp` (a rear render of the shear balance).
+
 Please don't upload photos where the PlaySeat client's face is visible, unless his family has said it's fine to put online.
 
 **Words, not files.** Just answer these in the chat:
