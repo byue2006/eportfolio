@@ -3,6 +3,12 @@
 {
   "name": "eportfolio",
   "compatibility_date": "2025-09-01",
+  // The addresses that serve this site. Every deploy makes this list the complete set, so a domain left out
+  // here gets detached: keep brianyue.me in it. Cloudflare creates the DNS records itself.
+  "routes": [
+    { "pattern": "brianyue.me", "custom_domain": true },
+    { "pattern": "www.brianyue.me", "custom_domain": true }
+  ],
   "assets": {
     "directory": ".",
     // unknown URLs get the styled 404.html instead of a blank page

@@ -97,6 +97,7 @@ The site is tuned to download as little as possible without looking any differen
 
 Newest first. The detailed version, with what was considered and why, is the Decision log in `CLAUDE.md`.
 
+- **2026-11-13** `www.brianyue.me` added (both addresses now listed in `wrangler.jsonc`).
 - **2026-11-13** Résumé now downloads as `Brian-Yue-Resume.pdf` (the old `resume.pdf` link still works). Each project page shows its own picture when its link is shared. Phone QR card redone at three times the resolution.
 - **2026-11-13** QR codes for events added in `assets/brand/` (with the BY mark, plain, and a phone-screen card). Re-make them with `python3 tools/make_qr.py`.
 - **2026-11-13** Easier for search engines and AI tools to read, with no visible change: machine-readable page info on every page and a plain-text site index (`llms.txt`). Still to do by Brian: add `www.brianyue.me` in Cloudflare.
