@@ -97,6 +97,7 @@ The site is tuned to download as little as possible without looking any differen
 
 Newest first. The detailed version, with what was considered and why, is the Decision log in `CLAUDE.md`.
 
+- **2026-11-13** QR codes for events added in `assets/brand/` (with the BY mark, plain, and a phone-screen card). Re-make them with `python3 tools/make_qr.py`.
 - **2026-11-13** Easier for search engines and AI tools to read, with no visible change: machine-readable page info on every page and a plain-text site index (`llms.txt`). Still to do by Brian: add `www.brianyue.me` in Cloudflare.
 - **2026-11-13** Wording made more direct across the site ("I designed", "I modeled", "we delivered" in place of "I did the design", "was mine", "was delivered"). Credits to teammates unchanged.
 - **2026-11-08** README and CLAUDE.md updated with Brian's preferences, open items and this change log.
