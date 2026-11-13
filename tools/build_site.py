@@ -1257,7 +1257,7 @@ def llms():
         d = P_[slug]
         return f'- [{plain(d["card_title"])}]({SITE}/{kind}/{slug}): {plain(" · ".join(d["status"] + [d["dates"]]))}. {plain(d["lede"])}'
     small = [f'- [{plain(x["title"])}]({SITE}/work/smaller-work#{x["id"]}): {plain(x["label"])}. {plain(x["card"])}' for x in SMALL]
-    return '\n'.join([
+    text = '\n'.join([
         '# Brian Yue', '',
         f'> {PERSON["description"]} B.S.E. in Mechanical Engineering, graduating May 2028. Based in Durham, NC. {plain(WHAT_I_DO)}', '',
         'This is my portfolio. Every page is plain HTML and readable without JavaScript. The project pages say what was mine, what was a teammate\'s, and what I would do differently.', '',
@@ -1269,6 +1269,11 @@ def llms():
         '## Leadership', *[item('leadership', s_) for s_ in LEAD], '',
         '## Smaller work', *small, '',
         '## Optional', f'- [Personal]({SITE}/personal): volleyball, basketball, music and photography', ''])
+    # plain ASCII: the file is served as text/plain with no charset, so accents and arrows could arrive garbled
+    for a, b in ((' · ', ', '), (' → ', ' to '), ('–', '-'), ('é', 'e'), ('’', "'")):
+        text = text.replace(a, b)
+    assert text.isascii(), sorted(set(c for c in text if not c.isascii()))
+    return text
 
 write('index.html', home())
 write('llms.txt', llms())

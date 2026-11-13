@@ -7,27 +7,27 @@ This is my portfolio. Every page is plain HTML and readable without JavaScript. 
 ## Contact
 - Email: brian.yue@duke.edu
 - LinkedIn: https://www.linkedin.com/in/brianyihanyue/
-- [Résumé (PDF)](https://brianyue.me/resume.pdf)
+- [Resume (PDF)](https://brianyue.me/resume.pdf)
 - [About](https://brianyue.me/about): background, education, honors, skills and coursework
 
 ## Experience
-- [Floating-element shear-force balance](https://brianyue.me/work/shear-balance): Internship · NC State · Finished · Jun 2026 → Aug 2026. I designed it, ran the FEA and drew up the five-sheet drawing package. When friction data came in from a grad student's similar rig, I switched to a $159 ball-bearing carriage.
-- [Transonic truss-braced wing review](https://brianyue.me/work/ttbw): Research · Duke · Published · AIAA AVIATION · Jun 2026. I wrote this AIAA paper on my own from 53 sources, then presented it at AVIATION 2026 with two of the authors I'd cited in the room.
+- [Floating-element shear-force balance](https://brianyue.me/work/shear-balance): Internship, NC State, Finished, Jun 2026 to Aug 2026. I designed it, ran the FEA and drew up the five-sheet drawing package. When friction data came in from a grad student's similar rig, I switched to a $159 ball-bearing carriage.
+- [Transonic truss-braced wing review](https://brianyue.me/work/ttbw): Research, Duke, Published, AIAA AVIATION, Jun 2026. I wrote this AIAA paper on my own from 53 sources, then presented it at AVIATION 2026 with two of the authors I'd cited in the room.
 
 ## Projects
-- [Unified forward closure](https://brianyue.me/work/forward-closure): Project · Flown · Duke Aero · Aug 2025 → present. We used to machine three forward closures for every motor. I redesigned them as one part, and that part flew.
-- [Modular Happy Meal train](https://brianyue.me/work/happy-meal): Project · Toy Fair 2025 · Duke · Spring 2025. I modeled most of this Happy Meal train in Onshape. Kids swap the heads to build their own, and it costs $0.31 to make.
-- [Accessible PlaySeat](https://brianyue.me/work/playseat): Project · Delivered · Duke EGR 101 · Sep 2024 → Dec 2024. We built a play seat for a three-year-old who loves Formula 1. The first time he sat in it, we learned the wheels were in the wrong place.
+- [Unified forward closure](https://brianyue.me/work/forward-closure): Project, Flown, Duke Aero, Aug 2025 to present. We used to machine three forward closures for every motor. I redesigned them as one part, and that part flew.
+- [Modular Happy Meal train](https://brianyue.me/work/happy-meal): Project, Toy Fair 2025, Duke, Spring 2025. I modeled most of this Happy Meal train in Onshape. Kids swap the heads to build their own, and it costs $0.31 to make.
+- [Accessible PlaySeat](https://brianyue.me/work/playseat): Project, Delivered, Duke EGR 101, Sep 2024 to Dec 2024. We built a play seat for a three-year-old who loves Formula 1. The first time he sat in it, we learned the wheels were in the wrong place.
 
 ## Leadership
-- [ISSDC captain, then advisor](https://brianyue.me/leadership/issdc): Leadership · Global Champion · Sep 2021 → Aug 2024. I designed space settlements against the clock for three years, and my company won the 2023 Global Finals at Kennedy Space Center.
-- [Teaching assistant, Duke](https://brianyue.me/leadership/teaching): Leadership · Ongoing · Aug 2025 → present. I TA EGR 105, the computing class I took my first semester, and grade for ME 221.
-- [Student coach, Tsinghua International School](https://brianyue.me/leadership/coaching): Leadership · Finished · Sep 2020 → May 2024. I coached middle schoolers in Beijing for four years while playing varsity myself, and became head coach of two teams.
+- [ISSDC captain, then advisor](https://brianyue.me/leadership/issdc): Leadership, Global Champion, Sep 2021 to Aug 2024. I designed space settlements against the clock for three years, and my company won the 2023 Global Finals at Kennedy Space Center.
+- [Teaching assistant, Duke](https://brianyue.me/leadership/teaching): Leadership, Ongoing, Aug 2025 to present. I TA EGR 105, the computing class I took my first semester, and grade for ME 221.
+- [Student coach, Tsinghua International School](https://brianyue.me/leadership/coaching): Leadership, Finished, Sep 2020 to May 2024. I coached middle schoolers in Beijing for four years while playing varsity myself, and became head coach of two teams.
 
 ## Smaller work
-- [Simulating the ISS deorbit](https://brianyue.me/work/smaller-work#iss-deorbit): EGR 105 · Fall 2024 · Team project. Our team simulated the ISS falling out of orbit. I wrote the orbital decay code, RK4 integrator and all.
-- [Checking a snap-fit with FEA](https://brianyue.me/work/smaller-work#snap-fit-fea): ME 321 · Fall 2026. I ran the FEA on a printed snap-fit grip, then printed it to check that it really snaps.
-- [Space Shuttle Vanguard](https://brianyue.me/work/smaller-work#vanguard): EGR 101 · Fall 2024. I went way overboard on a CAD assignment for EGR 101, lettering and all.
+- [Simulating the ISS deorbit](https://brianyue.me/work/smaller-work#iss-deorbit): EGR 105, Fall 2024, Team project. Our team simulated the ISS falling out of orbit. I wrote the orbital decay code, RK4 integrator and all.
+- [Checking a snap-fit with FEA](https://brianyue.me/work/smaller-work#snap-fit-fea): ME 321, Fall 2026. I ran the FEA on a printed snap-fit grip, then printed it to check that it really snaps.
+- [Space Shuttle Vanguard](https://brianyue.me/work/smaller-work#vanguard): EGR 101, Fall 2024. I went way overboard on a CAD assignment for EGR 101, lettering and all.
 
 ## Optional
 - [Personal](https://brianyue.me/personal): volleyball, basketball, music and photography
