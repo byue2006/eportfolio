@@ -90,13 +90,14 @@ The site is tuned to download as little as possible without looking any differen
 
 ## Notes
 
-- `resume.pdf` is your one-page résumé (Resume_ME.pdf). It includes your phone number.
+- `resume.pdf` is your one-page résumé (Resume_ME.pdf). It includes your phone number. To update it, replace this file only: the site makes its own copy called `Brian-Yue-Resume.pdf`, which is the one visitors download.
 - The TTBW page reuses two figures from other authors (June et al. 2022; Harrison et al. 2020). They're credited as not your work. To drop them, remove the two `fig(...)` entries for `ttbw-noise-margins` and `ttbw-control-layouts` in `tools/build_site.py`.
 
 ## Change log
 
 Newest first. The detailed version, with what was considered and why, is the Decision log in `CLAUDE.md`.
 
+- **2026-11-13** Résumé now downloads as `Brian-Yue-Resume.pdf` (the old `resume.pdf` link still works). Each project page shows its own picture when its link is shared. Phone QR card redone at three times the resolution.
 - **2026-11-13** QR codes for events added in `assets/brand/` (with the BY mark, plain, and a phone-screen card). Re-make them with `python3 tools/make_qr.py`.
 - **2026-11-13** Easier for search engines and AI tools to read, with no visible change: machine-readable page info on every page and a plain-text site index (`llms.txt`). Still to do by Brian: add `www.brianyue.me` in Cloudflare.
 - **2026-11-13** Wording made more direct across the site ("I designed", "I modeled", "we delivered" in place of "I did the design", "was mine", "was delivered"). Credits to teammates unchanged.

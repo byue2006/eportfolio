@@ -4,7 +4,7 @@
 All page text lives in this file. Edit it, then run:  python3 tools/build_site.py
 This overwrites the generated .html files, so make content changes here, not in the HTML.
 """
-import os, re, html, json
+import os, re, html, json, shutil
 
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # the site folder
 SCR = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +13,7 @@ SITE = 'https://brianyue.me'          # the live domain (Cloudflare)
 EMAIL = 'brian.yue@duke.edu'
 LINKEDIN = 'https://www.linkedin.com/in/brianyihanyue/'
 DOI = 'https://doi.org/10.2514/6.2026-4344'
+RESUME = 'Brian-Yue-Resume.pdf'      # the name the résumé downloads under: a copy of resume.pdf, made on every build (see the end of this file)
 
 # The site logo: bold Geist BY with an orange square stop on a white tile (tools/make_brand.py makes the
 # favicons and assets/brand/ from the same outline). Colors come from CSS so it follows light/dark mode.
@@ -302,7 +303,7 @@ def project_schema(kind, slug):
 
 
 # ---------------------------------------------------------------- shell
-def page(title, desc, P, active, main, progress=False, path=None, schema=''):
+def page(title, desc, P, active, main, progress=False, path=None, schema='', share=None):
     def cur(k): return ' aria-current="page"' if active == k else ''
     # 3D models are meshopt-compressed (tools/compress_models.py); the viewer loads this small decoder from our own server
     # The viewer library (~250 KB) loads only when a model comes within ~700px of the screen; until then the
@@ -319,13 +320,13 @@ def page(title, desc, P, active, main, progress=False, path=None, schema=''):
            f'<a href="{home}#leadership"{cur("leadership")}>Leadership</a>'
            f'<a href="{P}about.html"{cur("about")}>About</a>'
            f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}{"" if HAS_PERSONAL else " hidden"}>Personal</a>'
-           f'<a href="{P}resume.pdf" target="_blank" rel="noopener">Résumé <span class="ext" aria-hidden="true">↗</span></a>')
+           f'<a href="{P}{RESUME}" target="_blank" rel="noopener">Résumé <span class="ext" aria-hidden="true">↗</span></a>')
     menu_links = (f'<a href="{P}index.html"{cur("home")}>Home <span>00</span></a>'
                   f'<a href="{home}#work"{cur("work")}>Work <span>01</span></a>'
                   f'<a href="{home}#leadership"{cur("leadership")}>Leadership <span>02</span></a>'
                   f'<a href="{P}about.html"{cur("about")}>About <span>03</span></a>'
                   f'<a href="{P}personal.html" data-nav="personal"{cur("personal")}{"" if HAS_PERSONAL else " hidden"}>Personal <span>04</span></a>'
-                  f'<a href="{P}resume.pdf" target="_blank" rel="noopener">Résumé <span>PDF</span></a>')
+                  f'<a href="{P}{RESUME}" target="_blank" rel="noopener">Résumé <span>PDF</span></a>')
     canon = '' if path is None else f'\n<link rel="canonical" href="{SITE}/{path}">\n<meta property="og:url" content="{SITE}/{path}">'
     out = f'''<!doctype html>
 <html lang="en" data-theme="dark">
@@ -341,9 +342,10 @@ def page(title, desc, P, active, main, progress=False, path=None, schema=''):
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Brian Yue">
-<meta property="og:image" content="{SITE}/images/og-card.png">
+<meta property="og:image" content="{SITE}/{share or 'images/og-card.png'}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{esc(title)}">
 <meta name="twitter:card" content="summary_large_image">{canon}
 {schema}<link rel="icon" href="{P}favicon.svg" type="image/svg+xml">
 <link rel="icon" href="{P}favicon.ico" sizes="48x48">
@@ -383,7 +385,7 @@ def page(title, desc, P, active, main, progress=False, path=None, schema=''):
     <div class="actions" data-reveal>
       <button class="pill" type="button" data-copy="{EMAIL}">Copy email <span class="hint"></span></button>
       <a class="pill" href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
-      <a class="pill" href="{P}resume.pdf" target="_blank" rel="noopener">Résumé <span class="arrow">↗</span></a>
+      <a class="pill" href="{P}{RESUME}" target="_blank" rel="noopener">Résumé <span class="arrow">↗</span></a>
     </div>
     <div class="foot-bar">
       <span>© 2026 Brian Yue</span>
@@ -881,7 +883,7 @@ def project_page(i, kind, slug):
   </div>
 </section>'''
     title = f'{html.unescape(d["card_title"])} · Brian Yue'
-    return page(title, d.get('desc') or d['lede'], P, kind, main, progress=True, path=f'{kind}/{slug}', schema=project_schema(kind, slug))
+    return page(title, d.get('desc') or d['lede'], P, kind, main, progress=True, path=f'{kind}/{slug}', schema=project_schema(kind, slug), share=share_image(slug))
 
 # ---------------------------------------------------------------- home
 def home():
@@ -971,7 +973,7 @@ def home():
       <p class="big-text" style="margin-top:0"> <span>I'm a mechanical engineering junior at Duke working toward an aerospace certificate. Before that, I captained ISSDC teams and coached middle school volleyball and basketball in Beijing.</span></p>
       <div class="actions">
         <a class="pill solid" href="about.html">More about me <span class="arrow">→</span></a>
-        <a class="pill" href="resume.pdf" target="_blank" rel="noopener">Résumé <span class="arrow">↗</span></a>
+        <a class="pill" href="{RESUME}" target="_blank" rel="noopener">Résumé <span class="arrow">↗</span></a>
       </div>
     </div>
   </div>
@@ -1010,7 +1012,7 @@ def about():
         <p>I'm a native speaker of English and Mandarin, and a US citizen.</p>
       </div>
       <div class="actions fade-in" style="--d:.7s; margin-top:28px">
-        <a class="pill solid" href="resume.pdf" target="_blank" rel="noopener">Résumé (PDF) <span class="arrow">↗</span></a>
+        <a class="pill solid" href="{RESUME}" target="_blank" rel="noopener">Résumé (PDF) <span class="arrow">↗</span></a>
         <a class="pill" href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
       </div>
     </div>
@@ -1250,6 +1252,35 @@ def sitemap():
     urls = ''.join(f'  <url><loc>{SITE}/{x}</loc></url>\n' for x in paths)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
 
+# ---------------------------------------------------------------- link previews (what a shared link shows on LinkedIn, in messages, in Slack)
+# Home, About, Personal and Smaller work show the main card (images/og-card.png, from make_brand.py). Each project page
+# shows its own: images/og/<slug>.jpg, drawn by tools/make_share_cards.py from the inputs below.
+SHARE_INPUTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'share_cards.json')
+SHARE_DONE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'share_cards.done.json')
+
+def share_image(slug):
+    rel = f'images/og/{slug}.jpg'
+    return rel if os.path.exists(os.path.join(OUT, rel)) else None
+
+def share_cards():
+    """Write what each project's preview card shows, and say so if a card on disk was drawn from older text."""
+    cards = {}
+    for kind, slug in ORDER:
+        d = P_[slug]; t = d.get('thumb', {})
+        c = dict(label=plain(d['cat']), title=plain(d['card_title']),
+                 foot=plain(d['status'][0] if '·' in d['status'][0] else ' · '.join(d['status'])))
+        if t.get('src'):
+            c.update(image=t['src'], fit=t.get('mode') == 'fit', pos=t.get('pos', '50% 50%'), tint=t.get('tint', ''))
+        else:   # no photo: the organization tile's colour and wording
+            c.update(big=d['org']['word'].split('<br>'), bg=d['org']['bg'])
+        cards[slug] = c
+    with open(SHARE_INPUTS, 'w', encoding='utf-8') as f:
+        json.dump(cards, f, indent=1, ensure_ascii=False); f.write('\n')
+    done = json.load(open(SHARE_DONE, encoding='utf-8')) if os.path.exists(SHARE_DONE) else {}
+    stale = [k for k, v in cards.items() if done.get(k) != v or not share_image(k)]
+    if stale:
+        print('NOTE: link-preview cards out of date for', ', '.join(stale), '-> run: python3 tools/make_share_cards.py, then this script again')
+
 def llms():
     """llms.txt: a plain-text index of the site for AI assistants and other tools that read pages for people.
     Built from the same text as the cards, so it can't drift from the site."""
@@ -1262,7 +1293,7 @@ def llms():
         f'> {PERSON["description"]} B.S.E. in Mechanical Engineering, graduating May 2028. Based in Durham, NC. {plain(WHAT_I_DO)}', '',
         'This is my portfolio. Every page is plain HTML and readable without JavaScript. The project pages say what was mine, what was a teammate\'s, and what I would do differently.', '',
         '## Contact',
-        f'- Email: {EMAIL}', f'- LinkedIn: {LINKEDIN}', f'- [Résumé (PDF)]({SITE}/resume.pdf)',
+        f'- Email: {EMAIL}', f'- LinkedIn: {LINKEDIN}', f'- [Résumé (PDF)]({SITE}/{RESUME})',
         f'- [About]({SITE}/about): background, education, honors, skills and coursework', '',
         '## Experience', *[item('work', s_) for s_ in EXPER], '',
         '## Projects', *[item('work', s_) for s_ in PROJ], '',
@@ -1275,6 +1306,12 @@ def llms():
     assert text.isascii(), sorted(set(c for c in text if not c.isascii()))
     return text
 
+# The résumé lives in the repository as resume.pdf, and that address keeps working for links already out there.
+# The site links to a copy whose name says whose it is, so it isn't one more "resume.pdf" in a recruiter's downloads.
+if os.path.exists(os.path.join(OUT, 'resume.pdf')):
+    shutil.copyfile(os.path.join(OUT, 'resume.pdf'), os.path.join(OUT, RESUME))
+
+share_cards()
 write('index.html', home())
 write('llms.txt', llms())
 write('404.html', not_found())

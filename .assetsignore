@@ -38,6 +38,7 @@ node_modules
 !/apple-touch-icon.png
 /*.pdf
 !/resume.pdf
+!/Brian-Yue-Resume.pdf
 # stray video and CAD uploads: only the converted copies in media/ are published
 /*.mov
 /*.MOV

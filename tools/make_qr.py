@@ -4,9 +4,11 @@
     python3 tools/make_qr.py   (optionally: python3 tools/make_qr.py https://brianyue.me/about)
 
 Writes to assets/brand/:
-  qr-brianyue.svg, qr-brianyue-2048.png              the code with the BY mark in the middle
-  qr-brianyue-plain.svg, qr-brianyue-plain-2048.png  the code alone
-  qr-phone-card.png                                  a phone-sized screen to hold up: logo, code, address
+  qr-brianyue.svg, qr-brianyue-4096.png              the code with the BY mark in the middle
+  qr-brianyue-plain.svg, qr-brianyue-plain-4096.png  the code alone
+  qr-phone-card.png                                  a phone-shaped screen to hold up: logo, code, address
+                                                     (3510 x 7596, three times a phone's own pixels, so it stays
+                                                     sharp when zoomed or shown on a tablet or projector)
 
 Dark squares on white only (inverted codes fail on some phones), square modules, and the standard
 four-module white margin, which scanners need: keep that margin clear wherever the code is placed.
@@ -107,14 +109,17 @@ def main():
     tmp = tempfile.mkdtemp()
     try:
         files = {'mark.svg': with_mark, 'plain.svg': plain, 'lockup-dark.svg': lockup_svg(ON_DARK),
-                 'mark.html': wrap('mark.svg', 2048), 'plain.html': wrap('plain.svg', 2048),
+                 'mark.html': wrap('mark.svg', 4096), 'plain.html': wrap('plain.svg', 4096),
                  'phone.html': phone_card_html('mark.svg', 'lockup-dark.svg')}
         for n, s in files.items():
             open(os.path.join(tmp, n), 'w', encoding='utf-8').write(s)
-        jobs = [('mark.html', 'qr-brianyue-2048.png'), ('plain.html', 'qr-brianyue-plain-2048.png'), ('phone.html', 'qr-phone-card.png')]
+        jobs = [('mark.html', 'qr-brianyue-4096.png', 1), ('plain.html', 'qr-brianyue-plain-4096.png', 1), ('phone.html', 'qr-phone-card.png', 3)]
         jf = os.path.join(tmp, 'jobs.json')
-        json.dump([{'html': os.path.join(tmp, h), 'out': os.path.join(brand, o), 'transparent': False} for h, o in jobs], open(jf, 'w'))
+        json.dump([{'html': os.path.join(tmp, h), 'out': os.path.join(brand, o), 'transparent': False, 'scale': k} for h, o, k in jobs], open(jf, 'w'))
         subprocess.run(['node', os.path.join(ROOT, 'tools', 'brand_png.js'), jf], check=True)
+        for old in ('qr-brianyue-2048.png', 'qr-brianyue-plain-2048.png'):   # the earlier, smaller renders
+            if os.path.exists(os.path.join(brand, old)):
+                os.remove(os.path.join(brand, old))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     print(f'QR codes for {URL} written to assets/brand/')

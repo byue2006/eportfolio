@@ -1,0 +1,75 @@
+{
+ "shear-balance": {
+  "label": "Instrument design",
+  "title": "Floating-element shear-force balance",
+  "foot": "Internship · NC State",
+  "image": "images/card-shear-balance.webp",
+  "fit": true,
+  "pos": "50% 50%",
+  "tint": "#e9edf3"
+ },
+ "ttbw": {
+  "label": "Research · publication",
+  "title": "Transonic truss-braced wing review",
+  "foot": "Research · Duke",
+  "image": "images/aiaa-foyer.webp",
+  "fit": false,
+  "pos": "65% 50%",
+  "tint": ""
+ },
+ "forward-closure": {
+  "label": "Flight hardware",
+  "title": "Unified forward closure",
+  "foot": "Project · Flown",
+  "image": "images/closure-machined.webp",
+  "fit": false,
+  "pos": "50% 60%",
+  "tint": ""
+ },
+ "happy-meal": {
+  "label": "Product design · injection molding",
+  "title": "Modular Happy Meal train",
+  "foot": "Project · Toy Fair 2025",
+  "image": "images/card-toy.webp",
+  "fit": false,
+  "pos": "50% 50%",
+  "tint": ""
+ },
+ "playseat": {
+  "label": "Assistive device",
+  "title": "Accessible PlaySeat",
+  "foot": "Project · Delivered",
+  "image": "images/playseat-iso.webp",
+  "fit": false,
+  "pos": "45% 55%",
+  "tint": ""
+ },
+ "issdc": {
+  "label": "Team systems design · 2021–24",
+  "title": "ISSDC captain, then advisor",
+  "foot": "Leadership · Global Champion",
+  "image": "images/card-issdc.webp",
+  "fit": false,
+  "pos": "50% 50%",
+  "tint": ""
+ },
+ "teaching": {
+  "label": "Teaching",
+  "title": "Teaching assistant, Duke",
+  "foot": "Leadership · Ongoing",
+  "big": [
+   "EGR 105",
+   "ME 221"
+  ],
+  "bg": "#012169"
+ },
+ "coaching": {
+  "label": "Coaching · 2020–24",
+  "title": "Student coach, Tsinghua International School",
+  "foot": "Leadership · Finished",
+  "image": "images/coaching-timeout.webp",
+  "fit": false,
+  "pos": "50% 50%",
+  "tint": ""
+ }
+}

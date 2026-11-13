@@ -7,7 +7,7 @@ This is my portfolio. Every page is plain HTML and readable without JavaScript. 
 ## Contact
 - Email: brian.yue@duke.edu
 - LinkedIn: https://www.linkedin.com/in/brianyihanyue/
-- [Resume (PDF)](https://brianyue.me/resume.pdf)
+- [Resume (PDF)](https://brianyue.me/Brian-Yue-Resume.pdf)
 - [About](https://brianyue.me/about): background, education, honors, skills and coursework
 
 ## Experience
