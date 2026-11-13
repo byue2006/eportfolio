@@ -102,7 +102,7 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 
 **One setting only you can change (Cloudflare):**
 
-- [ ] **Make `www.brianyue.me` work.** Typing the address with "www" in front currently fails. In Cloudflare: Workers & Pages → eportfolio → Settings → Domains & Routes → Add → Custom domain → `www.brianyue.me`.
+- [ ] **Make `www.brianyue.me` work.** Typing the address with "www" in front currently fails. In Cloudflare: Workers & Pages → eportfolio → the **Domains** tab in the row along the top (next to Settings, not inside it) → add a custom domain → `www.brianyue.me`.
 
 ## Already done (no need to send)
 

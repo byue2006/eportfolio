@@ -72,7 +72,7 @@ Brian Yue's portfolio. Static site, live at https://brianyue.me (Cloudflare Work
 - Photos he could add: him leading an EGR 105 lab, shear-balance hardware (if built), the AVIATION podium, the Toy Fair booth.
 - Unconfirmed captions, kept neutral until he answers: is he the one in sunglasses in coaching Fig. 4; is he crouching in front in the ISSDC China Finals photo, and what year.
 - Unused images kept for now (delete only when he says): `images/ttbw-diagram.webp`, `images/balance-rear.webp`.
-- `www.brianyue.me` has no DNS record (checked 2026-11-13), so the address fails if someone types the www. Brian has to add it in Cloudflare (Workers & Pages, eportfolio, Settings, Domains & Routes, add custom domain `www.brianyue.me`). Don't add routes to `wrangler.jsonc` for this: the main domain is attached in the dashboard and a config-side route list could replace it.
+- `www.brianyue.me` has no DNS record (checked 2026-11-13), so the address fails if someone types the www. Brian has to add it in Cloudflare: Workers & Pages, eportfolio, then the **Domains** tab in the row along the top (Overview, Metrics, Deployments, Observability, Issues, Domains, Access, Settings; it is no longer under Settings), add custom domain `www.brianyue.me`. Don't add routes to `wrangler.jsonc` for this: the main domain is attached in the dashboard and a config-side route list could replace it.
 - Résumé PDF detail for the next upload: the file's built-in title is "Resume ME" (shows in the browser tab); it should be "Brian Yue Résumé" (Word: File, Properties, Title).
 
 ## Decision log (newest first; add a line for every change)
