@@ -97,6 +97,7 @@ The site is tuned to download as little as possible without looking any differen
 
 Newest first. The detailed version, with what was considered and why, is the Decision log in `CLAUDE.md`.
 
+- **2026-11-13** Easier for search engines and AI tools to read, with no visible change: machine-readable page info on every page and a plain-text site index (`llms.txt`). Still to do by Brian: add `www.brianyue.me` in Cloudflare.
 - **2026-11-13** Wording made more direct across the site ("I designed", "I modeled", "we delivered" in place of "I did the design", "was mine", "was delivered"). Credits to teammates unchanged.
 - **2026-11-08** README and CLAUDE.md updated with Brian's preferences, open items and this change log.
 - **2026-11-08** Site made lighter with no visible change: smaller per-page image copies, compressed 3D models (4.1 MB to 1 MB), compressed studio lighting, 3D viewer loads on approach.

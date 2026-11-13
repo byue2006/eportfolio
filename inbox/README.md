@@ -98,7 +98,11 @@ Please don't upload photos where the PlaySeat client's face is visible, unless h
 
 **Files to send when ready:**
 
-- [ ] **Updated résumé PDF.** It should say "sole author" for the TTBW paper and list Duke Aero from August 2024. Upload it and it replaces `resume.pdf`.
+- [ ] **Updated résumé PDF.** It should say "sole author" for the TTBW paper and list Duke Aero from August 2024. Upload it and it replaces `resume.pdf`. Before exporting from Word, set File → Properties → Title to "Brian Yue Résumé": right now the browser tab shows "Resume ME".
+
+**One setting only you can change (Cloudflare):**
+
+- [ ] **Make `www.brianyue.me` work.** Typing the address with "www" in front currently fails. In Cloudflare: Workers & Pages → eportfolio → Settings → Domains & Routes → Add → Custom domain → `www.brianyue.me`.
 
 ## Already done (no need to send)
 

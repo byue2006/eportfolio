@@ -257,10 +257,52 @@ def render_teaser(P):
                     f'alt="{esc(it.get("alt") or it.get("caption") or "")}" loading="lazy"></a>' for it in ITEMS[:4])
     return chips, strip
 
-SCHEMA = '<script type="application/ld+json">' + '{"@context": "https://schema.org", "@type": "Person", "name": "Brian Yue", "url": "https://brianyue.me/", "image": "https://brianyue.me/images/portrait.jpg", "email": "mailto:brian.yue@duke.edu", "jobTitle": "Mechanical engineering student", "affiliation": {"@type": "CollegeOrUniversity", "name": "Duke University", "url": "https://duke.edu"}, "knowsAbout": ["Mechanical design", "GD&T", "Finite element analysis", "Tolerance analysis", "Aerospace structures", "Machining"], "sameAs": ["https://www.linkedin.com/in/brianyihanyue/"]}' + '</script>\n'
+# ---------------------------------------------------------------- for search engines, link previews and AI tools
+# Nothing here is visible on the page. Every fact below is also stated in the visible text; keep them in sync.
+WHAT_I_DO = 'I design aerospace hardware, draw it up properly with GD&amp;T, check it with FEA, and then help machine it.'
+PERSON_ID = SITE + '/#brian'
+PERSON = {"@type": "Person", "@id": PERSON_ID, "name": "Brian Yue", "url": SITE + "/", "image": SITE + "/images/portrait.jpg",
+          "email": "mailto:" + EMAIL, "jobTitle": "Mechanical engineering student",
+          "description": "Mechanical engineering junior at Duke University, working toward a certificate in aerospace engineering.",
+          "affiliation": {"@type": "CollegeOrUniversity", "name": "Duke University", "url": "https://duke.edu"},
+          "address": {"@type": "PostalAddress", "addressLocality": "Durham", "addressRegion": "NC", "addressCountry": "US"},
+          "knowsLanguage": ["English", "Mandarin Chinese"],
+          "knowsAbout": ["Mechanical design", "GD&T", "Finite element analysis", "Tolerance analysis", "Aerospace structures", "Machining"],
+          "sameAs": [LINKEDIN]}
+PERSON_REF = {"@type": "Person", "@id": PERSON_ID, "name": "Brian Yue", "url": SITE + "/"}
+
+def plain(t):
+    """Page text without tags or entities, for the machine-readable copies."""
+    return html.unescape(re.sub(r'<[^>]+>', '', t)).strip()
+
+def ld(*nodes):
+    """A schema.org block (JSON-LD) for the page head."""
+    body = json.dumps({"@context": "https://schema.org", "@graph": list(nodes)}, ensure_ascii=False).replace('</', '<\\/')
+    return f'<script type="application/ld+json">{body}</script>\n'
+
+def crumbs(*steps):
+    return {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": n + 1, "name": name, "item": url} for n, (name, url) in enumerate(steps)]}
+
+def project_schema(kind, slug):
+    d = P_[slug]
+    url = f'{SITE}/{kind}/{slug}'
+    sec = ('Work', SITE + '/#work') if kind == 'work' else ('Leadership', SITE + '/#leadership')
+    art = {"@type": "Article", "@id": url + '#article', "headline": plain(d['title']), "description": plain(d.get('desc') or d['lede']),
+           "url": url, "mainEntityOfPage": url, "author": {"@id": PERSON_ID}, "keywords": [plain(t) for t in d['tags']]}
+    if d.get('thumb', {}).get('src'):
+        art['image'] = f'{SITE}/{d["thumb"]["src"]}'
+    nodes = [crumbs(('Brian Yue', SITE + '/'), sec, (plain(d['card_title']), url)), art, PERSON_REF]
+    if slug == 'ttbw':   # the published paper itself
+        art['about'] = {"@id": DOI}
+        nodes.append({"@type": "ScholarlyArticle", "@id": DOI, "name": plain(d['title']), "author": {"@id": PERSON_ID}, "datePublished": "2026-06",
+                      "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": DOI.split('doi.org/')[1]}, "url": DOI, "sameAs": DOI,
+                      "publisher": {"@type": "Organization", "name": "American Institute of Aeronautics and Astronautics"}})
+    return ld(*nodes)
+
 
 # ---------------------------------------------------------------- shell
-def page(title, desc, P, active, main, progress=False, path=None):
+def page(title, desc, P, active, main, progress=False, path=None, schema=''):
     def cur(k): return ' aria-current="page"' if active == k else ''
     # 3D models are meshopt-compressed (tools/compress_models.py); the viewer loads this small decoder from our own server
     # The viewer library (~250 KB) loads only when a model comes within ~700px of the screen; until then the
@@ -292,16 +334,18 @@ def page(title, desc, P, active, main, progress=False, path=None):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
+<meta name="author" content="Brian Yue">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#0b0c0d">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Brian Yue">
 <meta property="og:image" content="{SITE}/images/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">{canon}
-{SCHEMA if path in ('', 'about') else ''}<link rel="icon" href="{P}favicon.svg" type="image/svg+xml">
+{schema}<link rel="icon" href="{P}favicon.svg" type="image/svg+xml">
 <link rel="icon" href="{P}favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="{P}apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -837,7 +881,7 @@ def project_page(i, kind, slug):
   </div>
 </section>'''
     title = f'{html.unescape(d["card_title"])} · Brian Yue'
-    return page(title, d.get('desc') or d['lede'], P, kind, main, progress=True, path=f'{kind}/{slug}')
+    return page(title, d.get('desc') or d['lede'], P, kind, main, progress=True, path=f'{kind}/{slug}', schema=project_schema(kind, slug))
 
 # ---------------------------------------------------------------- home
 def home():
@@ -862,7 +906,7 @@ def home():
       <p class="label kicker fade-in" style="--d:.05s">Mechanical engineering student · Duke University</p>
       <h1 class="display split">I design hardware and then <em>make it.</em></h1>
       <dl class="titleblock fade-in" style="--d:.7s">
-        <div class="wide"><dt>What I do</dt><dd>I design aerospace hardware, draw it up properly with GD&amp;T, check it with FEA, and then help machine it.</dd></div>
+        <div class="wide"><dt>What I do</dt><dd>{WHAT_I_DO}</dd></div>
         <div class="third"><dt>School</dt><dd>Duke University</dd></div>
         <div class="third"><dt>Degree</dt><dd>B.S.E. in Mechanical Engineering</dd></div>
         <div class="third"><dt>Certificate</dt><dd>Aerospace Engineering</dd></div>
@@ -945,7 +989,8 @@ def home():
     chips, strip = render_teaser(P)
     main = (main.replace('{TEASER_HIDDEN}', '' if HAS_PERSONAL else ' hidden')
                 .replace('{TEASER_CHIPS}', chips).replace('{TEASER_STRIP}', strip))
-    return page('Brian Yue · Mechanical Engineering', 'Brian Yue, Duke mechanical engineering student: instrument design, GD&T drawing packages, FEA, flight hardware, and a sole-author AIAA paper.', P, 'home', main, path='')
+    return page('Brian Yue · Mechanical Engineering', 'Brian Yue, Duke mechanical engineering student: instrument design, GD&T drawing packages, FEA, flight hardware, and a sole-author AIAA paper.', P, 'home', main, path='',
+                schema=ld({"@type": "WebSite", "@id": SITE + '/#site', "name": "Brian Yue", "url": SITE + '/', "author": {"@id": PERSON_ID}}, PERSON))
 
 # ---------------------------------------------------------------- about
 def about():
@@ -1011,7 +1056,8 @@ def about():
     </div>
   </div>
 </section>'''
-    return page('About · Brian Yue', 'About Brian Yue, a Duke mechanical engineering student: experience, education, honors, and skills in CAD, GD&T, FEA, and machining.', P, 'about', main, path='about')
+    return page('About · Brian Yue', 'About Brian Yue, a Duke mechanical engineering student: experience, education, honors, and skills in CAD, GD&T, FEA, and machining.', P, 'about', main, path='about',
+                schema=ld({"@type": "ProfilePage", "@id": SITE + '/about', "url": SITE + '/about', "name": "About Brian Yue", "mainEntity": {"@id": PERSON_ID}}, PERSON))
 
 
 # ---------------------------------------------------------------- animated card posters (smaller work)
@@ -1132,7 +1178,8 @@ def smaller_work():
 
 <div class="wrap sw">{groups}
 </div>'''
-    return page('Smaller work · Brian Yue', 'Smaller projects by Brian Yue: an ISS deorbit simulation, an FEA check on a snap-fit, and a 3D-printable Space Shuttle model.', P, 'work', main, path='work/smaller-work')
+    return page('Smaller work · Brian Yue', 'Smaller projects by Brian Yue: an ISS deorbit simulation, an FEA check on a snap-fit, and a 3D-printable Space Shuttle model.', P, 'work', main, path='work/smaller-work',
+                schema=ld(crumbs(('Brian Yue', SITE + '/'), ('Work', SITE + '/#smaller'), ('Smaller work', SITE + '/work/smaller-work')), PERSON_REF))
 
 # ---------------------------------------------------------------- personal
 def personal():
@@ -1151,7 +1198,7 @@ def personal():
 </section>'''
     TILES, SECS = render_personal(P)
     main = main.replace('{TILES}', TILES).replace('{SECS}', SECS)
-    return page('Personal · Brian Yue', 'Volleyball, basketball, music, and photography: what Brian Yue does away from engineering.', P, 'personal', main, path='personal')
+    return page('Personal · Brian Yue', 'Volleyball, basketball, music, and photography: what Brian Yue does away from engineering.', P, 'personal', main, path='personal', schema=ld(crumbs(('Brian Yue', SITE + '/'), ('Personal', SITE + '/personal')), PERSON_REF))
 
 # ---------------------------------------------------------------- write
 _DISPLAY_IMG = re.compile(r'(\ssrc="|url\()((?:\.\./)*/?)(images/[^"/)]+\.(?:webp|jpe?g|png))(?=[")])')
@@ -1203,7 +1250,28 @@ def sitemap():
     urls = ''.join(f'  <url><loc>{SITE}/{x}</loc></url>\n' for x in paths)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
 
+def llms():
+    """llms.txt: a plain-text index of the site for AI assistants and other tools that read pages for people.
+    Built from the same text as the cards, so it can't drift from the site."""
+    def item(kind, slug):
+        d = P_[slug]
+        return f'- [{plain(d["card_title"])}]({SITE}/{kind}/{slug}): {plain(" · ".join(d["status"] + [d["dates"]]))}. {plain(d["lede"])}'
+    small = [f'- [{plain(x["title"])}]({SITE}/work/smaller-work#{x["id"]}): {plain(x["label"])}. {plain(x["card"])}' for x in SMALL]
+    return '\n'.join([
+        '# Brian Yue', '',
+        f'> {PERSON["description"]} B.S.E. in Mechanical Engineering, graduating May 2028. Based in Durham, NC. {plain(WHAT_I_DO)}', '',
+        'This is my portfolio. Every page is plain HTML and readable without JavaScript. The project pages say what was mine, what was a teammate\'s, and what I would do differently.', '',
+        '## Contact',
+        f'- Email: {EMAIL}', f'- LinkedIn: {LINKEDIN}', f'- [Résumé (PDF)]({SITE}/resume.pdf)',
+        f'- [About]({SITE}/about): background, education, honors, skills and coursework', '',
+        '## Experience', *[item('work', s_) for s_ in EXPER], '',
+        '## Projects', *[item('work', s_) for s_ in PROJ], '',
+        '## Leadership', *[item('leadership', s_) for s_ in LEAD], '',
+        '## Smaller work', *small, '',
+        '## Optional', f'- [Personal]({SITE}/personal): volleyball, basketball, music and photography', ''])
+
 write('index.html', home())
+write('llms.txt', llms())
 write('404.html', not_found())
 write('sitemap.xml', sitemap())
 write('about.html', about())
