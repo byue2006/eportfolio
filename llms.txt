@@ -11,7 +11,7 @@ This is my portfolio. Every page is plain HTML and readable without JavaScript. 
 - [About](https://brianyue.me/about): background, education, honors, skills and coursework
 
 ## Experience
-- [Floating-element shear-force balance](https://brianyue.me/work/shear-balance): Internship, NC State, Finished, Jun 2026 to Aug 2026. I designed it, ran the FEA and drew up the five-sheet drawing package. When friction data came in from a grad student's similar rig, I switched to a $159 ball-bearing carriage.
+- [Floating-element shear-force balance](https://brianyue.me/work/shear-balance): Internship, NC State, Finished, Jun 2026 to Aug 2026. I designed it, ran the FEA and drew up the five-sheet drawing package. When a grad student's similar rig showed heavy friction losses, I took his suggestion and switched to a $159 ball-bearing carriage.
 - [Transonic truss-braced wing review](https://brianyue.me/work/ttbw): Research, Duke, Published, AIAA AVIATION, Jun 2026. I wrote this AIAA paper on my own from 53 sources, then presented it at AVIATION 2026 with two of the authors I'd cited in the room.
 
 ## Projects

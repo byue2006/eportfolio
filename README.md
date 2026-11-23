@@ -97,6 +97,7 @@ The site is tuned to download as little as possible without looking any differen
 
 Newest first. The detailed version, with what was considered and why, is the Decision log in `CLAUDE.md`.
 
+- **2026-11-23** Shear balance page: the carriage idea is now credited to the grad student in the story and the summary, not only in the "What was mine" box.
 - **2026-11-13** `www.brianyue.me` added (both addresses now listed in `wrangler.jsonc`).
 - **2026-11-13** Résumé now downloads as `Brian-Yue-Resume.pdf` (the old `resume.pdf` link still works). Each project page shows its own picture when its link is shared. Phone QR card redone at three times the resolution.
 - **2026-11-13** QR codes for events added in `assets/brand/` (with the BY mark, plain, and a phone-screen card). Re-make them with `python3 tools/make_qr.py`.
